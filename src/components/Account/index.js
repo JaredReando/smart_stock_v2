@@ -1,15 +1,20 @@
 import React from 'react';
+import { compose } from 'recompose';
+
 import { PasswordForgetForm } from '../PasswordForget';
 import PasswordChangeForm from '../PasswordChange';
-import { withAuthorization } from '../Session';
+import { withAuthorization, withAuthConsumer } from '../Session';
 
-const AccountPage = () => (
+const AccountPage = ({authUser}) => (
     <div>
-        <h1>Account Page</h1>
+        <h1>Account: {authUser.email}</h1>
         <PasswordForgetForm />
         <PasswordChangeForm />
     </div>
 );
 
 const condition = authUser => !!authUser
-export default withAuthorization(condition)(AccountPage);
+export default compose(
+    withAuthConsumer,
+    withAuthorization(condition)
+)(AccountPage);
