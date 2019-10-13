@@ -8,7 +8,7 @@ import * as ROUTES from '../../constants/routes';
 const SignOutButton = ({ firebase, history }) => {
     const handleSignOut = () => {
       firebase.doSignOut();
-      history.push(ROUTES.SIGN_IN)
+      history.push(ROUTES.LANDING)
     };
     return (
         <button type="button" onClick={handleSignOut}>
