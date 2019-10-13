@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { withAuthentication } from '../Session';
+import { withAuthProvider } from '../Session';
 
 import Navigation from '../Navigation';
 import LandingPage from '../Landing';
@@ -32,4 +32,4 @@ const App = () => {
     )
 };
 
-export default withAuthentication(App);
+export default withAuthProvider(App);
