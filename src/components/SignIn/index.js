@@ -7,15 +7,47 @@ import { SignUpLink } from '../SignUp';
 import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
 
+const boxShadow = () => {
+    return {
+        transition: 'box-shadow .15s ease-in',
+        boxShadow: '0 2px 4px 0 rgba(63,103,139,0.50)',
+        ':hover': {
+            boxShadow: '0 0 8px 0 rgba(63,103,139,0.10), 0 8px 8px 0 rgba(63,103,139,0.25)',
+            cursor: 'pointer',
+        },
+        ':active': {
+            boxShadow: 'none',
+        },
+    };
+};
+const disableButton = ({ disabled }: DynamicButtonProps) => {
+    return {
+        opacity: disabled ? 0.5 : 1,
+    };
+};
+
+const PageWrapper = styled.div`
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`;
+
+const BigBold = styled.p`
+    font-weight: bold;
+    ${props => css`font-size: ${props.fontSize};`}
+`;
+
 const Container = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    max-width: 600px;
-    min-height: 200px;
-    max-height: 400px;
-    border: 1px solid black;
+    border-radius: 10px;
+    width: 450px;
+    height: 500px;
+    border: 1px solid #dadce0;
     
     & * {
         margin: 10px;
@@ -23,29 +55,44 @@ const Container = styled.div`
     
 `;
 
+const ErrorMessage = styled.div`
+text-align: center;
+    background-color: tomato;
+    line-height: 1.5em;
+    color: #fff;
+    border-radius: 5px;
+    width: 80%;
+    padding: 10px;
+`;
+
 const Input = styled.input`
     width: 80%;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    padding: 10px;
 `;
 
-const Button = styled.button`
-    width: 80%;
-    height: 30px;
-    
-    ${props => (!props.disabled ? 
-        css`&:hover {
-            background-color: lightgrey;
-            color: red;
-        }` : null
-    )}
-`;
+const Button = styled.button({
+    width: '85%',
+    height: '40px',
+    borderRadius: '5px',
+    color: '#fff',
+    fontSize: '1em',
+    backgroundColor: '#4285F4',
+},
+    boxShadow,
+    disableButton,
+);
 
 const SignInPage = () => (
-    <div>
-        <h1>SignIn</h1>
-        <SignInForm />
-        <SignUpLink />
-        <PasswordForgetLink />
-    </div>
+    <PageWrapper>
+        <Container>
+            <SignInForm />
+            {/*<SignUpLink />*/}
+            <PasswordForgetLink />
+        </Container>
+    </PageWrapper>
 );
 const INITIAL_STATE = {
     email: '',
@@ -83,14 +130,17 @@ class SignInFormBase extends Component {
         const isInvalid = password === '' || email === '';
 
         return (
-            <Container>
-                <h1>Sign In</h1>
+            <>
+                <BigBold fontSize='3em'>SmartStock</BigBold>
+                <BigBold fontSize='1.7em'>Inventory, Simplified</BigBold>
+                <BigBold fontSize='1em'>Sign In</BigBold>
                 <Input
                     name="email"
                     value={email}
                     type="text"
                     onChange={this.onChange}
                     placeholder="Email Address"
+                    autocomplete='off'
                 />
                 <Input
                     name="password"
@@ -105,8 +155,8 @@ class SignInFormBase extends Component {
                 >
                     Log In
                 </Button>
-                {error && <p>{error.message}</p>}
-            </Container>
+                {error && <ErrorMessage>{error.message}</ErrorMessage>}
+            </>
         )
 
     }

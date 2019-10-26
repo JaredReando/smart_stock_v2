@@ -4,39 +4,41 @@ import { Link } from 'react-router-dom';
 import * as ROUTES from '../../constants/routes';
 import SignOutButton from '../SignOut'
 import { withAuthConsumer } from '../Session';
+import { NavWrapper, NavGroup, Logo, NavItem } from './navigation.styles.js';
 
 const NavigationAuth = () => (
-    <ul>
-        <li>
+    <NavGroup>
+        <NavItem>
             <Link to={ROUTES.LANDING}>Landing</Link>
-        </li>
-        <li>
+        </NavItem>
+        <NavItem>
             <Link to={ROUTES.HOME}>Home</Link>
-        </li>
-        <li>
+        </NavItem>
+        <NavItem>
             <Link to={ROUTES.ACCOUNT}>Account</Link>
-        </li>
-        <li>
+        </NavItem>
+        <NavItem>
             <SignOutButton />
-        </li>
-    </ul>
+        </NavItem>
+    </NavGroup>
 );
 
 const NavigationNonAuth = () => (
-    <ul>
-        <li>
+    <NavGroup>
+        <NavItem>
             <Link to={ROUTES.LANDING}>Landing</Link>
-        </li>
-        <li>
+        </NavItem>
+        <NavItem>
             <Link to={ROUTES.SIGN_IN}>Sign In</Link>
-        </li>
-    </ul>
+        </NavItem>
+    </NavGroup>
 );
 
 const Navigation = ({authUser}) => (
-    <div>
+    <NavWrapper>
+        <Logo>SmartStock</Logo>
         {authUser ? <NavigationAuth /> : <NavigationNonAuth />}
-    </div>
+    </NavWrapper>
 );
 
 export default withAuthConsumer(Navigation);

@@ -2,34 +2,41 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { withAuthProvider } from '../Session';
 
-import Navigation from '../Navigation';
-import LandingPage from '../Landing';
 import SignUpPage from '../SignUp';
 import SignInPage from '../SignIn';
 import PasswordForgetPage from '../PasswordForget';
-import HomePage from '../Home';
-import AccountPage from '../Account';
-import AdminPage from '../Admin';
+import Dashboard from '../Dashboard';
+
 import * as ROUTES from '../../constants/routes';
+import AuthenticatedRoute from "../../helpers/route_helpers";
+import AuthUserContext from "../Session/context";
+
 
 const App = () => {
     return (
         <Router>
             <div>
-                <Navigation />
-                <hr/>
                 <Switch>
-                    <Route exact path={ROUTES.LANDING} component={LandingPage}/>
+                    {/*<Route exact path={ROUTES.LANDING} component={LandingPage}/>*/}
                     <Route path={ROUTES.SIGN_UP} component={SignUpPage}/>
                     <Route path={ROUTES.SIGN_IN} component={SignInPage}/>
                     <Route path={ROUTES.PASSWORD_FORGET} component={PasswordForgetPage}/>
-                    <Route path={ROUTES.HOME} component={HomePage}/>
-                    <Route path={ROUTES.ACCOUNT} component={AccountPage}/>
-                    <Route path={ROUTES.ADMIN} component={AdminPage}/>
+
+                    <AuthenticatedRoute path={ROUTES.HOME} component={Dashboard} />
+                    <AuthenticatedRoute path={ROUTES.ACCOUNT} component={Dashboard}/>
+                    <AuthenticatedRoute path={ROUTES.ADMIN} component={Dashboard}/>
+                    <AuthenticatedRoute path={ROUTES.ACCOUNT} component={Dashboard}/>
+                    <AuthenticatedRoute path={ROUTES.LANDING} component={Dashboard}/>
                 </Switch>
             </div>
         </Router>
     )
 };
 
+/*withAuthProvider wraps 'App' in a <AuthUserContext.Provider />...
+ HOC. Any lower hierarchy component can access Firebase session status
+ by connecting to the consumer provider: withAuthConsumer.
+ Consumer will update all connected components with any Firebase Auth
+ events (logged in, auth user object, etc...)
+ */
 export default withAuthProvider(App);

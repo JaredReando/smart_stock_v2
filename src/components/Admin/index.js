@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
-import { withFirebase } from "../Firebase";
+import { withFirebase } from "../Firebase"
+import Papa from 'papaparse';
 
+import NunaStock from '../../helpers/nuna_stock';
+import { fixedBins } from "../../constants/demo_data";
+import RestockReport from "./restock_report";
 
 class Admin extends Component {
     constructor(props) {
@@ -8,12 +12,12 @@ class Admin extends Component {
         this.state = {
             loading: false,
             users: [],
+            restockReport: [],
         }
     }
 
     componentDidMount() {
         this.setState({loading: true});
-
         this.props.firebase.users().on('value', snapshot => {
             const usersObject = snapshot.val();
             const usersList = Object.keys(usersObject).map(key => ({
@@ -31,17 +35,66 @@ class Admin extends Component {
         this.props.firebase.users().off();
     }
 
+    testNunaClass = (event) => {
+        event.preventDefault();
+        const inventoryFile = event.target.files[0];
+        const reader = new FileReader();
+        //THIS WILL LOAD AFTER THE 'reader.readAsText' METHOD BELOW.
+        reader.onload = (event) => {
+            const data = event.target.result;
+            const parsedInventoryCSV = Papa.parse(data, {header: true}).data;
+            const nunaStock = new NunaStock(parsedInventoryCSV, fixedBins);
+            this.setState({restockReport: nunaStock.restockReport});
+
+            const newFifoInventoryReport = nunaStock.getFifoSortedInventory();
+            const newFixedBinRestockReport = nunaStock.getFixedBinRestockReport();
+
+        };
+        //THIS WILL LOAD BEFORE THE CODE ABOVE IS CALLED
+        reader.readAsText(inventoryFile);
+    };
+
     render() {
+        const { users, loading } = this.state;
         return (
             <div>
-                <h1>Admin Page</h1>
-                <h2>Users:</h2>
-                {this.state.users.map(user => (
-                    <h3 key={user.uid}>{user.username}</h3>
-                ))}
+                <h1>Admin</h1>
+                {loading && <div>Loading ...</div>}
+                <UserList users={users} />
+
+                <input
+                    type='file'
+                    onChange={this.testNunaClass}
+                />
+
+                <div>
+                    <h1>Summary</h1>
+                    <h4>{`Records: ${this.state.restockReport.length}`}</h4>
+                </div>
+
+               <RestockReport
+                   report={this.state.restockReport}
+               />
             </div>
-        )
+        );
     }
 }
+const UserList = ({ users }) => (
+    <ul>
+        {users.map(user => (
+            <li key={user.uid}>
+        <span>
+          <strong>ID: </strong> {user.uid }
+        </span>
+                <span>
+          <strong> E-Mail:</strong> {user.email }
+        </span>
+                <span>
+          <strong> Username:</strong> {user.username }
+        </span>
+            </li>
+        ))}
+    </ul>
+);
 
 export default withFirebase(Admin);
