@@ -2,7 +2,7 @@ import React from 'react';
 
 import { AuthUserContext } from './index';
 
-const withAuthProvider = Component => props => {
+const withAuthConsumer = Component => props => {
     return (
         <AuthUserContext.Consumer>
             {authUser => <Component {...props} authUser={authUser}/>}
@@ -10,4 +10,4 @@ const withAuthProvider = Component => props => {
     )
 };
 
-export default withAuthProvider;
+export default withAuthConsumer;

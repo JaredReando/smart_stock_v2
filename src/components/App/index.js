@@ -9,8 +9,6 @@ import Dashboard from '../Dashboard';
 
 import * as ROUTES from '../../constants/routes';
 import AuthenticatedRoute from "../../helpers/route_helpers";
-import AuthUserContext from "../Session/context";
-
 
 const App = () => {
     return (

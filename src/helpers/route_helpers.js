@@ -9,10 +9,20 @@ import {withAuthConsumer} from "../components/Session";
         - Provided by 'withAuthConsumer' HOC
 */
 
+/* Destructures props into Component(value is actual React component element),
+loggedIn boolean value from Redux, and {...rest} object
+It returns a standard <Route /> component, passing {..rest} prop object along and rendering a page component
+If 'loggedIn' value is true, the specified Component from props is rendered
+If 'loggedIn' value is false, user is redirected back to home page
+ */
 const AuthenticatedRoute = ({ component: Component, authUser, ...rest }) => {
+    console.log('....rest ', rest);
     return (
         <Route
             {...rest}
+            //'props' here refers to those provided by <Route />: history, location, match, etc.
+            //The Component's unique props don't need to be passed here, since they will
+            //be provided by Dashboard's render of same Component
             render={props =>
                 authUser ? (
                     <Component {...props} />

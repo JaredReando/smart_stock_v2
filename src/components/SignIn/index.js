@@ -20,7 +20,7 @@ const boxShadow = () => {
         },
     };
 };
-const disableButton = ({ disabled }: DynamicButtonProps) => {
+const disableButton = ({ disabled }) => {
     return {
         opacity: disabled ? 0.5 : 1,
     };
@@ -94,17 +94,16 @@ const SignInPage = () => (
         </Container>
     </PageWrapper>
 );
-const INITIAL_STATE = {
-    email: '',
-    password: '',
-    error: null,
-};
 
 class SignInFormBase extends Component {
     constructor(props) {
         super(props);
 
-        this.state = {...INITIAL_STATE};
+        this.state = {
+            email: '',
+            password: '',
+            error: null,
+        };
     }
 
     onSubmit = (event) => {
@@ -112,8 +111,12 @@ class SignInFormBase extends Component {
         this.props.firebase
             .doSignInWithEmailAndPassword(email, password)
             .then(() => {
-                this.setState({ ...INITIAL_STATE });
-                this.props.history.push(ROUTES.HOME);
+                this.setState({
+                    email: '',
+                    password: '',
+                    error: null,
+                }, this.props.history.push(ROUTES.HOME));
+
             })
             .catch(error => {
                 this.setState({ error });

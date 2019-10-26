@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import * as ROUTES from '../../constants/routes';
-import { withAuthProvider } from '../Session';
+import { withAuthConsumer } from '../Session';
 import { withFirebase } from '../Firebase';
 
 import HomePage from '../Home';
@@ -25,14 +25,17 @@ class Dashboard extends Component {
                 <hr/>
                 <h1>Dashboard</h1>
 
-                <Route>
+                <Switch>
+                    <Route path={ROUTES.HOME} component={AdminPage}/>
                     <Route path={ROUTES.ACCOUNT} component={AccountPage}/>
                     <Route path={ROUTES.ADMIN} component={AdminPage}/>
-                </Route>
+                    <Route path={ROUTES.ACCOUNT} component={AdminPage}/>
+                    <Route path={ROUTES.LANDING} component={AccountPage}/>
+                </Switch>
 
             </div>
         )
     }
 }
 
-export default withAuthProvider(Dashboard);
+export default withFirebase(withAuthConsumer(Dashboard));
