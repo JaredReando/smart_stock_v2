@@ -15,6 +15,7 @@ class RestockReport extends React.Component {
             <Table>
                 <TableHead>
                     <TableRow>
+                        <TH>Delete</TH>
                         <TH>Source</TH>
                         <TH>Destination</TH>
                         <TH>Material</TH>
@@ -25,6 +26,7 @@ class RestockReport extends React.Component {
                 </TableHead>
                 <TableBody>
                     <TableRow>
+                        <TD>Delete?</TD>
                         <TD>sourceBin</TD>
                         <TD>destinationBin</TD>
                         <TD>material</TD>
@@ -35,6 +37,7 @@ class RestockReport extends React.Component {
                     {this.props.report.map((record) => {
                         return (
                             <ReportItem
+                                key={record.uuid}
                                 record={record}
                             />
                         )

@@ -1,5 +1,5 @@
 import React from 'react';
-import { TableRow, TD } from "./restock_report.styles";
+import { TableRow, TD, Delete } from "./restock_report.styles";
 
 
 const ReportItem = ({record}) => {
@@ -16,7 +16,8 @@ const ReportItem = ({record}) => {
         } = record;
 
     return (
-        <TableRow key={uuid}>
+        <TableRow>
+            <TD><Delete onClick={() => console.log('DELETE')}>DELETE</Delete></TD>
             <TD>{sourceBin}</TD>
             <TD>{destinationBin}</TD>
             <TD>{material}</TD>

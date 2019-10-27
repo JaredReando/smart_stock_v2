@@ -2,7 +2,7 @@ import firebase from 'firebase';
 import 'firebase/auth';
 import 'firebase/database';
 
-const config = {
+const firebaseConfig = {
     apiKey: process.env.REACT_APP_API_KEY,
     authDomain: process.env.REACT_APP_AUTH_DOMAIN,
     databaseURL: process.env.REACT_APP_DATABASE_URL,
@@ -13,7 +13,7 @@ const config = {
 
 class Firebase {
     constructor() {
-        firebase.initializeApp(config);
+        firebase.initializeApp(firebaseConfig);
 
         this.auth = firebase.auth();
         this.db = firebase.database();
@@ -32,6 +32,12 @@ class Firebase {
 
     doPasswordUpdate = password =>
         this.auth.currentUser.updatePassword(password);
+
+    doOverwriteRestockReport = (restockReport) =>
+        this.db.ref('Companies')
+            .child('Nuna')
+            .child('restock_report')
+            .set(restockReport);
 
     //Database logic
     user = uid => this.db.ref(`users/${uid}`);

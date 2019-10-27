@@ -1,5 +1,15 @@
 import styled from "styled-components";
 
+export const Delete = styled.button`
+    border: none;
+        
+    :hover {
+        color: red;
+        cursor: pointer;
+    }
+    
+`;
+
 export const Table = styled.table`
     display: flex;
     flex-direction: column;

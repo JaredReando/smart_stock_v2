@@ -6,6 +6,7 @@ import AuthUserContext from "./context";
 const withAuthProvider = Component => {
 
     class withAuthProvider extends React.Component {
+
         componentDidMount() {
             this.listener = this.props.firebase.auth.onAuthStateChanged(authUser => {
                 //on mount, saves and updates authUser to sessionStorage
@@ -13,6 +14,7 @@ const withAuthProvider = Component => {
                 authUser
                     ? sessionStorage.setItem("authUser", JSON.stringify(authUser))
                     : sessionStorage.removeItem("authUser");
+
                 console.log("update from withAuthProvider")
             });
         }

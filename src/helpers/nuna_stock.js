@@ -1,4 +1,4 @@
-import v4 from 'uuid/v4';
+import uuid from 'uuid';
 
 export default class NunaStock {
     constructor(rawInventoryJSON, fixedBinsJSON) {
@@ -16,7 +16,7 @@ export default class NunaStock {
             storageUnit: (jsonIventoryReportObject['Storage Unit'] ? jsonIventoryReportObject['Storage Unit'] : 'N/A'),
             storageType: (jsonIventoryReportObject['Storage Type'] === undefined ? 'undefined' : jsonIventoryReportObject['Storage Type']),
             storageLocation: (jsonIventoryReportObject['Storage Location'] ? jsonIventoryReportObject['Storage Location'] : 'N/A'),
-            uuid: v4()
+            uuid: uuid()
         };
         return parsedRecord
     }
@@ -93,11 +93,11 @@ export default class NunaStock {
                     available: (fifoResult['available'] >= 0 ? fifoResult['available'] : 'N/A'),
                     isCompleted: false,
                     isMissing: false,
-                    uuid: v4()
-                }
+                    uuid: uuid()
+                };
                 fixedBinRestockReport.push(restockRecord);
             }
-        })
+        });
         return fixedBinRestockReport;
     }
 }

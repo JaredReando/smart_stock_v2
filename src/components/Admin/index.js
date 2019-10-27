@@ -17,8 +17,10 @@ class Admin extends Component {
     }
 
     componentDidMount() {
+        const Firebase = this.props.firebase;
         this.setState({loading: true});
-        this.props.firebase.users().on('value', snapshot => {
+
+        Firebase.users().on('value', snapshot => {
             const usersObject = snapshot.val();
             const usersList = Object.keys(usersObject).map(key => ({
                 ...usersObject[key],
@@ -29,6 +31,15 @@ class Admin extends Component {
                 loading: false,
             });
         });
+
+        Firebase.db.ref('restock_report').on('value', snapshot => {
+            const restockReport = snapshot.val();
+            this.setState({ restockReport: restockReport})
+        });
+        // restock_records.on('value', snapshot => {
+        //     const firebaseRestockRecords = snapshot.val();
+        //     this.props.dispatch(loadRestockRecords(firebaseRestockRecords))
+        // })
     }
 
     componentWillUnmount() {
@@ -45,13 +56,25 @@ class Admin extends Component {
             const parsedInventoryCSV = Papa.parse(data, {header: true}).data;
             const nunaStock = new NunaStock(parsedInventoryCSV, fixedBins);
             this.setState({restockReport: nunaStock.restockReport});
-
+            this.props.firebase.doOverwriteRestockReport(nunaStock.restockReport);
             const newFifoInventoryReport = nunaStock.getFifoSortedInventory();
             const newFixedBinRestockReport = nunaStock.getFixedBinRestockReport();
-
         };
         //THIS WILL LOAD BEFORE THE CODE ABOVE IS CALLED
         reader.readAsText(inventoryFile);
+    };
+    handleSubtmit = (e) => {
+        e.preventDefault();
+        const Firebase = this.props.firebase.db
+            .ref('Companies')
+            .child('Nuna')
+            .child('restock_report')
+            .orderByChild('sourceBin')
+            .once('value', snapshot => {
+                console.log('results: ', snapshot.val())
+
+            })
+        // debugger;
     };
 
     render() {
@@ -71,6 +94,14 @@ class Admin extends Component {
                     <h1>Summary</h1>
                     <h4>{`Records: ${this.state.restockReport.length}`}</h4>
                 </div>
+                <form onSubmit={this.handleSubtmit}>
+                    <input
+                        ref='searchInput'
+                        type='text'
+                        placeholder='Search bin names...'
+                    />
+                    <button type='submit'>Search</button>
+                </form>
 
                <RestockReport
                    report={this.state.restockReport}

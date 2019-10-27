@@ -37,4 +37,4 @@ const App = () => {
  Consumer will update all connected components with any Firebase Auth
  events (logged in, auth user object, etc...)
  */
-export default withAuthProvider(App);
+export default App;
