@@ -38,4 +38,27 @@ const AuthenticatedRoute = ({ component: Component, authUser, ...rest }) => {
     );
 };
 
+const signInAuthenticatedRouteBase = ({ component: Component, authUser, ...rest }) => {
+    return (
+        <Route
+            {...rest}
+            //'props' here refers to those provided by <Route />: history, location, match, etc.
+            //The Component's unique props don't need to be passed here, since they will
+            //be provided by Dashboard's render of same Component
+            render={props =>
+                !authUser ? (
+                    <Component {...props} />
+                ) : (
+                    <Redirect
+                        to={{
+                            pathname: ROUTES.HOME,
+                            state: { from: props.location },
+                        }}
+                    />
+                )
+            }
+        />
+    );
+};
+export const SignInAuthenticatedRoute = withAuthConsumer(signInAuthenticatedRouteBase);
 export default withAuthConsumer(AuthenticatedRoute)

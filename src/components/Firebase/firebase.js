@@ -30,8 +30,9 @@ class Firebase {
 
     doPasswordReset = email => this.auth.sendPasswordResetEmail(email);
 
-    doPasswordUpdate = password =>
+    doPasswordUpdate = password => {
         this.auth.currentUser.updatePassword(password);
+    };
 
     doOverwriteRestockReport = (restockReport) => {
         this.db.ref('Companies')
@@ -45,6 +46,12 @@ class Firebase {
             .child('Nuna')
             .child('inventory_report')
             .set(inventoryReport);
+    };
+
+    doDeleteRestockRecord = (recordKey) => {
+        this.db.ref('Companies/Nuna/restock_report')
+            .child(recordKey)
+            .set(null);
     };
 
     //Database logic

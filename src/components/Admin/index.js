@@ -85,7 +85,7 @@ class Admin extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
         const searchString = this.refs.searchInput.value;
-
+        //TODO: figure out how to search for Bin/SU/Material values across all Firebase nodes without high cost super-searching.
         const Firebase = this.props.firebase.db
             .ref('Companies')
             .child('Nuna')
@@ -97,7 +97,6 @@ class Admin extends Component {
                 console.log('results: ', snapshot.val())
 
             })
-        // debugger;
     };
 
     render() {

@@ -6,6 +6,9 @@ import AuthUserContext from "./context";
 const withAuthProvider = Component => {
 
     class withAuthProvider extends React.Component {
+        state = {
+            authUser: null,
+        };
 
         componentDidMount() {
             this.listener = this.props.firebase.auth.onAuthStateChanged(authUser => {
@@ -15,7 +18,7 @@ const withAuthProvider = Component => {
                     ? sessionStorage.setItem("authUser", JSON.stringify(authUser))
                     : sessionStorage.removeItem("authUser");
 
-                console.log("update from withAuthProvider")
+                this.setState({authUser: authUser});
             });
         }
 
@@ -24,7 +27,7 @@ const withAuthProvider = Component => {
         }
 
         render() {
-            const authUser = JSON.parse(sessionStorage.getItem("authUser"));
+            const { authUser } = this.state;
             return (
                 <AuthUserContext.Provider value={authUser}>
                     <Component {...this.props} />

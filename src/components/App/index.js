@@ -8,16 +8,16 @@ import PasswordForgetPage from '../PasswordForget';
 import Dashboard from '../Dashboard';
 
 import * as ROUTES from '../../constants/routes';
-import AuthenticatedRoute from "../../helpers/route_helpers";
+import AuthenticatedRoute, { SignInAuthenticatedRoute } from "../../helpers/route_helpers";
 
 const App = () => {
     return (
         <Router>
             <div>
                 <Switch>
-                    {/*<Route exact path={ROUTES.LANDING} component={LandingPage}/>*/}
+                    <Route exact path={ROUTES.LANDING} component={Dashboard}/>
                     <Route path={ROUTES.SIGN_UP} component={SignUpPage}/>
-                    <Route path={ROUTES.SIGN_IN} component={SignInPage}/>
+                    <SignInAuthenticatedRoute path={ROUTES.SIGN_IN} component={SignInPage}/>
                     <Route path={ROUTES.PASSWORD_FORGET} component={PasswordForgetPage}/>
 
                     <AuthenticatedRoute path={ROUTES.HOME} component={Dashboard} />

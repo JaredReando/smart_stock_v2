@@ -1,8 +1,10 @@
 import React from 'react';
+import { withFirebase} from "../Firebase";
+
 import { TableRow, TD, Delete } from "./restock_report.styles";
 
 
-const ReportItem = ({record, ...props}) => {
+const ReportItem = ({record, firebase, recordKey}) => {
         const {
             isCompleted,
             isMissing,
@@ -14,10 +16,13 @@ const ReportItem = ({record, ...props}) => {
             storageUnit,
             uuid,
         } = record;
-
+    const allTheThings = () => {
+        console.log('Index:', recordKey);
+        firebase.doDeleteRestockRecord(recordKey);
+    }
     return (
         <TableRow>
-            <TD><Delete onClick={() => console.log('Idex:', props.index)}>DELETE</Delete></TD>
+            <TD><Delete onClick={allTheThings}>DELETE</Delete></TD>
             <TD>{sourceBin}</TD>
             <TD>{destinationBin}</TD>
             <TD>{material}</TD>
@@ -30,4 +35,4 @@ const ReportItem = ({record, ...props}) => {
     )
 };
 
-export default ReportItem;
+export default withFirebase(ReportItem);
