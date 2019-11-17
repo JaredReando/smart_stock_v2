@@ -6,13 +6,16 @@ import NunaStock from '../../helpers/nuna_stock';
 import { fixedBins } from "../../constants/demo_data";
 import RestockReport from "./restock_report";
 
+const RESTOCK_REPORT_PATH = 'Companies/Nuna/restock_report';
+
 class Admin extends Component {
     constructor(props) {
         super(props);
         this.state = {
             loading: false,
             users: [],
-            restockReport: [],
+            restockReport: {},
+            inventoryReport: {},
         }
     }
 
@@ -32,7 +35,7 @@ class Admin extends Component {
             });
         });
 
-        Firebase.db.ref('restock_report').on('value', snapshot => {
+        Firebase.db.ref(RESTOCK_REPORT_PATH).on('value', snapshot => {
             const restockReport = snapshot.val();
             this.setState({ restockReport: restockReport})
         });
@@ -42,11 +45,19 @@ class Admin extends Component {
         // })
     }
 
+
+
     componentWillUnmount() {
         this.props.firebase.users().off();
+        this.props.firebase.db.ref('Companies/Nuna/restock_report').off()
     }
 
-    testNunaClass = (event) => {
+
+    readFile = () => {
+
+    }
+
+    handleFileInput = (event) => {
         event.preventDefault();
         const inventoryFile = event.target.files[0];
         const reader = new FileReader();
@@ -54,22 +65,34 @@ class Admin extends Component {
         reader.onload = (event) => {
             const data = event.target.result;
             const parsedInventoryCSV = Papa.parse(data, {header: true}).data;
+
             const nunaStock = new NunaStock(parsedInventoryCSV, fixedBins);
-            this.setState({restockReport: nunaStock.restockReport});
-            this.props.firebase.doOverwriteRestockReport(nunaStock.restockReport);
-            const newFifoInventoryReport = nunaStock.getFifoSortedInventory();
-            const newFixedBinRestockReport = nunaStock.getFixedBinRestockReport();
+            // this.setState({restockReport: nunaStock.restockReportArray});
+
+            this.setState({restockReport: nunaStock.restockReportObject});
+
+            this.props.firebase.doOverwriteRestockReport(nunaStock.restockReportObject);
+            console.log('inventory: ', nunaStock.inventoryReportObject);
+            this.props.firebase.doOverwriteInventoryReport(nunaStock.inventoryReportObject);
+
+            // console.log('nested: ', this.createRestockReportNestedObject(nunaStock.restockReport));
+
         };
         //THIS WILL LOAD BEFORE THE CODE ABOVE IS CALLED
         reader.readAsText(inventoryFile);
     };
-    handleSubtmit = (e) => {
+
+    handleSubmit = (e) => {
         e.preventDefault();
+        const searchString = this.refs.searchInput.value;
+
         const Firebase = this.props.firebase.db
             .ref('Companies')
             .child('Nuna')
-            .child('restock_report')
-            .orderByChild('sourceBin')
+            .child('inventory_report')
+            .child(1)
+            .child('ST2')
+            .child(searchString)
             .once('value', snapshot => {
                 console.log('results: ', snapshot.val())
 
@@ -87,14 +110,14 @@ class Admin extends Component {
 
                 <input
                     type='file'
-                    onChange={this.testNunaClass}
+                    onChange={this.handleFileInput}
                 />
 
                 <div>
                     <h1>Summary</h1>
-                    <h4>{`Records: ${this.state.restockReport.length}`}</h4>
+                    {/*<h4>{`Records: ${this.state.restockReport.length}`}</h4>*/}
                 </div>
-                <form onSubmit={this.handleSubtmit}>
+                <form onSubmit={this.handleSubmit}>
                     <input
                         ref='searchInput'
                         type='text'

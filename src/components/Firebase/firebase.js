@@ -33,11 +33,19 @@ class Firebase {
     doPasswordUpdate = password =>
         this.auth.currentUser.updatePassword(password);
 
-    doOverwriteRestockReport = (restockReport) =>
+    doOverwriteRestockReport = (restockReport) => {
         this.db.ref('Companies')
             .child('Nuna')
             .child('restock_report')
             .set(restockReport);
+    };
+
+    doOverwriteInventoryReport = (inventoryReport) => {
+        this.db.ref('Companies')
+            .child('Nuna')
+            .child('inventory_report')
+            .set(inventoryReport);
+    };
 
     //Database logic
     user = uid => this.db.ref(`users/${uid}`);

@@ -2,7 +2,7 @@ import React from 'react';
 import { TableRow, TD, Delete } from "./restock_report.styles";
 
 
-const ReportItem = ({record}) => {
+const ReportItem = ({record, ...props}) => {
         const {
             isCompleted,
             isMissing,
@@ -17,12 +17,14 @@ const ReportItem = ({record}) => {
 
     return (
         <TableRow>
-            <TD><Delete onClick={() => console.log('DELETE')}>DELETE</Delete></TD>
+            <TD><Delete onClick={() => console.log('Idex:', props.index)}>DELETE</Delete></TD>
             <TD>{sourceBin}</TD>
             <TD>{destinationBin}</TD>
             <TD>{material}</TD>
             <TD>{description}</TD>
-            <TD>{available}</TD>
+            <TD
+            color='red'
+            >{available}</TD>
             <TD>{storageUnit}</TD>
         </TableRow>
     )

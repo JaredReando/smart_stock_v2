@@ -4,8 +4,85 @@ export default class NunaStock {
     constructor(rawInventoryJSON, fixedBinsJSON) {
         this.rawInventoryJSON = rawInventoryJSON;
         this.fixedBinsJSON = fixedBinsJSON;
-        this.restockReport = this.getFixedBinRestockReport()
+
+        //TODO: phase out need for report arrays throughout application
+        this.restockReportArray = this.getFixedBinRestockReport();
+        this.inventoryReportArray = this.getFifoSortedInventory();
+
+        //Firebase-friendly data object data structures
+        this.inventoryReportObject = this.createInventoryReportNestedObject();
+        this.restockReportObject = this.createRestockReportNestedObject();
     }
+
+    createRestockReportNestedObject = () => {
+        const restockReportObjectArray = this.getFixedBinRestockReport();
+        const reducer = (nestedObj, obj, index) => {
+            nestedObj[index] = obj;
+            return nestedObj;
+        };
+        return restockReportObjectArray.reduce(reducer, {})
+    };
+
+    createInventoryReportNestedObject = () => {
+        const inventoryReportObjectArray = this.getFifoSortedInventory();
+        //method will only work for arrays containing objects with identical key/value pairs
+        //1st level: storage location
+        const reducer = (nestedObj, obj) => {
+            const objStorageLocation = obj['storageLocation'];
+            const objStorageType = obj['storageType'];
+            const objStorageBin = obj['storageBin'];
+            const objStorageUnit = obj['storageUnit'];
+
+            const checkObjectModel = () => {
+                //Checks for existence of all required inventory record data structure nodes
+                //If any are missing, it is added to nestedObject as a new key
+                //Does not add actual inventory data. Just creates the empty object node tree
+
+                if (!nestedObj[objStorageLocation]) {
+                    nestedObj[objStorageLocation] = {};
+                }
+                const levelOne = nestedObj[objStorageLocation];
+                if (!levelOne[objStorageType]) {
+                    levelOne[objStorageType] = {};
+                }
+                const levelTwo = nestedObj[objStorageLocation][objStorageType];
+                if (!levelTwo[objStorageBin]) {
+                    levelTwo[objStorageBin] = {};
+                }
+                const levelThree = nestedObj[objStorageLocation][objStorageType][objStorageBin];
+                if (!levelThree[objStorageUnit]) {
+                    const isSysBin = (objStorageType[0] === '9');
+
+                    if (objStorageUnit !== 'N/A' && !isSysBin) {
+                        levelThree[objStorageUnit] = {};
+                    }
+                }
+            };
+            checkObjectModel();
+            //Assign inventoryObject to lowest level storageUnit node:
+            const isSysBin = (objStorageType[0] === '9');
+
+            if (objStorageUnit === 'N/A' && !isSysBin) {
+                nestedObj[objStorageLocation][objStorageType][objStorageBin] = "empty";
+            }
+            //Sets inventory object to unique index key on storageUnit object node
+            if (!!nestedObj[objStorageLocation][objStorageType][objStorageBin][objStorageUnit] && !isSysBin) {
+                const storageUnitPath = nestedObj[objStorageLocation][objStorageType][objStorageBin][objStorageUnit];
+                const objIndex = Object.keys(storageUnitPath).length;
+                storageUnitPath[objIndex] = obj;
+            }
+            //Special exception for non-HU handled system locations
+            if (objStorageUnit === 'N/A' && isSysBin) {
+                const storageBinPath = nestedObj[objStorageLocation][objStorageType][objStorageBin]
+                const objIndex = Object.keys(storageBinPath).length;
+                storageBinPath[objIndex] = obj;
+            }
+
+            return nestedObj;
+        };
+
+        return inventoryReportObjectArray.reduce(reducer, {})
+    };
 
     //PARSES A SINGLE RAW INVENTORY OBJECT RECORD INTO DESIRED KEY/VALUE PAIRS
     parseInventoryRecordObject(jsonIventoryReportObject) {
@@ -15,9 +92,14 @@ export default class NunaStock {
             available: (jsonIventoryReportObject['Available stock'] >= 0 ? jsonIventoryReportObject['Available stock'] : 'N/A'),
             storageUnit: (jsonIventoryReportObject['Storage Unit'] ? jsonIventoryReportObject['Storage Unit'] : 'N/A'),
             storageType: (jsonIventoryReportObject['Storage Type'] === undefined ? 'undefined' : jsonIventoryReportObject['Storage Type']),
-            storageLocation: (jsonIventoryReportObject['Storage Location'] ? jsonIventoryReportObject['Storage Location'] : 'N/A'),
+            storageLocation: (jsonIventoryReportObject['Storage Location'] ? jsonIventoryReportObject['Storage Location'] : 1),
             uuid: uuid()
         };
+        if(parsedRecord.storageBin.includes('.')) {
+            const binName = parsedRecord.storageBin;
+            parsedRecord.storageBin = binName.replace(/\./g, '_');
+        }
+
         return parsedRecord
     }
 

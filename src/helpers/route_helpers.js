@@ -16,7 +16,6 @@ If 'loggedIn' value is true, the specified Component from props is rendered
 If 'loggedIn' value is false, user is redirected back to home page
  */
 const AuthenticatedRoute = ({ component: Component, authUser, ...rest }) => {
-    console.log('....rest ', rest);
     return (
         <Route
             {...rest}

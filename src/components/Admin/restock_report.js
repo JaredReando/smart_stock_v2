@@ -34,9 +34,12 @@ class RestockReport extends React.Component {
                         <TD>available</TD>
                         <TD>storageUnit</TD>
                     </TableRow>
-                    {this.props.report.map((record) => {
+                    {this.props.report && Object.keys(this.props.report).map((recordKey, index) => {
+                        const reportObject = this.props.report;
+                        const record = reportObject[recordKey];
                         return (
                             <ReportItem
+                                index={index}
                                 key={record.uuid}
                                 record={record}
                             />
