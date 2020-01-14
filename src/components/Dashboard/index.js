@@ -61,6 +61,9 @@ class Dashboard extends Component {
                 <Navigation />
                 <hr/>
                 <ComponentContainer>
+                    {/*using 'render' here instead of 'component' let's me pass in stateful values and
+                    methods from this Dashboard component while letting these Route components be
+                    Functional. I can pass 'Firebase' down by wrapping Dashboard and passing down as an FC prop.*/}
                     <Switch>
                         {/*<Route path={ROUTES.HOME} component={AdminPage}/>*/}
                         <Route path={ROUTES.ACCOUNT} component={AccountPage}/>
