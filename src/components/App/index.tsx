@@ -1,6 +1,5 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { withAuthProvider } from '../Session';
 
 import SignUpPage from '../SignUp';
 import SignInPage from '../SignIn';
