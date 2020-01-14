@@ -12,6 +12,13 @@ export default class NunaStock {
         //Firebase-friendly data object data structures
         this.inventoryReportObject = this.createInventoryReportNestedObject();
         this.restockReportObject = this.createRestockReportNestedObject();
+
+        //Experimental --> for Dashboard summary view.
+        this.outOfStock = this.findOutOfStockMaterials()
+    }
+
+    findOutOfStockMaterials = () => {
+
     }
 
     createRestockReportNestedObject = () => {

@@ -5,59 +5,20 @@ import Papa from 'papaparse';
 import NunaStock from '../../helpers/nuna_stock';
 import { fixedBins } from "../../constants/demo_data";
 import RestockReport from "./restock_report";
+import {
+    Container,
+    ReportContainer,
+    DashContainer
+} from './admin.styles';
 
-const RESTOCK_REPORT_PATH = 'Companies/Nuna/restock_report';
+const Admin = ({
+                   restockReport,
+                   inventoryReport,
+                   handleRestockUpdate,
+                   firebase
+}) => {
 
-class Admin extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            loading: false,
-            users: [],
-            restockReport: {},
-            inventoryReport: {},
-        }
-    }
-
-    componentDidMount() {
-        const Firebase = this.props.firebase;
-        this.setState({loading: true});
-
-        Firebase.users().on('value', snapshot => {
-            const usersObject = snapshot.val();
-            const usersList = Object.keys(usersObject).map(key => ({
-                ...usersObject[key],
-                uid: key,
-            }));
-            this.setState({
-                users: usersList,
-                loading: false,
-            });
-        });
-
-        Firebase.db.ref(RESTOCK_REPORT_PATH).on('value', snapshot => {
-            const restockReport = snapshot.val();
-            this.setState({ restockReport: restockReport})
-        });
-        // restock_records.on('value', snapshot => {
-        //     const firebaseRestockRecords = snapshot.val();
-        //     this.props.dispatch(loadRestockRecords(firebaseRestockRecords))
-        // })
-    }
-
-
-
-    componentWillUnmount() {
-        this.props.firebase.users().off();
-        this.props.firebase.db.ref('Companies/Nuna/restock_report').off()
-    }
-
-
-    readFile = () => {
-
-    }
-
-    handleFileInput = (event) => {
+   const handleFileInput = (event) => {
         event.preventDefault();
         const inventoryFile = event.target.files[0];
         const reader = new FileReader();
@@ -71,9 +32,9 @@ class Admin extends Component {
 
             this.setState({restockReport: nunaStock.restockReportObject});
 
-            this.props.firebase.doOverwriteRestockReport(nunaStock.restockReportObject);
+            firebase.doOverwriteRestockReport(nunaStock.restockReportObject);
             console.log('inventory: ', nunaStock.inventoryReportObject);
-            this.props.firebase.doOverwriteInventoryReport(nunaStock.inventoryReportObject);
+            firebase.doOverwriteInventoryReport(nunaStock.inventoryReportObject);
 
             // console.log('nested: ', this.createRestockReportNestedObject(nunaStock.restockReport));
 
@@ -82,72 +43,87 @@ class Admin extends Component {
         reader.readAsText(inventoryFile);
     };
 
-    handleSubmit = (e) => {
-        e.preventDefault();
-        const searchString = this.refs.searchInput.value;
-        //TODO: figure out how to search for Bin/SU/Material values across all Firebase nodes without high cost super-searching.
-        const Firebase = this.props.firebase.db
-            .ref('Companies')
-            .child('Nuna')
-            .child('inventory_report')
-            .child(1)
-            .child('ST2')
-            .child(searchString)
-            .once('value', snapshot => {
-                console.log('results: ', snapshot.val())
+    // const handleSubmit = (e) => {
+    //     e.preventDefault();
+    //     const searchString = this.refs.searchInput.value;
+    //     //TODO: figure out how to search for Bin/SU/Material values across all Firebase nodes without high cost super-searching.
+    //     const Firebase = firebase.db
+    //         .ref('Companies')
+    //         .child('Nuna')
+    //         .child('inventory_report')
+    //         .child(1)
+    //         .child('ST2')
+    //         .child(searchString)
+    //         .once('value', snapshot => {
+    //             console.log('results: ', snapshot.val())
+    //
+    //         })
+    // };
 
-            })
-    };
+    let notFound, complete, incomplete, recordCount = 'N/A';
+    if (restockReport) {
+        recordCount = Object.keys(restockReport).length;
+        notFound = Object.keys(restockReport).reduce((value, recordKey) => {
+            const record = restockReport[recordKey];
+            if (record.isMissing) {
+                value += 1;
+            }
+            return value
+        }, 0);
 
-    render() {
-        const { users, loading } = this.state;
-        return (
-            <div>
-                <h1>Admin</h1>
-                {loading && <div>Loading ...</div>}
-                <UserList users={users} />
+        complete = Object.keys(restockReport).reduce((value, recordKey) => {
+            const record = restockReport[recordKey];
+            if (record.isCompleted) {
+                value += 1;
+            }
+            return value;
+        }, 0);
+
+        incomplete = Object.keys(restockReport).reduce((value, recordKey) => {
+            const record = restockReport[recordKey];
+            if (!record.isCompleted && !record.isMissing) {
+                value += 1;
+            }
+            return value;
+        }, 0);
+
+    }
+
+
+
+    return (
+        <Container>
+            <DashContainer>
+                <h2>New Report</h2>
 
                 <input
                     type='file'
-                    onChange={this.handleFileInput}
+                    onChange={handleFileInput}
                 />
 
                 <div>
                     <h1>Summary</h1>
-                    {/*<h4>{`Records: ${this.state.restockReport.length}`}</h4>*/}
+                    <h3>Records: {recordCount}</h3>
+                    <h3>Complete: {complete}</h3>
+                    <h3>Incomplete: {incomplete}</h3>
+                    <h3>Not Found: {notFound}</h3>
                 </div>
-                <form onSubmit={this.handleSubmit}>
-                    <input
-                        ref='searchInput'
-                        type='text'
-                        placeholder='Search bin names...'
-                    />
-                    <button type='submit'>Search</button>
-                </form>
-
+                {/*<form onSubmit={handleSubmit}>*/}
+                {/*    <input*/}
+                {/*        ref='searchInput'*/}
+                {/*        type='text'*/}
+                {/*        placeholder='Search bin names...'*/}
+                {/*    />*/}
+                {/*    <button type='submit'>Search</button>*/}
+                {/*</form>*/}
+            </DashContainer>
+            <ReportContainer>
                <RestockReport
-                   report={this.state.restockReport}
+                   report={restockReport}
                />
-            </div>
-        );
-    }
-}
-const UserList = ({ users }) => (
-    <ul>
-        {users.map(user => (
-            <li key={user.uid}>
-        <span>
-          <strong>ID: </strong> {user.uid }
-        </span>
-                <span>
-          <strong> E-Mail:</strong> {user.email }
-        </span>
-                <span>
-          <strong> Username:</strong> {user.username }
-        </span>
-            </li>
-        ))}
-    </ul>
-);
+            </ReportContainer>
+        </Container>
+    );
+};
 
 export default withFirebase(Admin);
