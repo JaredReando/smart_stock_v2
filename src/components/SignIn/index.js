@@ -96,6 +96,8 @@ const SignInPage = () => (
 );
 
 class SignInFormBase extends Component {
+    passwordRef = React.createRef();
+
     constructor(props) {
         super(props);
 
@@ -106,8 +108,24 @@ class SignInFormBase extends Component {
         };
     }
 
+    componentDidMount() {
+        this.passwordRef.current.addEventListener("keyup", this.checkEnter)
+    }
+
+    componentWillUnmount() {
+        this.passwordRef.current.removeEventListener("keyup", this.checkEnter);
+    }
+
+    checkEnter = (e) => {
+        if (e.key && e.key === "Enter") {
+            this.onSubmit();
+        }
+    };
+
     onSubmit = (event) => {
-        event.preventDefault();
+        if (event) {
+            event.preventDefault();
+        }
         const { email, password } = this.state;
         this.props.firebase
             .doSignInWithEmailAndPassword(email, password)
@@ -146,6 +164,7 @@ class SignInFormBase extends Component {
                     autocomplete='off'
                 />
                 <Input
+                    ref={this.passwordRef}
                     name="password"
                     value={password}
                     type="password"
