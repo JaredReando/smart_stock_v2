@@ -1,68 +1,58 @@
 import styled from "styled-components";
-
-export const Delete = styled.button({
-    width: '100%',
-    height: '100%',
-    border: 'none',
-
-    ':hover': {
-        color: 'red',
-        cursor: 'pointer',
-    }
-});
+import {theme} from "../../constants/theme";
 
 export const Table = styled.table({
     position: 'relative',
     display: 'flex',
-    height: '100%',
+    height: 'calc(100% - 40px)',
     flexDirection: 'column',
-    maxWidth: '1200px',
     borderRadius: '4px',
-    border: '1px solid #dddddd',
+    boxShadow: theme.shadows.large,
     marginRight: 'auto',
     marginLeft: 'auto',
+    maxWidth: '1200px',
     overflow: 'scroll',
 });
 
 
 export const TableHead = styled.thead({
-    position: 'sticky',
-    backgroundColor: '#f5f5f5',
-    top: 0,
+    backgroundColor: 'lightgrey',
     width: '100%',
-    // borderBottom: '1px solid black',
+    display: 'flex',
 });
-
-
-export const TH = styled.th({
-   alignSelf: 'flex-start',
-   flexBasis: '16%',
-   flexGrow: 1,
-   // border: '1px solid blue',
-});
-
-
-export const TD = styled.td({
-    flexBasis: '16%',
-    flexGrow: 1,
-    alignSelf: 'flex-start',
-    // border: '1px solid blue',
-},
-    ({flexBasis}) => ({
-        flexBasis: flexBasis ? flexBasis : null,
-    })
-);
 
 export const TableBody = styled.tbody({
-    width: '100%'
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    overflow: 'scroll'
 });
 
-export const TableRow = styled.tr({
-    width: '100%',
+export const TableRow = styled.tr(({priority}) => ({
+    flexGrow: 1,
     display: 'flex',
     paddingLeft: '20px',
     paddingRight: '20px',
     paddingTop: '5px',
     paddingBottom: '5px',
-    // border: '1px solid black',
-});
+
+    '&:nth-child(even)': {
+        background: '#f5f5f5',
+    }
+}));
+
+
+export const TH = styled.th(({width}) => ({
+    textAlign: 'left',
+    width: width,
+}));
+
+
+export const TD = styled.td(({width, align}) => ({
+    textAlign: 'left',
+    width: width,
+}),
+    ({flexBasis}) => ({
+        flexBasis: flexBasis ? flexBasis : null,
+    })
+);

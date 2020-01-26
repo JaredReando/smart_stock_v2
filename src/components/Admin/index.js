@@ -28,12 +28,10 @@ const Admin = ({
             const parsedInventoryCSV = Papa.parse(data, {header: true}).data;
 
             const nunaStock = new NunaStock(parsedInventoryCSV, fixedBins);
-            // this.setState({restockReport: nunaStock.restockReportArray});
 
-            this.setState({restockReport: nunaStock.restockReportObject});
+            handleRestockUpdate(nunaStock.restockReportObject);
 
             firebase.doOverwriteRestockReport(nunaStock.restockReportObject);
-            console.log('inventory: ', nunaStock.inventoryReportObject);
             firebase.doOverwriteInventoryReport(nunaStock.inventoryReportObject);
 
             // console.log('nested: ', this.createRestockReportNestedObject(nunaStock.restockReport));
@@ -94,28 +92,20 @@ const Admin = ({
     return (
         <Container>
             <DashContainer>
-                <h2>New Report</h2>
-
-                <input
-                    type='file'
-                    onChange={handleFileInput}
-                />
-
                 <div>
-                    <h1>Summary</h1>
-                    <h3>Records: {recordCount}</h3>
-                    <h3>Complete: {complete}</h3>
-                    <h3>Incomplete: {incomplete}</h3>
-                    <h3>Not Found: {notFound}</h3>
+                    <h2>New Report</h2>
+                    <input
+                        type='file'
+                        onChange={handleFileInput}
+                    />
+                    <div>
+                        <h1>Summary</h1>
+                        <h3>Records: {recordCount}</h3>
+                        <h3>Complete: {complete}</h3>
+                        <h3>Incomplete: {incomplete}</h3>
+                        <h3>Not Found: {notFound}</h3>
+                    </div>
                 </div>
-                {/*<form onSubmit={handleSubmit}>*/}
-                {/*    <input*/}
-                {/*        ref='searchInput'*/}
-                {/*        type='text'*/}
-                {/*        placeholder='Search bin names...'*/}
-                {/*    />*/}
-                {/*    <button type='submit'>Search</button>*/}
-                {/*</form>*/}
             </DashContainer>
             <ReportContainer>
                <RestockReport
