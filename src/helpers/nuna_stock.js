@@ -4,7 +4,7 @@ export default class NunaStock {
     constructor(rawInventoryJSON, fixedBinsJSON) {
         this.rawInventoryJSON = rawInventoryJSON;
         this.fixedBinsJSON = fixedBinsJSON;
-
+        console.log('did it work? ', this.getMaterialStockLevels());
         //TODO: phase out need for report arrays throughout application
         this.restockReportArray = this.getFixedBinRestockReport();
         this.inventoryReportArray = this.getFifoSortedInventory();
@@ -14,12 +14,28 @@ export default class NunaStock {
         this.restockReportObject = this.createRestockReportNestedObject();
 
         //Experimental --> for Dashboard summary view.
-        this.outOfStock = this.findOutOfStockMaterials()
+        this.outOfStock = this.getMaterialStockLevels()
     }
 
-    findOutOfStockMaterials = () => {
+    getMaterialStockLevels = () => {
+        const emptyRestock = this.getEmptyFixedBins();
+        const fixedBinDetails = this.fixedBinsJSON.reduce((binDetails, fixedBin) => {
+            const bin = fixedBin['BINS'];
+            const product = fixedBin['Product No'];
+            if(!binDetails[product]) {
+                binDetails[product] = {binCount: 0, fixedBins: [], binsStocked: 0};
+            }
+            if(!emptyRestock.includes(bin)) {
+                binDetails[product].binsStocked += 1
+            }
+                binDetails[product].binCount += 1;
+                binDetails[product].fixedBins.push(bin);
+            return binDetails
+        }, {});
 
-    }
+        console.log('fixed bin objects: ', fixedBinDetails);
+        return fixedBinDetails
+    };
 
     createRestockReportNestedObject = () => {
         const restockReportObjectArray = this.getFixedBinRestockReport();
@@ -100,13 +116,13 @@ export default class NunaStock {
             storageUnit: (jsonIventoryReportObject['Storage Unit'] ? jsonIventoryReportObject['Storage Unit'] : 'N/A'),
             storageType: (jsonIventoryReportObject['Storage Type'] === undefined ? 'undefined' : jsonIventoryReportObject['Storage Type']),
             storageLocation: (jsonIventoryReportObject['Storage Location'] ? jsonIventoryReportObject['Storage Location'] : 1),
+            noneStocked: false,
             uuid: uuid()
         };
         if(parsedRecord.storageBin.includes('.')) {
             const binName = parsedRecord.storageBin;
             parsedRecord.storageBin = binName.replace(/\./g, '_');
         }
-
         return parsedRecord
     }
 
@@ -164,6 +180,7 @@ export default class NunaStock {
         const fifoSortedInventory = this.getFifoSortedInventory();
         const validRestockInventory =  this.getValidRestockInventory(fifoSortedInventory);
         const emptyFixedBins = this.getEmptyFixedBins();
+        const materialStockLevels = this.getMaterialStockLevels();
         const fixedBinRestockReport = [];
         emptyFixedBins.forEach((fixedBin) => {
             //MATCHES MATERIAL TO RESTOCK BETWEEN EMPTY FIXED BIN ARRAY AND FIXED BIN 'fixedBinsJSON' MASTER
@@ -182,6 +199,7 @@ export default class NunaStock {
                     available: (fifoResult['available'] >= 0 ? fifoResult['available'] : 'N/A'),
                     isCompleted: false,
                     isMissing: false,
+                    noneStocked: materialStockLevels[fifoResult['material']].binsStocked === 0,
                     uuid: uuid()
                 };
                 fixedBinRestockReport.push(restockRecord);

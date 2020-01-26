@@ -67,7 +67,7 @@ class Dashboard extends Component {
                     <Switch>
                         {/*<Route path={ROUTES.HOME} component={AdminPage}/>*/}
                         <Route path={ROUTES.ACCOUNT} component={AccountPage}/>
-                        <Route path={ROUTES.HOME} render={() => {
+                        <Route path={ROUTES.LANDING} render={() => {
                             return (
                                 <AdminPage
                                     restockReport={restockReport}
@@ -76,7 +76,7 @@ class Dashboard extends Component {
                             )}}
                         />
                         <Route path={ROUTES.ACCOUNT} component={AdminPage}/>
-                        <Route path={ROUTES.LANDING} component={AccountPage}/>
+                        <Route path={ROUTES.HOME} component={AccountPage}/>
                     </Switch>
                 </ComponentContainer>
 
