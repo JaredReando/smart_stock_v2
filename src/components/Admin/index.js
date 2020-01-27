@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
+import React, {useState} from 'react';
+
 import { withFirebase } from "../Firebase"
 import Papa from 'papaparse';
-
+import NewReportModal from '../Modals/new_report_modal';
 import NunaStock from '../../helpers/nuna_stock';
 import { fixedBins } from "../../constants/demo_data";
 import RestockReport from "./restock_report";
@@ -14,11 +15,12 @@ import {
 const Admin = ({
                    restockReport,
                    inventoryReport,
+                    lastUpdated = new Date(),
                    handleRestockUpdate,
                    firebase
 }) => {
 
-   const handleFileInput = (event) => {
+    const handleFileInput = (event) => {
         event.preventDefault();
         const inventoryFile = event.target.files[0];
         const reader = new FileReader();
@@ -33,6 +35,7 @@ const Admin = ({
 
             firebase.doOverwriteRestockReport(nunaStock.restockReportObject);
             firebase.doOverwriteInventoryReport(nunaStock.inventoryReportObject);
+            firebase.doOverwriteLastUpdated();
 
             // console.log('nested: ', this.createRestockReportNestedObject(nunaStock.restockReport));
 
@@ -59,6 +62,7 @@ const Admin = ({
     // };
 
     let notFound, complete, incomplete, recordCount = 'N/A';
+
     if (restockReport) {
         recordCount = Object.keys(restockReport).length;
         notFound = Object.keys(restockReport).reduce((value, recordKey) => {
@@ -87,23 +91,33 @@ const Admin = ({
 
     }
 
-
+    const [showModal, setShowModal] = useState(false);
 
     return (
         <Container>
+            {showModal && (
+                <NewReportModal
+                    handleUpload={handleFileInput}
+                    handleClick={() => setShowModal(false)}
+                />
+            )}
             <DashContainer>
-                <div>
-                    <h2>New Report</h2>
-                    <input
-                        type='file'
-                        onChange={handleFileInput}
-                    />
+                <div
+                    style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'center',
+                        // alignItems: 'center',
+                        height: '100%',
+                    }}
+                >
                     <div>
-                        <h1>Summary</h1>
                         <h3>Records: {recordCount}</h3>
                         <h3>Complete: {complete}</h3>
                         <h3>Incomplete: {incomplete}</h3>
                         <h3>Not Found: {notFound}</h3>
+                        <h3>Last Updated: {lastUpdated.toString() || 'N/A'}</h3>
+                        <button onClick={() => setShowModal(true)}>New Report</button>
                     </div>
                 </div>
             </DashContainer>

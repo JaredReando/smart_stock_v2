@@ -9,9 +9,10 @@ import { NavWrapper, NavGroup, Logo } from './navigation.styles.js';
 const NavLink = (props) => {
     const style = {
         textDecoration: 'none',
-        color: 'green',
+        fontWeight: 'bold',
+        color: 'black',
         textTransform: 'uppercase',
-        paddingRight: '50px'
+        marginRight: '50px',
     };
     return (
         <Link {...props} style={style} />

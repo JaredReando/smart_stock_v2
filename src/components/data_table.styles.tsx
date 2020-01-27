@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {theme} from "../../constants/theme";
+import {theme} from "../constants/theme";
 
 export const Table = styled.table({
     position: 'relative',
@@ -26,7 +26,7 @@ export const TableBody = styled.tbody({
     overflow: 'scroll'
 });
 
-export const TableRow = styled.tr(({priority}) => ({
+export const TableRow = styled.tr(() => ({
     flexGrow: 1,
     display: 'flex',
     paddingLeft: '20px',
@@ -40,18 +40,15 @@ export const TableRow = styled.tr(({priority}) => ({
 }));
 
 
-export const TH = styled.th(({width}) => ({
+export const TH = styled.th<{width: string}>(({width}) => ({
     textAlign: 'left',
     width: width,
 }));
 
 
-export const TD = styled.td(({width, align}) => ({
-    textAlign: 'left',
-    width: width,
-    fontSize: '.75em'
-}),
-    ({flexBasis}) => ({
-        flexBasis: flexBasis ? flexBasis : null,
+export const TD = styled.td<{width: string, align?: string}>(({width, align}) => ({
+        textAlign: 'left',
+        width: width,
+        fontSize: '.75em'
     })
 );

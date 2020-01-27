@@ -1,11 +1,14 @@
 import styled from 'styled-components';
 
 export const Container = styled.div({
+    position: 'relative',
     display: 'flex',
     flexDirection: 'column',
     width: '100%',
+    maxWidth: '1200px',
+    margin: '0 auto',
     height: '100%',
-    overflow: 'hidden'
+    // overflow: 'hidden'
 });
 
 export const DashContainer = styled.div({
