@@ -34,6 +34,15 @@ class Firebase {
         this.auth.currentUser.updatePassword(password);
     };
 
+    doOverwriteLastUpdated = () => {
+        const now = new Date().toString();
+        this.db.ref('Companies')
+            .child('Nuna')
+            .child('last_updated')
+            .set(now)
+
+    };
+
     doOverwriteRestockReport = (restockReport) => {
         this.db.ref('Companies')
             .child('Nuna')

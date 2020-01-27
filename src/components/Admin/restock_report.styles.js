@@ -4,13 +4,11 @@ import {theme} from "../../constants/theme";
 export const Table = styled.table({
     position: 'relative',
     display: 'flex',
-    height: 'calc(100% - 40px)',
     flexDirection: 'column',
+    height: 'calc(100% - 40px)',
+    width: '100%',
     borderRadius: '4px',
     boxShadow: theme.shadows.large,
-    marginRight: 'auto',
-    marginLeft: 'auto',
-    maxWidth: '1200px',
     overflow: 'scroll',
 });
 
@@ -51,6 +49,7 @@ export const TH = styled.th(({width}) => ({
 export const TD = styled.td(({width, align}) => ({
     textAlign: 'left',
     width: width,
+    fontSize: '.75em'
 }),
     ({flexBasis}) => ({
         flexBasis: flexBasis ? flexBasis : null,

@@ -9,32 +9,32 @@ import {
 } from './restock_report.styles';
 
 const RestockReport = (props) => {
-    function setWidth(grow = 1, columns = 6) {
+    function setRatio(grow = 1, columns = 6) {
         const baseWidth = 100 / columns;
         return `${baseWidth * grow}%`;
     }
 
     const headerItems = [
         {
-            title: "Source", width: setWidth(2),
+            title: "Source", key: 'row_data_key', width: setRatio(2),
         },
         {
-            title: "Destination", width: setWidth(2),
+            title: "Destination", width: setRatio(2),
         },
         {
-            title: "Material", width: setWidth(3),
+            title: "Material", width: setRatio(3),
         },
         {
-            title: "Description", width: setWidth(4),
+            title: "Description", width: setRatio(4),
         },
         {
-            title: "Qty.", width: setWidth(1),
+            title: "Qty.", width: setRatio(1),
         },
         {
-            title: "Storage Unit", width: setWidth(2),
+            title: "Storage Unit", width: setRatio(2),
         },
     ];
-
+ // const tableProps = {columnHeaders: [], rowData: []}
     return (
         <Table>
             <TableHead>

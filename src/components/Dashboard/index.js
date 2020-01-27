@@ -17,6 +17,7 @@ import {
 import Navigation from "../Navigation";
 
 const RESTOCK_REPORT_PATH = 'Companies/Nuna/restock_report';
+const LAST_UPDATED_PATH = 'Companies/Nuna/last_updated';
 
 class Dashboard extends Component {
     constructor(props) {
@@ -24,6 +25,7 @@ class Dashboard extends Component {
         this.state = {
             restockReport: {},
             inventoryReport: {},
+            lastUpdated: new Date(),
         }
     }
 
@@ -34,6 +36,10 @@ class Dashboard extends Component {
         Firebase.db.ref(RESTOCK_REPORT_PATH).on('value', snapshot => {
             const restockReport = snapshot.val();
             this.setState({ restockReport: restockReport})
+        });
+        Firebase.db.ref(LAST_UPDATED_PATH).on('value', snapshot => {
+            const lastUpdated = snapshot.val();
+            this.setState({ lastUpdated: new Date(lastUpdated)})
         });
         // restock_records.on('value', snapshot => {
         //     const firebaseRestockRecords = snapshot.val();
@@ -55,7 +61,7 @@ class Dashboard extends Component {
     };
 
     render() {
-        const {restockReport, inventoryReport} = this.state;
+        const {restockReport, inventoryReport, lastUpdated} = this.state;
         return (
             <Container>
                 <Navigation />
@@ -71,6 +77,7 @@ class Dashboard extends Component {
                             return (
                                 <AdminPage
                                     restockReport={restockReport}
+                                    lastUpdated={lastUpdated}
                                     handleRestockUpdate={this.handleRestockUpdate}
                                 />
                             )}}
