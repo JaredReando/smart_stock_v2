@@ -1,16 +1,18 @@
 import React, {useState} from 'react';
 
-import { withFirebase } from "../Firebase"
+import { withFirebase } from "../../components/Firebase"
 import Papa from 'papaparse';
-import NewReportModal from '../Modals/new_report_modal';
+import NewReportModal from '../../components/Modals/new_report_modal';
 import NunaStock from '../../helpers/nuna_stock';
-import { fixedBins } from "../../constants/demo_data";
+import { fixedBins } from "../../constants";
 import RestockReport from "./restock_report";
 import {
     Container,
     ReportContainer,
-    DashContainer
+    DashContainer,
+    TestButton,
 } from './admin.styles';
+import FixedBins from "./fixed_bins";
 
 const Admin = ({
                    restockReport,
@@ -44,23 +46,6 @@ const Admin = ({
         reader.readAsText(inventoryFile);
     };
 
-    // const handleSubmit = (e) => {
-    //     e.preventDefault();
-    //     const searchString = this.refs.searchInput.value;
-    //     //TODO: figure out how to search for Bin/SU/Material values across all Firebase nodes without high cost super-searching.
-    //     const Firebase = firebase.db
-    //         .ref('Companies')
-    //         .child('Nuna')
-    //         .child('inventory_report')
-    //         .child(1)
-    //         .child('ST2')
-    //         .child(searchString)
-    //         .once('value', snapshot => {
-    //             console.log('results: ', snapshot.val())
-    //
-    //         })
-    // };
-
     let notFound, complete, incomplete, recordCount = 'N/A';
 
     if (restockReport) {
@@ -90,9 +75,12 @@ const Admin = ({
         }, 0);
 
     }
+    function overwriteFixedBins() {
+        firebase.doOverwriteFixedBins(fixedBins);
+    }
 
     const [showModal, setShowModal] = useState(false);
-
+    const [toggleView, setToggleView] = useState(false);
     return (
         <Container>
             {showModal && (
@@ -102,29 +90,26 @@ const Admin = ({
                 />
             )}
             <DashContainer>
-                <div
-                    style={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        justifyContent: 'center',
-                        // alignItems: 'center',
-                        height: '100%',
-                    }}
-                >
-                    <div>
-                        <h3>Records: {recordCount}</h3>
-                        <h3>Complete: {complete}</h3>
-                        <h3>Incomplete: {incomplete}</h3>
-                        <h3>Not Found: {notFound}</h3>
-                        <h3>Last Updated: {lastUpdated.toString() || 'N/A'}</h3>
-                        <button onClick={() => setShowModal(true)}>New Report</button>
-                    </div>
-                </div>
+                <h3>Records: {recordCount}</h3>
+                <h3>Complete: {complete}</h3>
+                <h3>Incomplete: {incomplete}</h3>
+                <h3>Not Found: {notFound}</h3>
+                <h3>Last Updated: {lastUpdated.toString() || 'N/A'}</h3>
+                <TestButton onClick={() => setShowModal(true)}>New Report</TestButton>
+                <TestButton onClick={() => setToggleView(t => !t)}>Toggle View</TestButton>
+                <TestButton onClick={overwriteFixedBins}>Set Fixed Bins</TestButton>
             </DashContainer>
             <ReportContainer>
-               <RestockReport
-                   report={restockReport}
-               />
+                {!toggleView && (
+                   <RestockReport
+                       report={restockReport}
+                   />
+                )}
+                {toggleView && (
+                    <FixedBins
+                        fixedBins={fixedBins}
+                    />
+                )}
             </ReportContainer>
         </Container>
     );

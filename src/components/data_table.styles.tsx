@@ -5,7 +5,7 @@ export const Table = styled.table({
     position: 'relative',
     display: 'flex',
     flexDirection: 'column',
-    height: 'calc(100% - 40px)',
+    height: '100%',
     width: '100%',
     borderRadius: '4px',
     boxShadow: theme.shadows.large,

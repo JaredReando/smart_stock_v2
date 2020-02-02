@@ -20,8 +20,8 @@ export default class NunaStock {
     getMaterialStockLevels = () => {
         const emptyRestock = this.getEmptyFixedBins();
         const fixedBinDetails = this.fixedBinsJSON.reduce((binDetails, fixedBin) => {
-            const bin = fixedBin['BINS'];
-            const product = fixedBin['Product No'];
+            const bin = fixedBin['Bin'];
+            const product = fixedBin['Product'];
             if(!binDetails[product]) {
                 binDetails[product] = {binCount: 0, fixedBins: [], binsStocked: 0};
             }
@@ -33,7 +33,6 @@ export default class NunaStock {
             return binDetails
         }, {});
 
-        console.log('fixed bin objects: ', fixedBinDetails);
         return fixedBinDetails
     };
 
@@ -164,11 +163,11 @@ export default class NunaStock {
         return validRestockInventory;
     }
 
-    //MATCHES DESIGNATED FIXED BINS WITH EMPTY BINS IN RESTOCK REPORT. RETURNS BACK A SORTED ARRAY OF EMPTY RESTOCK BIN NAMES
+    //MATCHES DESIGNATED FIXED Bin WITH EMPTY Bin IN RESTOCK REPORT. RETURNS BACK A SORTED ARRAY OF EMPTY RESTOCK BIN NAMES
     getEmptyFixedBins() {
-        //INVENTORY.FILTER => BINS FOUND IN FIXEDBINS THAT HAVE 0 STOCK IN INVENTORY REPORT
+        //INVENTORY.FILTER => Bin FOUND IN FIXEDBin THAT HAVE 0 STOCK IN INVENTORY REPORT
         //CREATES AN ARRAY OF BIN NAME STRINGS SO 'includes' METHOD CAN BE USED FOR EMPTY BIN MATCHING
-        let fixedBinNames = this.fixedBinsJSON.map((record) => record['BINS'])
+        let fixedBinNames = this.fixedBinsJSON.map((record) => record['Bin'])
         //CREATES AN ARRAY OF INVENTORY REPORT OBJECTS CORRESPONDING TO EMPTY BIN / FIXED BIN MATCHES
         let binsToRestockObjects = this.getFifoSortedInventory().filter((record) => (record.available == 0 & fixedBinNames.includes(record.storageBin)));
         //MAPS BACK AN ARRAY CONTAINING ONLY EMPTY FIXED BIN NAMES
@@ -184,15 +183,15 @@ export default class NunaStock {
         const fixedBinRestockReport = [];
         emptyFixedBins.forEach((fixedBin) => {
             //MATCHES MATERIAL TO RESTOCK BETWEEN EMPTY FIXED BIN ARRAY AND FIXED BIN 'fixedBinsJSON' MASTER
-            const materialToRestock = this.fixedBinsJSON.find((jsonBin) => jsonBin['BINS'] === fixedBin)
+            const materialToRestock = this.fixedBinsJSON.find((jsonBin) => jsonBin['Bin'] === fixedBin)
             //RETURNS INDEX REFERENCE FOR FIRST MATCH FOUND IN 'validRestockInventory' OF FIXED BIN MATERIAL
-            const sliceIndex = validRestockInventory.findIndex((fifoRecord) => fifoRecord['material'] === materialToRestock['Product No'])
+            const sliceIndex = validRestockInventory.findIndex((fifoRecord) => fifoRecord['material'] === materialToRestock['Product'])
             //LOOKS IN 'validRestockInventory' FOR MATCH OF MATERIAL RECORD. IF FOUND, PULLS FULL OBJECT FROM ARRAY AND RETURNS IN PLACE OF fixedBin
             if (sliceIndex !== -1) {
                 const fifoResult = validRestockInventory.splice(sliceIndex, 1)[0];
                 const restockRecord = {
                     sourceBin: fifoResult['storageBin'],
-                    destinationBin: materialToRestock['BINS'],
+                    destinationBin: materialToRestock['Bin'],
                     material: fifoResult['material'],
                     storageUnit: fifoResult['storageUnit'],
                     description: materialToRestock['Description'],

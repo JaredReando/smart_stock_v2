@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import styled, { css } from 'styled-components';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'recompose';
-import { PasswordForgetLink } from '../PasswordForget';
+import { PasswordForgetLink } from '../../components/PasswordForget';
 import { SignUpLink } from '../SignUp';
-import { withFirebase } from '../Firebase';
+import { withFirebase } from '../../components/Firebase';
 import * as ROUTES from '../../constants/routes';
 
 const boxShadow = () => {

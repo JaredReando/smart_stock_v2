@@ -3,14 +3,14 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
 
-import App from './components/App';
+import Routes from './components/Routes';
 import Firebase, {FirebaseContext} from "./components/Firebase";
 import withAuthProvider from "./components/Session/withAuthProvider";
 
 
 ReactDOM.render(
     <FirebaseContext.Provider value={new Firebase()}>
-        {withAuthProvider(App)()}
+        {withAuthProvider(Routes)()}
     </FirebaseContext.Provider>,
     document.getElementById('root')
 );

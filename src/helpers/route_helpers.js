@@ -28,7 +28,7 @@ const AuthenticatedRoute = ({ component: Component, authUser, ...rest }) => {
                 ) : (
                     <Redirect
                         to={{
-                            pathname: ROUTES.SIGN_IN,
+                            pathname: ROUTES.LOGIN,
                             state: { from: props.location },
                         }}
                     />
@@ -39,6 +39,7 @@ const AuthenticatedRoute = ({ component: Component, authUser, ...rest }) => {
 };
 
 const signInAuthenticatedRouteBase = ({ component: Component, authUser, ...rest }) => {
+    console.log("login route")
     return (
         <Route
             {...rest}

@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import * as ROUTES from '../../constants/routes';
-import SignOutButton from '../SignOut'
+import SignOutButton from '../../pages/SignOut'
 import { withAuthConsumer } from '../Session';
 import { NavWrapper, NavGroup, Logo } from './navigation.styles.js';
 
@@ -20,17 +20,16 @@ const NavLink = (props) => {
 };
 const NavigationAuth = () => (
     <NavGroup>
-        <NavLink to={ROUTES.LANDING}>Landing</NavLink>
         <NavLink to={ROUTES.HOME}>Home</NavLink>
         <NavLink to={ROUTES.ACCOUNT}>Account</NavLink>
+        <NavLink to={ROUTES.CLIENT}>Client</NavLink>
         <SignOutButton />
     </NavGroup>
 );
 
 const NavigationNonAuth = () => (
     <NavGroup>
-        <NavLink to={ROUTES.LANDING}>Landing</NavLink>
-        <NavLink to={ROUTES.SIGN_IN}>Sign In</NavLink>
+        <NavLink to={ROUTES.LOGIN}>Sign In</NavLink>
     </NavGroup>
 );
 

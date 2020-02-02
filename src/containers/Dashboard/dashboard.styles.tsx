@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 
 export const Container = styled.div({
@@ -9,8 +8,8 @@ export const Container = styled.div({
 });
 
 export const ComponentContainer = styled.div({
-    flexGrow: 1,
-    display: 'flex',
-    overflow: 'scroll',
+    height: 'calc(100% - 61px)',
 });
+
+
 
