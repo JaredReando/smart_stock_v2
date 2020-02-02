@@ -1,23 +1,27 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import * as ROUTES from '../../constants/routes';
-import { withAuthConsumer } from '../Session';
-import { withFirebase } from '../Firebase';
+import { withAuthConsumer } from '../../components/Session';
+import { withFirebase } from '../../components/Firebase';
 
-import HomePage from '../Home';
-import AccountPage from '../Account';
-import AdminPage from '../Admin';
-import LandingPage from '../Landing';
+import Client from '../../pages/Client';
+import HomePage from '../../pages/Home';
+import AccountPage from '../../components/Account';
+import AdminPage from '../../pages/Admin';
+import LandingPage from '../../components/Landing';
 
 import {
     Container,
     ComponentContainer
 } from './dashboard.styles';
 
-import Navigation from "../Navigation";
+import Navigation from "../../components/Navigation";
+import {fixedBins} from "../../constants";
+import AuthenticatedRoute from "../../helpers/route_helpers";
 
 const RESTOCK_REPORT_PATH = 'Companies/Nuna/restock_report';
 const LAST_UPDATED_PATH = 'Companies/Nuna/last_updated';
+const FIXED_BIN_PATH = 'Companies/Nuna/fixed_bins';
 
 class Dashboard extends Component {
     constructor(props) {
@@ -26,6 +30,7 @@ class Dashboard extends Component {
             restockReport: {},
             inventoryReport: {},
             lastUpdated: new Date(),
+            fixedBins: {},
         }
     }
 
@@ -41,10 +46,10 @@ class Dashboard extends Component {
             const lastUpdated = snapshot.val();
             this.setState({ lastUpdated: new Date(lastUpdated)})
         });
-        // restock_records.on('value', snapshot => {
-        //     const firebaseRestockRecords = snapshot.val();
-        //     this.props.dispatch(loadRestockRecords(firebaseRestockRecords))
-        // })
+        Firebase.db.ref(FIXED_BIN_PATH).on('value', snapshot => {
+            const fixedBins = snapshot.val();
+            this.setState({ fixedBins: fixedBins})
+        });
     }
 
     componentWillUnmount() {
@@ -61,7 +66,7 @@ class Dashboard extends Component {
     };
 
     render() {
-        const {restockReport, inventoryReport, lastUpdated} = this.state;
+        const {restockReport, inventoryReport, lastUpdated, fixedBins} = this.state;
         return (
             <Container>
                 <Navigation />
@@ -71,22 +76,28 @@ class Dashboard extends Component {
                     methods from this Dashboard component while letting these Route components be
                     Functional. I can pass 'Firebase' down by wrapping Dashboard and passing down as an FC prop.*/}
                     <Switch>
-                        {/*<Route path={ROUTES.HOME} component={AdminPage}/>*/}
+                        <Route path={ROUTES.CLIENT} render={(props) => {
+                            return (
+                                <Client
+                                    restockReport={restockReport}
+                                />
+                            )
+                        }} />
                         <Route path={ROUTES.ACCOUNT} component={AccountPage}/>
-                        <Route path={ROUTES.LANDING} render={() => {
+                        <Route exact path={ROUTES.HOME} render={(props) => {
                             return (
                                 <AdminPage
                                     restockReport={restockReport}
                                     lastUpdated={lastUpdated}
+                                    fixedBins={fixedBins}
                                     handleRestockUpdate={this.handleRestockUpdate}
                                 />
                             )}}
                         />
                         <Route path={ROUTES.ACCOUNT} component={AdminPage}/>
-                        <Route path={ROUTES.HOME} component={AccountPage}/>
+                        {/*<Route exact path={ROUTES.HOME} component={AccountPage}/>*/}
                     </Switch>
                 </ComponentContainer>
-
             </Container>
         )
     }

@@ -1,6 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-import { withFirebase } from '../Firebase';
+import { withFirebase } from '../../components/Firebase';
 import { compose } from 'recompose';
 import styled from 'styled-components';
 
@@ -22,7 +22,7 @@ const SignOut = styled.button({
 const SignOutButton = ({ firebase, history }) => {
     const handleSignOut = () => {
       firebase.doSignOut();
-      history.push(ROUTES.SIGN_IN)
+      history.push(ROUTES.LOGIN)
     };
     return (
         <SignOut onClick={handleSignOut}>

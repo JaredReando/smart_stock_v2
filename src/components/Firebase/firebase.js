@@ -57,6 +57,13 @@ class Firebase {
             .set(inventoryReport);
     };
 
+    doOverwriteFixedBins = (fixedBinRecords) => {
+        this.db.ref('Companies')
+            .child('Nuna')
+            .child('fixed_bins')
+            .set(fixedBinRecords);
+    };
+
     doDeleteRestockRecord = (recordKey) => {
         this.db.ref('Companies/Nuna/restock_report')
             .child(recordKey)

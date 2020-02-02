@@ -13,11 +13,10 @@ interface Props {
     rowData: any;
 }
 const DataTable: React.FC<Props> = ({columnHeaders, rowData}) => {
-    function setRatio(grow = 1, columns = 6) {
+    function setRatio(grow = 1, columns = columnHeaders.length) {
         const baseWidth = 100 / columns;
         return `${baseWidth * grow}%`;
     }
-
     return (
         <Table>
             <TableHead>
@@ -60,6 +59,6 @@ const DataTable: React.FC<Props> = ({columnHeaders, rowData}) => {
             </TableBody>
         </Table>
     )
-}
+};
 
 export default DataTable;
