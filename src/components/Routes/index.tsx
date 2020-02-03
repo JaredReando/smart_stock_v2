@@ -3,10 +3,10 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import SignUpPage from '../../pages/SignUp';
 import SignInPage from '../../pages/SignIn';
-import PasswordForgetPage from '../PasswordForget';
+import PasswordForgetPage from '../../pages/PasswordForget';
 import Dashboard from '../../containers/Dashboard';
 import * as ROUTES from '../../constants/routes';
-import AuthenticatedRoute, { SignInAuthenticatedRoute } from "../../helpers/route_helpers";
+import AuthenticatedRoute, { SignInAuthenticatedRoute } from "../../routing/route_helpers";
 
 const Routes = () => {
     return (

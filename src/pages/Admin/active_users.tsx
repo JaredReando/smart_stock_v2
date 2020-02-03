@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withFirebase } from "../../components/Firebase/index"
+import {Consumer as FirebaseConsumer} from '../../context/firebase.context';
 
 interface Props {
     firebase: any;
@@ -70,4 +70,4 @@ const UserList = (props: any) => (
     </ul>
 );
 
-export default withFirebase(ActiveUsers);
+export default ActiveUsers;

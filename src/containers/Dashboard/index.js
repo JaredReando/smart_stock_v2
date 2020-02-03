@@ -1,14 +1,10 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import * as ROUTES from '../../constants/routes';
-import { withAuthConsumer } from '../../components/Session';
-import { withFirebase } from '../../components/Firebase';
-
+import AccountPage from '../../pages/Account'
+import AdminPage from '../../pages/Admin'
 import Client from '../../pages/Client';
-import HomePage from '../../pages/Home';
-import AccountPage from '../../components/Account';
-import AdminPage from '../../pages/Admin';
-import LandingPage from '../../components/Landing';
+
 
 import {
     Container,
@@ -17,7 +13,7 @@ import {
 
 import Navigation from "../../components/Navigation";
 import {fixedBins} from "../../constants";
-import AuthenticatedRoute from "../../helpers/route_helpers";
+import AuthenticatedRoute from "../../routing/route_helpers";
 
 const RESTOCK_REPORT_PATH = 'Companies/Nuna/restock_report';
 const LAST_UPDATED_PATH = 'Companies/Nuna/last_updated';
@@ -103,4 +99,4 @@ class Dashboard extends Component {
     }
 }
 
-export default withFirebase(withAuthConsumer(Dashboard));
+export default Dashboard;

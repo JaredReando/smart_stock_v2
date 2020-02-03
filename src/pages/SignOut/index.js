@@ -1,6 +1,5 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-import { withFirebase } from '../../components/Firebase';
 import { compose } from 'recompose';
 import styled from 'styled-components';
 
@@ -32,6 +31,5 @@ const SignOutButton = ({ firebase, history }) => {
 };
 
 export default compose(
-    withFirebase,
     withRouter,
 )(SignOutButton);
