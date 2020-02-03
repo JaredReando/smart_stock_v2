@@ -2,7 +2,6 @@ import React from 'react';
 import {
     Container,
 } from './client.styles';
-import { withFirebase } from "../../components/Firebase/index";
 
 interface Props {
     restockReport: any;
@@ -17,4 +16,4 @@ const Client: React.FC<Props> = ({restockReport}) => {
     )
 };
 
-export default withFirebase(Client);
+export default Client;

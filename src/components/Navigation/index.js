@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 
 import * as ROUTES from '../../constants/routes';
 import SignOutButton from '../../pages/SignOut'
-import { withAuthConsumer } from '../Session';
 import { NavWrapper, NavGroup, Logo } from './navigation.styles.js';
 
 const NavLink = (props) => {
@@ -40,4 +39,4 @@ const Navigation = ({authUser}) => (
     </NavWrapper>
 );
 
-export default withAuthConsumer(Navigation);
+export default Navigation;

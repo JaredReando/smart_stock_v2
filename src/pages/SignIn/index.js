@@ -2,10 +2,7 @@ import React, { Component } from 'react';
 import styled, { css } from 'styled-components';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'recompose';
-import { PasswordForgetLink } from '../../components/PasswordForget';
-import { SignUpLink } from '../SignUp';
-import { withFirebase } from '../../components/Firebase';
-import * as ROUTES from '../../constants/routes';
+import { PasswordForgetLink } from '../PasswordForget';
 
 const boxShadow = () => {
     return {
@@ -135,7 +132,7 @@ class SignInFormBase extends Component {
                     email: '',
                     password: '',
                     error: null,
-                }, this.props.history.push(ROUTES.HOME));
+                }, this.props.history.push("/"));
 
             })
             .catch(error => {
@@ -186,7 +183,6 @@ class SignInFormBase extends Component {
 };
 
 const SignInForm = compose(
-    withFirebase,
     withRouter,
 )(SignInFormBase);
 
