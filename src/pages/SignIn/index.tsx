@@ -28,7 +28,8 @@ const SignInPageBase = (props: any) => {
                 setEmail('');
                 setPassword('');
                 setError(null);
-                history.push("/sign_up");
+                sessionStorage.setItem("stockUser", "true");
+                history.push("/admin");
 
             })
             .catch((err: any) => {
