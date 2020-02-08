@@ -48,6 +48,7 @@
   },
   "devDependencies": {
     "@types/react-modal": "^3.10.4",
-    "@types/react-transition-group": "^4.2.3"
+    "@types/react-transition-group": "^4.2.3",
+    "prettier": "1.19.1"
   }
 }
