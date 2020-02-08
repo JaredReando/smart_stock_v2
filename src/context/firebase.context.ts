@@ -1,5 +1,5 @@
 import createState from 'react-copy-write';
-import Firebase from '../components/Firebase';
+import Firebase from '../api/Firebase';
 
 const firebase = new Firebase();
 

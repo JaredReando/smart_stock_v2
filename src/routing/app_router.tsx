@@ -7,13 +7,14 @@ import PasswordForgetPage from '../pages/PasswordForget';
 import Dashboard from '../containers/Dashboard';
 import AuthenticatedRoute  from "./route_helpers";
 import NotFound404 from "../pages/not_found_404";
+import AdminPage from "../pages/Admin/admin_page";
 
 const Routes = () => {
     return (
         <BrowserRouter basename="/">
             <Switch>
                 <AuthenticatedRoute path={"/client"} component={Dashboard} />
-                <AuthenticatedRoute path={"/admin"} component={Dashboard}/>
+                <AuthenticatedRoute path={"/admin"} component={AdminPage}/>
 
                 <Route exact path="/" component={SignInPage}/>
                 <Route path={"/login"} component={SignInPage}/>
