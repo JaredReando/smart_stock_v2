@@ -10,6 +10,7 @@ export const theme = {
     lightGrey: '#ECECEC',
     grey: '#C4C4C4',
     darkGrey: '#ABABAB',
+    green: 'lightgreen',
     black: '#2C2C2C',
     azure: '#008CFF',
     white: '#FBFBFB',

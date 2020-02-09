@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Consumer as FirebaseConsumer } from '../../context/firebase.context';
+import React, { Component, useContext } from 'react';
+import {Context as FirebaseContext } from '../../context/firebase.context';
 
 interface Props {
   firebase: any;
@@ -16,7 +16,7 @@ class ActiveUsers extends Component<Props, State> {
   };
 
   componentDidMount() {
-    const Firebase = this.props.firebase;
+    const Firebase = useContext(FirebaseContext);
     this.setState({ loading: true });
 
     Firebase.users().on('value', (snapshot: any) => {

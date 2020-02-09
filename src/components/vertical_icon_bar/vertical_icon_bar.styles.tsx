@@ -5,7 +5,7 @@ export const Container = styled.div({});
 export const ButtonPanelWrapper = styled.div(props => ({
     height: '100%',
     width: '40px',
-    background: props.theme.colors.darkBlue,
+    background: props.theme.colors.black,
     display: 'flex',
     flex: 1,
     flexDirection: 'column',
@@ -25,13 +25,13 @@ export const IconButton = styled.div<{ active: boolean; backgroundColor?: string
         if (!active) {
             return {
                 ':hover': {
-                    background: theme.colors.azure,
+                    background: theme.colors.darkGrey,
                 },
             };
         }
         return {
             fontSize: theme.text.size.large,
-            background: active ? theme.colors.azure : backgroundColor,
+            background: active ? theme.colors.darkGrey : backgroundColor,
             color: theme.colors.azure,
         };
     },

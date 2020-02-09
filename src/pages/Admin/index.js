@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, {useContext, useState} from 'react';
 import Papa from 'papaparse';
-import NewReportModal from '../../components/Modals/new_report_modal';
-import { Provider as FirebaseProvider } from '../../context/firebase.context';
+import NewReportModal from '../../components/modals/new_report_modal';
+import {Context as FirebaseContext} from '../../context/firebase.context';
 import NunaStock from '../../helpers/nuna_stock';
 import { fixedBins } from '../../constants';
 import RestockReport from './restock_report';
@@ -18,8 +18,8 @@ const Admin = ({
   inventoryReport,
   lastUpdated = new Date(),
   handleRestockUpdate,
-  firebase,
 }) => {
+    const firebase = useContext(FirebaseContext);
   const handleFileInput = (event, firebase) => {
     event.preventDefault();
     const inventoryFile = event.target.files[0];
@@ -81,38 +81,34 @@ const Admin = ({
   const [showModal, setShowModal] = useState(false);
   const [toggleView, setToggleView] = useState(false);
   return (
-    <FirebaseProvider>
-      {firebase => (
-        <Container>
-          {showModal && (
-            <NewReportModal
-              handleUpload={event => handleFileInput(event, firebase)}
-              handleClick={() => setShowModal(false)}
-            />
-          )}
-          <DashContainer>
-            <h3>Records: {recordCount}</h3>
-            <h3>Complete: {complete}</h3>
-            <h3>Incomplete: {incomplete}</h3>
-            <h3>Not Found: {notFound}</h3>
-            <h3>Last Updated: {lastUpdated.toString() || 'N/A'}</h3>
-            <TestButton onClick={() => setShowModal(true)}>
-              New Report
-            </TestButton>
-            <TestButton onClick={() => setToggleView(t => !t)}>
-              Toggle View
-            </TestButton>
-            <TestButton onClick={() => overwriteFixedBins(firebase)}>
-              Set Fixed Bins
-            </TestButton>
-          </DashContainer>
-          <ReportContainer>
-            {!toggleView && <RestockReport report={restockReport} />}
-            {toggleView && <FixedBins fixedBins={fixedBins} />}
-          </ReportContainer>
-        </Container>
+    <Container>
+      {showModal && (
+        <NewReportModal
+          handleUpload={event => handleFileInput(event, firebase)}
+          handleClick={() => setShowModal(false)}
+        />
       )}
-    </FirebaseProvider>
+      <DashContainer>
+        <h3>Records: {recordCount}</h3>
+        <h3>Complete: {complete}</h3>
+        <h3>Incomplete: {incomplete}</h3>
+        <h3>Not Found: {notFound}</h3>
+        <h3>Last Updated: {lastUpdated.toString() || 'N/A'}</h3>
+        <TestButton onClick={() => setShowModal(true)}>
+          New Report
+        </TestButton>
+        <TestButton onClick={() => setToggleView(t => !t)}>
+          Toggle View
+        </TestButton>
+        <TestButton onClick={() => overwriteFixedBins(firebase)}>
+          Set Fixed Bins
+        </TestButton>
+      </DashContainer>
+      <ReportContainer>
+        {!toggleView && <RestockReport report={restockReport} />}
+        {toggleView && <FixedBins fixedBins={fixedBins} />}
+      </ReportContainer>
+    </Container>
   );
 };
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { ButtonPanelWrapper, IconButton, Container } from './vertical_icon_bar.styles';
-import {AppIcon} from "./icons";
+import {AppIcon} from "../icons";
 
 export interface Tab {
     title: string;

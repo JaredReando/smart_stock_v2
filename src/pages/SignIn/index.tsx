@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Consumer as FirebaseConsumer } from '../../context/firebase.context';
+import React, { useContext, useState } from 'react';
+import { Context as FirebaseContext } from '../../context/firebase.context';
 import { PasswordForgetLink } from '../PasswordForget';
 
 import {
@@ -11,12 +11,13 @@ import {
   Button,
 } from './sign_in.styles';
 
-const SignInPageBase = (props: any) => {
+const SignInPage = (props: any) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
+  const firebase = useContext(FirebaseContext);
 
-  const { firebase, history } = props;
+  const {history} = props;
   const isInvalid = password === '' && email === '';
 
   const onSubmit = (e: React.SyntheticEvent) => {
@@ -65,15 +66,5 @@ const SignInPageBase = (props: any) => {
     </Container>
   );
 };
-
-const SignInPage = (props: any) => (
-  <FirebaseConsumer>
-    {firebase => {
-      return <SignInPageBase firebase={firebase} {...props} />;
-    }}
-  </FirebaseConsumer>
-);
-
-// const SignInForm = compose(SignInFormBase);
 
 export default SignInPage;
