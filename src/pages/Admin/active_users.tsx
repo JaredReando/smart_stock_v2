@@ -1,73 +1,73 @@
 import React, { Component } from 'react';
-import {Consumer as FirebaseConsumer} from '../../context/firebase.context';
+import { Consumer as FirebaseConsumer } from '../../context/firebase.context';
 
 interface Props {
-    firebase: any;
+  firebase: any;
 }
 
 interface State {
-    loading: boolean;
-    users: any;
+  loading: boolean;
+  users: any;
 }
 class ActiveUsers extends Component<Props, State> {
-    state = {
+  state = {
+    loading: false,
+    users: [],
+  };
+
+  componentDidMount() {
+    const Firebase = this.props.firebase;
+    this.setState({ loading: true });
+
+    Firebase.users().on('value', (snapshot: any) => {
+      const usersObject = snapshot.val();
+      const usersList = Object.keys(usersObject).map(key => ({
+        ...usersObject[key],
+        uid: key,
+      }));
+      this.setState({
+        users: usersList,
         loading: false,
-        users: [],
-    };
+      });
+    });
+  }
 
-    componentDidMount() {
-        const Firebase = this.props.firebase;
-        this.setState({loading: true});
+  componentWillUnmount() {
+    this.props.firebase.users().off();
+  }
 
-        Firebase.users().on('value', (snapshot: any) => {
-            const usersObject = snapshot.val();
-            const usersList = Object.keys(usersObject).map(key => ({
-                ...usersObject[key],
-                uid: key,
-            }));
-            this.setState({
-                users: usersList,
-                loading: false,
-            });
-        });
-    }
-
-    componentWillUnmount() {
-        this.props.firebase.users().off();
-    }
-
-    render() {
-        const { users, loading } = this.state;
-        return (
-            <div>
-                {loading && <div>Loading ...</div>}
-                {!loading && <UserList users={users} />}
-            </div>
-        );
-    }
+  render() {
+    const { users, loading } = this.state;
+    return (
+      <div>
+        {loading && <div>Loading ...</div>}
+        {!loading && <UserList users={users} />}
+      </div>
+    );
+  }
 }
 
 interface User {
-    uid: string;
-    email: string;
-    username: string;
+  uid: string;
+  email: string;
+  username: string;
 }
 const UserList = (props: any) => (
-    <ul>
-        {props.users.map((user: User) => (
-            <li key={user.uid}>
+  <ul>
+    {props.users.map((user: User) => (
+      <li key={user.uid}>
         <span>
-          <strong>ID: </strong> {user.uid }
+          <strong>ID: </strong> {user.uid}
         </span>
-                <span>
-          <strong> E-Mail:</strong> {user.email }
+        <span>
+          <strong> E-Mail:</strong> {user.email}
         </span>
-                <span>
-          <strong> Username:</strong> {user.username }
+        <span>
+          <strong> Username:</strong> {user.username}
         </span>
-            </li>
-        ))}
-    </ul>
+      </li>
+    ))}
+  </ul>
 );
 
 export default ActiveUsers;

@@ -1,18 +1,21 @@
 import React from 'react';
-import { ThemeProvider} from "styled-components";
-import { GlobalStyle} from "./styles/global_styles";
-import {Provider as FirebaseProvider} from './context/firebase.context';
+import { ThemeProvider } from 'styled-components';
+import { GlobalStyle } from './styles/global_styles';
+import { Provider as FirebaseProvider } from './context/firebase.context';
 import AppRouter from './routing/app_router';
+import { theme } from "./styles/theme";
 
 const App = () => {
-    return (
-        <ThemeProvider theme={{colors: {red: 'tomato', green: 'lightgreen'}, space: [0, 2, 4, 8, 12, 20]}}>
-            <GlobalStyle />
-            <FirebaseProvider>
-                <AppRouter />
-            </FirebaseProvider>
-        </ThemeProvider>
-    )
+  return (
+    <ThemeProvider
+      theme={theme}
+    >
+      <GlobalStyle />
+      <FirebaseProvider>
+        <AppRouter />
+      </FirebaseProvider>
+    </ThemeProvider>
+  );
 };
 
 export default App;
