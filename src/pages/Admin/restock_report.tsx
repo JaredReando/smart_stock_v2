@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
-import DataTable from '../../components/data_table';
+import DataTable from '../../components/data_table/data_table';
+import {useRestockUpdater} from "../../hooks/useRestockUpdater";
 
 interface Props {
-  report: any;
+  report?: any;
 }
-const RestockReport: React.FC<Props> = ({ report }) => {
+const RestockReport: React.FC<Props> = () => {
   const [showStatus, setShowStatus] = useState(false);
   const status = { title: 'Status', key: 'isMissing', ratio: 5 };
+  const report = useRestockUpdater();
   const headerItems = [
     {
       title: 'Source',

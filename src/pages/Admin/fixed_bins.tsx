@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Container } from './fixed_bins.styles';
-import DataTable from '../../components/data_table';
+import DataTable from '../../components/data_table/data_table';
 
 interface Props {
   fixedBins: any;

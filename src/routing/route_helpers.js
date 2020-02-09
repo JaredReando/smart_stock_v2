@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { Consumer as AuthConsumer } from '../context/auth.context';
+import VerticalNavBar from "../containers/vertical_nav_bar/vertical_nav_bar";
 
 /*This component needs to know about:
     - User's Firebase login status
@@ -22,9 +23,12 @@ const AuthenticatedRoute = ({ component: Component, ...rest }) => {
           //'props' here refers to those provided by <Route />: history, location, match, etc.
           //The Component's unique props don't need to be passed here, since they will
           //be provided by Dashboard's render of same Component
-          render={props =>
+          component={props =>
             user ? (
-              <Component {...props} />
+                <div style={{display: 'flex', height: '100vh', width: '100vw'}}>
+                  <VerticalNavBar/>
+                  <Component {...props} />
+                </div>
             ) : (
               <Redirect
                 to={{

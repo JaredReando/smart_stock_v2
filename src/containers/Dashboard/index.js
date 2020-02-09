@@ -7,9 +7,6 @@ import Client from '../../pages/Client';
 
 import { Container, ComponentContainer } from './dashboard.styles';
 
-import Navigation from '../../components/Navigation';
-import { fixedBins } from '../../constants';
-import AuthenticatedRoute from '../../routing/route_helpers';
 
 const RESTOCK_REPORT_PATH = 'Companies/Nuna/restock_report';
 const LAST_UPDATED_PATH = 'Companies/Nuna/last_updated';
@@ -62,7 +59,6 @@ class Dashboard extends Component {
     } = this.state;
     return (
       <Container>
-        <Navigation />
         <hr />
         <ComponentContainer>
           {/*using 'render' here instead of 'component' let's me pass in stateful values and

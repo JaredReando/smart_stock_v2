@@ -1,15 +1,12 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
-import AppModal from "../../components/Modals/app_modal";
-import {VerticalIconBar} from "../../components/vertical_icon_bar";
+import AppModal from "../../components/modals/app_modal";
 
 const Container = styled.div(props => ({
-  border: `1px solid ${props.theme.colors.green}`,
-  height: '100vh',
-  width: '100vw',
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
+    flexGrow: 1,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
 }));
 
 const SmallContainer = styled.div(({theme}) => ({
@@ -20,35 +17,18 @@ const SmallContainer = styled.div(({theme}) => ({
     border: '1px solid black'
 }));
 
-const testTabs = [
-    {
-        title: "home",
-        iconName: "home"
-    },
-    {
-        title: "settings",
-        iconName: "settings"
-    }
-];
-
 const AdminPage = () => {
   const [showModal, setShowModal] = useState(false);
+  console.log('admin page rendered');
   return (
     <Container>
+      <button onClick={() => setShowModal(s => !s)}>Modal</button>
       <AppModal isOpen={showModal} onClose={() => setShowModal(false)}>
           <SmallContainer>
             <h1>Howdy</h1>
           </SmallContainer>
       </AppModal>
-
-        <VerticalIconBar
-            tabs={testTabs}
-            handleClick={() => console.log("clicked")}
-            activeTabIndex={0}
-        />
-
       <h1>Admin Dashboard</h1>
-      <button onClick={() => setShowModal(s => !s)}>Modal</button>
 
     </Container>
   );
