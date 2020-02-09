@@ -6,4 +6,3 @@ const firebase = new Firebase();
 const { Provider, Consumer, mutate } = createState(firebase);
 
 export { Provider, Consumer, mutate };
-

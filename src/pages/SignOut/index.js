@@ -6,30 +6,24 @@ import styled from 'styled-components';
 import * as ROUTES from '../../constants/routes';
 
 const SignOut = styled.button({
-    border: 'none',
-    outline: 'none',
-    fontWeight: 'bold',
-    color: 'black',
-    textAligh: 'center',
-    textTransform: 'uppercase',
-    fontSize: '1em',
-    ':hover': {
-        cursor: 'pointer',
-        background: 'lightgrey',
-    }
-})
+  border: 'none',
+  outline: 'none',
+  fontWeight: 'bold',
+  color: 'black',
+  textAligh: 'center',
+  textTransform: 'uppercase',
+  fontSize: '1em',
+  ':hover': {
+    cursor: 'pointer',
+    background: 'lightgrey',
+  },
+});
 const SignOutButton = ({ firebase, history }) => {
-    const handleSignOut = () => {
-      firebase.doSignOut();
-      history.push(ROUTES.LOGIN)
-    };
-    return (
-        <SignOut onClick={handleSignOut}>
-            Sign Out
-        </SignOut>
-    )
+  const handleSignOut = () => {
+    firebase.doSignOut();
+    history.push(ROUTES.LOGIN);
+  };
+  return <SignOut onClick={handleSignOut}>Sign Out</SignOut>;
 };
 
-export default compose(
-    withRouter,
-)(SignOutButton);
+export default compose(withRouter)(SignOutButton);
