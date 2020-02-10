@@ -1,12 +1,14 @@
 import React from 'react';
-
 import { Container } from './fixed_bins.styles';
 import DataTable from '../../components/data_table/data_table';
+import {useFixedBinUpdater} from "../../hooks";
+
 
 interface Props {
   fixedBins: any;
 }
-const FixedBins: React.FC<Props> = ({ fixedBins }) => {
+const FixedBins: React.FC<Props> = () => {
+  const fixedBins = useFixedBinUpdater();
   const headerItems = [
     {
       title: 'Bin',

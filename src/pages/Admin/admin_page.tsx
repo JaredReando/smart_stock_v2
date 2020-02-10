@@ -19,7 +19,6 @@ const SmallContainer = styled.div(({theme}) => ({
 
 const AdminPage = () => {
   const [showModal, setShowModal] = useState(false);
-  console.log('admin page rendered');
   return (
     <Container>
       <button onClick={() => setShowModal(s => !s)}>Modal</button>
