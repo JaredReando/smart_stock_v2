@@ -3,7 +3,7 @@ import { Context as FirebaseContext } from "../context/firebase.context";
 
 const RESTOCK_REPORT_PATH = 'Companies/Nuna/restock_report';
 
-export const useRestockUpdater = () => {
+const useRestockUpdater = () => {
     const firebase = useContext(FirebaseContext);
     const [restockReport, setRestockReport] = useState({});
     useEffect(() => {
@@ -13,10 +13,11 @@ export const useRestockUpdater = () => {
         });
 
         return () => {
-            console.log("turned off")
             firebase.db.ref(RESTOCK_REPORT_PATH).off()
         }
-    });
+    },[firebase.db]);
 
     return restockReport
 };
+
+export default useRestockUpdater;

@@ -49,7 +49,6 @@ const signInAuthenticatedRouteBase = ({
   authUser,
   ...rest
 }) => {
-  console.log('login route');
   return (
     <AuthConsumer>
       {({ user }) => (

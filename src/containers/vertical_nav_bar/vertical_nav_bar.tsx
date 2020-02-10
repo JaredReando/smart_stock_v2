@@ -12,28 +12,18 @@ interface NavTab extends Tab {
 const tempTabs: NavTab[] = [
     {
         iconName: 'home',
-        title: 'Home',
-        path: '/admin/home',
+        title: 'Admin Home',
+        path: '/admin',
     },
     {
         iconName: 'settings',
-        title: 'Settings',
-        path: '/admin/settings',
-    },
-    {
-        iconName: 'text',
-        title: 'Text',
-        path: '/admin/hello',
-    },
-    {
-        iconName: 'log',
-        title: 'Log',
-        path: '/agent/log',
+        title: 'Restock Report',
+        path: '/admin/restock_report',
     },
     {
         iconName: 'developer',
-        title: 'Developer',
-        path: '/admin/developer',
+        title: 'Fixed Bins',
+        path: '/admin/fixed_bins',
     },
     {
         iconName: 'help',
@@ -49,12 +39,7 @@ const VerticalNavBar: FC<Props> = () => {
     const [profileShown, setProfileShown] = useState(false);
 
     const getTabs = (): NavTab[] => {
-        const profileTab: NavTab = {
-            iconName: 'gps',
-            title: 'jared reando',
-        };
-
-        return [profileTab, ...tempTabs];
+        return [...tempTabs];
     };
 
     const tabs = getTabs();
@@ -73,7 +58,6 @@ const VerticalNavBar: FC<Props> = () => {
     const handleIconClick = (index: number) => {
         const tab = tabs[index];
         if (tab.path) {
-            console.log('gone to: ', tabs[index].path);
             return history.push(tabs[index].path!)
         }
     };
