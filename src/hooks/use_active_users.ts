@@ -7,11 +7,12 @@ const useActiveUsers = () => {
 
     useEffect(() => {
         firebase.users().on('value', (snap: any) => {
-            console.log('users: ', snap.val())
+            const users = snap.val();
+            setUsers(users);
         });
-
         return () => firebase.users().off();
-    })
+    }, [firebase]);
+    return users;
 };
 
 export default useActiveUsers;

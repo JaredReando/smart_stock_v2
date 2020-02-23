@@ -10,6 +10,7 @@ import {
   Input,
   Button,
 } from './sign_in.styles';
+import { setAuthUser } from "../../context/mutators/auth.mutators";
 
 const SignInPage = (props: any) => {
   const [email, setEmail] = useState('');
@@ -28,11 +29,11 @@ const SignInPage = (props: any) => {
         setEmail('');
         setPassword('');
         setError(null);
-        sessionStorage.setItem('stockUser', 'true');
+        setAuthUser(true);
         history.push('/admin');
       })
       .catch((err: any) => {
-        setError(err);
+        setError(err.message);
       });
   };
 
@@ -60,6 +61,7 @@ const SignInPage = (props: any) => {
         <Button onClick={onSubmit} disabled={isInvalid}>
           Log In
         </Button>
+        {error && <p>{error}</p>}
         {/*<SignUpLink />*/}
         <PasswordForgetLink />
       </Form>
