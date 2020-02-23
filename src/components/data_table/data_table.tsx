@@ -7,6 +7,7 @@ import {
   TH,
   TD,
 } from './data_table.styles';
+import uuid from 'uuid';
 
 interface Props {
   columnHeaders: any;
@@ -21,8 +22,8 @@ const DataTable: React.FC<Props> = ({ columnHeaders, rowData }) => {
     <Table>
       <TableHead>
         <TableRow>
-          {columnHeaders.map((item: any) => (
-            <TH key={item.item} width={setRatio(item.ratio)}>
+          {columnHeaders.map((item: any, i: number) => (
+            <TH key={i} width={setRatio(item.ratio)}>
               {item.title}
             </TH>
           ))}
@@ -30,12 +31,12 @@ const DataTable: React.FC<Props> = ({ columnHeaders, rowData }) => {
       </TableHead>
       <TableBody>
         {rowData &&
-          Object.keys(rowData).map(recordKey => {
+          Object.keys(rowData).map((recordKey: any, i: number) => {
             const rowRecord = rowData[recordKey];
             const returnToMe = columnHeaders.map((header: any) => {
               if (rowRecord[header.key]) {
                 return (
-                  <TD width={setRatio(header.ratio)}>
+                  <TD key={rowRecord[header.key]} width={setRatio(header.ratio)}>
                     {rowRecord[header.key]}
                   </TD>
                 );
@@ -43,7 +44,7 @@ const DataTable: React.FC<Props> = ({ columnHeaders, rowData }) => {
               return null;
             });
             if (returnToMe) {
-              return <TableRow>{returnToMe}</TableRow>;
+              return <TableRow key={uuid()}>{returnToMe}</TableRow>;
             }
             return null;
           })}

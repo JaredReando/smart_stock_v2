@@ -9,7 +9,6 @@ const initAuth = () => {
   //check browser storage for 'auth' token.
   const user =
     sessionStorage.getItem('stockUser') || localStorage.getItem('stockUser');
-  console.log("was 'auth' found? ", user);
   let auth: AuthContext = {};
   if (user) {
     //update context if storage token found
