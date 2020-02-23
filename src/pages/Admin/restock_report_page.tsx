@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 import DataTable from '../../components/data_table/data_table';
 import {useRestockUpdater} from "../../hooks";
+import AdminHeader from "./admin_header";
+import {Box, FlexColumn} from '../../styles/layout';
+import RestockInfoDashboard from "./restock_info_dashboard";
+import AppModal from "../../components/modals/app_modal";
+import CreateRestockReportModal from "./create_restock_report_modal";
 
 interface Props {
   report?: any;
@@ -46,11 +51,29 @@ const RestockReport: React.FC<Props> = () => {
   if (showStatus) {
     headerItems.unshift(status);
   }
-
+  const [showModal, setShowModal] = useState(false);
   return (
     <>
-      <button onClick={() => setShowStatus(s => !s)}>Status</button>
-      <DataTable columnHeaders={headerItems} rowData={report} />
+      <AppModal isOpen={showModal} onClose={() => setShowModal(false)}>
+        <CreateRestockReportModal/>
+      </AppModal>
+
+      <FlexColumn height="100%">
+        <AdminHeader
+            title="Restock Report"
+        >
+          <RestockInfoDashboard
+            handleClick={() => setShowModal(s => !s)}
+          />
+        </AdminHeader>
+        <Box
+          flexGrow={1}
+          overflow="hidden"
+        >
+          <DataTable columnHeaders={headerItems} rowData={report} />
+
+        </Box>
+      </FlexColumn>
     </>
   );
 };

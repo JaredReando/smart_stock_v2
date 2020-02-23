@@ -1,7 +1,8 @@
 import React from 'react';
-import { Container } from './fixed_bins.styles';
 import DataTable from '../../components/data_table/data_table';
 import {useFixedBinUpdater} from "../../hooks";
+import {FlexColumn} from '../../styles/layout';
+import AdminHeader from "./admin_header";
 
 
 interface Props {
@@ -27,9 +28,10 @@ const FixedBins: React.FC<Props> = () => {
     },
   ];
   return (
-    <Container>
+    <FlexColumn height="100%">
+      <AdminHeader title="Fixed Bins"/>
       <DataTable columnHeaders={headerItems} rowData={fixedBins} />
-    </Container>
+    </FlexColumn>
   );
 };
 
