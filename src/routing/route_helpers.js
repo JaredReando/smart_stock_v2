@@ -17,14 +17,14 @@ If 'loggedIn' value is false, user is redirected back to home page
 const AuthenticatedRoute = ({ component: Component, ...rest }) => {
   return (
     <AuthConsumer>
-      {({ user }) => (
+      {({ validUser }) => (
         <Route
           {...rest}
           //'props' here refers to those provided by <Route />: history, location, match, etc.
           //The Component's unique props don't need to be passed here, since they will
           //be provided by Dashboard's render of same Component
           component={props =>
-            user ? (
+            validUser ? (
                 <div style={{display: 'flex', height: '100vh', width: '100vw'}}>
                   <VerticalNavBar/>
                   <Component {...props} />
@@ -51,14 +51,14 @@ const signInAuthenticatedRouteBase = ({
 }) => {
   return (
     <AuthConsumer>
-      {({ user }) => (
+      {({ validUser }) => (
         <Route
           {...rest}
           //'props' here refers to those provided by <Route />: history, location, match, etc.
           //The Component's unique props don't need to be passed here, since they will
           //be provided by Dashboard's render of same Component
           render={props =>
-            user ? (
+            validUser ? (
               <Component {...props} />
             ) : (
               <Redirect

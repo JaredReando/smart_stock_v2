@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
 import AppModal from "../../components/modals/app_modal";
+import { useActiveUsers } from "../../hooks";
 
 const Container = styled.div(props => ({
     flexGrow: 1,
@@ -19,6 +20,8 @@ const SmallContainer = styled.div(({theme}) => ({
 
 const AdminPage = () => {
   const [showModal, setShowModal] = useState(false);
+  const users = useActiveUsers();
+  console.log('users: ', users);
   return (
     <Container>
       <button onClick={() => setShowModal(s => !s)}>Modal</button>
