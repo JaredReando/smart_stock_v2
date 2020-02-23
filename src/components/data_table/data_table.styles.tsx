@@ -38,14 +38,16 @@ export const TableRow = styled.tr(() => ({
   },
 }));
 
-export const TH = styled.th<{ width: string }>(({ width }) => ({
+export const TH = styled.th<{ width: string }>(({ theme, width }) => ({
+  fontFamily: theme.text.headingFontFamily,
   textAlign: 'left',
   width: width,
 }));
 
-export const TD = styled.td<{ width: string; align?: string }>(
-  ({ width, align }) => ({
+export const TD = styled.td<{ width: string;}>(
+  ({ width, theme }) => ({
     textAlign: 'left',
+    fontFamily: theme.text.bodyFontFamily,
     width: width,
     fontSize: '.75em',
   })

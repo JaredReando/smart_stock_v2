@@ -2,6 +2,9 @@ import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { Consumer as AuthConsumer } from '../context/auth.context';
 import VerticalNavBar from "../containers/vertical_nav_bar/vertical_nav_bar";
+import {
+  FlexColumn
+} from "../styles/layout";
 
 /*This component needs to know about:
     - User's Firebase login status
@@ -27,7 +30,12 @@ const AuthenticatedRoute = ({ component: Component, ...rest }) => {
             validUser ? (
                 <div style={{display: 'flex', height: '100vh', width: '100vw'}}>
                   <VerticalNavBar/>
-                  <Component {...props} />
+                  <FlexColumn
+                    flexGrow={1}
+                    border="1px solid orange"
+                  >
+                    <Component {...props} />
+                  </FlexColumn>
                 </div>
             ) : (
               <Redirect

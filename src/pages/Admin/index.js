@@ -4,14 +4,14 @@ import NewReportModal from '../../components/modals/new_report_modal';
 import {Context as FirebaseContext} from '../../context/firebase.context';
 import NunaStock from '../../helpers/nuna_stock';
 import { fixedBins } from '../../constants';
-import RestockReport from './restock_report';
+import RestockReport from './restock_report_page';
 import {
   Container,
   ReportContainer,
   DashContainer,
   TestButton,
 } from './admin.styles';
-import FixedBins from './fixed_bins';
+import FixedBins from './fixed_bins_page';
 
 const Admin = ({
   restockReport,

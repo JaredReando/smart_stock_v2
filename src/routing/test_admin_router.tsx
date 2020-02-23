@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import NotFound404 from "../pages/not_found_404";
 import AdminPage from "../pages/Admin/admin_page";
-import RestockReport from "../pages/Admin/restock_report";
+import RestockReport from "../pages/Admin/restock_report_page";
 
 
 const TestHello = () => {
