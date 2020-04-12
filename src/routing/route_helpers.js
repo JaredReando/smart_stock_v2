@@ -17,7 +17,7 @@ It returns a standard <Route /> component, passing {..rest} prop object along an
 If 'loggedIn' value is true, the specified Component from props is rendered
 If 'loggedIn' value is false, user is redirected back to home page
  */
-const AuthenticatedRoute = ({ component: Component, ...rest }) => {
+const AdminAuthRoute = ({ component: Component, ...rest }) => {
   return (
     <AuthConsumer>
       {({ validUser }) => (
@@ -52,6 +52,39 @@ const AuthenticatedRoute = ({ component: Component, ...rest }) => {
   );
 };
 
+const ClientAuthRoute = ({ component: Component, ...rest }) => {
+  return (
+      <AuthConsumer>
+        {({ validUser }) => (
+            <Route
+                {...rest}
+                //'props' here refers to those provided by <Route />: history, location, match, etc.
+                //The Component's unique props don't need to be passed here, since they will
+                //be provided by Dashboard's render of same Component
+                component={props =>
+                    validUser ? (
+                        <div style={{display: 'flex', height: '100vh', width: '100vw'}}>
+                          <FlexColumn
+                              flexGrow={1}
+                          >
+                            <Component {...props} />
+                          </FlexColumn>
+                        </div>
+                    ) : (
+                        <Redirect
+                            to={{
+                              pathname: '/',
+                              state: { from: props.location },
+                            }}
+                        />
+                    )
+                }
+            />
+        )}
+      </AuthConsumer>
+  );
+};
+
 const signInAuthenticatedRouteBase = ({
   component: Component,
   authUser,
@@ -83,4 +116,4 @@ const signInAuthenticatedRouteBase = ({
   );
 };
 export const SignInAuthenticatedRoute = signInAuthenticatedRouteBase;
-export default AuthenticatedRoute;
+export { AdminAuthRoute, ClientAuthRoute };
