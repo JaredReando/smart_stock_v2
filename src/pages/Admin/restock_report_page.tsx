@@ -55,7 +55,7 @@ const RestockReport: React.FC<Props> = () => {
   return (
     <>
       <AppModal isOpen={showModal} onClose={() => setShowModal(false)}>
-        <CreateRestockReportModal/>
+        <CreateRestockReportModal closeModal={() => setShowModal(s => !s)}/>
       </AppModal>
 
       <FlexColumn height="100%">

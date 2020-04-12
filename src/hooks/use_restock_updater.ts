@@ -1,10 +1,10 @@
-import { useState, useEffect, useContext } from 'react'
-import { Context as FirebaseContext } from "../context/firebase.context";
+import { useState, useEffect } from 'react'
+import { useFirebaseContext } from "./use_firebase_context";
 
 const RESTOCK_REPORT_PATH = 'Companies/Nuna/restock_report';
 
 const useRestockUpdater = () => {
-    const firebase = useContext(FirebaseContext);
+    const firebase = useFirebaseContext();
     const [restockReport, setRestockReport] = useState({});
     useEffect(() => {
         firebase.db.ref(RESTOCK_REPORT_PATH).on('value', (snap: any) => {

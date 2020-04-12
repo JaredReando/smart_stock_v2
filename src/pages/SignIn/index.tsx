@@ -58,7 +58,10 @@ const SignInPage = (props: any) => {
           onChange={e => setPassword(e.target.value)}
           placeholder="Password"
         />
-        <Button onClick={onSubmit} disabled={isInvalid}>
+        <Button
+            onClick={onSubmit}
+            disabled={isInvalid}
+        >
           Log In
         </Button>
         {error && <p>{error}</p>}
