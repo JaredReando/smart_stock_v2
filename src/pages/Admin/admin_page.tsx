@@ -1,8 +1,8 @@
 import React from 'react';
 import { useActiveUsers } from "../../hooks";
-import {Header} from "../../styles/typography";
+import {Header} from "../../component_library/styles/typography";
 import AdminHeader from "./admin_header";
-import {FlexColumn} from '../../styles/layout';
+import {Column} from '../../component_library/styles/layout';
 
 const AdminPage = () => {
   const users = useActiveUsers();
@@ -10,7 +10,7 @@ const AdminPage = () => {
   return (
       <>
 
-        <FlexColumn height="100%">
+        <Column height="100%">
             <AdminHeader
                 title="Admin Page"
             />
@@ -19,7 +19,7 @@ const AdminPage = () => {
             size="xlarge"
           >Admin Dashboard</Header>
 
-        </FlexColumn>
+        </Column>
       </>
   );
 };

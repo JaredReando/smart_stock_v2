@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import DataTable from '../../components/data_table/data_table';
+import DataTable from '../../component_library/components/data_table/data_table';
 import {useRestockUpdater} from "../../hooks";
 import AdminHeader from "./admin_header";
-import {Box, FlexColumn} from '../../styles/layout';
+import {Box, Column} from '../../component_library/styles/layout';
 import RestockInfoDashboard from "./restock_info_dashboard";
-import AppModal from "../../components/modals/app_modal";
+import AppModal from "../../component_library/modals/app_modal";
 import CreateRestockReportModal from "./create_restock_report_modal";
 
 interface Props {
@@ -58,7 +58,7 @@ const RestockReport: React.FC<Props> = () => {
         <CreateRestockReportModal closeModal={() => setShowModal(s => !s)}/>
       </AppModal>
 
-      <FlexColumn height="100%">
+      <Column height="100%">
         <AdminHeader
             title="Restock Report"
         >
@@ -73,7 +73,7 @@ const RestockReport: React.FC<Props> = () => {
           <DataTable columnHeaders={headerItems} rowData={report} />
 
         </Box>
-      </FlexColumn>
+      </Column>
     </>
   );
 };

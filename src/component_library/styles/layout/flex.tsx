@@ -5,10 +5,10 @@ const Flex = styled(Box)({
     display: 'flex',
 });
 
-export const FlexRow = styled(Flex)({
+export const Row = styled(Flex)({
     flexDirection: 'row',
 });
 
-export const FlexColumn = styled(Flex)({
+export const Column = styled(Flex)({
     flexDirection: 'column',
 });

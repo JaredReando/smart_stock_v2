@@ -3,7 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import * as ROUTES from '../../constants/routes';
 import AccountPage from '../../pages/Account';
 import AdminPage from '../../pages/Admin';
-import Client from '../../pages/Client';
+import Client from '../../pages/Client/restocking_page';
 
 import { Container, ComponentContainer } from './dashboard.styles';
 

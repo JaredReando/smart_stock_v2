@@ -59,6 +59,15 @@ class Firebase {
       .set(inventoryReport);
   };
 
+  doUpdateRestockRecord = (index, updatedRecord) => {
+    this.db
+        .ref('Companies')
+        .child('Nuna')
+        .child('restock_report')
+        .child(index)
+        .set(updatedRecord)
+  };
+
   doOverwriteFixedBins = fixedBinRecords => {
     this.db
       .ref('Companies')

@@ -1,9 +1,9 @@
 import React, { FC, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
-import {VerticalIconBar} from "../../components/vertical_icon_bar/vertical_icon_bar";
+import {VerticalIconBar} from "../../component_library/components/vertical_icon_bar/vertical_icon_bar";
 import { Container } from './vertical_nav_bar.styles';
-import { Tab } from "../../components/vertical_icon_bar/vertical_icon_bar";
-import { theme } from "../../styles/theme";
+import { Tab } from "../../component_library/components/vertical_icon_bar/vertical_icon_bar";
+import { theme } from "../../component_library/styles/theme";
 
 interface NavTab extends Tab {
     path?: string;

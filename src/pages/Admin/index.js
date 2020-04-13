@@ -1,7 +1,6 @@
-import React, {useContext, useState} from 'react';
+import React, {useState} from 'react';
 import Papa from 'papaparse';
-import NewReportModal from '../../components/modals/new_report_modal';
-import {Context as FirebaseContext} from '../../context/firebase.context';
+import NewReportModal from '../../component_library/modals/new_report_modal';
 import NunaStock from '../../helpers/nuna_stock';
 import { fixedBins } from '../../constants';
 import RestockReport from './restock_report_page';
@@ -12,6 +11,7 @@ import {
   TestButton,
 } from './admin.styles';
 import FixedBins from './fixed_bins_page';
+import {useFirebaseContext} from "../../hooks/use_firebase_context";
 
 const Admin = ({
   restockReport,
@@ -19,7 +19,7 @@ const Admin = ({
   lastUpdated = new Date(),
   handleRestockUpdate,
 }) => {
-    const firebase = useContext(FirebaseContext);
+    const firebase = useFirebaseContext();
   const handleFileInput = (event, firebase) => {
     event.preventDefault();
     const inventoryFile = event.target.files[0];

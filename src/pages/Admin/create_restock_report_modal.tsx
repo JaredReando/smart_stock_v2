@@ -1,23 +1,22 @@
-import React, { useCallback, useContext, useRef, useState } from 'react';
-import {Header, AppText} from '../../styles/typography';
-import {FlexColumn} from "../../styles/layout";
-import {Button} from "../../styles/buttons";
+import React, { useRef, useState } from 'react';
+import {Header, AppText} from '../../component_library/styles/typography';
+import {Column} from "../../component_library/styles/layout";
+import {Button} from "../../component_library/styles/buttons";
 import { csvToObject } from "../../helpers/csv_to_object";
-import {Context as FirebaseContext} from '../../context/firebase.context';
 import NunaStock from "../../helpers/nuna_stock";
 import { fixedBins } from "../../constants";
-import DataTable from "../../components/data_table/data_table";
+import DataTable from "../../component_library/components/data_table/data_table";
+import { useFirebaseContext } from "../../hooks/use_firebase_context";
 
 const CreateRestockReportModal = ({closeModal}: any) => {
-    const firebase = useContext(FirebaseContext);
-    const inputRef = useRef(null);
+    const firebase = useFirebaseContext();
+    const inputRef = useRef<null | HTMLInputElement>(null);
     const [fileName, setFileName] = useState();
     const [fileError, setFileError] = useState<null | string>(null);
     const [draftReport, setDraftReport] = useState(undefined);
     const handleClick = (e: any) => {
         e.preventDefault();
         setFileError(null);
-        //@ts-ignore
         inputRef.current!.click()
     };
 
@@ -112,7 +111,7 @@ const CreateRestockReportModal = ({closeModal}: any) => {
         },
     ];
     return (
-        <FlexColumn
+        <Column
             height="100vh"
             maxHeight="80vh"
             width="80vw"
@@ -137,7 +136,7 @@ const CreateRestockReportModal = ({closeModal}: any) => {
                     <Button onClick={handleSetReport}>Confirm</Button>
                 </div>
             )}
-        </FlexColumn>
+        </Column>
     )
 };
 

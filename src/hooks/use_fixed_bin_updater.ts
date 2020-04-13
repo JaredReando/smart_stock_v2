@@ -1,10 +1,10 @@
-import { useState, useEffect, useContext } from 'react'
-import { Context as FirebaseContext } from "../context/firebase.context";
+import { useState, useEffect } from 'react'
+import { useFirebaseContext } from "./use_firebase_context";
 
 const FIXED_BIN_PATH = 'Companies/Nuna/fixed_bins';
 
 const useFixedBinUpdater = () => {
-    const firebase = useContext(FirebaseContext);
+    const firebase = useFirebaseContext();
     const [fixedBins, setFixedBins] = useState({});
     useEffect(() => {
         firebase.db.ref(FIXED_BIN_PATH).on('value', (snap: any) => {
