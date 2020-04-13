@@ -1,5 +1,5 @@
 import React from 'react';
-import { withAuthorization } from '../../components/Session';
+import { withAuthorization } from '../../component_library/Session';
 import styled, { css } from 'styled-components';
 
 import RestockList from './restock_list';

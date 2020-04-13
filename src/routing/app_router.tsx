@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import SignUpPage from '../pages/SignUp';
 import SignInPage from '../pages/SignIn';
 import PasswordForgetPage from '../pages/PasswordForget';
-import ClientPage from '../pages/Client';
+import ClientPage from '../pages/Client/restocking_page';
 import {AdminAuthRoute, ClientAuthRoute} from './route_helpers';
 import NotFound404 from '../pages/not_found_404';
 import AdminRouter from "./admin_router";

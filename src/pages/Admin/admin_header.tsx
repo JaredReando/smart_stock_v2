@@ -4,7 +4,7 @@ import {
     InnerLeftContainer,
     InnerRightContainer,
 } from "./admin_header.styles";
-import {Header} from '../../styles/typography'
+import {Header} from '../../component_library/styles/typography'
 
 interface Props {
     title: string;

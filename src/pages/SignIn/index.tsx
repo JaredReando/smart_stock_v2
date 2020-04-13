@@ -1,5 +1,4 @@
-import React, { useContext, useState } from 'react';
-import { Context as FirebaseContext } from '../../context/firebase.context';
+import React, { useState } from 'react';
 import { PasswordForgetLink } from '../PasswordForget';
 
 import {
@@ -11,12 +10,13 @@ import {
   Button,
 } from './sign_in.styles';
 import { setAuthUser } from "../../context/mutators/auth.mutators";
+import { useFirebaseContext } from "../../hooks/use_firebase_context";
 
 const SignInPage = (props: any) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
-  const firebase = useContext(FirebaseContext);
+  const firebase = useFirebaseContext();
 
   const {history} = props;
   const isInvalid = password === '' && email === '';

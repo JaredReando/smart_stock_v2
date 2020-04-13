@@ -1,5 +1,5 @@
 import React, { SVGAttributes } from 'react';
-import * as icons from '../svg';
+import * as icons from '../../svg';
 export type IconNames = keyof typeof icons;
 
 export interface Props extends SVGAttributes<SVGElement> {

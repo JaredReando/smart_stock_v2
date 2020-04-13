@@ -21,13 +21,13 @@ export const disableButton = (props: any) => {
   };
 };
 
-export const Container = styled.div`
-  height: 100vh;
-  width: 100vw;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
+export const Container = styled.div({
+  height: "100vh",
+  width: "100vw",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+});
 
 export const BigBold = styled.p<{ fontSize: any }>`
   font-weight: bold;
@@ -44,7 +44,7 @@ export const Form = styled.form({
     alignItems: "center",
     borderRadius: "10px",
     width: "100%",
-    maxWidth: "450px",
+    maxWidth: "500px",
     height: "500px",
     border: "1px solid #dadce0",
   });

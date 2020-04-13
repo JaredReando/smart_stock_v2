@@ -91,7 +91,7 @@ export default class NunaStock {
       if (objStorageUnit === 'N/A' && !isSysBin) {
         nestedObj[objStorageLocation][objStorageType][objStorageBin] = 'empty';
       }
-      //Sets inventory object to unique index key on storageUnit object node
+      //Sets inventory object to unique index.ts key on storageUnit object node
       if (
         !!nestedObj[objStorageLocation][objStorageType][objStorageBin][
           objStorageUnit
