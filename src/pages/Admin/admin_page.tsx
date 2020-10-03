@@ -3,12 +3,10 @@ import { useActiveUsers } from '../../hooks';
 import { Header } from '../../component_library/styles/typography';
 import AdminHeader from './admin_header';
 import { Column } from '../../component_library/styles/layout';
-import { airtableFetch } from '../../api/api';
 
 const AdminPage = () => {
     const users = useActiveUsers();
     console.log('users: ', users);
-    airtableFetch();
     return (
         <>
             <Column height="100%">

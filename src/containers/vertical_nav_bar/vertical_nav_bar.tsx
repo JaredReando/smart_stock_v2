@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { VerticalIconBar } from '../../component_library/components/vertical_icon_bar/vertical_icon_bar';
 import { Container } from './vertical_nav_bar.styles';
@@ -35,8 +35,6 @@ const tempTabs: NavTab[] = [
 interface Props {}
 
 const VerticalNavBar: FC<Props> = () => {
-    const [profileShown, setProfileShown] = useState(false);
-
     const getTabs = (): NavTab[] => {
         return [...tempTabs];
     };
