@@ -11,7 +11,7 @@ export interface ColumnHeader extends Partial<StringKeys> {
 
 export interface RowData extends StringKeys {}
 
-interface StringKeys {
+export interface StringKeys {
     [key: string]: string | number;
 }
 
