@@ -61,7 +61,9 @@ const DataTable: React.FC<Props> = ({ columnHeaders, rowData, loading }) => {
                             ))}
                         </TableRow>
                     </TableHead>
-                    <TableBody>{rowData.map(row => rowBuilder(columnHeaders, row))}</TableBody>
+                    <TableBody>
+                        {rowData && rowData.map(row => rowBuilder(columnHeaders, row))}
+                    </TableBody>
                 </Table>
             )}
         </>

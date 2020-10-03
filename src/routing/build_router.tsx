@@ -2,7 +2,7 @@ import React from 'react';
 import { Route } from 'react-router';
 import Router from './router';
 
-const buildRouter = (basename: string, routes: any) => {
+const buildRouter = (basename: string, routes: { [key: string]: (...args: any[]) => any }) => {
     let routeComponents = [];
     for (let route in routes) {
         const baseRoute = route === '/';
