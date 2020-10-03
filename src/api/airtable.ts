@@ -1,11 +1,18 @@
+import { StringKeys } from '../component_library/components/data_table/data_table';
+
+export interface FixedBinRecord extends StringKeys {
+    id: string;
+    bin: string;
+    description: string;
+    item: string;
+}
+
 export interface AirtableBinRecord {
     id: string;
     fields: {
         Bin: string;
-        DESC: string;
-        Description: string;
+        DESCRIPTION: string[];
         ITEM: string;
-        'Item Code': string;
     };
 }
 
@@ -16,8 +23,9 @@ export interface AirtableFixBinResponse {
 
 export async function getFixedBinPage(offsetToken?: string): Promise<AirtableFixBinResponse> {
     const nextPageToken = offsetToken ? `&offset=${offsetToken}` : '';
+    const noMissingItems = "&view=Grid%20view&filterByFormula=NOT(%7BITEM%7D+%3D+'')";
     return await fetch(
-        `https://api.airtable.com/v0/appBSDPm29XAY4tNF/Fixed%20Bins?maxRecords=1300&view=Grid%20view${nextPageToken}`,
+        `https://api.airtable.com/v0/appBSDPm29XAY4tNF/Fixed%20Bins?maxRecords=1300${nextPageToken}${noMissingItems}`,
         {
             method: 'GET',
             headers: {
@@ -28,7 +36,7 @@ export async function getFixedBinPage(offsetToken?: string): Promise<AirtableFix
     ).then(r => r.json());
 }
 
-export async function getAllFixedBins(): Promise<AirtableBinRecord[]> {
+export async function getAllFixedBinPages(): Promise<AirtableBinRecord[]> {
     let paginatedResponse = await getFixedBinPage();
     let allResponses = [...paginatedResponse.records];
     let nextPageExists = !!paginatedResponse.offset;
@@ -42,4 +50,18 @@ export async function getAllFixedBins(): Promise<AirtableBinRecord[]> {
     return allResponses;
 }
 
-getAllFixedBins();
+function formatBinObjects(bins: AirtableBinRecord[]): FixedBinRecord[] {
+    return bins.map(bin => {
+        return {
+            id: bin.id,
+            item: bin.fields.ITEM ?? '-',
+            description: bin.fields.DESCRIPTION[0] ?? '--',
+            bin: bin.fields.Bin,
+        };
+    });
+}
+
+export async function fetchAirtableFixedBins(): Promise<FixedBinRecord[]> {
+    const fetchedBins = await getAllFixedBinPages();
+    return formatBinObjects(fetchedBins);
+}
