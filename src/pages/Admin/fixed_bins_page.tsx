@@ -1,38 +1,49 @@
 import React from 'react';
 import DataTable from '../../component_library/components/data_table/data_table';
-import {useFixedBinUpdater} from "../../hooks";
-import {Column} from '../../component_library/styles/layout';
-import AdminHeader from "./admin_header";
-
+import { useFixedBinUpdater } from '../../hooks';
+import { Column } from '../../component_library/styles/layout';
+import AdminHeader from './admin_header';
+import { getAllFixedBins } from '../../api/airtable';
+import { useFirebaseContext } from '../../hooks/use_firebase_context';
 
 interface Props {
-  fixedBins: any;
+    fixedBins: any;
 }
 const FixedBins: React.FC<Props> = () => {
-  const fixedBins = useFixedBinUpdater();
-  const headerItems = [
-    {
-      title: 'Bin',
-      key: 'Bin',
-      ratio: 1,
-    },
-    {
-      title: 'Product',
-      key: 'Product',
-      ratio: 2,
-    },
-    {
-      title: 'Description',
-      key: 'Description',
-      ratio: 3,
-    },
-  ];
-  return (
-    <Column height="100%">
-      <AdminHeader title="Fixed Bins"/>
-      <DataTable columnHeaders={headerItems} rowData={fixedBins} />
-    </Column>
-  );
+    const { loading, fixedBins } = useFixedBinUpdater();
+    const firebase = useFirebaseContext();
+    const headerItems = [
+        {
+            title: 'Bin',
+            key: 'Bin',
+            ratio: 1,
+        },
+        {
+            title: 'Product',
+            key: 'Product',
+            ratio: 2,
+        },
+        {
+            title: 'Description',
+            key: 'Description',
+            ratio: 3,
+        },
+    ];
+    return (
+        <Column height="100%">
+            <AdminHeader title="Fixed Bins">
+                <button
+                    onClick={async () => {
+                        // const airtableBins = getAllFixedBins();
+                        await firebase.addATestBin();
+                    }}
+                >
+                    Update Bins
+                </button>
+            </AdminHeader>
+            <DataTable columnHeaders={headerItems} rowData={fixedBins} loading={loading} />
+        </Column>
+    );
 };
 
 export default FixedBins;
