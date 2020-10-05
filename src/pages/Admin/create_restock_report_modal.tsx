@@ -8,6 +8,17 @@ import { fixedBins } from '../../constants';
 import DataTable from '../../component_library/components/data_table/data_table';
 import { useFirebaseContext } from '../../hooks/use_firebase_context';
 
+import PouchDB from 'pouchdb-browser';
+import uuid from 'uuid';
+
+const db = new PouchDB('inventory');
+
+async function addRecords(records: { _id: string; [key: string]: any }[]) {
+    const result = await db.bulkDocs(records);
+    console.log('record added! : ', result);
+    return result;
+}
+
 const CreateRestockReportModal = ({ closeModal }: any) => {
     const firebase = useFirebaseContext();
     const inputRef = useRef<null | HTMLInputElement>(null);
@@ -20,7 +31,7 @@ const CreateRestockReportModal = ({ closeModal }: any) => {
         inputRef.current!.click();
     };
 
-    const requiredHeaders = [
+    const requiredHeaders: Array<keyof RawInventoryRecord> = [
         'Storage Bin',
         'Material',
         'Available stock',
@@ -30,30 +41,56 @@ const CreateRestockReportModal = ({ closeModal }: any) => {
     ];
 
     //checks if uploaded report contains all necessary inventory header fields
-    const hasValidHeaders = (required: string[], evaluate: string[]) => {
-        let missing: string[] | null = [];
-        const isValid = required.reduce((matches, header) => {
+    const hasValidHeaders = (
+        required: string[],
+        evaluate: string[],
+    ): { isValid: boolean; missingHeaders: string[] } => {
+        const missingHeaders: string[] = [];
+        const isValid: boolean = required.reduce((matches: boolean, header: string) => {
             if (!evaluate.includes(header)) {
-                missing!.push(header);
+                missingHeaders.push(header);
                 matches = false;
             }
             return matches;
         }, true);
-        missing = missing.length === 0 ? null : missing;
-        return { isValid, missing };
+        return { isValid, missingHeaders };
     };
 
-    const readTextFile = (file: any, callback: (data: any) => void) => {
+    interface RawInventoryRecord {
+        'Storage Bin': string;
+        Material: string;
+        'Available stock': number;
+        'Storage Unit': string;
+        'Storage Type': string;
+        'Storage Location': number;
+    }
+
+    const formatInventoryObjects = (inventoryReport: RawInventoryRecord[]) => {};
+
+    const convertCSVFile = (file: any, callback: (data: any) => void) => {
         const reader = new FileReader();
         reader.onload = (e: any) => {
             const data = e.target.result;
-            const parsedData = csvToObject(data);
+            const parsedData: RawInventoryRecord[] = csvToObject(data);
             const csvKeys = Object.keys(parsedData[0]);
-            const isValid = hasValidHeaders(requiredHeaders, csvKeys);
-            if (!isValid.missing) {
-                const draftRestock = new NunaStock(parsedData, fixedBins);
-                console.log(draftRestock.restockReportArray);
-                callback(draftRestock.restockReportArray);
+            let { isValid, missingHeaders } = hasValidHeaders(requiredHeaders, csvKeys);
+            if (isValid) {
+                console.log('report data: ', parsedData);
+                const withIDs = parsedData.map(d => {
+                    return { _id: uuid(), ...d };
+                });
+                const result = addRecords(withIDs);
+                result.then(r => console.log('result: ', r));
+                // const draftRestock = new NunaStock(parsedData, fixedBins);
+                // callback(draftRestock.restockReportArray);
+            } else {
+                missingHeaders = missingHeaders.map(h => `"${h}"`);
+                const pluralOrSingular = missingHeaders.length === 1 ? 'header' : 'headers';
+                alert(
+                    `UPLOAD ERROR: Missing required column ${pluralOrSingular} -- ${missingHeaders.join(
+                        ', ',
+                    )}`,
+                );
             }
         };
         reader.readAsText(file);
@@ -74,7 +111,7 @@ const CreateRestockReportModal = ({ closeModal }: any) => {
             return;
         }
         setFileName(fileName);
-        readTextFile(file, setDraftReport);
+        convertCSVFile(file, setDraftReport);
     };
 
     const headerItems = [

@@ -1,16 +1,30 @@
 import uuid from 'uuid';
 import { FixedBinRecord } from '../api/airtable';
 
+//TODO: remove this file from 'exclude' tsconfig array
+
+interface InventoryRecord {
+    storageLocation: number;
+    storageType: string;
+    bin: string;
+    material: string;
+    stockCategory: string;
+    available: number;
+    storageUnit: string;
+    storageUnitType: 'PAL';
+}
+
 export const hello = 'hello!';
 
 export class SmartStock {
-    constructor(private inventory: any, private fixedBins: FixedBinRecord[]) {
+    constructor(private inventory: InventoryRecord[], private fixedBins: FixedBinRecord[]) {
         this.inventory = inventory;
         this.fixedBins = fixedBins;
         //Experimental --> for Dashboard summary view.
         this.outOfStock = this.getMaterialStockLevels();
     }
 
+    //
     get MaterialStockLevels() {
         const emptyRestock = this.getEmptyFixedBins();
         const fixedBinDetails = this.fixedBinsJSON.reduce((binDetails, fixedBin) => {
