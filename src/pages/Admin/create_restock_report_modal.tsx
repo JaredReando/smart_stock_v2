@@ -3,28 +3,57 @@ import { Header, AppText } from '../../component_library/styles/typography';
 import { Column } from '../../component_library/styles/layout';
 import { Button } from '../../component_library/styles/buttons';
 import { csvToObject } from '../../helpers/csv_to_object';
-import NunaStock from '../../helpers/nuna_stock';
-import { fixedBins } from '../../constants';
 import DataTable from '../../component_library/components/data_table/data_table';
-import { useFirebaseContext } from '../../hooks/use_firebase_context';
+import { useFirebase } from '../../hooks/use_firebase_context';
 
-import PouchDB from 'pouchdb-browser';
-import uuid from 'uuid';
-
-const db = new PouchDB('inventory');
-
-async function addRecords(records: { _id: string; [key: string]: any }[]) {
-    const result = await db.bulkDocs(records);
-    console.log('record added! : ', result);
-    return result;
+const headerItems = [
+    {
+        title: 'Source',
+        key: 'sourceBin',
+        ratio: 2,
+    },
+    {
+        title: 'Destination',
+        key: 'destinationBin',
+        ratio: 2,
+    },
+    {
+        title: 'Material',
+        key: 'material',
+        ratio: 3,
+    },
+    {
+        title: 'Description',
+        key: 'description',
+        ratio: 4,
+    },
+    {
+        title: 'Qty.',
+        key: 'available',
+        ratio: 1,
+    },
+    {
+        title: 'Storage Unit',
+        key: 'storageUnit',
+        ratio: 2,
+    },
+];
+interface RawInventoryRecord {
+    'Storage Bin': string;
+    Material: string;
+    'Available stock': number;
+    'Storage Unit': string;
+    'Storage Type': string;
+    'Storage Location': number;
 }
 
 const CreateRestockReportModal = ({ closeModal }: any) => {
-    const firebase = useFirebaseContext();
+    const firebase = useFirebase();
     const inputRef = useRef<null | HTMLInputElement>(null);
     const [fileName, setFileName] = useState();
     const [fileError, setFileError] = useState<null | string>(null);
     const [draftReport, setDraftReport] = useState([]);
+
     const handleClick = (e: any) => {
         e.preventDefault();
         setFileError(null);
@@ -40,14 +69,14 @@ const CreateRestockReportModal = ({ closeModal }: any) => {
         'Storage Location',
     ];
 
-    //checks if uploaded report contains all necessary inventory header fields
-    const hasValidHeaders = (
-        required: string[],
-        evaluate: string[],
+    //checks if uploaded report contains all necessary inventory object keys
+    const hasRequiredKeys = (
+        requiredKeys: string[],
+        compareKeys: string[],
     ): { isValid: boolean; missingHeaders: string[] } => {
         const missingHeaders: string[] = [];
-        const isValid: boolean = required.reduce((matches: boolean, header: string) => {
-            if (!evaluate.includes(header)) {
+        const isValid: boolean = requiredKeys.reduce((matches: boolean, header: string) => {
+            if (!compareKeys.includes(header)) {
                 missingHeaders.push(header);
                 matches = false;
             }
@@ -55,15 +84,6 @@ const CreateRestockReportModal = ({ closeModal }: any) => {
         }, true);
         return { isValid, missingHeaders };
     };
-
-    interface RawInventoryRecord {
-        'Storage Bin': string;
-        Material: string;
-        'Available stock': number;
-        'Storage Unit': string;
-        'Storage Type': string;
-        'Storage Location': number;
-    }
 
     const formatInventoryObjects = (inventoryReport: RawInventoryRecord[]) => {};
 
@@ -73,14 +93,9 @@ const CreateRestockReportModal = ({ closeModal }: any) => {
             const data = e.target.result;
             const parsedData: RawInventoryRecord[] = csvToObject(data);
             const csvKeys = Object.keys(parsedData[0]);
-            let { isValid, missingHeaders } = hasValidHeaders(requiredHeaders, csvKeys);
+            let { isValid, missingHeaders } = hasRequiredKeys(requiredHeaders, csvKeys);
             if (isValid) {
                 console.log('report data: ', parsedData);
-                const withIDs = parsedData.map(d => {
-                    return { _id: uuid(), ...d };
-                });
-                const result = addRecords(withIDs);
-                result.then(r => console.log('result: ', r));
                 // const draftRestock = new NunaStock(parsedData, fixedBins);
                 // callback(draftRestock.restockReportArray);
             } else {
@@ -114,38 +129,6 @@ const CreateRestockReportModal = ({ closeModal }: any) => {
         convertCSVFile(file, setDraftReport);
     };
 
-    const headerItems = [
-        {
-            title: 'Source',
-            key: 'sourceBin',
-            ratio: 2,
-        },
-        {
-            title: 'Destination',
-            key: 'destinationBin',
-            ratio: 2,
-        },
-        {
-            title: 'Material',
-            key: 'material',
-            ratio: 3,
-        },
-        {
-            title: 'Description',
-            key: 'description',
-            ratio: 4,
-        },
-        {
-            title: 'Qty.',
-            key: 'available',
-            ratio: 1,
-        },
-        {
-            title: 'Storage Unit',
-            key: 'storageUnit',
-            ratio: 2,
-        },
-    ];
     return (
         <Column
             height="100vh"

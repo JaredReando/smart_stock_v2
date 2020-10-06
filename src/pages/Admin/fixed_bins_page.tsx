@@ -1,18 +1,17 @@
 import React from 'react';
 import DataTable from '../../component_library/components/data_table/data_table';
-import { useFixedBinUpdater } from '../../hooks';
 import { Column } from '../../component_library/styles/layout';
 import AdminHeader from './admin_header';
-import { getAllFixedBinPages } from '../../api/airtable';
-import { useFirebaseContext } from '../../hooks/use_firebase_context';
+import { useFirebase } from '../../hooks/use_firebase_context';
+import { useAdminDataStore } from '../../hooks/use_admin_data_store';
 
 interface Props {
     fixedBins: any;
 }
 
 const FixedBins: React.FC<Props> = () => {
-    const { loading, fixedBins } = useFixedBinUpdater();
-    const firebase = useFirebaseContext();
+    const { fixedBinStore } = useAdminDataStore();
+    const firebase = useFirebase();
     const headerItems = [
         {
             title: 'Bin',
@@ -33,16 +32,13 @@ const FixedBins: React.FC<Props> = () => {
     return (
         <Column height="100%">
             <AdminHeader title="Fixed Bins">
-                <button
-                    onClick={async () => {
-                        // const airtableBins = getAllFixedBins();
-                        await firebase.addATestBin();
-                    }}
-                >
-                    Update Bins
-                </button>
+                <a href="#">Go to Airtable</a>
             </AdminHeader>
-            <DataTable columnHeaders={headerItems} rowData={fixedBins} loading={loading} />
+            <DataTable
+                columnHeaders={headerItems}
+                rowData={fixedBinStore.fixedBins}
+                loading={fixedBinStore.loading}
+            />
         </Column>
     );
 };

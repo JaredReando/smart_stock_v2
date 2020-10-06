@@ -1,7 +1,11 @@
 import { useState, useEffect } from 'react';
 import { fetchAirtableFixedBins, FixedBinRecord } from '../api/airtable';
 
-const useFixedBinUpdater = (): { loading: boolean; fixedBins: FixedBinRecord[] } => {
+export interface FixedBinStore {
+    loading: boolean;
+    fixedBins: FixedBinRecord[];
+}
+const useFixedBinStore = (): FixedBinStore => {
     const [fixedBins, setFixedBins] = useState<FixedBinRecord[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     useEffect(() => {
@@ -10,11 +14,10 @@ const useFixedBinUpdater = (): { loading: boolean; fixedBins: FixedBinRecord[] }
             const bins = await fetchAirtableFixedBins();
             setFixedBins(bins);
             setLoading(false);
-            console.log('bings: ', bins);
         }
         getAirtableBins();
     }, []);
     return { loading, fixedBins };
 };
 
-export default useFixedBinUpdater;
+export default useFixedBinStore;

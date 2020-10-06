@@ -32,12 +32,13 @@ const DataTable: React.FC<Props> = ({ columnHeaders, rowData, loading }) => {
             if (`${header.key}` in row) {
                 const detail = (
                     <TD key={header.key} width={setRatio(header.ratio)} minWidth={header.width}>
-                        {row[header.key]}
+                        {row[header.key].toString()}
                     </TD>
                 );
                 rowCells.push(detail);
             } else {
                 console.log('misfit row: ', row);
+                console.log('header key it failed on: ', header.key);
             }
         });
         return <TableRow key={uuid()}>{rowCells}</TableRow>;

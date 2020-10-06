@@ -2,12 +2,12 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { Box, Row } from '../../component_library/styles/layout';
 import { Header, AppText } from '../../component_library';
 import { Container, Section, DetailRow } from './restocking_page.styles';
-import { useRestockUpdater } from '../../hooks';
-import { useFirebaseContext } from '../../hooks/use_firebase_context';
+import { useRestockStore } from '../../hooks';
+import { useFirebase } from '../../hooks/use_firebase_context';
 
 const Client: React.FC = () => {
-    const firebase = useFirebaseContext();
-    const restockReport = useRestockUpdater();
+    const firebase = useFirebase();
+    const restockReport = useRestockStore();
     const [record, setRecord] = useState(0);
     const getRecord = useCallback(
         (direction: 'prev' | 'next') => {
