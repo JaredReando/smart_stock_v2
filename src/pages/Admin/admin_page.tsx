@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useActiveUsers } from '../../hooks';
 import AdminHeader from './admin_header';
 import { Column } from '../../component_library/styles/layout';
@@ -18,26 +18,21 @@ interface RawInventoryRecord {
 }
 
 const AdminPage = () => {
-    const users = useActiveUsers();
-    const [localDdInventory, setLocalDdInventory] = React.useState<{ [key: string]: any }[] | null>(
-        null,
-    );
-    const { localDB, inventoryStore } = useAdminDataStore();
+    const [localDocs, setLocalDocs] = React.useState([]);
     const inputRef = useRef<null | HTMLInputElement>(null);
+
+    const { localDB } = useAdminDataStore();
     const firebase = useFirebase();
 
-    React.useEffect(() => {
-        try {
-            localDB.current.allDocs({ include_docs: true }).then((r: any) => {
-                setLocalDdInventory(r.rows.map((row: any) => row.doc));
-                console.log('all docs: ', r.rows);
-            });
-        } catch (err) {
-            console.error('error: ', err);
-        }
-    }, [localDB.current]);
-    console.log('local db inventory: ', localDdInventory);
-    console.log('users: ', users);
+    useEffect(() => {
+        localDB
+            .allDocs({ include_docs: true })
+            .then((docs: any) => {
+                console.log('all the docs: ', docs);
+                setLocalDocs(docs.rows.map((r: any) => r.doc));
+            })
+            .catch((err: Error) => console.error('AdminPage Error: ', err));
+    }, []);
 
     const requiredHeaders: Array<keyof RawInventoryRecord> = [
         'Storage Bin',
@@ -77,11 +72,8 @@ const AdminPage = () => {
             const csvKeys = Object.keys(parsedData[0]);
             let { isValid, missingHeaders } = hasRequiredKeys(requiredHeaders, csvKeys);
             if (isValid) {
-                console.log('report data: ', parsedData);
+                //writes report to Firebase -- should trigger localDB update in useAdminDataStore
                 firebase.doOverwriteInventoryReport(parsedData);
-                localDB.current.bulkDocs(parsedData).then(() => console.log('localDB populated!'));
-                // const draftRestock = new NunaStock(parsedData, fixedBins);
-                // callback(draftRestock.restockReportArray);
             } else {
                 missingHeaders = missingHeaders.map(h => `"${h}"`);
                 const pluralOrSingular = missingHeaders.length === 1 ? 'field' : 'fields';
@@ -167,7 +159,7 @@ const AdminPage = () => {
                 {/*        })}*/}
                 {/*    </ul>*/}
                 {/*</Column>*/}
-                <DataTable columnHeaders={headerItems} rowData={localDdInventory || []} />
+                {/*<DataTable columnHeaders={headerItems} rowData={localDocs || []} />*/}
             </Column>
         </>
     );

@@ -1,23 +1,41 @@
 import { useState, useEffect } from 'react';
 import { useFirebase } from './use_firebase_context';
 
-const INVENTORY_REPORT_PATH = 'Companies/Nuna/inventory_report';
+const NUNA_INVENTORY_PATH = 'Companies/Nuna/inventory';
 
-const useInventoryStore = () => {
+interface InventorySummary {
+    lastUpdated: string;
+    recordCount: number;
+}
+
+type InventoryDB = any[];
+
+interface InventoryStore {
+    inventoryDB: InventoryDB;
+    inventorySummary: InventorySummary | null;
+}
+
+const useInventoryStore = (): InventoryStore => {
     const firebase = useFirebase();
-    const [inventoryStore, setInventoryStore] = useState([]);
+    const [inventoryDB, setInventoryDB] = useState([]);
+    const [inventorySummary, setInventorySummary] = useState<InventorySummary | null>(null);
+
     useEffect(() => {
-        firebase.db.ref(INVENTORY_REPORT_PATH).on('value', (snap: any) => {
-            const inventoryReport = snap.val();
-            setInventoryStore(inventoryReport);
+        firebase.db.ref(NUNA_INVENTORY_PATH + '/summary').on('value', (summary: any) => {
+            setInventorySummary(summary.val());
+            firebase.db.ref(NUNA_INVENTORY_PATH + '/database').once('value', (db: any) => {
+                console.log('firebase inventory DB updated');
+                const inventoryReport = db.val();
+                setInventoryDB(inventoryReport);
+            });
         });
 
         return () => {
-            firebase.db.ref(INVENTORY_REPORT_PATH).off();
+            firebase.db.ref(NUNA_INVENTORY_PATH).off();
         };
-    }, [firebase.db]);
+    }, []);
 
-    return inventoryStore;
+    return { inventoryDB, inventorySummary };
 };
 
 export default useInventoryStore;

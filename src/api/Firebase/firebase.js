@@ -51,11 +51,28 @@ class Firebase {
     };
 
     doOverwriteInventoryReport = inventoryReport => {
+        console.log('overwriting....');
         this.db
             .ref('Companies')
             .child('Nuna')
-            .child('inventory_report')
+            .child('inventory')
+            .child('records')
             .set(inventoryReport);
+        this.updateInventorySummary(inventoryReport.length);
+    };
+
+    updateInventorySummary = recordCount => {
+        const summary = {
+            lastUpdated: new Date().toJSON(),
+            recordCount,
+        };
+        this.db
+            .ref('Companies')
+            .child('Nuna')
+            .child('inventory')
+            .child('summary')
+            .set(summary);
+        console.log('Inventory revisionId updated: ', summary);
     };
 
     doUpdateRestockRecord = (index, updatedRecord) => {

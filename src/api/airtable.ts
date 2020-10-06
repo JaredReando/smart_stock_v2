@@ -46,7 +46,6 @@ export async function getAllFixedBinPages(): Promise<AirtableBinRecord[]> {
         allResponses.push(...paginatedResponse.records);
         nextPageExists = !!paginatedResponse.offset;
     }
-    console.log('all resposes: ', allResponses);
     return allResponses;
 }
 
