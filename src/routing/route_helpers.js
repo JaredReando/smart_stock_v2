@@ -17,35 +17,32 @@ If 'loggedIn' value is true, the specified Component from props is rendered
 If 'loggedIn' value is false, user is redirected back to home page
  */
 const AdminAuthRoute = ({ component: Component, ...rest }) => {
-    const adminDataStore = useInitializeAdminDataStore();
     return (
         <AuthConsumer>
             {({ validUser }) => (
-                <AdminDataStoreProvider value={adminDataStore}>
-                    <Route
-                        {...rest}
-                        //'props' here refers to those provided by <Route />: history, location, match, etc.
-                        //The Component's unique props don't need to be passed here, since they will
-                        //be provided by Dashboard's render of same Component
-                        component={props =>
-                            validUser ? (
-                                <div style={{ display: 'flex', height: '100vh', width: '100vw' }}>
-                                    <VerticalNavBar />
-                                    <Column flexGrow={1} style={{ border: '2px solid red' }}>
-                                        <Component {...props} />
-                                    </Column>
-                                </div>
-                            ) : (
-                                <Redirect
-                                    to={{
-                                        pathname: '/',
-                                        state: { from: props.location },
-                                    }}
-                                />
-                            )
-                        }
-                    />
-                </AdminDataStoreProvider>
+                <Route
+                    {...rest}
+                    //'props' here refers to those provided by <Route />: history, location, match, etc.
+                    //The Component's unique props don't need to be passed here, since they will
+                    //be provided by Dashboard's render of same Component
+                    component={props =>
+                        validUser ? (
+                            <div style={{ display: 'flex', height: '100vh', width: '100vw' }}>
+                                <VerticalNavBar />
+                                <Column flexGrow={1} style={{ border: '2px solid red' }}>
+                                    <Component {...props} />
+                                </Column>
+                            </div>
+                        ) : (
+                            <Redirect
+                                to={{
+                                    pathname: '/',
+                                    state: { from: props.location },
+                                }}
+                            />
+                        )
+                    }
+                />
             )}
         </AuthConsumer>
     );

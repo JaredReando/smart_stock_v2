@@ -1,19 +1,7 @@
 import React from 'react';
-import { Table, TableHead, TableBody, TableRow, TH, TD } from './data_table.styles';
+import { Table, TableBody, TableHead, TableRow, TD, TH } from './data_table.styles';
 import uuid from 'uuid';
-
-export interface ColumnHeader extends Partial<StringKeys> {
-    title: string;
-    key: string;
-    ratio: number;
-    width?: string;
-}
-
-export interface RowData extends StringKeys {}
-
-export interface StringKeys {
-    [key: string]: string | number;
-}
+import { ColumnHeader, RowData } from '../../../constants/types';
 
 interface Props {
     columnHeaders: ColumnHeader[];

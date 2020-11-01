@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Column, Row, Box } from '../../component_library/styles/layout';
-import { SubsectionHeader, AppText } from '../../component_library';
+import { Box, Column, Row } from '../../component_library/styles/layout';
+import { SubsectionHeader } from '../../component_library';
+import { DetailProps } from '../../constants/types';
 
 const flexCentered = {
     justifyContent: 'space-evenly',
@@ -26,10 +27,6 @@ export const Section = styled(Row)({
     ...flexCentered,
 });
 
-interface DetailProps {
-    title: string;
-    data: string;
-}
 export const DetailRow: React.FC<DetailProps> = ({ title, data }) => {
     return (
         <Row alignItems="center" border="1px solid red">

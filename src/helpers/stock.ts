@@ -1,18 +1,7 @@
 import uuid from 'uuid';
-import { FixedBinRecord } from '../api/airtable';
+import { FixedBinRecord, InventoryRecord } from '../constants/types';
 
 //TODO: remove this file from 'exclude' tsconfig array
-
-interface InventoryRecord {
-    storageLocation: number;
-    storageType: string;
-    bin: string;
-    material: string;
-    stockCategory: string;
-    available: number;
-    storageUnit: string;
-    storageUnitType: 'PAL';
-}
 
 export const hello = 'hello!';
 

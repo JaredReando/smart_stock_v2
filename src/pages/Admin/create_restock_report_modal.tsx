@@ -5,6 +5,7 @@ import { Button } from '../../component_library/styles/buttons';
 import { csvToObject } from '../../helpers/csv_to_object';
 import DataTable from '../../component_library/components/data_table/data_table';
 import { useFirebase } from '../../hooks/use_firebase_context';
+import { RawInventoryRecord } from '../../constants/types';
 
 const headerItems = [
     {
@@ -38,14 +39,6 @@ const headerItems = [
         ratio: 2,
     },
 ];
-interface RawInventoryRecord {
-    'Storage Bin': string;
-    Material: string;
-    'Available stock': number;
-    'Storage Unit': string;
-    'Storage Type': string;
-    'Storage Location': number;
-}
 
 const CreateRestockReportModal = ({ closeModal }: any) => {
     const firebase = useFirebase();

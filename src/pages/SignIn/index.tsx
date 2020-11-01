@@ -54,9 +54,19 @@ const SignInPage = (props: any) => {
                 <Button onClick={onSubmit} disabled={isInvalid}>
                     Log In
                 </Button>
-                {error && <p>{error}</p>}
+                {error && (
+                    <p
+                        style={{
+                            padding: '10px',
+                            width: '85%',
+                            color: 'tomato',
+                        }}
+                    >
+                        {error}
+                    </p>
+                )}
                 {/*<SignUpLink />*/}
-                <PasswordForgetLink />
+                {/*<PasswordForgetLink />*/}
             </Form>
         </Container>
     );

@@ -1,10 +1,7 @@
-import { useState, useEffect } from 'react';
-import { fetchAirtableFixedBins, FixedBinRecord } from '../api/airtable';
+import { useEffect, useState } from 'react';
+import { fetchAirtableFixedBins } from '../api/airtable';
+import { FixedBinRecord, FixedBinStore } from '../constants/types';
 
-export interface FixedBinStore {
-    loading: boolean;
-    fixedBins: FixedBinRecord[];
-}
 const useFixedBinStore = (): FixedBinStore => {
     const [fixedBins, setFixedBins] = useState<FixedBinRecord[]>([]);
     const [loading, setLoading] = useState<boolean>(true);

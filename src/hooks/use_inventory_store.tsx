@@ -1,19 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useFirebase } from './use_firebase_context';
+import { InventoryStore, InventorySummary } from '../constants/types';
 
 const NUNA_INVENTORY_PATH = 'Companies/Nuna/inventory';
-
-interface InventorySummary {
-    lastUpdated: string;
-    recordCount: number;
-}
-
-type InventoryDB = any[];
-
-interface InventoryStore {
-    inventoryDB: InventoryDB;
-    inventorySummary: InventorySummary | null;
-}
 
 const useInventoryStore = (): InventoryStore => {
     const firebase = useFirebase();

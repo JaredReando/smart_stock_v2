@@ -1,4 +1,5 @@
-import { AuthContext, mutate } from '../auth.context';
+import { mutate } from '../auth.context';
+import { AuthContext } from '../../constants/types';
 
 export const setAuthUser = (isValid: boolean) => {
     sessionStorage.setItem('stockUser', isValid.toString());

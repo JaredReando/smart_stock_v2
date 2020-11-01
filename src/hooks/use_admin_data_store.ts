@@ -1,16 +1,11 @@
-import { useEffect, createContext, useContext, useRef } from 'react';
+import { createContext, useContext, useEffect, useRef } from 'react';
 import { useFixedBinStore, useRestockStore } from './index';
-import { FixedBinStore } from './use_fixed_bin_store';
-import PouchDb from 'pouchdb-browser';
 import useInventoryStore from './use_inventory_store';
+import PouchDb from 'pouchdb-browser';
+import { AdminDataStoreContext } from '../constants/types';
+
 PouchDb.plugin(require('pouchdb-find').default);
 
-interface AdminDataStoreContext {
-    fixedBinStore: FixedBinStore;
-    inventoryStore: any;
-    restockStore: any[];
-    localDB: any;
-}
 const adminDataStoreContext = createContext<AdminDataStoreContext | undefined>(undefined);
 
 //TODO: consider adding additional localDB for Airtable fixed bins to optimize memory performance
@@ -56,7 +51,9 @@ export function useInitializeAdminDataStore() {
                     ...inventorySummary,
                 }),
             )
-            .then(() => console.log('localDB inventory store updated!'));
+            .then(() => {
+                console.log('localDB inventory store updated!');
+            });
     };
 
     useEffect(() => {

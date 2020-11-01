@@ -1,25 +1,4 @@
-import { StringKeys } from '../component_library/components/data_table/data_table';
-
-export interface FixedBinRecord extends StringKeys {
-    id: string;
-    bin: string;
-    description: string;
-    item: string;
-}
-
-export interface AirtableBinRecord {
-    id: string;
-    fields: {
-        Bin: string;
-        DESCRIPTION: string[];
-        ITEM: string;
-    };
-}
-
-export interface AirtableFixBinResponse {
-    offset?: string;
-    records: Array<AirtableBinRecord>;
-}
+import { AirtableBinRecord, AirtableFixBinResponse, FixedBinRecord } from '../constants/types';
 
 export async function getFixedBinPage(offsetToken?: string): Promise<AirtableFixBinResponse> {
     const nextPageToken = offsetToken ? `&offset=${offsetToken}` : '';
