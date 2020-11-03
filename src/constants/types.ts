@@ -1,7 +1,7 @@
 import { Tab } from '../component_library/components/vertical_icon_bar/vertical_icon_bar';
 
 export interface PouchInventoryDoc {
-    doc: any; //TODO: sync with 'InventoryRecord' type
+    doc: { _id: string; _rev: string } & InventoryRecord;
     id: string;
     key: string;
     value: {
@@ -10,6 +10,7 @@ export interface PouchInventoryDoc {
 }
 
 export interface RawInventoryRecord {
+    [key: string]: string | number;
     'Storage Location': number;
     'Storage Type': string;
     'Storage Bin': string;
@@ -23,6 +24,23 @@ export interface RawInventoryRecord {
     Quant: number;
     Duration: number;
     'GR Date': string;
+}
+
+export interface InventoryRecord {
+    storageLocation: number;
+    storageType: string;
+    storageBin: string;
+    material: string;
+    description: string;
+    stockCategory: string;
+    available: number;
+    storageUnit: string;
+    storageUnitType: 'PAL';
+}
+
+export interface InventorySummary {
+    lastUpdated: string;
+    recordCount: number;
 }
 
 export interface FixedBinStore {
@@ -69,22 +87,6 @@ export interface AirtableBinRecord {
 export interface AirtableFixBinResponse {
     offset?: string;
     records: Array<AirtableBinRecord>;
-}
-
-export interface InventoryRecord {
-    storageLocation: number;
-    storageType: string;
-    bin: string;
-    material: string;
-    stockCategory: string;
-    available: number;
-    storageUnit: string;
-    storageUnitType: 'PAL';
-}
-
-export interface InventorySummary {
-    lastUpdated: string;
-    recordCount: number;
 }
 
 type InventoryDB = any[];

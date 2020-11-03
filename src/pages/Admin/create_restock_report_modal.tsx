@@ -86,7 +86,7 @@ const CreateRestockReportModal = ({ closeModal }: any) => {
             const data = e.target.result;
             const parsedData: RawInventoryRecord[] = csvToObject(data);
             const csvKeys = Object.keys(parsedData[0]);
-            let { isValid, missingHeaders } = hasRequiredKeys(requiredHeaders, csvKeys);
+            let { isValid, missingHeaders } = hasRequiredKeys(requiredHeaders as string[], csvKeys);
             if (isValid) {
                 console.log('report data: ', parsedData);
                 // const draftRestock = new NunaStock(parsedData, fixedBins);

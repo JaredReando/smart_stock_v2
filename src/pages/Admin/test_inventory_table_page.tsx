@@ -13,6 +13,7 @@ const TestInventoryTable = () => {
             //loads all documents from localDB storage
             .allDocs({ include_docs: true })
             .then((docs: any) => {
+                // debugger
                 setLocalDocs(docs.rows.map((r: PouchInventoryDoc) => r.doc));
             })
             .catch((err: Error) => console.error('AdminPage Error: ', err));
@@ -22,32 +23,32 @@ const TestInventoryTable = () => {
     const headerItems = [
         {
             title: 'Storage Bin',
-            key: 'Storage Bin',
+            key: 'storageBin',
             ratio: 1,
         },
         {
             title: 'Material',
-            key: 'Material',
+            key: 'material',
             ratio: 2,
         },
         {
             title: 'Available',
-            key: 'Available stock',
+            key: 'available',
             ratio: 2,
         },
         {
             title: 'Storage Unit',
-            key: 'Storage Unit',
+            key: 'storageUnit',
             ratio: 3,
         },
         {
             title: 'Storage Type',
-            key: 'Storage Type',
+            key: 'storageType',
             ratio: 4,
         },
         {
             title: 'Storage Location',
-            key: 'Storage Location',
+            key: 'storageLocation',
             ratio: 1,
         },
     ];

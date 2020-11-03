@@ -14,6 +14,7 @@ export function useInitializeAdminDataStore() {
     const { inventoryDB, inventorySummary } = useInventoryStore();
     const restockStore = useRestockStore();
     let localDB: any = useRef(new PouchDb('smart-stock'));
+    console.log('invetoryDB: ', inventoryDB);
 
     /*
      * - if firebase details are fetched, check if lastUpdated matches localDB

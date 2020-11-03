@@ -41,22 +41,61 @@ const AdminPage = () => {
     const requiredHeaders: Array<keyof RawInventoryRecord> = [
         'Storage Bin',
         'Material',
+        'Material Description',
         'Available stock',
         'Storage Unit',
         'Storage Type',
         'Storage Location',
     ];
 
-    const convertCSVFile = (file: any, callback?: (data: any) => void) => {
+    /**
+     * converts an instance of RawInventoryRecord into
+     * @param object
+     * @param nameConversion
+     * */
+    function renameRawInventoryRecord(
+        object: RawInventoryRecord,
+        nameConversion: { [name: string]: string },
+    ) {
+        const renamedRecordObject: { [name: string]: string | number } = {};
+        const objectKeys = Object.keys(object);
+        objectKeys.forEach(key => {
+            const convertKeyTo = nameConversion[key];
+            const objectValueAtKey = object[key];
+            renamedRecordObject[convertKeyTo] = objectValueAtKey;
+        });
+        return renamedRecordObject;
+    }
+    const convertCSVFile = (file: File) => {
         const reader = new FileReader();
-        reader.onload = (e: any) => {
-            const data = e.target.result;
-            const parsedData: RawInventoryRecord[] = csvToObject(data);
-            const csvKeys = Object.keys(parsedData[0]);
-            let { isValid, missingHeaders } = hasRequiredKeys(requiredHeaders, csvKeys);
+        reader.onload = (e: ProgressEvent<FileReader>) => {
+            const csvFile = e.target!.result; //selected local .csv file
+            const parsedFile: RawInventoryRecord[] = csvToObject(csvFile);
+            const csvKeys: string[] = Object.keys(parsedFile[0]);
+            let { isValid, missingHeaders } = hasRequiredKeys(requiredHeaders as string[], csvKeys);
             if (isValid) {
+                const inventoryNameConversion: { [key: string]: string } = {
+                    'Storage Location': 'storageLocation',
+                    'Storage Type': 'storageType',
+                    'Storage Bin': 'storageBin',
+                    Material: 'material',
+                    'Material Description': 'materialDescription',
+                    'Available stock': 'available',
+                    'Storage Unit': 'storageUnit',
+                    Plant: 'plant',
+                    'Pick Quantity': 'pickQuantity',
+                    'Storage Unit Type': 'storageUnitType',
+                    Quant: 'quant',
+                    Duration: 'duration',
+                    'GR Date': 'grDate',
+                };
+                const latestInventory = parsedFile.map((record: RawInventoryRecord) => {
+                    //@ts-ignore
+                    return renameRawInventoryRecord(record, inventoryNameConversion);
+                });
+                console.log('lastest: ', latestInventory);
                 //writes report to Firebase -- should trigger localDB update in useAdminDataStore
-                firebase.doOverwriteInventoryReport(parsedData);
+                firebase.doOverwriteInventoryReport(latestInventory);
             } else {
                 missingHeaders = missingHeaders.map(h => `"${h}"`);
                 const pluralOrSingular = missingHeaders.length === 1 ? 'field' : 'fields';

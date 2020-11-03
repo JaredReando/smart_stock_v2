@@ -12,7 +12,7 @@ const useInventoryStore = (): InventoryStore => {
     useEffect(() => {
         firebase.db.ref(NUNA_INVENTORY_PATH + '/summary').on('value', (summary: any) => {
             setInventorySummary(summary.val());
-            firebase.db.ref(NUNA_INVENTORY_PATH + '/database').once('value', (db: any) => {
+            firebase.db.ref(NUNA_INVENTORY_PATH + '/records').once('value', (db: any) => {
                 console.log('firebase inventory DB updated');
                 const inventoryReport = db.val();
                 setInventoryDB(inventoryReport);
