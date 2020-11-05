@@ -1,9 +1,8 @@
 import { createContext, useContext, useEffect, useRef } from 'react';
 import { useFixedBinStore, useRestockStore } from './index';
 import useInventoryStore from './use_inventory_store';
-import PouchDb from 'pouchdb-browser';
 import { AdminDataStoreContext } from '../constants/types';
-
+import PouchDb from 'pouchdb-browser';
 PouchDb.plugin(require('pouchdb-find').default);
 
 const adminDataStoreContext = createContext<AdminDataStoreContext | undefined>(undefined);
@@ -11,10 +10,9 @@ const adminDataStoreContext = createContext<AdminDataStoreContext | undefined>(u
 //TODO: consider adding additional localDB for Airtable fixed bins to optimize memory performance
 export function useInitializeAdminDataStore() {
     const fixedBinStore = useFixedBinStore();
-    const { inventoryDB, inventorySummary } = useInventoryStore();
+    const { getInventory, inventorySummary } = useInventoryStore();
     const restockStore = useRestockStore();
     let localDB: any = useRef(new PouchDb('smart-stock'));
-    console.log('invetoryDB: ', inventoryDB);
 
     /*
      * - if firebase details are fetched, check if lastUpdated matches localDB
@@ -35,8 +33,10 @@ export function useInitializeAdminDataStore() {
         return localSummary.lastUpdated === firebaseSummary.lastUpdated;
     }
 
-    const rebootLocalDB = () => {
-        const localInventoryDB = inventoryDB.map((r: any, i: number) => {
+    const rebootLocalDB = async () => {
+        const fetchedInventory = await getInventory();
+
+        const localInventoryDB = fetchedInventory.map((r: any, i: number) => {
             // pad single digits with leading '0' for sorting
             const id = i < 10 ? '0' + i : i;
             return { ...r, _id: 'invRec' + id };
@@ -58,7 +58,7 @@ export function useInitializeAdminDataStore() {
     };
 
     useEffect(() => {
-        if (!!inventorySummary && !!inventoryDB) {
+        if (!!inventorySummary && !!getInventory) {
             localDB.current
                 .get('summary')
                 .then((r: any) => {
@@ -73,17 +73,17 @@ export function useInitializeAdminDataStore() {
                     if (err.message === 'missing') {
                         rebootLocalDB();
                     } else {
-                        console.error('Exciting new error: ', err);
+                        console.error('Error refreshing getInventory: ', err);
                     }
                 });
         } else {
-            console.log('either inventorySummary or inventoryDB were false');
+            console.log('either inventorySummary or getInventory were false');
         }
-    }, [inventorySummary, inventoryDB]);
+    }, [inventorySummary, getInventory]);
 
     return {
         fixedBinStore,
-        inventoryStore: inventoryDB,
+        inventoryStore: getInventory,
         restockStore,
         localDB: localDB.current,
     };

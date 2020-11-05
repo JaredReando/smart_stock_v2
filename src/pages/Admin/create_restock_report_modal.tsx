@@ -6,6 +6,7 @@ import { csvToObject } from '../../helpers/csv_to_object';
 import DataTable from '../../component_library/components/data_table/data_table';
 import { useFirebase } from '../../hooks/use_firebase_context';
 import { RawInventoryRecord } from '../../constants/types';
+import { hasRequiredKeys } from '../../helpers/has_required_headers';
 
 const headerItems = [
     {
@@ -61,22 +62,6 @@ const CreateRestockReportModal = ({ closeModal }: any) => {
         'Storage Type',
         'Storage Location',
     ];
-
-    //checks if uploaded report contains all necessary inventory object keys
-    const hasRequiredKeys = (
-        requiredKeys: string[],
-        compareKeys: string[],
-    ): { isValid: boolean; missingHeaders: string[] } => {
-        const missingHeaders: string[] = [];
-        const isValid: boolean = requiredKeys.reduce((matches: boolean, header: string) => {
-            if (!compareKeys.includes(header)) {
-                missingHeaders.push(header);
-                matches = false;
-            }
-            return matches;
-        }, true);
-        return { isValid, missingHeaders };
-    };
 
     const formatInventoryObjects = (inventoryReport: RawInventoryRecord[]) => {};
 

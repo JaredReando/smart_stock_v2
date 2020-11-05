@@ -89,10 +89,8 @@ export interface AirtableFixBinResponse {
     records: Array<AirtableBinRecord>;
 }
 
-type InventoryDB = any[];
-
 export interface InventoryStore {
-    inventoryDB: InventoryDB;
+    getInventory: () => Promise<InventoryRecord[]>;
     inventorySummary: InventorySummary | null;
 }
 
