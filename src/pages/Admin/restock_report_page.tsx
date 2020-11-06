@@ -35,9 +35,9 @@ const RestockReport: React.FC<Props> = () => {
             return { storageBin: record.bin };
         });
         const binsToRestock = await localDB.getBinsToRestock(fixedBinParams);
-        console.log('answer: ', binsToRestock);
         const materialsNeeded = restockMaterialsNeeded(binsToRestock);
-        await localDB.getRestockRecords(materialsNeeded);
+        const restockRecords = await localDB.getRestockRecords(materialsNeeded);
+        console.log('restock records: ', restockRecords);
     };
 
     const headerItems: {

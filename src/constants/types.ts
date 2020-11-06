@@ -43,6 +43,13 @@ export interface InventorySummary {
     recordCount: number;
 }
 
+export interface RestockSummary {
+    lastUpdated: string;
+    recordCount: number;
+    outOfStock: string[];
+    priorityMaterials: string[];
+}
+
 export interface RestockRecord {
     isMissing: boolean;
     sourceBin: string;
@@ -59,6 +66,7 @@ export interface FixedBinStore {
 }
 
 export interface AdminDataStoreContext {
+    inventorySummary: InventorySummary;
     fixedBinStore: FixedBinStore;
     inventoryStore: any;
     restockStore: any[];

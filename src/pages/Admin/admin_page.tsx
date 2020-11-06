@@ -1,16 +1,21 @@
 import React, { useRef } from 'react';
 import AdminHeader from './admin_header';
-import { Column } from '../../component_library/styles/layout';
+import { Column, Row } from '../../component_library/styles/layout';
 import { Button } from '../../component_library/styles/buttons';
 import { useFirebase } from '../../hooks/use_firebase_context';
-// import TestInventoryTable from './test_inventory_table_page';
+import moment from 'moment';
 import { convertInventoryCSVFile, requiredHeaders } from '../../helpers/convert_inventory_csv_file';
+import { useAdminDataStore } from '../../hooks/use_admin_data_store';
 
 const AdminPage = () => {
     const inputRef = useRef<null | HTMLInputElement>(null);
-
+    const { inventorySummary } = useAdminDataStore();
     const firebase = useFirebase();
 
+    if (inventorySummary) {
+        console.log('last updated: ', inventorySummary.lastUpdated);
+        console.log('moment in time: ', moment(inventorySummary.lastUpdated).calendar());
+    }
     const handleClick = (e: any) => {
         e.preventDefault();
         inputRef.current!.click();
@@ -45,6 +50,30 @@ const AdminPage = () => {
                     </>
                 </AdminHeader>
                 <h1>This is the admin dashboard!</h1>
+                <Column>
+                    <Row alignItems="center">
+                        <h3>Last updated: </h3>
+                        <p>
+                            {!!inventorySummary
+                                ? moment(inventorySummary.lastUpdated).calendar()
+                                : ''}
+                        </p>
+                    </Row>
+                    <Row alignItems="flex-start">
+                        <h3>Out of Stock: </h3>
+                        <Column>
+                            <p>Peeper Neat</p>
+                            <p>Peeper Neat</p>
+                            <p>Peeper Neat</p>
+                            <p>Peeper Neat</p>
+                            <p>Peeper Neat</p>
+                            <p>Peeper Neat</p>
+                            <p>Peeper Neat</p>
+                            <p>Peeper Neat</p>
+                            <p>Peeper Neat</p>
+                        </Column>
+                    </Row>
+                </Column>
                 {/*<TestInventoryTable />*/}
             </Column>
         </>

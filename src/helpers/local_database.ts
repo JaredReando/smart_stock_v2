@@ -70,22 +70,41 @@ export class LocalDatabase {
                 fields: ['material'],
             },
         });
-        const promiseArray = [];
-        console.time('all');
+        const pendingQueries: Promise<any>[] = [];
+        const materialsArray: string[] = [];
         for (let material in materialNeeded) {
-            console.log('material.....', material);
             const matches = this.localDB.find({
                 selector: {
-                    storageType: 'ST1',
+                    //Include more locations in array to broaden search
+                    storageType: { $in: ['ST1'] },
                     storageLocation: '0001',
                     material: material,
                 },
             });
-            //TODO: mine empty results here to build 'out of stock' stat
-            promiseArray.push(matches);
+            pendingQueries.push(matches);
+            materialsArray.push(material);
         }
-        const allPromises = await Promise.all(promiseArray).finally(() => console.timeEnd('all'));
-        console.log('all promises: ', allPromises);
+        const resolvedQueries = await Promise.all(pendingQueries);
+        return resolvedQueries.reduce(
+            (acc: { [key: string]: string[] }, val: any, index: number) => {
+                const stockedLocations = val.docs.length;
+                if (stockedLocations === 0) {
+                    const outOfStock = materialsArray[index];
+                    acc['outOfStock'] = [...acc['outOfStock'], outOfStock];
+                }
+                if (stockedLocations > 0) {
+                    const material = val.docs[0].material;
+                    const resultsLimit = materialNeeded[material];
+                    const sortedResults = val.docs.sort((a: any, b: any) =>
+                        a.storageUnit > b.storageUnit ? 1 : -1,
+                    );
+                    const sourceBins = sortedResults.slice(0, resultsLimit);
+                    acc[material] = [...sourceBins];
+                }
+                return acc;
+            },
+            { outOfStock: [] },
+        );
     }
 
     async bulkAddRecords<T, U>(records: T[], summary: U) {

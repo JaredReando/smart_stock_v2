@@ -35,15 +35,12 @@ export function useInitializeAdminDataStore() {
             const id = i < 10 ? '0' + i : i;
             return { ...r, _id: 'invRec' + id };
         });
-        localDB.current
-            .resetDB()
-            .then(() =>
-                localDB.current.bulkAddRecords(localInventoryDB, {
-                    _id: 'summary',
-                    ...inventorySummary,
-                }),
-            )
-            .then(() => localDB.current.find('storageType'));
+        localDB.current.resetDB().then(() =>
+            localDB.current.bulkAddRecords(localInventoryDB, {
+                _id: 'summary',
+                ...inventorySummary,
+            }),
+        );
     };
 
     useEffect(() => {
@@ -69,6 +66,7 @@ export function useInitializeAdminDataStore() {
 
     return {
         fixedBinStore,
+        inventorySummary,
         inventoryStore: getInventory,
         restockStore,
         localDB: localDB.current,
