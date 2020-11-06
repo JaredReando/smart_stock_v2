@@ -1,6 +1,6 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { Box, Row } from '../../component_library/styles/layout';
-import { Header, AppText } from '../../component_library';
+import { Header } from '../../component_library';
 import { Container, Section, DetailRow } from './restocking_page.styles';
 import { useRestockStore } from '../../hooks';
 import { useFirebase } from '../../hooks/use_firebase_context';
@@ -36,18 +36,7 @@ const Client: React.FC = () => {
         return null;
     }
 
-    const {
-        available,
-        description,
-        destinationBin,
-        isCompleted,
-        isMissing,
-        material,
-        noneStocked,
-        sourceBin,
-        storageUnit,
-        uuid,
-    } = restockReport[record];
+    const { destinationBin, sourceBin } = restockReport[record];
     //@ts-ignore
     const testRecord = { ...restockReport[record], available: 999 };
     console.log(restockReport[record]);

@@ -4,7 +4,7 @@ export default class NunaStock {
     constructor(rawInventoryJSON, fixedBinsJSON) {
         this.rawInventoryJSON = rawInventoryJSON;
         this.fixedBinsJSON = fixedBinsJSON;
-        console.log('did it work? ', this.getMaterialStockLevels());
+        console.log('did stock levels work? ', this.getMaterialStockLevels());
         //TODO: phase out need for report arrays throughout application
         this.restockReportArray = this.getFixedBinRestockReport();
         this.inventoryReportArray = this.getFifoSortedInventory();

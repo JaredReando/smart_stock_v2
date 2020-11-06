@@ -1,7 +1,8 @@
-import { createContext, useContext, useEffect, useRef } from 'react';
+import { createContext, useContext, useEffect, useRef, MutableRefObject } from 'react';
 import { useFixedBinStore, useRestockStore } from './index';
 import useInventoryStore from './use_inventory_store';
 import { AdminDataStoreContext } from '../constants/types';
+import { LocalDatabase } from '../helpers/local_database';
 import PouchDb from 'pouchdb-browser';
 PouchDb.plugin(require('pouchdb-find').default);
 
@@ -12,20 +13,14 @@ export function useInitializeAdminDataStore() {
     const fixedBinStore = useFixedBinStore();
     const { getInventory, inventorySummary } = useInventoryStore();
     const restockStore = useRestockStore();
-    let localDB: any = useRef(new PouchDb('smart-stock'));
-
+    let localDB: MutableRefObject<LocalDatabase> = useRef<LocalDatabase>(new LocalDatabase());
     /*
      * - if firebase details are fetched, check if lastUpdated matches localDB
      * - if there is no change, don't update localDB
      * - if there is a mismatch, delete and restore localDB with firebase clone
-     *
      * - if a match for 'lastUpdated' doesn't exist in db, the db is corrupt/deleted/first-run
      * - in that case, delete and restore localDD with firebase clone
-     *
-     *
-     *
      */
-
     function compareLocalAndFirebaseDBs<
         T extends { lastUpdated: string },
         U extends { lastUpdated: string }
@@ -35,35 +30,28 @@ export function useInitializeAdminDataStore() {
 
     const rebootLocalDB = async () => {
         const fetchedInventory = await getInventory();
-
         const localInventoryDB = fetchedInventory.map((r: any, i: number) => {
             // pad single digits with leading '0' for sorting
             const id = i < 10 ? '0' + i : i;
             return { ...r, _id: 'invRec' + id };
         });
-
-        new PouchDb('smart-stock')
-            .destroy()
-            .then(() => (localDB.current = new PouchDb('smart-stock')))
-            .then(() => localDB.current.bulkDocs(localInventoryDB))
+        localDB.current
+            .resetDB()
             .then(() =>
-                localDB.current.put({
+                localDB.current.bulkAddRecords(localInventoryDB, {
                     _id: 'summary',
                     ...inventorySummary,
                 }),
             )
-            .then(() => {
-                console.log('localDB inventory store updated!');
-            });
+            .then(() => localDB.current.find('storageType'));
     };
 
     useEffect(() => {
-        if (!!inventorySummary && !!getInventory) {
-            localDB.current
-                .get('summary')
-                .then((r: any) => {
-                    console.log('db get SUMMARY request: ', r);
-                    const comparison = compareLocalAndFirebaseDBs(r, inventorySummary);
+        if (!!inventorySummary) {
+            localDB.current.summary
+                .then((summary: any) => {
+                    console.log('db get SUMMARY request: ', summary);
+                    const comparison = compareLocalAndFirebaseDBs(summary, inventorySummary);
                     console.log('comparison: ', comparison);
                     if (!comparison) {
                         rebootLocalDB();
@@ -76,10 +64,8 @@ export function useInitializeAdminDataStore() {
                         console.error('Error refreshing getInventory: ', err);
                     }
                 });
-        } else {
-            console.log('either inventorySummary or getInventory were false');
         }
-    }, [inventorySummary, getInventory]);
+    }, [inventorySummary]);
 
     return {
         fixedBinStore,

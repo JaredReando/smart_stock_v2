@@ -2,7 +2,6 @@ import React from 'react';
 import DataTable from '../../component_library/components/data_table/data_table';
 import { Column } from '../../component_library/styles/layout';
 import AdminHeader from './admin_header';
-import { useFirebase } from '../../hooks/use_firebase_context';
 import { useAdminDataStore } from '../../hooks/use_admin_data_store';
 
 interface Props {
@@ -11,7 +10,6 @@ interface Props {
 
 const FixedBins: React.FC<Props> = () => {
     const { fixedBinStore } = useAdminDataStore();
-    const firebase = useFirebase();
     const headerItems = [
         {
             title: 'Bin',
@@ -32,7 +30,9 @@ const FixedBins: React.FC<Props> = () => {
     return (
         <Column height="100%">
             <AdminHeader title="Fixed Bins">
-                <a href="#">Go to Airtable</a>
+                <a href="https://airtable.com/tblHImRJEKbWwvSZq/viw55Ghz3crFPCJOt?blocks=hide">
+                    Go to Airtable
+                </a>
             </AdminHeader>
             <DataTable
                 columnHeaders={headerItems}

@@ -43,6 +43,16 @@ export interface InventorySummary {
     recordCount: number;
 }
 
+export interface RestockRecord {
+    isMissing: boolean;
+    sourceBin: string;
+    destinationBin: string;
+    material: string;
+    description: string;
+    available: number;
+    storageUnit: string;
+}
+
 export interface FixedBinStore {
     loading: boolean;
     fixedBins: FixedBinRecord[];

@@ -25,7 +25,7 @@ const AdminPage = () => {
             return;
         }
         const results = await convertInventoryCSVFile(file, requiredHeaders);
-        console.log('results: ', results);
+        firebase.overwriteInventoryReport(results);
     };
 
     return (
@@ -40,11 +40,11 @@ const AdminPage = () => {
                             style={{ display: 'none' }}
                         />
                         <Button onClick={handleClick} style={{ flexShrink: 0 }}>
-                            Upload Inventory Report
+                            New Inventory Report
                         </Button>
                     </>
                 </AdminHeader>
-                <h1>This is the admin dashboard</h1>
+                <h1>This is the admin dashboard!</h1>
                 {/*<TestInventoryTable />*/}
             </Column>
         </>

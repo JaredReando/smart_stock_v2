@@ -33,24 +33,16 @@ class Firebase {
         this.auth.currentUser.updatePassword(password);
     };
 
-    doOverwriteLastUpdated = () => {
-        const now = new Date().toString();
-        this.db
-            .ref('Companies')
-            .child('Nuna')
-            .child('last_updated')
-            .set(now);
-    };
-
-    doOverwriteRestockReport = restockReport => {
+    overwriteRestockReport = restockReport => {
         this.db
             .ref('Companies')
             .child('Nuna')
             .child('restock_report')
             .set(restockReport);
+        this.updateRestockSummary(restockReport.length);
     };
 
-    doOverwriteInventoryReport = inventoryReport => {
+    overwriteInventoryReport = inventoryReport => {
         console.log('overwriting....');
         this.db
             .ref('Companies')
@@ -72,7 +64,21 @@ class Firebase {
             .child('inventory')
             .child('summary')
             .set(summary);
-        console.log('Inventory revisionId updated: ', summary);
+        console.log('inventory summary updated: ', summary);
+    };
+
+    updateRestockSummary = recordCount => {
+        const summary = {
+            lastUpdated: new Date().toJSON(),
+            recordCount,
+        };
+        this.db
+            .ref('Companies')
+            .child('Nuna')
+            .child('restock_report')
+            .child('summary')
+            .set(summary);
+        console.log('restock summary updated: ', summary);
     };
 
     doUpdateRestockRecord = (index, updatedRecord) => {
@@ -82,49 +88,6 @@ class Firebase {
             .child('restock_report')
             .child(index)
             .set(updatedRecord);
-    };
-
-    experimentalFixedBins = fixedBinRecords => {
-        for (const record in fixedBinRecords) {
-            const { fields: bin } = record;
-            const binDetails = {
-                Bin: bin.Bin,
-                Product: bin.ITEM,
-                Description: bin.Description,
-            };
-            this.db
-                .ref('Companies')
-                .child('Nuna')
-                .child('fixed_bins')
-                .child('B01-01-B');
-            // .set({
-            //   bin: 'wacky',
-            //   product: 'world',
-            //   description: 'of wonder'
-            // });
-        }
-        console.log('done');
-    };
-
-    doOverwriteFixedBins = fixedBinRecords => {
-        this.db
-            .ref('Companies')
-            .child('Nuna')
-            .child('fixed_bins')
-            .set(fixedBinRecords);
-    };
-
-    addATestBin = async () => {
-        const reult = await this.db
-            .ref('Companies')
-            .child('Nuna')
-            .child('fixed_bins')
-            .child('B01-01-B')
-            .set({
-                'A01-01-A': 'peepa neat',
-                'Z43-02-C': 'scirbble dowg',
-            });
-        console.log('result? : ', reult);
     };
 
     doDeleteRestockRecord = recordKey => {

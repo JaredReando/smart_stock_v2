@@ -23,14 +23,10 @@ const Admin = ({
         reader.onload = event => {
             const data = event.target.result;
             const parsedInventoryCSV = Papa.parse(data, { header: true }).data;
-
             const nunaStock = new NunaStock(parsedInventoryCSV, fixedBins);
-
             handleRestockUpdate(nunaStock.restockReportObject);
-
-            firebase.doOverwriteRestockReport(nunaStock.restockReportObject);
-            firebase.doOverwriteInventoryReport(nunaStock.inventoryReportObject);
-            firebase.doOverwriteLastUpdated();
+            firebase.overwriteRestockReport(nunaStock.restockReportObject);
+            firebase.overwriteInventoryReport(nunaStock.inventoryReportObject);
 
             // console.log('nested: ', this.createRestockReportNestedObject(nunaStock.restockReport));
         };
@@ -69,9 +65,6 @@ const Admin = ({
             return value;
         }, 0);
     }
-    function overwriteFixedBins(firebase) {
-        firebase.doOverwriteFixedBins(fixedBins);
-    }
 
     const [showModal, setShowModal] = useState(false);
     const [toggleView, setToggleView] = useState(false);
@@ -91,7 +84,6 @@ const Admin = ({
                 <h3>Last Updated: {lastUpdated.toString() || 'N/A'}</h3>
                 <TestButton onClick={() => setShowModal(true)}>New Report</TestButton>
                 <TestButton onClick={() => setToggleView(t => !t)}>Toggle View</TestButton>
-                <TestButton onClick={() => overwriteFixedBins(firebase)}>Set Fixed Bins</TestButton>
             </DashContainer>
             <ReportContainer>
                 {!toggleView && <RestockReport report={restockReport} />}

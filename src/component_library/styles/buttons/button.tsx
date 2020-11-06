@@ -10,24 +10,23 @@ import {
 } from 'styled-system';
 
 import styled from 'styled-components';
-import { AppText } from "../typography";
+import { AppText } from '../typography';
 
 interface Props
     extends React.ButtonHTMLAttributes<HTMLButtonElement>,
         SpaceProps,
         BorderRadiusProps,
-        LayoutProps {
-}
+        LayoutProps {}
 
 const ButtonAppText = styled(AppText)({
     display: 'flex',
     alignItems: 'center',
-    justifyContent: "center",
+    justifyContent: 'center',
 });
 
-const StyledButton = styled.button<Props>(({theme}) =>
-    ({
-        border: '1px solid green',
+const StyledButton = styled.button<Props>(
+    ({ theme }) => ({
+        border: '1px solid black',
         cursor: 'pointer',
         minWidth: '100px',
         height: '40px',
@@ -37,7 +36,7 @@ const StyledButton = styled.button<Props>(({theme}) =>
         textOverflow: 'ellipsis',
         whiteSpace: 'nowrap',
         boxShadow: theme.shadows.small,
-        ":active": {
+        ':active': {
             boxShadow: 'none',
         },
         ':focus:not(.focus-visible)': {

@@ -75,7 +75,7 @@ export const convertInventoryCSVFile = (
                     )}`,
                 );
             }
-            reader.readAsText(file);
         };
+        reader.readAsText(file);
     });
 };

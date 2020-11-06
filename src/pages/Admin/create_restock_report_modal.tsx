@@ -63,8 +63,6 @@ const CreateRestockReportModal = ({ closeModal }: any) => {
         'Storage Location',
     ];
 
-    const formatInventoryObjects = (inventoryReport: RawInventoryRecord[]) => {};
-
     const convertCSVFile = (file: any, callback: (data: any) => void) => {
         const reader = new FileReader();
         reader.onload = (e: any) => {
@@ -90,7 +88,7 @@ const CreateRestockReportModal = ({ closeModal }: any) => {
     };
     const handleSetReport = (e: any) => {
         e.preventDefault();
-        firebase.doOverwriteRestockReport(draftReport);
+        firebase.overwriteRestockReport(draftReport);
         closeModal();
     };
 
