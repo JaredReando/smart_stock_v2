@@ -13,7 +13,7 @@ export const requiredHeaders: Array<keyof RawInventoryRecord> = [
 ];
 
 /**
- * converts an instance of RawInventoryRecord into
+ * converts an instance of RawInventoryRecord into an InventoryObject
  * @param object
  * @param nameConversion
  * */

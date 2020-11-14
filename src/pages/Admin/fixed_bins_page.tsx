@@ -3,6 +3,7 @@ import DataTable from '../../component_library/components/data_table/data_table'
 import { Column } from '../../component_library/styles/layout';
 import AdminHeader from './admin_header';
 import { useAdminDataStore } from '../../hooks/use_admin_data_store';
+import Button from '../../component_library/styles/buttons/button';
 
 interface Props {
     fixedBins: any;
@@ -30,9 +31,15 @@ const FixedBins: React.FC<Props> = () => {
     return (
         <Column height="100%">
             <AdminHeader title="Fixed Bins">
-                <a href="https://airtable.com/tblHImRJEKbWwvSZq/viw55Ghz3crFPCJOt?blocks=hide">
-                    Go to Airtable
-                </a>
+                <Button variant="secondary">
+                    <a
+                        href="https://airtable.com/tblHImRJEKbWwvSZq/viw55Ghz3crFPCJOt?blocks=hide"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Go to Airtable
+                    </a>
+                </Button>
             </AdminHeader>
             <DataTable
                 columnHeaders={headerItems}

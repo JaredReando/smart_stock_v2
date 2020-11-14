@@ -25,8 +25,8 @@ const DataTable: React.FC<Props> = ({ columnHeaders, rowData, loading }) => {
                 );
                 rowCells.push(detail);
             } else {
-                console.log('misfit row: ', row);
-                console.log('header key it failed on: ', header.key);
+                // console.log('misfit row: ', row);
+                // console.log('header key it failed on: ', header.key);
             }
         });
         return <TableRow key={uuid()}>{rowCells}</TableRow>;

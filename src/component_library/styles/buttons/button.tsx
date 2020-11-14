@@ -8,15 +8,20 @@ import {
     BorderRadiusProps,
     LayoutProps,
 } from 'styled-system';
-
+import { Spinner } from '../spinner/spinner';
 import styled from 'styled-components';
 import { AppText } from '../typography';
+
+export type ButtonVariants = 'primary' | 'secondary' | 'danger' | 'link';
 
 interface Props
     extends React.ButtonHTMLAttributes<HTMLButtonElement>,
         SpaceProps,
         BorderRadiusProps,
-        LayoutProps {}
+        LayoutProps {
+    loading?: boolean;
+    variant?: ButtonVariants;
+}
 
 const ButtonAppText = styled(AppText)({
     display: 'flex',
@@ -26,7 +31,6 @@ const ButtonAppText = styled(AppText)({
 
 const StyledButton = styled.button<Props>(
     ({ theme }) => ({
-        border: '1px solid black',
         cursor: 'pointer',
         minWidth: '100px',
         height: '40px',
@@ -36,6 +40,9 @@ const StyledButton = styled.button<Props>(
         textOverflow: 'ellipsis',
         whiteSpace: 'nowrap',
         boxShadow: theme.shadows.small,
+        ':hover': {
+            boxShadow: theme.shadows.large,
+        },
         ':active': {
             boxShadow: 'none',
         },
@@ -52,18 +59,22 @@ const StyledButton = styled.button<Props>(
     borderRadius,
 );
 
-const Button: React.FC<Props> = ({ children, ...rest }) => {
+const Button: React.FC<Props> = ({ loading, variant, children, ...rest }) => {
     return (
-        <StyledButton {...rest}>
-            <ButtonAppText bold color="inherit">
-                {children}
-            </ButtonAppText>
+        <StyledButton variant={variant} {...rest}>
+            {loading && <Spinner size="30px" color={'white'} />}
+            {!loading && (
+                <ButtonAppText bold color="inherit">
+                    {children}
+                </ButtonAppText>
+            )}
         </StyledButton>
     );
 };
 
 Button.defaultProps = {
-    borderRadius: 4,
+    borderRadius: '4px',
+    variant: 'secondary',
 };
 
 export default Button;

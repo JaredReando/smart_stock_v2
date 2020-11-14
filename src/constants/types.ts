@@ -26,16 +26,28 @@ export interface RawInventoryRecord {
     'GR Date': string;
 }
 
+export interface StockSource extends InventoryRecord {
+    destinationBin: string;
+}
+export interface FoundOverstock {
+    stockSources: StockSource[];
+    outOfStock: string[];
+}
+
 export interface InventoryRecord {
     storageLocation: number;
     storageType: string;
     storageBin: string;
     material: string;
-    description: string;
+    materialDescription: string;
     stockCategory: string;
     available: number;
     storageUnit: string;
+    pickQuantity: string;
     storageUnitType: 'PAL';
+    quant: string;
+    duration: string;
+    grDate: string;
 }
 
 export interface InventorySummary {
@@ -47,17 +59,18 @@ export interface RestockSummary {
     lastUpdated: string;
     recordCount: number;
     outOfStock: string[];
-    priorityMaterials: string[];
 }
 
 export interface RestockRecord {
-    isMissing: boolean;
+    status: 'pending' | 'complete' | 'missing';
     sourceBin: string;
     destinationBin: string;
     material: string;
     description: string;
     available: number;
     storageUnit: string;
+    priority: 'low' | 'normal' | 'high';
+    id: string;
 }
 
 export interface FixedBinStore {

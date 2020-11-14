@@ -10,8 +10,8 @@ const useInventoryStore = (): InventoryStore => {
     const [inventorySummary, setInventorySummary] = useState<InventorySummary | null>(null);
     const fetchFirebaseInventory = async (): Promise<InventoryRecord[]> => {
         return new Promise(res => {
-            firebase.db.ref(NUNA_INVENTORY_PATH).once('value', (db: any) => {
-                const inventoryRecords = db.val();
+            firebase.db.ref(NUNA_INVENTORY_PATH).once('value', (snap: any) => {
+                const inventoryRecords = snap.val();
                 res(inventoryRecords);
             });
         });

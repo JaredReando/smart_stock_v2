@@ -31,7 +31,7 @@ const AdminAuthRoute = ({ component: Component, ...rest }) => {
                             <AdminDataStoreProvider value={adminDataStore}>
                                 <div style={{ display: 'flex', height: '100vh', width: '100vw' }}>
                                     <VerticalNavBar />
-                                    <Column flexGrow={1} style={{ border: '2px solid red' }}>
+                                    <Column flexGrow={1}>
                                         <Component {...props} />
                                     </Column>
                                 </div>

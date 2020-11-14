@@ -37,7 +37,8 @@ class Firebase {
         this.db
             .ref('Companies')
             .child('Nuna')
-            .child('restock_report')
+            .child('restock')
+            .child('records')
             .set(restockReport);
         this.updateRestockSummary(restockReport.length);
     };
@@ -75,7 +76,7 @@ class Firebase {
         this.db
             .ref('Companies')
             .child('Nuna')
-            .child('restock_report')
+            .child('restock')
             .child('summary')
             .set(summary);
         console.log('restock summary updated: ', summary);

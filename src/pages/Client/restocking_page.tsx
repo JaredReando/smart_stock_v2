@@ -7,11 +7,11 @@ import { useFirebase } from '../../hooks/use_firebase_context';
 
 const Client: React.FC = () => {
     const firebase = useFirebase();
-    const restockReport = useRestockStore();
+    const { records } = useRestockStore();
     const [record, setRecord] = useState(0);
     const getRecord = useCallback(
         (direction: 'prev' | 'next') => {
-            const limit = restockReport.length - 1;
+            const limit = records.length - 1;
             if (direction === 'prev') {
                 if (record === 0) {
                     return limit;
@@ -29,17 +29,17 @@ const Client: React.FC = () => {
             }
             return record;
         },
-        [restockReport, record],
+        [records, record],
     );
 
-    if (restockReport.length === 0) {
+    if (records.length === 0) {
         return null;
     }
 
-    const { destinationBin, sourceBin } = restockReport[record];
+    const { destinationBin, sourceBin } = records[record];
     //@ts-ignore
-    const testRecord = { ...restockReport[record], available: 999 };
-    console.log(restockReport[record]);
+    const testRecord = { ...records[record], available: 999 };
+    console.log(records[record]);
 
     return (
         <Container>
@@ -64,10 +64,11 @@ const Client: React.FC = () => {
             </Section>
             <Box width="100%" border="1px solid green">
                 <h1>Details</h1>
-                {Object.keys(restockReport[record]).map((key: string) => {
-                    const data = restockReport[record][key];
+                {Object.keys(records[record]).map((key: string) => {
+                    //@ts-ignore
+                    const data = records[record][key];
                     const title = key;
-                    return <DetailRow title={title} data={data} />;
+                    return <DetailRow title={title} data={data} key={key} />;
                 })}
             </Box>
             <Box>

@@ -12,7 +12,7 @@ const adminDataStoreContext = createContext<AdminDataStoreContext | undefined>(u
 export function useInitializeAdminDataStore() {
     const fixedBinStore = useFixedBinStore();
     const { getInventory, inventorySummary } = useInventoryStore();
-    const restockStore = useRestockStore();
+    const { records: restockStore } = useRestockStore();
     let localDB: MutableRefObject<LocalDatabase> = useRef<LocalDatabase>(new LocalDatabase());
     /*
      * - if firebase details are fetched, check if lastUpdated matches localDB

@@ -1,11 +1,11 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 export const Container = styled.div({});
 
 export const ButtonPanelWrapper = styled.div(props => ({
     height: '100%',
-    width: '40px',
-    background: props.theme.colors.black,
+    width: '100px',
+    background: props.theme.colors.green,
     display: 'flex',
     flex: 1,
     flexDirection: 'column',

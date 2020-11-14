@@ -1,6 +1,7 @@
 import styled from 'styled-components';
+import { space, SpaceProps } from 'styled-system';
 
-export interface Props {
+export interface Props extends SpaceProps {
     color?: string;
     size?: string;
     bold?: boolean;
@@ -19,7 +20,7 @@ const AppText = styled.p<Props>(props => {
         marginBlockStart: '0px',
         marginBlockEnd: '0px',
     };
-});
+}, space);
 
 function getFontWeight(props: Props) {
     if (props.bold) {
