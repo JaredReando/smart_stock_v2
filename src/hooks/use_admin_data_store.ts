@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useRef, MutableRefObject } from 'react';
-import { useFixedBinStore, useRestockStore } from './index';
+import { useFixedBinStore } from './index';
 import useInventoryStore from './use_inventory_store';
 import { AdminDataStoreContext } from '../constants/types';
 import { LocalDatabase } from '../helpers/local_database';
@@ -12,7 +12,6 @@ const adminDataStoreContext = createContext<AdminDataStoreContext | undefined>(u
 export function useInitializeAdminDataStore() {
     const fixedBinStore = useFixedBinStore();
     const { getInventory, inventorySummary } = useInventoryStore();
-    const { records: restockStore } = useRestockStore();
     let localDB: MutableRefObject<LocalDatabase> = useRef<LocalDatabase>(new LocalDatabase());
     /*
      * - if firebase details are fetched, check if lastUpdated matches localDB
@@ -47,9 +46,7 @@ export function useInitializeAdminDataStore() {
         if (!!inventorySummary) {
             localDB.current.summary
                 .then((summary: any) => {
-                    console.log('db get SUMMARY request: ', summary);
                     const comparison = compareLocalAndFirebaseDBs(summary, inventorySummary);
-                    console.log('comparison: ', comparison);
                     if (!comparison) {
                         rebootLocalDB();
                     }
@@ -68,7 +65,6 @@ export function useInitializeAdminDataStore() {
         fixedBinStore,
         inventorySummary,
         inventoryStore: getInventory,
-        restockStore,
         localDB: localDB.current,
     };
 }

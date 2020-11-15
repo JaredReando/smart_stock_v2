@@ -3,7 +3,7 @@ import { useFirebase } from './use_firebase_context';
 import { RestockRecord, RestockSummary } from '../constants/types';
 
 const RESTOCK_REPORT_PATH = 'Companies/Nuna/restock/records';
-const RESTOCK_SUMMARY_PATAH = 'Companies/Nuna/restock/summary';
+const RESTOCK_SUMMARY_PATH = 'Companies/Nuna/restock/summary';
 
 const useRestockStore = (): { records: RestockRecord[]; summary: RestockSummary } => {
     const firebase = useFirebase();
@@ -12,17 +12,16 @@ const useRestockStore = (): { records: RestockRecord[]; summary: RestockSummary 
     useEffect(() => {
         firebase.db.ref(RESTOCK_REPORT_PATH).on('value', (snap: any) => {
             const records = snap.val();
-            console.log('restock: ', records);
             setRestockReport(records);
         });
-        firebase.db.ref(RESTOCK_SUMMARY_PATAH).on('value', (snap: any) => {
+        firebase.db.ref(RESTOCK_SUMMARY_PATH).on('value', (snap: any) => {
             const summary = snap.val();
-            console.log('summary: ', summary);
             setRestockSummary(summary);
         });
 
         return () => {
             firebase.db.ref(RESTOCK_REPORT_PATH).off();
+            firebase.db.ref(RESTOCK_SUMMARY_PATH).off();
         };
     }, [firebase.db]);
 

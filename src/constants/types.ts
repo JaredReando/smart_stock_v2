@@ -61,6 +61,11 @@ export interface RestockSummary {
     outOfStock: string[];
 }
 
+export interface StockLevels {
+    total: number;
+    empty: string[];
+    filled: string[];
+}
 export interface RestockRecord {
     status: 'pending' | 'complete' | 'missing';
     sourceBin: string;
@@ -69,7 +74,7 @@ export interface RestockRecord {
     description: string;
     available: number;
     storageUnit: string;
-    priority: 'low' | 'normal' | 'high';
+    stockLevels: StockLevels;
     id: string;
 }
 

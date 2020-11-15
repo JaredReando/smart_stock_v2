@@ -5,9 +5,14 @@ import { Subheader } from '../../component_library/styles/typography';
 import { Box, Column, Row } from '../../component_library/styles/layout';
 import RestockInfoDashboard from './restock_info_dashboard';
 import AppModal from '../../component_library/modals/app_modal';
-// import CreateRestockReportModal from './create_restock_report_modal';
 import { useAdminDataStore } from '../../hooks/use_admin_data_store';
-import { RestockRecord, StockSource } from '../../constants/types';
+import {
+    FixedBinRecord,
+    RestockRecord,
+    RowData,
+    StockLevels,
+    StockSource,
+} from '../../constants/types';
 import { useFirebase } from '../../hooks/use_firebase_context';
 import Button from '../../component_library/styles/buttons/button';
 import { ModalCard } from '../../component_library/modals/modal_card';
@@ -20,9 +25,28 @@ interface Props {
 const RestockReport: React.FC<Props> = () => {
     const [showModal, setShowModal] = useState(false);
     const [loading, setLoading] = useState(false);
-    const { restockStore: report, fixedBinStore, localDB } = useAdminDataStore();
+    const { records: report } = useRestockStore();
+    const { fixedBinStore, localDB } = useAdminDataStore();
     const firebase = useFirebase();
     // console.log('firebase report: ', report)
+
+    /**
+     * Derives the fixed bins assigned to all materials in fixedBinStore
+     * Returns an object with material strings as keys and string arrays containing assigned fixedBins
+     * @param fixedBins
+     */
+    const deriveAllottedBinsByMaterial = (
+        fixedBins: FixedBinRecord[],
+    ): { [key: string]: string[] } => {
+        return fixedBins.reduce((acc: any, record) => {
+            if (record.item in acc) {
+                acc[record.item] = [...acc[record.item], record.bin];
+            } else {
+                acc[record.item] = [record.bin];
+            }
+            return acc;
+        }, {});
+    };
 
     /**
      * Loops through fixed bins to find unique material names
@@ -33,24 +57,92 @@ const RestockReport: React.FC<Props> = () => {
      * @param fixedBins
      * */
     const restockMaterialsNeeded = (binsToRestock: string[], fixedBins: any[]) => {
-        const materialsNeeded = binsToRestock.reduce(
-            (acc: { [key: string]: string[] }, bin: any) => {
-                const match = fixedBins.find(record => record.bin === bin);
-                const material = match!.item;
-                const destinationBin = match!.bin;
-                if (material in acc) {
-                    acc[material] = [...acc[material], destinationBin];
-                } else {
-                    acc[material] = [destinationBin];
-                }
-                return acc;
-            },
-            {},
-        );
-        return materialsNeeded;
+        return binsToRestock.reduce((acc: { [key: string]: string[] }, bin: any) => {
+            const match = fixedBins.find(record => record.bin === bin);
+            const material = match!.item;
+            const destinationBin = match!.bin;
+            if (material in acc) {
+                acc[material] = [...acc[material], destinationBin];
+            } else {
+                acc[material] = [destinationBin];
+            }
+            return acc;
+        }, {});
     };
 
-    const createRestockObjects = (stockSources: StockSource[]): RestockRecord[] => {
+    /**
+     * Derives empty bins and filled bins relative to fixed bin material assignment'
+     * Returns object with material string keys and arrays containing filled and empty bin names
+     * @param allottedBinsByMaterial
+     * @param binsToRestock
+     */
+    const getFilledToEmptyMaterials = (
+        allottedBinsByMaterial: { [key: string]: string[] },
+        binsToRestock: string[],
+    ) => {
+        const prioritizedMaterials: {
+            [key: string]: {
+                total: number;
+                filled: string[];
+                empty: string[];
+            };
+        } = {};
+        for (let material in allottedBinsByMaterial) {
+            prioritizedMaterials[material] = {
+                total: allottedBinsByMaterial[material].length,
+                filled: [],
+                empty: [],
+            };
+            allottedBinsByMaterial[material].forEach(binName => {
+                const empty = binsToRestock.includes(binName);
+                if (empty) {
+                    prioritizedMaterials[material].empty = [
+                        ...prioritizedMaterials[material].empty,
+                        binName,
+                    ];
+                } else {
+                    prioritizedMaterials[material].filled = [
+                        ...prioritizedMaterials[material].filled,
+                        binName,
+                    ];
+                }
+            });
+        }
+        return prioritizedMaterials;
+    };
+
+    /**
+     * Assigns a restocking priority status to materials
+     * If no stock exists in fixed bin, material assigned 'high' status
+     * Otherwise, assigned 'normal' status
+     * //TODO: determine better thresholds for assigning statuses
+     * @param prioritizedMaterials
+     */
+    const determinedMaterialRestockStatus = (prioritizedMaterials: {
+        [key: string]: {
+            total: number;
+            filled: string[];
+            empty: string[];
+        };
+    }) => {
+        const materialPriorities: { [key: string]: 'low' | 'normal' | 'high' } = {};
+        for (let material in prioritizedMaterials) {
+            const status = prioritizedMaterials[material];
+            if (status.empty.length === status.total) {
+                materialPriorities[material] = 'high';
+            } else if (status.empty.length > status.filled.length) {
+                materialPriorities[material] = 'low';
+            } else {
+                materialPriorities[material] = 'normal';
+            }
+        }
+        return materialPriorities;
+    };
+
+    const createRestockObjects = (
+        stockSources: StockSource[],
+        materialStockLevels: { [key: string]: StockLevels },
+    ): RestockRecord[] => {
         const restockRecords = stockSources.map((stockSource: StockSource) => {
             const restockRecord: RestockRecord = {
                 status: 'pending',
@@ -60,7 +152,7 @@ const RestockReport: React.FC<Props> = () => {
                 description: stockSource.materialDescription,
                 available: stockSource.available,
                 storageUnit: stockSource.storageUnit,
-                priority: 'low',
+                stockLevels: materialStockLevels[stockSource.material],
                 id: stockSource.quant,
             };
             return restockRecord;
@@ -68,15 +160,21 @@ const RestockReport: React.FC<Props> = () => {
         console.log('restock object tester: ', restockRecords);
         return restockRecords;
     };
+
     const createRestockReport = async () => {
         const fixedBinQueryParams = fixedBinStore.fixedBins.map(record => {
             return { storageBin: record.bin };
         });
         const binsToRestock = await localDB.getBinsToRestock(fixedBinQueryParams);
         const materialsNeeded = restockMaterialsNeeded(binsToRestock, fixedBinStore.fixedBins);
+        const allottedBinsByMaterial = deriveAllottedBinsByMaterial(fixedBinStore.fixedBins);
+        const materialStockLevels = getFilledToEmptyMaterials(
+            allottedBinsByMaterial,
+            binsToRestock,
+        );
         const foundInOverstock = await localDB.findInOverstock(materialsNeeded); //array of inventory records + destination bin property
         console.log('out of stock: ', foundInOverstock.outOfStock);
-        return createRestockObjects(foundInOverstock.stockSources);
+        return createRestockObjects(foundInOverstock.stockSources, materialStockLevels);
     };
 
     const headerItems: {
@@ -161,7 +259,10 @@ const RestockReport: React.FC<Props> = () => {
                     <RestockInfoDashboard handleClick={() => setShowModal(s => !s)} />
                 </AdminHeader>
                 <Box flexGrow={1} overflow="hidden">
-                    <DataTable columnHeaders={headerItems} rowData={report} />
+                    <DataTable
+                        columnHeaders={headerItems}
+                        rowData={(report as unknown) as RowData[]}
+                    />
                 </Box>
             </Column>
         </>
