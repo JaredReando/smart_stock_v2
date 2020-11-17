@@ -88,6 +88,7 @@ export interface AdminDataStoreContext {
     fixedBinStore: FixedBinStore;
     inventoryStore: any;
     restockStore: any[];
+    overwriteDBs: (inventory: InventoryRecord[], summary: InventorySummary) => void;
     localDB: any;
 }
 

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { PasswordForgetLink } from '../PasswordForget';
+// import { PasswordForgetLink } from '../PasswordForget';
 
-import { Container, BigBold, Form, ErrorMessage, Input, Button } from './sign_in.styles';
+import { Container, BigBold, Form, Input, Button } from './sign_in.styles';
 import { setAuthUser } from '../../context/mutators/auth.mutators';
 import { useFirebase } from '../../hooks/use_firebase_context';
 

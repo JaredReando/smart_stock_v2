@@ -1,18 +1,84 @@
 import { createContext, useContext, useEffect, useRef, MutableRefObject } from 'react';
 import { useFixedBinStore } from './index';
 import useInventoryStore from './use_inventory_store';
-import { AdminDataStoreContext } from '../constants/types';
+import { AdminDataStoreContext, InventoryRecord, InventorySummary } from '../constants/types';
 import { LocalDatabase } from '../helpers/local_database';
 import PouchDb from 'pouchdb-browser';
+import { useFirebase } from './use_firebase_context';
 PouchDb.plugin(require('pouchdb-find').default);
 
 const adminDataStoreContext = createContext<AdminDataStoreContext | undefined>(undefined);
 
+function compareLocalAndRemoteDBs<
+    T extends { lastUpdated: string },
+    U extends { lastUpdated: string }
+>(localSummary: T, firebaseSummary: U): 'local' | 'remote' | 'match' {
+    const local = new Date(localSummary.lastUpdated);
+    const remote = new Date(firebaseSummary.lastUpdated);
+    if (local > remote) {
+        return 'local';
+    }
+    if (local < remote) {
+        return 'remote';
+    }
+    return 'match';
+}
+
+const restoreLocalFromRemote = async (
+    localDBRef: LocalDatabase,
+    inventory: InventoryRecord[],
+    remoteSummary: InventorySummary,
+) => {
+    await restoreLocalDB(localDBRef, inventory, {
+        lastUpdated: remoteSummary.lastUpdated,
+        recordCount: remoteSummary.recordCount,
+    });
+    console.log('local restored from remote');
+};
+
+const updateRemoteFromLocal = async (localDBRef: LocalDatabase, firebaseRef: any) => {
+    const localInventory = await localDBRef.getLocalInventory();
+    const localSummary = await localDBRef.summary;
+    firebaseRef.overwriteInventoryReport(localInventory, {
+        lastUpdated: localSummary.lastUpdated,
+        recordCount: localSummary.recordCount,
+    });
+};
+
+const restoreLocalDB = async (
+    localDBRef: LocalDatabase,
+    inventory: InventoryRecord[],
+    summary: InventorySummary,
+) => {
+    const localDbInventory = inventory.map((r: any, i: number) => {
+        //remove PouchDB properties, if present
+        if ('_id' in r) {
+            delete r._id;
+        }
+        if ('_rev' in r) {
+            delete r._rev;
+        }
+        // pad single digits with leading '0' for sorting
+        const id = i < 10 ? '0' + i : i;
+        return { ...r, _id: 'invRec' + id };
+    });
+    try {
+        await localDBRef.rebootDB();
+        await localDBRef.bulkAddRecords(localDbInventory, {
+            ...summary,
+        });
+    } catch (e) {
+        console.log(e);
+    }
+    console.log('reboot method used');
+};
 //TODO: consider adding additional localDB for Airtable fixed bins to optimize memory performance
 export function useInitializeAdminDataStore() {
+    const firebase = useFirebase();
     const fixedBinStore = useFixedBinStore();
-    const { getInventory, inventorySummary } = useInventoryStore();
+    const { getInventory, inventorySummary: remoteSummary } = useInventoryStore();
     let localDB: MutableRefObject<LocalDatabase> = useRef<LocalDatabase>(new LocalDatabase());
+
     /*
      * - if firebase details are fetched, check if lastUpdated matches localDB
      * - if there is no change, don't update localDB
@@ -20,52 +86,52 @@ export function useInitializeAdminDataStore() {
      * - if a match for 'lastUpdated' doesn't exist in db, the db is corrupt/deleted/first-run
      * - in that case, delete and restore localDD with firebase clone
      */
-    function compareLocalAndFirebaseDBs<
-        T extends { lastUpdated: string },
-        U extends { lastUpdated: string }
-    >(localSummary: T, firebaseSummary: U): boolean {
-        return localSummary.lastUpdated === firebaseSummary.lastUpdated;
-    }
 
-    const rebootLocalDB = async () => {
-        const fetchedInventory = await getInventory();
-        const localInventoryDB = fetchedInventory.map((r: any, i: number) => {
-            // pad single digits with leading '0' for sorting
-            const id = i < 10 ? '0' + i : i;
-            return { ...r, _id: 'invRec' + id };
-        });
-        localDB.current.resetDB().then(() =>
-            localDB.current.bulkAddRecords(localInventoryDB, {
-                _id: 'summary',
-                ...inventorySummary,
-            }),
-        );
+    const overwriteLocalAndRemote = async (
+        inventory: InventoryRecord[],
+        inventorySummary: InventorySummary,
+    ) => {
+        await restoreLocalFromRemote(localDB.current, inventory, inventorySummary);
+        console.log('about to update firebase....');
+        await updateRemoteFromLocal(localDB.current, firebase);
     };
-
     useEffect(() => {
-        if (!!inventorySummary) {
-            localDB.current.summary
-                .then((summary: any) => {
-                    const comparison = compareLocalAndFirebaseDBs(summary, inventorySummary);
-                    if (!comparison) {
-                        rebootLocalDB();
-                    }
-                })
-                .catch((err: Error) => {
-                    if (err.message === 'missing') {
-                        rebootLocalDB();
-                    } else {
-                        console.error('Error refreshing getInventory: ', err);
-                    }
-                });
+        console.log('summary updated: ', remoteSummary);
+        const syncLocalAndRemoteDBs = async () => {
+            try {
+                const localSummary = await localDB.current.summary;
+                const mostUpToDate = compareLocalAndRemoteDBs(localSummary, remoteSummary!);
+                if (mostUpToDate === 'local') {
+                    await updateRemoteFromLocal(localDB.current, firebase);
+                }
+                if (mostUpToDate === 'remote') {
+                    const remoteInventory = await getInventory();
+                    await restoreLocalFromRemote(localDB.current, remoteInventory, remoteSummary!);
+                }
+                if (mostUpToDate === 'match') {
+                    console.log('mostUpToDate passed. No update required');
+                }
+            } catch (err) {
+                if (err.message === 'missing') {
+                    console.log('missing summary. Rebooting from admin');
+                    const remoteInventory = await getInventory();
+                    await restoreLocalFromRemote(localDB.current, remoteInventory, remoteSummary!);
+                } else {
+                    console.error('Error refreshing getInventory: ', err);
+                }
+            }
+        };
+        if (!!remoteSummary) {
+            syncLocalAndRemoteDBs().then(thing => console.log('sync complete: ', thing));
         }
-    }, [inventorySummary]);
+    }, [remoteSummary]);
 
     return {
         fixedBinStore,
-        inventorySummary,
+        inventorySummary: remoteSummary,
         inventoryStore: getInventory,
         localDB: localDB.current,
+        overwriteDBs: overwriteLocalAndRemote,
     };
 }
 

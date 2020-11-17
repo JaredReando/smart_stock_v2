@@ -13,13 +13,12 @@ import { Subheader } from '../../component_library/styles/typography';
 const AdminPage = () => {
     const [showModal, setShowModal] = React.useState(false);
     const inputRef = useRef<null | HTMLInputElement>(null);
-    const { inventorySummary } = useAdminDataStore();
-    const firebase = useFirebase();
+    const { inventorySummary, overwriteDBs } = useAdminDataStore();
 
-    if (inventorySummary) {
-        console.log('last updated: ', inventorySummary.lastUpdated);
-        console.log('moment in time: ', moment(inventorySummary.lastUpdated).calendar());
-    }
+    // if (inventorySummary) {
+    //     console.log('last updated: ', inventorySummary.lastUpdated);
+    //     console.log('moment in time: ', moment(inventorySummary.lastUpdated).calendar());
+    // }
     const handleClick = (e: any) => {
         e.preventDefault();
         inputRef.current!.click();
@@ -34,7 +33,11 @@ const AdminPage = () => {
             return;
         }
         const results = await convertInventoryCSVFile(file, requiredHeaders);
-        firebase.overwriteInventoryReport(results);
+        const newSummary = {
+            lastUpdated: new Date().toJSON(),
+            recordCount: results.length,
+        };
+        overwriteDBs(results, newSummary);
     };
 
     return (

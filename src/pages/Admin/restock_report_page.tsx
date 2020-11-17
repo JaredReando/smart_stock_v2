@@ -111,34 +111,6 @@ const RestockReport: React.FC<Props> = () => {
         return prioritizedMaterials;
     };
 
-    /**
-     * Assigns a restocking priority status to materials
-     * If no stock exists in fixed bin, material assigned 'high' status
-     * Otherwise, assigned 'normal' status
-     * //TODO: determine better thresholds for assigning statuses
-     * @param prioritizedMaterials
-     */
-    const determinedMaterialRestockStatus = (prioritizedMaterials: {
-        [key: string]: {
-            total: number;
-            filled: string[];
-            empty: string[];
-        };
-    }) => {
-        const materialPriorities: { [key: string]: 'low' | 'normal' | 'high' } = {};
-        for (let material in prioritizedMaterials) {
-            const status = prioritizedMaterials[material];
-            if (status.empty.length === status.total) {
-                materialPriorities[material] = 'high';
-            } else if (status.empty.length > status.filled.length) {
-                materialPriorities[material] = 'low';
-            } else {
-                materialPriorities[material] = 'normal';
-            }
-        }
-        return materialPriorities;
-    };
-
     const createRestockObjects = (
         stockSources: StockSource[],
         materialStockLevels: { [key: string]: StockLevels },
@@ -173,7 +145,6 @@ const RestockReport: React.FC<Props> = () => {
             binsToRestock,
         );
         const foundInOverstock = await localDB.findInOverstock(materialsNeeded); //array of inventory records + destination bin property
-        console.log('out of stock: ', foundInOverstock.outOfStock);
         return createRestockObjects(foundInOverstock.stockSources, materialStockLevels);
     };
 

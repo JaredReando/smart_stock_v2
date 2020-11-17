@@ -45,7 +45,7 @@ const Client: React.FC = () => {
         <Container>
             <Section>
                 <Row px={4} flexGrow={0} border="1px solid green" justifyContent="center">
-                    <img src="https://img.icons8.com/ios/50/000000/pallet.png" />
+                    <img alt="pallet-icon" src="https://img.icons8.com/ios/50/000000/pallet.png" />
                 </Row>
                 <Box ml={4} flexGrow={1}>
                     <Header>{sourceBin}</Header>

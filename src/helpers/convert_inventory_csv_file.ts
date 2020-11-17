@@ -28,23 +28,26 @@ function renameRawInventoryRecord(
         const objectValueAtKey = object[key];
         renamedRecordObject[convertKeyTo] = objectValueAtKey;
     });
+    if ('undefined' in renamedRecordObject) {
+        delete renamedRecordObject.undefined;
+    }
     return renamedRecordObject;
 }
 
 const inventoryNameConversion: { [key: string]: string } = {
-    'Storage Location': 'storageLocation',
-    'Storage Type': 'storageType',
-    'Storage Bin': 'storageBin',
-    Material: 'material',
-    'Material Description': 'materialDescription',
     'Available stock': 'available',
-    'Storage Unit': 'storageUnit',
-    Plant: 'plant',
-    'Pick Quantity': 'pickQuantity',
-    'Storage Unit Type': 'storageUnitType',
-    Quant: 'quant',
     Duration: 'duration',
     'GR Date': 'grDate',
+    Material: 'material',
+    'Material Description': 'materialDescription',
+    Plant: 'plant',
+    Quant: 'quant',
+    'Storage Bin': 'storageBin',
+    'Storage Location': 'storageLocation',
+    'Storage Type': 'storageType',
+    'Storage Unit': 'storageUnit',
+    'Storage Unit Type': 'storageUnitType',
+    'Pick quantity': 'pickQuantity',
 };
 
 export const convertInventoryCSVFile = (

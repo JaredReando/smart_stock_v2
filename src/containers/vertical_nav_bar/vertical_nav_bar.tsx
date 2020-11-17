@@ -53,9 +53,9 @@ const VerticalNavBar: FC = () => {
         }
     };
 
-    const handleSignOut = () => {
-        history.push('/');
-    };
+    // const handleSignOut = () => {
+    //     history.push('/');
+    // };
 
     return (
         <Container>

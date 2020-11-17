@@ -16,10 +16,17 @@ export class LocalDatabase {
         this.localDB = new PouchDb('smart-stock');
     }
 
-    async resetDB() {
+    private async destroyDB() {
         await this.localDB.destroy();
+    }
+
+    private restoreDB() {
         this.localDB = new PouchDb('smart-stock');
-        console.log('reset from Class');
+    }
+
+    async rebootDB() {
+        await this.destroyDB();
+        this.restoreDB();
     }
 
     get summary(): Promise<InventorySummary> {
@@ -46,6 +53,14 @@ export class LocalDatabase {
             });
     }
 
+    async getLocalInventory() {
+        const inventory = await this.localDB.allDocs({
+            include_docs: true,
+            startkey: 'invRec',
+            endkey: 'invRec\ufff0',
+        });
+        return inventory.rows.map((row: any) => row.doc);
+    }
     /**
      * Takes an array of formatted query objects
      * Each query object represents a fixed bin name
@@ -56,11 +71,6 @@ export class LocalDatabase {
      */
     //TODO: calculate totally empty fixed bin materials with this method
     async getBinsToRestock(fixedBinQueryParams: { storageBin: string }[]) {
-        await this.localDB.createIndex({
-            index: {
-                fields: ['storageBin'],
-            },
-        });
         const matches = await this.localDB.find({
             selector: {
                 material: { $eq: '<<empty>>' },
@@ -138,11 +148,18 @@ export class LocalDatabase {
     }
 
     async bulkAddRecords<T, U>(records: T[], summary: U) {
-        this.localDB.bulkDocs(records).then(() => {
-            this.localDB.put({
+        let info = await this.localDB.info();
+        console.log('info: ', info);
+        try {
+            await this.localDB.bulkDocs(records);
+            await this.localDB.put({
                 _id: 'summary',
                 ...summary,
             });
-        });
+        } catch (e) {
+            console.error('Error adding bulk records: ', e);
+        }
+        info = await this.localDB.info();
+        console.log('info after: ', info);
     }
 }
