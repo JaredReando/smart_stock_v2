@@ -4,6 +4,7 @@ import { Column } from '../../component_library/styles/layout';
 import AdminHeader from './admin_header';
 import { useAdminDataStore } from '../../hooks/use_admin_data_store';
 import Button from '../../component_library/styles/buttons/button';
+import { Subheader } from '../../component_library/styles/typography';
 
 interface Props {
     fixedBins: any;
@@ -31,15 +32,15 @@ const FixedBins: React.FC<Props> = () => {
     return (
         <Column height="100%">
             <AdminHeader title="Fixed Bins">
-                <Button variant="secondary">
-                    <a
-                        href="https://airtable.com/tblHImRJEKbWwvSZq/viw55Ghz3crFPCJOt?blocks=hide"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        Go to Airtable
-                    </a>
-                </Button>
+                <Subheader>Open Airtable in new page:</Subheader>
+                <a
+                    style={{ width: '100%' }}
+                    href="https://airtable.com/tblHImRJEKbWwvSZq/viw55Ghz3crFPCJOt?blocks=hide"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <Button variant="secondary">Go to Airtable</Button>
+                </a>
             </AdminHeader>
             <DataTable
                 columnHeaders={headerItems}
