@@ -74,7 +74,7 @@ const Button: React.FC<Props> = ({ loading, variant, children, ...rest }) => {
 
 Button.defaultProps = {
     borderRadius: '4px',
-    variant: 'secondary',
+    variant: 'primary',
 };
 
 export default Button;

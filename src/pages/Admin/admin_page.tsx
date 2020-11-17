@@ -14,11 +14,8 @@ const AdminPage = () => {
     const [showModal, setShowModal] = React.useState(false);
     const inputRef = useRef<null | HTMLInputElement>(null);
     const { inventorySummary, overwriteDBs } = useAdminDataStore();
+    const lastUpdated = inventorySummary ? moment(inventorySummary.lastUpdated).calendar() : '';
 
-    // if (inventorySummary) {
-    //     console.log('last updated: ', inventorySummary.lastUpdated);
-    //     console.log('moment in time: ', moment(inventorySummary.lastUpdated).calendar());
-    // }
     const handleClick = (e: any) => {
         e.preventDefault();
         inputRef.current!.click();
@@ -74,18 +71,11 @@ const AdminPage = () => {
             </AppModal>
             <Column height="100%">
                 <AdminHeader title="Admin Page">
-                    <Button onClick={() => setShowModal(true)}>Upload Inventory</Button>
+                    <Subheader>{`Last Updated: ${lastUpdated}`}</Subheader>
+                    <Button onClick={() => setShowModal(s => !s)}>Upload Inventory</Button>
                 </AdminHeader>
                 <h1>This is the admin dashboard!</h1>
                 <Column>
-                    <Row alignItems="center">
-                        <h3>Last updated: </h3>
-                        <p>
-                            {!!inventorySummary
-                                ? moment(inventorySummary.lastUpdated).calendar()
-                                : ''}
-                        </p>
-                    </Row>
                     <Row alignItems="flex-start">
                         <h3>Out of Stock: </h3>
                         <Column>
@@ -101,7 +91,6 @@ const AdminPage = () => {
                         </Column>
                     </Row>
                 </Column>
-                {/*<TestInventoryTable />*/}
             </Column>
         </>
     );
