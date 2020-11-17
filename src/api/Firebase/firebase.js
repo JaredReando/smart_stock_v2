@@ -33,14 +33,29 @@ class Firebase {
         this.auth.currentUser.updatePassword(password);
     };
 
-    overwriteRestockReport = restockReport => {
+    overwriteRestockReport = (restockReport, outOfStock) => {
         this.db
             .ref('Companies')
             .child('Nuna')
             .child('restock')
             .child('records')
             .set(restockReport);
-        this.updateRestockSummary(restockReport.length);
+        this.updateRestockSummary(restockReport.length, outOfStock);
+    };
+
+    updateRestockSummary = (recordCount, outOfStock) => {
+        const summary = {
+            lastUpdated: new Date().toJSON(),
+            recordCount,
+            outOfStock,
+        };
+        this.db
+            .ref('Companies')
+            .child('Nuna')
+            .child('restock')
+            .child('summary')
+            .set(summary);
+        console.log('restock summary updated: ', summary);
     };
 
     overwriteInventoryReport = (inventoryReport, inventorySummary) => {
@@ -62,20 +77,6 @@ class Firebase {
             .child('summary')
             .set(inventorySummary);
         console.log('firebase inventory summary updated: ', inventorySummary);
-    };
-
-    updateRestockSummary = recordCount => {
-        const summary = {
-            lastUpdated: new Date().toJSON(),
-            recordCount,
-        };
-        this.db
-            .ref('Companies')
-            .child('Nuna')
-            .child('restock')
-            .child('summary')
-            .set(summary);
-        console.log('restock summary updated: ', summary);
     };
 
     doUpdateRestockRecord = (index, updatedRecord) => {

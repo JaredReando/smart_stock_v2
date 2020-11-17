@@ -119,7 +119,6 @@ const createRestockObjects = (
         };
         return restockRecord;
     });
-    console.log('restock object tester: ', restockRecords);
     return restockRecords;
 };
 
@@ -172,6 +171,7 @@ const RestockReport: React.FC<Props> = () => {
     const { fixedBinStore, localDB } = useAdminDataStore();
     const firebase = useFirebase();
     const lastUpdated = summary?.lastUpdated ? moment(summary.lastUpdated).calendar() : '--';
+    console.log(summary?.outOfStock);
 
     const createRestockReport = async () => {
         const fixedBinQueryParams = fixedBinStore.fixedBins.map(record => {
@@ -185,7 +185,10 @@ const RestockReport: React.FC<Props> = () => {
             binsToRestock,
         );
         const foundInOverstock = await localDB.findInOverstock(materialsNeeded); //array of inventory records + destination bin property
-        return createRestockObjects(foundInOverstock.stockSources, materialStockLevels);
+        return {
+            records: createRestockObjects(foundInOverstock.stockSources, materialStockLevels),
+            outOfStock: foundInOverstock.outOfStock,
+        };
     };
 
     return (
@@ -210,8 +213,8 @@ const RestockReport: React.FC<Props> = () => {
                             variant="primary"
                             onClick={async () => {
                                 setLoading(true);
-                                const restockReport = await createRestockReport();
-                                firebase.overwriteRestockReport(restockReport);
+                                const { records, outOfStock } = await createRestockReport();
+                                firebase.overwriteRestockReport(records, outOfStock);
                                 setShowModal(false);
                                 setLoading(false);
                             }}
@@ -227,7 +230,9 @@ const RestockReport: React.FC<Props> = () => {
             <Column height="100%">
                 <AdminHeader title="Restock Report">
                     <Subheader>{`Last Updated: ${lastUpdated}`}</Subheader>
-                    <Button onClick={() => setShowModal(s => !s)}>Reset</Button>
+                    <Button mt={3} onClick={() => setShowModal(s => !s)}>
+                        Configure New Report
+                    </Button>
                 </AdminHeader>
                 <Box flexGrow={1} overflow="hidden">
                     <DataTable

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, InnerLeftContainer, InnerRightContainer } from './admin_header.styles';
-import { Header, Subheader } from '../../component_library/styles/typography';
+import { Header } from '../../component_library/styles/typography';
 
 interface Props {
     title: string;

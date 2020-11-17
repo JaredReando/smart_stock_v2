@@ -2,7 +2,6 @@ import React, { useRef } from 'react';
 import AdminHeader from './admin_header';
 import { Column, Row } from '../../component_library/styles/layout';
 import { Button } from '../../component_library/styles/buttons';
-import { useFirebase } from '../../hooks/use_firebase_context';
 import moment from 'moment';
 import { convertInventoryCSVFile, requiredHeaders } from '../../helpers/convert_inventory_csv_file';
 import { useAdminDataStore } from '../../hooks/use_admin_data_store';
@@ -43,13 +42,13 @@ const AdminPage = () => {
                 <ModalCard headingText="Confirm Upload">
                     <Column>
                         <Subheader mb={4}>
-                            Uploading a new inventory report will immediately update application
-                            data for all connected users.
+                            Uploading a new inventory report will update the application with the
+                            most recent available data.
                         </Subheader>
                         <Subheader mb={4}>
-                            Please ensure all current activity is finished before proceeding.
+                            Active restock reports will not be affected by a new upload.
                         </Subheader>
-                        <Subheader>Do you wish to select a file and update?</Subheader>
+                        <Subheader>Do you wish to select a file and update inventory?</Subheader>
                     </Column>
                     <Row justifyContent="flex-end" mt={6}>
                         <Button variant="secondary" mr={4} onClick={() => setShowModal(false)}>
@@ -70,9 +69,11 @@ const AdminPage = () => {
                 </ModalCard>
             </AppModal>
             <Column height="100%">
-                <AdminHeader title="Admin Page">
+                <AdminHeader title="Inventory">
                     <Subheader>{`Last Updated: ${lastUpdated}`}</Subheader>
-                    <Button onClick={() => setShowModal(s => !s)}>Upload Inventory</Button>
+                    <Button mt={3} onClick={() => setShowModal(s => !s)}>
+                        Upload New Inventory File
+                    </Button>
                 </AdminHeader>
                 <h1>This is the admin dashboard!</h1>
                 <Column>

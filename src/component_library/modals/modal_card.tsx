@@ -10,6 +10,7 @@ const Container = styled.div`
     box-shadow: ${props => props.theme.shadows.large};
     background: white;
     justify-content: space-between;
+    overflow: hidden;
 `;
 
 interface ModalCardProps {

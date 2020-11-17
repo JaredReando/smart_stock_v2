@@ -34,12 +34,13 @@ const FixedBins: React.FC<Props> = () => {
             <AdminHeader title="Fixed Bins">
                 <Subheader>Open Airtable in new page:</Subheader>
                 <a
-                    style={{ width: '100%' }}
                     href="https://airtable.com/tblHImRJEKbWwvSZq/viw55Ghz3crFPCJOt?blocks=hide"
                     target="_blank"
                     rel="noopener noreferrer"
                 >
-                    <Button variant="secondary">Go to Airtable</Button>
+                    <Button mt={3} width={'100%'}>
+                        Go to Airtable
+                    </Button>
                 </a>
             </AdminHeader>
             <DataTable

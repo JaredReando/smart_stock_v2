@@ -33,7 +33,6 @@ const restoreLocalFromRemote = async (
         lastUpdated: remoteSummary.lastUpdated,
         recordCount: remoteSummary.recordCount,
     });
-    console.log('local restored from remote');
 };
 
 const updateRemoteFromLocal = async (localDBRef: LocalDatabase, firebaseRef: any) => {
@@ -68,9 +67,8 @@ const restoreLocalDB = async (
             ...summary,
         });
     } catch (e) {
-        console.log(e);
+        console.error('Error restoring local database: ', e);
     }
-    console.log('reboot method used');
 };
 //TODO: consider adding additional localDB for Airtable fixed bins to optimize memory performance
 export function useInitializeAdminDataStore() {
@@ -92,11 +90,9 @@ export function useInitializeAdminDataStore() {
         inventorySummary: InventorySummary,
     ) => {
         await restoreLocalFromRemote(localDB.current, inventory, inventorySummary);
-        console.log('about to update firebase....');
         await updateRemoteFromLocal(localDB.current, firebase);
     };
     useEffect(() => {
-        console.log('summary updated: ', remoteSummary);
         const syncLocalAndRemoteDBs = async () => {
             try {
                 const localSummary = await localDB.current.summary;
@@ -122,9 +118,9 @@ export function useInitializeAdminDataStore() {
             }
         };
         if (!!remoteSummary) {
-            syncLocalAndRemoteDBs().then(thing => console.log('sync complete: ', thing));
+            syncLocalAndRemoteDBs();
         }
-    }, [remoteSummary]);
+    }, [remoteSummary, firebase, getInventory]);
 
     return {
         fixedBinStore,
