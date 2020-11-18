@@ -1,52 +1,32 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
+import { AppText } from '../../component_library/styles/typography';
 
-export const boxShadow = () => {
-    return {
-        transition: 'box-shadow .15s ease-in',
-        boxShadow: '0 2px 4px 0 rgba(63,103,139,0.50)',
-        ':hover': {
-            boxShadow: '0 0 8px 0 rgba(63,103,139,0.10), 0 8px 8px 0 rgba(63,103,139,0.25)',
-        },
-        ':active': {
-            boxShadow: 'none',
-        },
-    };
-};
-
-export const disableButton = (props: any) => {
-    return {
-        opacity: props.disabled ? 0.5 : 1,
-        cursor: props.disabled ? 'not-allowed' : 'pointer',
-    };
-};
-
-export const Container = styled.div({
+export const Container = styled.div(({ theme }) => ({
     height: '100vh',
     width: '100vw',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-});
+    background: theme.colors.primary,
+}));
 
-export const BigBold = styled.p<{ fontSize: any }>`
+export const BigBold = styled(AppText)<{ fontSize: any }>`
     font-weight: bold;
-    ${props =>
-        css`
-            font-size: ${props.fontSize};
-        `}
+    font-size: ${props => props.fontSize};
 `;
-export const Form = styled.form({
-    background: 'white',
+
+export const Form = styled.form(({ theme }) => ({
+    padding: `${theme.space[6]}px ${theme.space[6]}px ${theme.space[3]}px ${theme.space[6]}px`,
+    background: theme.colors.white,
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: '10px',
+    borderRadius: '4px',
+    boxShadow: theme.shadows.large,
     width: '100%',
     maxWidth: '500px',
-    height: '500px',
-    border: '1px solid #dadce0',
-});
+}));
 
 export const ErrorMessage = styled.div({
     textAlign: 'center',
@@ -59,23 +39,9 @@ export const ErrorMessage = styled.div({
 });
 
 export const Input = styled.input({
-    width: '85%',
     border: '1px solid #dadce0',
-    borderRadius: '5px',
-    fontSize: '1em',
+    width: '100%',
     padding: '10px',
-    margin: '10px',
+    borderRadius: '4px',
+    fontSize: '1em',
 });
-
-export const Button = styled.button(
-    ({ theme }) => ({
-        width: '85%',
-        height: '40px',
-        borderRadius: '5px',
-        color: '#fff',
-        fontSize: '1em',
-        backgroundColor: theme.colors.green,
-    }),
-    boxShadow,
-    disableButton,
-);

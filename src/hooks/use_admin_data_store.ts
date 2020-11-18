@@ -9,6 +9,79 @@ PouchDb.plugin(require('pouchdb-find').default);
 
 const adminDataStoreContext = createContext<AdminDataStoreContext | undefined>(undefined);
 
+//TODO: consider adding additional localDB for Airtable fixed bins to optimize memory performance
+export function useInitializeAdminDataStore() {
+    const firebase = useFirebase();
+    const fixedBinStore = useFixedBinStore();
+    const { getInventory, inventorySummary: remoteSummary } = useInventoryStore();
+    let localDB: MutableRefObject<LocalDatabase> = useRef<LocalDatabase>(new LocalDatabase());
+
+    const overwriteLocalAndRemote = async (
+        inventory: InventoryRecord[],
+        inventorySummary: InventorySummary,
+    ) => {
+        await restoreLocalFromRemote(localDB.current, inventory, inventorySummary);
+        await updateRemoteFromLocal(localDB.current, firebase);
+    };
+
+    /*
+     * - if firebase details are fetched, check if lastUpdated matches localDB
+     * - if there is no change, don't update localDB
+     * - if there is a mismatch, delete and restore localDB with firebase clone
+     * - if a match for 'lastUpdated' doesn't exist in db, the db is corrupt/deleted/first-run
+     * - in that case, delete and restore localDD with firebase clone
+     */
+    useEffect(() => {
+        const syncLocalAndRemoteDBs = async () => {
+            try {
+                const localSummary = await localDB.current.summary;
+                const mostUpToDate = compareLocalAndRemoteDBs(localSummary, remoteSummary!);
+                if (mostUpToDate === 'local') {
+                    await updateRemoteFromLocal(localDB.current, firebase);
+                }
+                if (mostUpToDate === 'remote') {
+                    const remoteInventory = await getInventory();
+                    await restoreLocalFromRemote(localDB.current, remoteInventory, remoteSummary!);
+                }
+                if (mostUpToDate === 'match') {
+                    console.log('mostUpToDate passed. No update required');
+                }
+            } catch (err) {
+                if (err.message === 'missing') {
+                    console.log('missing summary. Rebooting from admin');
+                    const remoteInventory = await getInventory();
+                    await restoreLocalFromRemote(localDB.current, remoteInventory, remoteSummary!);
+                } else {
+                    console.error('Error refreshing getInventory: ', err);
+                }
+            }
+        };
+        if (!!remoteSummary) {
+            syncLocalAndRemoteDBs();
+        }
+    }, [remoteSummary, firebase, getInventory]);
+
+    return {
+        fixedBinStore,
+        inventorySummary: remoteSummary,
+        inventoryStore: getInventory,
+        localDB: localDB.current,
+        overwriteDBs: overwriteLocalAndRemote,
+    };
+}
+
+export function useAdminDataStore() {
+    const context = useContext(adminDataStoreContext);
+
+    if (!context) {
+        throw new Error('Unable to useAdminDataStore without parent <AdminDataStoreProvider />');
+    }
+
+    return context;
+}
+
+export const AdminDataStoreProvider = adminDataStoreContext.Provider;
+
 function compareLocalAndRemoteDBs<
     T extends { lastUpdated: string },
     U extends { lastUpdated: string }
@@ -70,75 +143,3 @@ const restoreLocalDB = async (
         console.error('Error restoring local database: ', e);
     }
 };
-//TODO: consider adding additional localDB for Airtable fixed bins to optimize memory performance
-export function useInitializeAdminDataStore() {
-    const firebase = useFirebase();
-    const fixedBinStore = useFixedBinStore();
-    const { getInventory, inventorySummary: remoteSummary } = useInventoryStore();
-    let localDB: MutableRefObject<LocalDatabase> = useRef<LocalDatabase>(new LocalDatabase());
-
-    /*
-     * - if firebase details are fetched, check if lastUpdated matches localDB
-     * - if there is no change, don't update localDB
-     * - if there is a mismatch, delete and restore localDB with firebase clone
-     * - if a match for 'lastUpdated' doesn't exist in db, the db is corrupt/deleted/first-run
-     * - in that case, delete and restore localDD with firebase clone
-     */
-
-    const overwriteLocalAndRemote = async (
-        inventory: InventoryRecord[],
-        inventorySummary: InventorySummary,
-    ) => {
-        await restoreLocalFromRemote(localDB.current, inventory, inventorySummary);
-        await updateRemoteFromLocal(localDB.current, firebase);
-    };
-    useEffect(() => {
-        const syncLocalAndRemoteDBs = async () => {
-            try {
-                const localSummary = await localDB.current.summary;
-                const mostUpToDate = compareLocalAndRemoteDBs(localSummary, remoteSummary!);
-                if (mostUpToDate === 'local') {
-                    await updateRemoteFromLocal(localDB.current, firebase);
-                }
-                if (mostUpToDate === 'remote') {
-                    const remoteInventory = await getInventory();
-                    await restoreLocalFromRemote(localDB.current, remoteInventory, remoteSummary!);
-                }
-                if (mostUpToDate === 'match') {
-                    console.log('mostUpToDate passed. No update required');
-                }
-            } catch (err) {
-                if (err.message === 'missing') {
-                    console.log('missing summary. Rebooting from admin');
-                    const remoteInventory = await getInventory();
-                    await restoreLocalFromRemote(localDB.current, remoteInventory, remoteSummary!);
-                } else {
-                    console.error('Error refreshing getInventory: ', err);
-                }
-            }
-        };
-        if (!!remoteSummary) {
-            syncLocalAndRemoteDBs();
-        }
-    }, [remoteSummary, firebase, getInventory]);
-
-    return {
-        fixedBinStore,
-        inventorySummary: remoteSummary,
-        inventoryStore: getInventory,
-        localDB: localDB.current,
-        overwriteDBs: overwriteLocalAndRemote,
-    };
-}
-
-export function useAdminDataStore() {
-    const context = useContext(adminDataStoreContext);
-
-    if (!context) {
-        throw new Error('Unable to useAdminDataStore without parent <AdminDataStoreProvider />');
-    }
-
-    return context;
-}
-
-export const AdminDataStoreProvider = adminDataStoreContext.Provider;

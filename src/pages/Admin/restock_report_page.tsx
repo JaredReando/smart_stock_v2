@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import DataTable from '../../component_library/components/data_table/data_table';
 import AdminHeader from './admin_header';
-import { Subheader } from '../../component_library/styles/typography';
+import { AppText, Header, Subheader } from '../../component_library/styles/typography';
 import { Box, Column, Row } from '../../component_library/styles/layout';
 import AppModal from '../../component_library/modals/app_modal';
 import { useAdminDataStore } from '../../hooks/use_admin_data_store';
@@ -167,19 +167,58 @@ const headerItems: {
 const RestockReport: React.FC<Props> = () => {
     const [showModal, setShowModal] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [dashboardInfo, setDashboardInfo] = useState({
+        completed: 0,
+        pending: 0,
+        missing: 0,
+    });
     const { records: report, summary } = useRestockStore();
-    const { fixedBinStore, localDB } = useAdminDataStore();
+    const {
+        fixedBinStore: { getFixedBins },
+        localDB,
+    } = useAdminDataStore();
     const firebase = useFirebase();
     const lastUpdated = summary?.lastUpdated ? moment(summary.lastUpdated).calendar() : '--';
-    console.log(summary?.outOfStock);
+
+    useEffect(() => {
+        document.title = 'Restock';
+        return () => {
+            document.title = 'Smart Stock';
+        };
+    });
+    useEffect(() => {
+        if (report.length > 0) {
+            const updatedDashboardInfo = report.reduce(
+                (acc: any, record) => {
+                    if (record.status === 'pending') {
+                        acc.pending = acc.pending + 1;
+                    }
+                    if (record.status === 'complete') {
+                        acc.completed = acc.completed + 1;
+                    }
+                    if (record.status === 'missing') {
+                        acc.missing = acc.missing + 1;
+                    }
+                    return acc;
+                },
+                {
+                    completed: 0,
+                    pending: 0,
+                    missing: 0,
+                },
+            );
+            setDashboardInfo(updatedDashboardInfo);
+        }
+    }, [report]);
 
     const createRestockReport = async () => {
-        const fixedBinQueryParams = fixedBinStore.fixedBins.map(record => {
+        const fixedBins = getFixedBins();
+        const fixedBinQueryParams = fixedBins.map(record => {
             return { storageBin: record.bin };
         });
         const binsToRestock = await localDB.getBinsToRestock(fixedBinQueryParams);
-        const materialsNeeded = restockMaterialsNeeded(binsToRestock, fixedBinStore.fixedBins);
-        const allottedBinsByMaterial = deriveAllottedBinsByMaterial(fixedBinStore.fixedBins);
+        const materialsNeeded = restockMaterialsNeeded(binsToRestock, fixedBins);
+        const allottedBinsByMaterial = deriveAllottedBinsByMaterial(fixedBins);
         const materialStockLevels = getFilledToEmptyMaterials(
             allottedBinsByMaterial,
             binsToRestock,
@@ -215,8 +254,8 @@ const RestockReport: React.FC<Props> = () => {
                                 setLoading(true);
                                 const { records, outOfStock } = await createRestockReport();
                                 firebase.overwriteRestockReport(records, outOfStock);
-                                setShowModal(false);
                                 setLoading(false);
+                                setShowModal(false);
                             }}
                             disabled={loading}
                             loading={loading}
@@ -228,11 +267,19 @@ const RestockReport: React.FC<Props> = () => {
             </AppModal>
 
             <Column height="100%">
-                <AdminHeader title="Restock Report">
-                    <Subheader>{`Last Updated: ${lastUpdated}`}</Subheader>
-                    <Button mt={3} onClick={() => setShowModal(s => !s)}>
-                        Configure New Report
-                    </Button>
+                <AdminHeader>
+                    <Column>
+                        <Header>Restock Report</Header>
+                        <Subheader>{`Last Updated: ${lastUpdated}`}</Subheader>
+                        <Button mt={3} onClick={() => setShowModal(s => !s)}>
+                            Configure New Report
+                        </Button>
+                    </Column>
+                    <Column>
+                        <AppText>{`Pending: ${dashboardInfo.pending}`}</AppText>
+                        <AppText>{`Completed: ${dashboardInfo.completed}`}</AppText>
+                        <AppText>{`Missing: ${dashboardInfo.missing}`}</AppText>
+                    </Column>
                 </AdminHeader>
                 <Box flexGrow={1} overflow="hidden">
                     <DataTable

@@ -55,7 +55,7 @@ const Client: React.FC = () => {
                 <Row px={4} flexGrow={0} border="1px solid green" justifyContent="center">
                     <img
                         src="https://img.icons8.com/wired/64/000000/move-stock.png"
-                        alt="move stock"
+                        alt="move-stock"
                     />
                 </Row>
                 <Box ml={4} flexGrow={1}>

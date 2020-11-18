@@ -93,13 +93,13 @@ const buttons = {
 const fontSizes = ['.75rem', '1rem', '1.25rem', '1.8rem'];
 
 const text = {
-    headingFontFamily: "'Source Sans Pro', sans-serif",
-    bodyFontFamily: "'Source Sans Pro', sans-serif",
+    headingFontFamily: "'Roboto', sans-serif",
+    bodyFontFamily: "'Roboto', sans-serif",
     color: {
         light: colors.white,
         medium: colors.darkGrey,
         dark: colors.black,
-        tomato: colors.tomato,
+        red: colors.tomato,
         inherit: 'inherit',
     },
     size: {

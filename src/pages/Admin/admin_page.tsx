@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import AdminHeader from './admin_header';
 import { Column, Row } from '../../component_library/styles/layout';
 import { Button } from '../../component_library/styles/buttons';
@@ -7,7 +7,7 @@ import { convertInventoryCSVFile, requiredHeaders } from '../../helpers/convert_
 import { useAdminDataStore } from '../../hooks/use_admin_data_store';
 import AppModal from '../../component_library/modals/app_modal';
 import { ModalCard } from '../../component_library/modals/modal_card';
-import { Subheader } from '../../component_library/styles/typography';
+import { Header, Subheader } from '../../component_library/styles/typography';
 
 const AdminPage = () => {
     const [showModal, setShowModal] = React.useState(false);
@@ -35,6 +35,12 @@ const AdminPage = () => {
         };
         overwriteDBs(results, newSummary);
     };
+    useEffect(() => {
+        document.title = 'Admin';
+        return () => {
+            document.title = 'Smart Stock';
+        };
+    });
 
     return (
         <>
@@ -69,11 +75,14 @@ const AdminPage = () => {
                 </ModalCard>
             </AppModal>
             <Column height="100%">
-                <AdminHeader title="Inventory">
-                    <Subheader>{`Last Updated: ${lastUpdated}`}</Subheader>
-                    <Button mt={3} onClick={() => setShowModal(s => !s)}>
-                        Upload New Inventory File
-                    </Button>
+                <AdminHeader>
+                    <Column>
+                        <Header>Inventory</Header>
+                        <Subheader>{`Last Updated: ${lastUpdated}`}</Subheader>
+                        <Button mt={3} onClick={() => setShowModal(s => !s)}>
+                            Upload New Inventory File
+                        </Button>
+                    </Column>
                 </AdminHeader>
                 <h1>This is the admin dashboard!</h1>
                 <Column>

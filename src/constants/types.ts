@@ -81,6 +81,7 @@ export interface RestockRecord {
 export interface FixedBinStore {
     loading: boolean;
     fixedBins: FixedBinRecord[];
+    getFixedBins: () => FixedBinRecord[];
 }
 
 export interface AdminDataStoreContext {

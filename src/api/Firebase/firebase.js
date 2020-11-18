@@ -19,13 +19,13 @@ class Firebase {
     }
 
     //User account/authorization logic
-    doCreateUserWithEmailAndPassword = (email, password) =>
+    createUserWithEmailAndPassword = (email, password) =>
         this.auth.createUserWithEmailAndPassword(email, password);
 
-    doSignInWithEmailAndPassword = (email, password) =>
+    signInWithEmailAndPassword = (email, password) =>
         this.auth.signInWithEmailAndPassword(email, password);
 
-    doSignOut = () => this.auth.signOut();
+    signOut = () => this.auth.signOut();
 
     doPasswordReset = email => this.auth.sendPasswordResetEmail(email);
 
@@ -56,6 +56,15 @@ class Firebase {
             .child('summary')
             .set(summary);
         console.log('restock summary updated: ', summary);
+    };
+
+    overwriteFixedBins = fixedBins => {
+        this.db
+            .ref('Companies')
+            .child('Nuna')
+            .child('fixed_bins')
+            .child('records')
+            .set(fixedBins);
     };
 
     overwriteInventoryReport = (inventoryReport, inventorySummary) => {

@@ -1,20 +1,8 @@
 import React from 'react';
-import { Container, InnerLeftContainer, InnerRightContainer } from './admin_header.styles';
-import { Header } from '../../component_library/styles/typography';
+import { Container } from './admin_header.styles';
 
-interface Props {
-    title: string;
-}
-const AdminHeader: React.FC<Props> = ({ title, children }) => {
-    return (
-        <Container>
-            <InnerLeftContainer>
-                <Header>{title}</Header>
-                {children}
-            </InnerLeftContainer>
-            <InnerRightContainer></InnerRightContainer>
-        </Container>
-    );
+const AdminHeader: React.FC = ({ children }) => {
+    return <Container>{children}</Container>;
 };
 
 export default AdminHeader;
