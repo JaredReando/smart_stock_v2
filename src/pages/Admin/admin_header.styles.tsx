@@ -7,4 +7,5 @@ export const Container = styled(Row)(({ theme }) => ({
     minHeight: '120px',
     margin: '15px 0px',
     paddingLeft: theme.space[5],
+    paddingRight: theme.space[5],
 }));

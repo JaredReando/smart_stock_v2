@@ -17,6 +17,7 @@ import Button from '../../component_library/styles/buttons/button';
 import { ModalCard } from '../../component_library/modals/modal_card';
 import { useRestockStore } from '../../hooks';
 import moment from 'moment';
+import styled from 'styled-components';
 
 interface Props {
     report?: any;
@@ -167,6 +168,7 @@ const headerItems: {
 const RestockReport: React.FC<Props> = () => {
     const [showModal, setShowModal] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [outOfStock, setOutOfStock] = useState<any[] | null>(null);
     const [dashboardInfo, setDashboardInfo] = useState({
         completed: 0,
         pending: 0,
@@ -186,6 +188,11 @@ const RestockReport: React.FC<Props> = () => {
             document.title = 'Smart Stock';
         };
     });
+    useEffect(() => {
+        if (summary?.outOfStock) {
+            setOutOfStock(summary.outOfStock);
+        }
+    }, [summary]);
     useEffect(() => {
         if (report.length > 0) {
             const updatedDashboardInfo = report.reduce(
@@ -269,17 +276,50 @@ const RestockReport: React.FC<Props> = () => {
             <Column height="100%">
                 <AdminHeader>
                     <Column>
-                        <Header>Restock Report</Header>
-                        <Subheader>{`Last Updated: ${lastUpdated}`}</Subheader>
+                        <Header uppercase>Restock Report</Header>
+                        <AppText
+                            mt={3}
+                            bold
+                            uppercase
+                            size="medium"
+                        >{`Updated: ${lastUpdated}`}</AppText>
                         <Button mt={3} onClick={() => setShowModal(s => !s)}>
                             Configure New Report
                         </Button>
                     </Column>
-                    <Column>
-                        <AppText>{`Pending: ${dashboardInfo.pending}`}</AppText>
-                        <AppText>{`Completed: ${dashboardInfo.completed}`}</AppText>
-                        <AppText>{`Missing: ${dashboardInfo.missing}`}</AppText>
-                    </Column>
+                    <InfoBlub>
+                        <BlubHeader>
+                            <AppText bold uppercase color="light">
+                                Status
+                            </AppText>
+                        </BlubHeader>
+                        <Box margin={2}>
+                            <AppText uppercase bold>{`Pending: ${dashboardInfo.pending}`}</AppText>
+                            <AppText
+                                uppercase
+                                bold
+                            >{`Stocked: ${dashboardInfo.completed}`}</AppText>
+                            <AppText uppercase bold>{`Missing: ${dashboardInfo.missing}`}</AppText>
+                        </Box>
+                    </InfoBlub>
+                    <InfoBlub maxHeight="150px" overflow="auto">
+                        <BlubHeader>
+                            <AppText bold uppercase color="light">
+                                Out of Stock
+                            </AppText>
+                        </BlubHeader>
+                        {outOfStock && (
+                            <Box margin={2} overflow="scroll">
+                                {outOfStock.sort().map(out => {
+                                    return (
+                                        <AppText margin={2} size="small" bold key={out}>
+                                            {out}
+                                        </AppText>
+                                    );
+                                })}
+                            </Box>
+                        )}
+                    </InfoBlub>
                 </AdminHeader>
                 <Box flexGrow={1} overflow="hidden">
                     <DataTable
@@ -293,3 +333,20 @@ const RestockReport: React.FC<Props> = () => {
 };
 
 export default RestockReport;
+
+const InfoBlub = styled(Column)`
+    border-radius: 4px;
+    box-shadow: ${props => props.theme.shadows.large};
+    flex-grow: 1;
+    margin-left: 20px;
+    position: relative;
+    overflow: hidden;
+`;
+
+const BlubHeader = styled(Row)`
+    height: 30px;
+    flex-shrink: 0;
+    background: ${props => props.theme.colors.primary};
+    align-items: center;
+    padding: 5px;
+`;

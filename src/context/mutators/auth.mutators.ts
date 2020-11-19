@@ -2,7 +2,7 @@ import { mutate } from '../auth.context';
 import { AuthContext } from '../../constants/types';
 
 export const setAuthUser = (isValid: boolean) => {
-    sessionStorage.setItem('stockUser', isValid.toString());
+    console.log('auth changed: ', isValid);
     mutate((draft: AuthContext) => {
         draft.validUser = isValid;
     });

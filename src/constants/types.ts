@@ -89,7 +89,7 @@ export interface AdminDataStoreContext {
     fixedBinStore: FixedBinStore;
     inventoryStore: any;
     restockStore: any[];
-    overwriteDBs: (inventory: InventoryRecord[], summary: InventorySummary) => void;
+    overwriteDBs: (inventory: InventoryRecord[], summary: InventorySummary) => Promise<void>;
     localDB: any;
 }
 
@@ -145,4 +145,5 @@ export interface DetailProps {
 
 export interface NavTab extends Tab {
     path?: string;
+    onClick?: () => void;
 }

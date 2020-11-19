@@ -5,19 +5,23 @@ const shadows = {
 };
 
 const colors = {
-    primary: 'rgb(15, 157, 88)',
+    primary: '#34a853',
+    secondary: '#f2f2f2',
     paleGrey: '#f4f5f7',
     lightGrey: '#ECECEC',
     grey: '#C4C4C4',
     darkGrey: '#ABABAB',
-    green: 'rgb(15, 157, 88)',
-    lightgreen: 'lightgreen',
     black: '#2C2C2C',
-    blue: 'rgb(66, 133, 244)',
-    white: '#FBFBFB',
     tomato: '#DC3535',
     turquoise: '#25E5E5',
     transparent: 'rgba(0,0,0,0)',
+    //google colors:
+    blue: '#4285f4',
+    green: '#34a853',
+    snow: '#f2f2f2',
+    warning: '#fbbc05',
+    error: '#ea4335',
+    white: '#FBFBFB',
 };
 
 export const focus = {
@@ -32,14 +36,14 @@ export const focus = {
 const buttons = {
     primary: {
         color: colors.white,
-        backgroundColor: colors.green,
+        backgroundColor: colors.primary,
         border: 'none',
         boxShadow: shadows.small,
         ':hover': {
             boxShadow: shadows.large,
         },
         ':active': {
-            backgroundColor: colors.lightgreen,
+            backgroundColor: colors.darkGrey,
         },
         ':disabled': {
             cursor: 'not-allowed',
@@ -50,11 +54,11 @@ const buttons = {
         },
     },
     secondary: {
-        color: colors.green,
-        backgroundColor: colors.white,
+        color: colors.primary,
+        backgroundColor: colors.secondary,
         border: 'none',
         ':hover': {
-            backgroundColor: colors.white,
+            backgroundColor: colors.secondary,
         },
         ':active': {
             borderColor: colors.black,

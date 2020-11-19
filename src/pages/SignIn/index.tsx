@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { Container, BigBold, Form, Input, ErrorMessage } from './sign_in.styles';
+import { Container, BigBold, Form, Input } from './sign_in.styles';
 import { setAuthUser } from '../../context/mutators/auth.mutators';
 import { useFirebase } from '../../hooks/use_firebase_context';
 import { Box, Row, Column } from '../../component_library/styles/layout';
-import { AppText, Subheader } from '../../component_library/styles/typography';
+import { AppText } from '../../component_library/styles/typography';
 import { Button } from '../../component_library/styles/buttons';
 
 const SignInPage = (props: any) => {

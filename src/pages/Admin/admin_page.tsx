@@ -7,10 +7,11 @@ import { convertInventoryCSVFile, requiredHeaders } from '../../helpers/convert_
 import { useAdminDataStore } from '../../hooks/use_admin_data_store';
 import AppModal from '../../component_library/modals/app_modal';
 import { ModalCard } from '../../component_library/modals/modal_card';
-import { Header, Subheader } from '../../component_library/styles/typography';
+import { AppText, Header, Subheader } from '../../component_library/styles/typography';
 
 const AdminPage = () => {
     const [showModal, setShowModal] = React.useState(false);
+    const [loading, setLoading] = React.useState(false);
     const inputRef = useRef<null | HTMLInputElement>(null);
     const { inventorySummary, overwriteDBs } = useAdminDataStore();
     const lastUpdated = inventorySummary ? moment(inventorySummary.lastUpdated).calendar() : '';
@@ -28,12 +29,13 @@ const AdminPage = () => {
             alert('Invalid file type. Select only CSV files.');
             return;
         }
+        setLoading(true);
         const results = await convertInventoryCSVFile(file, requiredHeaders);
         const newSummary = {
             lastUpdated: new Date().toJSON(),
             recordCount: results.length,
         };
-        overwriteDBs(results, newSummary);
+        await overwriteDBs(results, newSummary);
     };
     useEffect(() => {
         document.title = 'Admin';
@@ -64,10 +66,16 @@ const AdminPage = () => {
                             <input
                                 ref={inputRef}
                                 type="file"
+                                accept=".csv"
                                 onChange={handleChange}
                                 style={{ display: 'none' }}
                             />
-                            <Button variant="primary" onClick={handleClick}>
+                            <Button
+                                variant="primary"
+                                onClick={handleClick}
+                                loading={loading}
+                                disabled={loading}
+                            >
                                 Select File
                             </Button>
                         </>
@@ -77,8 +85,13 @@ const AdminPage = () => {
             <Column height="100%">
                 <AdminHeader>
                     <Column>
-                        <Header>Inventory</Header>
-                        <Subheader>{`Last Updated: ${lastUpdated}`}</Subheader>
+                        <Header uppercase>Inventory</Header>
+                        <AppText
+                            mt={3}
+                            uppercase
+                            bold
+                            size="medium"
+                        >{`Updated: ${lastUpdated}`}</AppText>
                         <Button mt={3} onClick={() => setShowModal(s => !s)}>
                             Upload New Inventory File
                         </Button>

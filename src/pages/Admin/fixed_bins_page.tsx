@@ -4,7 +4,7 @@ import { Column } from '../../component_library/styles/layout';
 import AdminHeader from './admin_header';
 import { useAdminDataStore } from '../../hooks/use_admin_data_store';
 import Button from '../../component_library/styles/buttons/button';
-import { Header, Subheader } from '../../component_library/styles/typography';
+import { AppText, Header, Subheader } from '../../component_library/styles/typography';
 
 interface Props {
     fixedBins: any;
@@ -41,8 +41,10 @@ const FixedBins: React.FC<Props> = () => {
         <Column height="100%">
             <AdminHeader>
                 <Column>
-                    <Header>Fixed Bins</Header>
-                    <Subheader>Change fixed bins in Airtable:</Subheader>
+                    <Header uppercase>Fixed Bins</Header>
+                    <AppText mt={3} uppercase bold>
+                        Change fixed bins in Airtable:
+                    </AppText>
                     <a
                         href="https://airtable.com/tblHImRJEKbWwvSZq/viw55Ghz3crFPCJOt?blocks=hide"
                         target="_blank"

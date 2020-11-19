@@ -5,6 +5,7 @@ import { AdminDataStoreContext, InventoryRecord, InventorySummary } from '../con
 import { LocalDatabase } from '../helpers/local_database';
 import PouchDb from 'pouchdb-browser';
 import { useFirebase } from './use_firebase_context';
+import { setAuthUser } from '../context/mutators/auth.mutators';
 PouchDb.plugin(require('pouchdb-find').default);
 
 const adminDataStoreContext = createContext<AdminDataStoreContext | undefined>(undefined);
@@ -31,6 +32,12 @@ export function useInitializeAdminDataStore() {
      * - if a match for 'lastUpdated' doesn't exist in db, the db is corrupt/deleted/first-run
      * - in that case, delete and restore localDD with firebase clone
      */
+    useEffect(() => {
+        firebase.auth.onAuthStateChanged((authUser: any) => {
+            setAuthUser(authUser);
+        });
+    });
+
     useEffect(() => {
         const syncLocalAndRemoteDBs = async () => {
             try {

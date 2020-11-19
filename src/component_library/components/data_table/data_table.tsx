@@ -2,6 +2,8 @@ import React from 'react';
 import { Table, TableBody, TableHead, TableRow, TD, TH } from './data_table.styles';
 import uuid from 'uuid';
 import { ColumnHeader, RowData } from '../../../constants/types';
+import { Header } from '../../styles/typography';
+import { Column } from '../../styles/layout';
 
 interface Props {
     columnHeaders: ColumnHeader[];
@@ -33,7 +35,11 @@ const DataTable: React.FC<Props> = ({ columnHeaders, rowData, loading }) => {
     }
     return (
         <>
-            {loading && <h1 style={{ textAlign: 'center' }}>Loading</h1>}
+            {loading && (
+                <Column height="100%" width="100%" justifyContent="center" alignItems="center">
+                    <Header>Loading...</Header>
+                </Column>
+            )}
             {!loading && (
                 <Table>
                     <TableHead>
