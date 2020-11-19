@@ -97,7 +97,8 @@ class Firebase {
         this.db
             .ref('Companies')
             .child('Nuna')
-            .child('restock_report')
+            .child('restock')
+            .child('records')
             .child(index)
             .set(updatedRecord);
     };

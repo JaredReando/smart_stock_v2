@@ -6,6 +6,9 @@ export const Container = styled(Row)(({ theme }) => ({
     flexShrink: 0,
     minHeight: '120px',
     margin: '15px 0px',
-    paddingLeft: theme.space[5],
-    paddingRight: theme.space[5],
+    maxWidth: '1500px',
+    flexWrap: 'wrap',
+    paddingLeft: theme.space[3],
+    paddingRight: theme.space[3],
+    justifyContent: 'space-between',
 }));

@@ -1,9 +1,10 @@
 import React, { useCallback, useState } from 'react';
 import { Box, Row } from '../../component_library/styles/layout';
-import { Header } from '../../component_library';
+import { AppText, Header } from '../../component_library';
 import { Container, Section, DetailRow } from './restocking_page.styles';
 import { useRestockStore } from '../../hooks';
 import { useFirebase } from '../../hooks/use_firebase_context';
+import { Button } from '../../component_library/styles/buttons';
 
 const Client: React.FC = () => {
     const firebase = useFirebase();
@@ -38,25 +39,33 @@ const Client: React.FC = () => {
 
     const { destinationBin, sourceBin } = records[record];
     //@ts-ignore
-    const testRecord = { ...records[record], available: 999 };
+    const testRecord =
+        records[record].status === 'complete'
+            ? { ...records[record], status: 'pending' }
+            : { ...records[record], status: 'complete' };
     console.log(records[record]);
 
     return (
         <Container>
             <Section>
                 <Row px={4} flexGrow={0} border="1px solid green" justifyContent="center">
-                    <img alt="pallet-icon" src="https://img.icons8.com/ios/50/000000/pallet.png" />
+                    <AppText bold uppercase>
+                        Source
+                    </AppText>
                 </Row>
                 <Box ml={4} flexGrow={1}>
                     <Header>{sourceBin}</Header>
                 </Box>
+                <Row>
+                    <AppText size="large">{records[record].material}</AppText>
+                    <AppText size="large">{records[record].description}</AppText>
+                </Row>
             </Section>
             <Section>
                 <Row px={4} flexGrow={0} border="1px solid green" justifyContent="center">
-                    <img
-                        src="https://img.icons8.com/wired/64/000000/move-stock.png"
-                        alt="move-stock"
-                    />
+                    <AppText bold uppercase>
+                        Destination
+                    </AppText>
                 </Row>
                 <Box ml={4} flexGrow={1}>
                     <h1>{destinationBin}</h1>
@@ -64,20 +73,52 @@ const Client: React.FC = () => {
             </Section>
             <Box width="100%" border="1px solid green">
                 <h1>Details</h1>
-                {Object.keys(records[record]).map((key: string) => {
-                    //@ts-ignore
-                    const data = records[record][key];
-                    const title = key;
-                    return <DetailRow title={title} data={data} key={key} />;
-                })}
+                <Row>
+                    <AppText size="large">{records[record].status}</AppText>
+                </Row>
+                {/*{Object.keys(records[record]).map((key: string) => {*/}
+                {/*    //@ts-ignore*/}
+                {/*    const data = records[record][key];*/}
+                {/*    const title = key;*/}
+                {/*    return <DetailRow title={title} data={data} key={key} />;*/}
+                {/*})}*/}
             </Box>
             <Box>
                 <h1>Buttons</h1>
-                <button onClick={() => setRecord(getRecord('prev'))}>PREV</button>
-                <button onClick={() => firebase.doUpdateRestockRecord(record, testRecord)}>
-                    TEST
-                </button>
-                <button onClick={() => setRecord(getRecord('next'))}>NEXT</button>
+                <Button variant="secondary" onClick={() => setRecord(getRecord('prev'))}>
+                    <AppText uppercase bold>
+                        Prev
+                    </AppText>
+                </Button>
+                <Button
+                    style={{ background: 'tomato' }}
+                    onClick={() => {
+                        firebase.doUpdateRestockRecord(record, {
+                            ...testRecord,
+                            status: 'missing',
+                        });
+                        console.log('test record: ', testRecord);
+                    }}
+                >
+                    <AppText uppercase bold>
+                        Missing
+                    </AppText>
+                </Button>
+                <Button
+                    onClick={() => {
+                        firebase.doUpdateRestockRecord(record, testRecord);
+                        console.log('test record: ', testRecord);
+                    }}
+                >
+                    <AppText uppercase bold>
+                        Complete
+                    </AppText>
+                </Button>
+                <Button variant="secondary" onClick={() => setRecord(getRecord('next'))}>
+                    <AppText uppercase bold>
+                        NEXT
+                    </AppText>
+                </Button>
             </Box>
         </Container>
     );

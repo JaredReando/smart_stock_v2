@@ -275,7 +275,7 @@ const RestockReport: React.FC<Props> = () => {
 
             <Column height="100%">
                 <AdminHeader>
-                    <Column>
+                    <Column margin={3}>
                         <Header uppercase>Restock Report</Header>
                         <AppText
                             mt={3}
@@ -287,7 +287,7 @@ const RestockReport: React.FC<Props> = () => {
                             Configure New Report
                         </Button>
                     </Column>
-                    <InfoBlub>
+                    <InfoBlub margin={3}>
                         <BlubHeader>
                             <AppText bold uppercase color="light">
                                 Status
@@ -302,7 +302,7 @@ const RestockReport: React.FC<Props> = () => {
                             <AppText uppercase bold>{`Missing: ${dashboardInfo.missing}`}</AppText>
                         </Box>
                     </InfoBlub>
-                    <InfoBlub maxHeight="150px" overflow="auto">
+                    <InfoBlub maxHeight="150px" overflow="auto" margin={3}>
                         <BlubHeader>
                             <AppText bold uppercase color="light">
                                 Out of Stock
@@ -338,7 +338,7 @@ const InfoBlub = styled(Column)`
     border-radius: 4px;
     box-shadow: ${props => props.theme.shadows.large};
     flex-grow: 1;
-    margin-left: 20px;
+    flex-basis: 200px;
     position: relative;
     overflow: hidden;
 `;

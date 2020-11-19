@@ -40,7 +40,7 @@ const FixedBins: React.FC<Props> = () => {
     return (
         <Column height="100%">
             <AdminHeader>
-                <Column>
+                <Column margin={3}>
                     <Header uppercase>Fixed Bins</Header>
                     <AppText mt={3} uppercase bold>
                         Change fixed bins in Airtable:
