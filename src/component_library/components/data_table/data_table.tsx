@@ -2,8 +2,9 @@ import React from 'react';
 import { Table, TableBody, TableHead, TableRow, TD, TH } from './data_table.styles';
 import uuid from 'uuid';
 import { ColumnHeader, RowData } from '../../../constants/types';
-import { Header } from '../../styles/typography';
+import { AppText, Header } from '../../styles/typography';
 import { Column } from '../../styles/layout';
+import { theme } from '../../styles/theme';
 
 interface Props {
     columnHeaders: ColumnHeader[];
@@ -19,10 +20,25 @@ const DataTable: React.FC<Props> = ({ columnHeaders, rowData, loading }) => {
     function rowBuilder(headers: ColumnHeader[], row: RowData) {
         const rowCells: React.ReactElement[] = [];
         columnHeaders.forEach(header => {
-            if (`${header.key}` in row) {
+            //workaround for color status indicators:
+            if (header.render) {
+                const color =
+                    row.status === 'pending'
+                        ? theme.colors.warning
+                        : row.status === 'complete'
+                        ? theme.colors.green
+                        : theme.colors.error;
                 const detail = (
                     <TD key={header.key} width={setRatio(header.ratio)} minWidth={header.width}>
-                        {row[header.key].toString()}
+                        {header.render(color)}
+                    </TD>
+                );
+                rowCells.push(detail);
+            }
+            if (!header.render && `${header.key}` in row) {
+                const detail = (
+                    <TD key={header.key} width={setRatio(header.ratio)} minWidth={header.width}>
+                        <AppText size="medium">{row[header.key].toString()}</AppText>
                     </TD>
                 );
                 rowCells.push(detail);
@@ -51,7 +67,9 @@ const DataTable: React.FC<Props> = ({ columnHeaders, rowData, loading }) => {
                                     //overrides any width % setting while keeping proportions
                                     minWidth={header.width}
                                 >
-                                    {header.title}
+                                    <AppText bold uppercase>
+                                        {header.title}
+                                    </AppText>
                                 </TH>
                             ))}
                         </TableRow>

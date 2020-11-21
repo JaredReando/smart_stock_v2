@@ -4,7 +4,8 @@ import { Column } from '../../component_library/styles/layout';
 import AdminHeader from './admin_header';
 import { useAdminDataStore } from '../../hooks/use_admin_data_store';
 import Button from '../../component_library/styles/buttons/button';
-import { AppText, Header, Subheader } from '../../component_library/styles/typography';
+import { AppText, Header } from '../../component_library/styles/typography';
+import moment from 'moment';
 
 interface Props {
     fixedBins: any;
@@ -19,11 +20,16 @@ const headerItems = [
     {
         title: 'Product',
         key: 'item',
-        ratio: 2,
+        ratio: 1,
     },
     {
         title: 'Description',
         key: 'description',
+        ratio: 3,
+    },
+    {
+        title: 'Last Modified',
+        key: 'lastModified',
         ratio: 3,
     },
 ];
@@ -58,7 +64,10 @@ const FixedBins: React.FC<Props> = () => {
             </AdminHeader>
             <DataTable
                 columnHeaders={headerItems}
-                rowData={fixedBinStore.fixedBins}
+                rowData={fixedBinStore.fixedBins.map(bin => ({
+                    ...bin,
+                    lastModified: moment(bin.lastModified).calendar(),
+                }))}
                 loading={fixedBinStore.loading}
             />
         </Column>

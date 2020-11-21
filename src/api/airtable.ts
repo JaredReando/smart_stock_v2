@@ -35,6 +35,7 @@ function formatBinObjects(bins: AirtableBinRecord[]): FixedBinRecord[] {
             item: bin.fields.ITEM ?? '-',
             description: bin.fields.DESCRIPTION[0] ?? '--',
             bin: bin.fields.Bin,
+            lastModified: bin.fields.LAST_MODIFIED,
         };
     });
 }

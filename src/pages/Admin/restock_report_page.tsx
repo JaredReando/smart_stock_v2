@@ -18,6 +18,7 @@ import { ModalCard } from '../../component_library/modals/modal_card';
 import { useRestockStore } from '../../hooks';
 import moment from 'moment';
 import styled from 'styled-components';
+import { theme } from '../../component_library/styles/theme';
 
 interface Props {
     report?: any;
@@ -126,27 +127,29 @@ const createRestockObjects = (
 const headerItems: {
     title: string;
     key: keyof RestockRecord;
+    render?: (args?: any) => JSX.Element;
     ratio: number;
 }[] = [
     {
-        title: 'Status',
+        title: '',
         key: 'status',
-        ratio: 1,
+        render: (color: string) => <CircleIndicator color={color} />,
+        ratio: 0.3,
     },
     {
         title: 'Source',
         key: 'sourceBin',
-        ratio: 2,
+        ratio: 1,
     },
     {
         title: 'Destination',
         key: 'destinationBin',
-        ratio: 2,
+        ratio: 1,
     },
     {
         title: 'Material',
         key: 'material',
-        ratio: 3,
+        ratio: 2,
     },
     {
         title: 'Description',
@@ -293,14 +296,39 @@ const RestockReport: React.FC<Props> = () => {
                                 Status
                             </AppText>
                         </BlubHeader>
-                        <Box margin={2}>
-                            <AppText uppercase bold>{`Pending: ${dashboardInfo.pending}`}</AppText>
-                            <AppText
-                                uppercase
-                                bold
-                            >{`Stocked: ${dashboardInfo.completed}`}</AppText>
-                            <AppText uppercase bold>{`Missing: ${dashboardInfo.missing}`}</AppText>
-                        </Box>
+                        <Row margin={2}>
+                            <Column>
+                                <Row alignItems="center" border="1px solid black" height="50px">
+                                    <CircleIndicator color={theme.colors.green} />
+                                    <AppText uppercase bold>
+                                        Completed
+                                    </AppText>
+                                </Row>
+                                <AppText>{dashboardInfo.completed}</AppText>
+                            </Column>
+                            <Column alignItems="center">
+                                <Row mb={3} alignItems="flex-start">
+                                    <CircleIndicator color={theme.colors.warning} />
+                                    <Row justifyContent="center" mr={3}>
+                                        <AppText uppercase bold>
+                                            Pending
+                                        </AppText>
+                                    </Row>
+                                </Row>
+                                <AppText>{dashboardInfo.pending}</AppText>
+                            </Column>
+                            <Column alignItems="center">
+                                <Row mb={3} alignItems="center">
+                                    <CircleIndicator color={theme.colors.error} />
+                                    <Row justifyContent="center" mr={3}>
+                                        <AppText uppercase bold>
+                                            Missing
+                                        </AppText>
+                                    </Row>
+                                </Row>
+                                <AppText>{dashboardInfo.missing}</AppText>
+                            </Column>
+                        </Row>
                     </InfoBlub>
                     <InfoBlub maxHeight="150px" overflow="auto" margin={3}>
                         <BlubHeader>
@@ -349,4 +377,12 @@ const BlubHeader = styled(Row)`
     background: ${props => props.theme.colors.primary};
     align-items: center;
     padding: 5px;
+`;
+
+export const CircleIndicator = styled.div<{ color?: string }>`
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    border: 1px solid black;
+    background: ${props => props.color || props.theme.colors.primary};
 `;

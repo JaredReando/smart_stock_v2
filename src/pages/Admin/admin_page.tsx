@@ -8,7 +8,6 @@ import { useAdminDataStore } from '../../hooks/use_admin_data_store';
 import AppModal from '../../component_library/modals/app_modal';
 import { ModalCard } from '../../component_library/modals/modal_card';
 import { AppText, Header, Subheader } from '../../component_library/styles/typography';
-import App from '../../app';
 
 const AdminPage = () => {
     const [showModal, setShowModal] = React.useState(false);
@@ -99,21 +98,12 @@ const AdminPage = () => {
                     </Column>
                 </AdminHeader>
                 <Column mx={3}>
-                    <Row alignItems="flex-start" margin={3}>
+                    <Row alignItems="center" margin={3}>
                         <AppText bold uppercase size="large">
-                            Out of Stock:{' '}
+                            Inventory Search
                         </AppText>
-                        <Column>
-                            <p>Peeper Neat</p>
-                            <p>Peeper Neat</p>
-                            <p>Peeper Neat</p>
-                            <p>Peeper Neat</p>
-                            <p>Peeper Neat</p>
-                            <p>Peeper Neat</p>
-                            <p>Peeper Neat</p>
-                            <p>Peeper Neat</p>
-                            <p>Peeper Neat</p>
-                        </Column>
+                        <input type="text" />
+                        <Button>Submit</Button>
                     </Row>
                 </Column>
             </Column>

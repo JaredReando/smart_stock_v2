@@ -17,7 +17,7 @@ class Firebase {
         firebase.initializeApp(firebaseConfig);
         this.auth = firebase.auth();
         this.db = firebase.database();
-        this.user = null;
+        this.user = localStorage.getItem('authUser') ?? null;
     }
 
     //User account/authorization logic
@@ -25,11 +25,16 @@ class Firebase {
         this.auth.createUserWithEmailAndPassword(email, password);
 
     signInWithEmailAndPassword = (email, password) =>
-        this.auth.signInWithEmailAndPassword(email, password).then(r => (this.user = r));
+        this.auth.signInWithEmailAndPassword(email, password).then(r => {
+            console.log('sign in with email and pass: ', r);
+            this.user = r;
+            localStorage.setItem('authUser', r);
+        });
 
     signOut = () => {
         this.auth.signOut().then(r => console.log('firebase logout: ', r));
         setAuthUser(false);
+        localStorage.removeItem('authUser');
     };
 
     doPasswordReset = email => this.auth.sendPasswordResetEmail(email);

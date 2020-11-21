@@ -9,7 +9,7 @@ function comparer(otherArray: any) {
     return function(current: any) {
         return (
             otherArray.filter(function(other: any) {
-                return other.id === current.id && other.item === current.item;
+                return other.id === current.id && other.lastUpdated === current.lastUpdated;
             }).length === 0
         );
     };

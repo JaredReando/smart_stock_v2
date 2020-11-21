@@ -111,6 +111,7 @@ const text = {
         medium: '1rem',
         large: '1.25rem',
         xlarge: '1.8rem',
+        jumbo: '50px',
     },
 };
 

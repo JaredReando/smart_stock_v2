@@ -46,9 +46,6 @@ export const TH = styled.th<{ width: string; minWidth?: string }>(({ theme, widt
 }));
 
 export const TD = styled.td<{ width: string; minWidth?: string }>(({ width, theme, minWidth }) => ({
-    textAlign: 'left',
-    fontFamily: theme.text.bodyFontFamily,
-    fontSize: '.75em',
     width: width,
     minWidth,
 }));

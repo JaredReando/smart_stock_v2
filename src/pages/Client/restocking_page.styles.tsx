@@ -1,16 +1,8 @@
-import React from 'react';
 import styled from 'styled-components';
-import { Box, Column, Row } from '../../component_library/styles/layout';
-import { SubsectionHeader } from '../../component_library';
-import { DetailProps } from '../../constants/types';
-
-const flexCentered = {
-    justifyContent: 'space-evenly',
-    alignItems: 'center',
-};
+import { Column } from '../../component_library/styles/layout';
 
 export const Container = styled(Column)({
-    ...flexCentered,
+    alignItems: 'center',
     height: '100%',
     maxHeight: '900px',
     width: '100%',
@@ -20,22 +12,10 @@ export const Container = styled(Column)({
     touchAction: 'manipulation',
 });
 
-export const Section = styled(Row)({
+export const Section = styled(Column)({
     flexGrow: 0,
     border: '1px solid red',
     width: '100%',
-    ...flexCentered,
+    justifyContent: 'space-evenly',
+    alignItems: 'flex-start',
 });
-
-export const DetailRow: React.FC<DetailProps> = ({ title, data }) => {
-    return (
-        <Row alignItems="center" border="1px solid red">
-            <Box mx={4}>
-                <SubsectionHeader bold>{title}</SubsectionHeader>
-            </Box>
-            <Box>
-                <SubsectionHeader>{data}</SubsectionHeader>
-            </Box>
-        </Row>
-    );
-};

@@ -98,18 +98,20 @@ export interface ColumnHeader extends Partial<StringKeys> {
     key: string;
     ratio: number;
     width?: string;
+    render?: (args?: any) => JSX.Element;
 }
 
 export interface RowData extends StringKeys {}
 
 export interface StringKeys {
-    [key: string]: string | number;
+    [key: string]: any;
 }
 
 export interface FixedBinRecord extends StringKeys {
     id: string;
     bin: string;
     description: string;
+    lastModified: string;
     item: string;
 }
 
@@ -119,6 +121,7 @@ export interface AirtableBinRecord {
         Bin: string;
         DESCRIPTION: string[];
         ITEM: string;
+        LAST_MODIFIED: string;
     };
 }
 

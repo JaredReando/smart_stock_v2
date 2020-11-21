@@ -17,6 +17,8 @@ const initAuth = () => {
 };
 //when context is initialized, the user object is set according to token validation results.
 //presumably, if no user exists ('{}'), one can be set at login using a context.consumer mutator to update the statue 'user' object.
-const { Provider, Consumer, mutate } = createState<AuthContext>({ validUser: true });
+const { Provider, Consumer, mutate } = createState<AuthContext>({
+    validUser: !!localStorage.getItem('authUser'),
+});
 
 export { Provider, Consumer, mutate };
