@@ -49,17 +49,24 @@ const deriveAllottedBinsByMaterial = (fixedBins: FixedBinRecord[]): { [key: stri
  * @param fixedBins
  * */
 const restockMaterialsNeeded = (binsToRestock: string[], fixedBins: any[]) => {
-    return binsToRestock.reduce((acc: { [key: string]: string[] }, bin: any) => {
-        const match = fixedBins.find(record => record.bin === bin);
-        const material = match!.item;
-        const destinationBin = match!.bin;
-        if (material in acc) {
-            acc[material] = [...acc[material], destinationBin];
-        } else {
-            acc[material] = [destinationBin];
-        }
-        return acc;
-    }, {});
+    return binsToRestock.reduce(
+        (acc: { [key: string]: { bins: string[]; description: string } }, bin: any) => {
+            const match = fixedBins.find(record => record.bin === bin);
+            const material = match!.item;
+            const destinationBin = match!.bin;
+            const description = match!.description;
+            if (material in acc) {
+                acc[material].bins = [...acc[material].bins, destinationBin];
+            } else {
+                acc[material] = {
+                    bins: [destinationBin],
+                    description: description,
+                };
+            }
+            return acc;
+        },
+        {},
+    );
 };
 
 /**
@@ -337,15 +344,28 @@ const RestockReport: React.FC<Props> = () => {
                             </AppText>
                         </BlubHeader>
                         {outOfStock && (
-                            <Box margin={2} overflow="scroll">
-                                {outOfStock.sort().map(out => {
-                                    return (
-                                        <AppText margin={2} size="small" bold key={out}>
-                                            {out}
-                                        </AppText>
-                                    );
-                                })}
-                            </Box>
+                            <Column margin={2} overflow="scroll">
+                                {/*{outOfStock.sort().map(out => {*/}
+                                {/*    console.log('out of stock record: ', out)*/}
+                                {/*    return (*/}
+                                <DataTable
+                                    columnHeaders={[
+                                        {
+                                            title: 'Material',
+                                            key: 'material',
+                                            ratio: 1,
+                                        },
+                                        {
+                                            title: 'Description',
+                                            key: 'description',
+                                            ratio: 2,
+                                        },
+                                    ]}
+                                    rowData={outOfStock.sort((a, b) =>
+                                        a.material > b.material ? 1 : -1,
+                                    )}
+                                />
+                            </Column>
                         )}
                     </InfoBlub>
                 </AdminHeader>

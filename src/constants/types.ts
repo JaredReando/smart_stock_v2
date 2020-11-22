@@ -31,7 +31,10 @@ export interface StockSource extends InventoryRecord {
 }
 export interface FoundOverstock {
     stockSources: StockSource[];
-    outOfStock: string[];
+    outOfStock: Array<{
+        material: string;
+        description: string;
+    }>;
 }
 
 export interface InventoryRecord {

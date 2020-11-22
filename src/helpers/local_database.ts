@@ -91,7 +91,9 @@ export class LocalDatabase {
      *
      * @param materialNeeded
      **/
-    async findInOverstock(materialNeeded: { [key: string]: string[] }): Promise<FoundOverstock> {
+    async findInOverstock(materialNeeded: {
+        [key: string]: { bins: string[]; description: string };
+    }): Promise<FoundOverstock> {
         await this.localDB.createIndex({
             index: {
                 fields: ['material'],
@@ -118,13 +120,19 @@ export class LocalDatabase {
                 //Empty array means query found no matches
                 if (stockedLocations === 0) {
                     const outOfStock = materialsArray[index];
-                    acc['outOfStock'] = [...acc['outOfStock'], outOfStock];
+                    acc['outOfStock'] = [
+                        ...acc['outOfStock'],
+                        {
+                            material: outOfStock,
+                            description: materialNeeded[outOfStock].description,
+                        },
+                    ];
                 }
                 if (stockedLocations > 0) {
                     //name of the material for this successful query match record
                     const material = val.docs[0].material;
-                    const resultsLimit = materialNeeded[material].length;
-                    const destinationBins = materialNeeded[material];
+                    const resultsLimit = materialNeeded[material].bins.length;
+                    const destinationBins = materialNeeded[material].bins;
                     const sortedResults = val.docs.sort((a: any, b: any) =>
                         a.storageUnit > b.storageUnit ? 1 : -1,
                     );

@@ -38,7 +38,9 @@ const DataTable: React.FC<Props> = ({ columnHeaders, rowData, loading }) => {
             if (!header.render && `${header.key}` in row) {
                 const detail = (
                     <TD key={header.key} width={setRatio(header.ratio)} minWidth={header.width}>
-                        <AppText size="medium">{row[header.key].toString()}</AppText>
+                        <AppText uppercase size="medium">
+                            {row[header.key].toString()}
+                        </AppText>
                     </TD>
                 );
                 rowCells.push(detail);
