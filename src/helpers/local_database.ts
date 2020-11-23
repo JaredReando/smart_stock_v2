@@ -94,6 +94,7 @@ export class LocalDatabase {
     async findInOverstock(materialNeeded: {
         [key: string]: { bins: string[]; description: string };
     }): Promise<FoundOverstock> {
+        console.log('db materails needed: ', materialNeeded);
         await this.localDB.createIndex({
             index: {
                 fields: ['material'],
@@ -106,7 +107,7 @@ export class LocalDatabase {
                 selector: {
                     //Include more locations in string array to broaden search
                     storageType: { $in: ['ST1'] },
-                    storageLocation: '0001',
+                    storageLocation: { $in: ['1', '0001'] },
                     material: material,
                 },
             });

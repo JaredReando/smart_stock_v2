@@ -37,11 +37,8 @@ const useFixedBinStore = (): FixedBinStore => {
             setFixedBins(firebaseBins);
             setLoading(false);
             const airtableBins = await fetchAirtableFixedBins();
-            const updateNeeded = checkIfUpdateNeeded(airtableBins, firebaseBins);
-            if (updateNeeded) {
-                firebase.overwriteFixedBins(airtableBins);
-                console.log('Updating Firebase with latest Airtable data.');
-            }
+            firebase.overwriteFixedBins(airtableBins);
+            console.log('Updating Firebase with latest Airtable data.');
         });
     }, [firebase]);
     return { loading, fixedBins, getFixedBins: () => fixedBins };

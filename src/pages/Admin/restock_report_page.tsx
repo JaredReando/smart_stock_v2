@@ -204,7 +204,7 @@ const RestockReport: React.FC<Props> = () => {
         }
     }, [summary]);
     useEffect(() => {
-        if (report.length > 0) {
+        if (report && report.length > 0) {
             const updatedDashboardInfo = report.reduce(
                 (acc: any, record) => {
                     if (record.status === 'pending') {
@@ -307,7 +307,7 @@ const RestockReport: React.FC<Props> = () => {
                             <Column>
                                 <Row alignItems="center" border="1px solid black" height="50px">
                                     <CircleIndicator color={theme.colors.green} />
-                                    <AppText uppercase bold>
+                                    <AppText uppercase bold size="small">
                                         Completed
                                     </AppText>
                                 </Row>
@@ -317,7 +317,7 @@ const RestockReport: React.FC<Props> = () => {
                                 <Row mb={3} alignItems="flex-start">
                                     <CircleIndicator color={theme.colors.warning} />
                                     <Row justifyContent="center" mr={3}>
-                                        <AppText uppercase bold>
+                                        <AppText uppercase bold size="small">
                                             Pending
                                         </AppText>
                                     </Row>
@@ -328,7 +328,7 @@ const RestockReport: React.FC<Props> = () => {
                                 <Row mb={3} alignItems="center">
                                     <CircleIndicator color={theme.colors.error} />
                                     <Row justifyContent="center" mr={3}>
-                                        <AppText uppercase bold>
+                                        <AppText uppercase bold size="small">
                                             Missing
                                         </AppText>
                                     </Row>
@@ -337,7 +337,7 @@ const RestockReport: React.FC<Props> = () => {
                             </Column>
                         </Row>
                     </InfoBlub>
-                    <InfoBlub maxHeight="150px" overflow="auto" margin={3}>
+                    <InfoBlub maxHeight="200px" overflow="auto" margin={3}>
                         <BlubHeader>
                             <AppText bold uppercase color="light">
                                 Out of Stock
@@ -349,6 +349,7 @@ const RestockReport: React.FC<Props> = () => {
                                 {/*    console.log('out of stock record: ', out)*/}
                                 {/*    return (*/}
                                 <DataTable
+                                    textSize="small"
                                     columnHeaders={[
                                         {
                                             title: 'Material',

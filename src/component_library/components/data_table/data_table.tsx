@@ -10,9 +10,10 @@ interface Props {
     columnHeaders: ColumnHeader[];
     rowData: RowData[];
     loading?: boolean;
+    textSize?: 'small' | 'medium' | 'large';
 }
 
-const DataTable: React.FC<Props> = ({ columnHeaders, rowData, loading }) => {
+const DataTable: React.FC<Props> = ({ columnHeaders, rowData, loading, textSize }) => {
     function setRatio(grow = 1, columns = columnHeaders.length) {
         const baseWidth = 100 / columns;
         return `${baseWidth * grow}%`;
@@ -38,7 +39,7 @@ const DataTable: React.FC<Props> = ({ columnHeaders, rowData, loading }) => {
             if (!header.render && `${header.key}` in row) {
                 const detail = (
                     <TD key={header.key} width={setRatio(header.ratio)} minWidth={header.width}>
-                        <AppText uppercase size="medium">
+                        <AppText uppercase size={textSize ?? 'medium'}>
                             {row[header.key].toString()}
                         </AppText>
                     </TD>
@@ -69,7 +70,7 @@ const DataTable: React.FC<Props> = ({ columnHeaders, rowData, loading }) => {
                                     //overrides any width % setting while keeping proportions
                                     minWidth={header.width}
                                 >
-                                    <AppText bold uppercase>
+                                    <AppText bold uppercase size={textSize ?? 'medium'}>
                                         {header.title}
                                     </AppText>
                                 </TH>
