@@ -6,9 +6,12 @@ import { useRestockStore } from '../../hooks';
 import { useFirebase } from '../../hooks/use_firebase_context';
 import { Button } from '../../component_library/styles/buttons';
 import { RestockRecord } from '../../constants/types';
+import { useHistory } from 'react-router-dom';
+import styled from 'styled-components';
 
 const Client: React.FC = () => {
     const firebase = useFirebase();
+    const history = useHistory();
     const { records: restockRecords } = useRestockStore();
     const [records, setRecords] = useState<RestockRecord[]>([]);
     const [recordIndex, setRecordIndex] = useState(0);
@@ -95,6 +98,17 @@ const Client: React.FC = () => {
 
     return (
         <Container>
+            <Row
+                backgroundColor="green"
+                height="50px"
+                width="100%"
+                alignItems="center"
+                justifyContent="center"
+            >
+                <AppText bold color="light" size="xlarge">
+                    SmartStock
+                </AppText>
+            </Row>
             <Section>
                 <Row px={4} flexGrow={0} justifyContent="center">
                     <AppText bold uppercase>
@@ -114,6 +128,9 @@ const Client: React.FC = () => {
                     </AppText>
                 </Row>
                 <Row pl={4} flexGrow={1} justifyContent="center" alignItems="center" width="100%">
+                    <AppText uppercase size="small">
+                        {records[recordIndex].status}
+                    </AppText>
                     <AppText bold uppercase size="jumbo">
                         {destinationBin}
                     </AppText>
@@ -174,7 +191,7 @@ const Client: React.FC = () => {
                             {storageUnit}
                         </AppText>
                     </Column>
-                    <Column flex="0 0 100px">
+                    <Column flex="0 0 120px" justifyContent="space-between" pb={3}>
                         <AppText bold uppercase>
                             Record
                         </AppText>
@@ -198,86 +215,101 @@ const Client: React.FC = () => {
                             type="checkbox"
                         />
                     </Row>
-                    <Row justifyContent="space-between">
-                        <AppText uppercase bold>
-                            Status
-                        </AppText>
-                    </Row>
-                    <Row>
-                        <AppText size="large">{records[recordIndex].status}</AppText>
-                    </Row>
                 </Box>
             </Section>
-            <Row>
-                <Box flexGrow={1}>
+            <Column>
+                <ButtonGrid>
                     <Button
+                        style={{
+                            gridColumnStart: 1,
+                            gridColumnEnd: 1,
+                            gridRowStart: 1,
+                            gridRowEnd: 3,
+                        }}
                         height="100%"
                         width="100%"
                         variant="secondary"
                         onClick={() => setRecordIndex(getRecord('prev'))}
                     >
-                        <AppText uppercase bold size="xlarge">
+                        <AppText uppercase bold size="large">
                             &#x027EA; Prev
                         </AppText>
                     </Button>
-                </Box>
-                <Column flexGrow={2}>
-                    <Box>
-                        <Button
-                            style={{ background: 'tomato' }}
-                            width="100%"
-                            onClick={() => {
-                                const index = restockRecords.findIndex(
-                                    rec => rec.id === records[recordIndex].id,
-                                );
-                                firebase.doUpdateRestockRecord(index, {
-                                    ...testRecord,
-                                    status: 'missing',
-                                });
-                            }}
-                        >
-                            <AppText uppercase bold size="xlarge">
-                                Missing
-                            </AppText>
-                        </Button>
-                    </Box>
-                    <Box>
-                        <Button
-                            height="100px"
-                            width="100%"
-                            variant={
-                                status === 'pending' || status === 'missing'
-                                    ? 'primary'
-                                    : 'secondary'
-                            }
-                            onClick={() => {
-                                const index = restockRecords.findIndex(
-                                    rec => rec.id === records[recordIndex].id,
-                                );
-                                firebase.doUpdateRestockRecord(index, testRecord);
-                            }}
-                        >
-                            <AppText uppercase bold size="xlarge">
-                                Complete
-                            </AppText>
-                        </Button>
-                    </Box>
-                </Column>
-                <Box>
                     <Button
+                        style={{
+                            background: 'tomato',
+                            gridColumnStart: 2,
+                            gridColumnEnd: 3,
+                            gridRowStart: 1,
+                            gridRowEnd: 2,
+                        }}
+                        height="100%"
+                        width="100%"
+                        onClick={() => {
+                            const index = restockRecords.findIndex(
+                                rec => rec.id === records[recordIndex].id,
+                            );
+                            firebase.doUpdateRestockRecord(index, {
+                                ...testRecord,
+                                status: 'missing',
+                            });
+                        }}
+                    >
+                        <AppText color="light" uppercase bold size="large">
+                            Missing
+                        </AppText>
+                    </Button>
+                    <Button
+                        style={{
+                            gridColumnStart: 2,
+                            gridColumnEnd: 2,
+                            gridRowStart: 2,
+                            gridRowEnd: 3,
+                        }}
+                        height="100%"
+                        width="100%"
+                        variant={
+                            status === 'pending' || status === 'missing' ? 'primary' : 'secondary'
+                        }
+                        onClick={() => {
+                            const index = restockRecords.findIndex(
+                                rec => rec.id === records[recordIndex].id,
+                            );
+                            firebase.doUpdateRestockRecord(index, testRecord);
+                        }}
+                    >
+                        <AppText color="light" uppercase bold size="large">
+                            Complete
+                        </AppText>
+                    </Button>
+                    <Button
+                        style={{
+                            gridColumnStart: 3,
+                            gridColumnEnd: 3,
+                            gridRowStart: 1,
+                            gridRowEnd: 3,
+                        }}
                         height="100%"
                         width="100%"
                         variant="secondary"
                         onClick={() => setRecordIndex(getRecord('next'))}
                     >
-                        <AppText uppercase bold size="xlarge">
+                        <AppText uppercase bold size="large">
                             NEXT &#x027EB;
                         </AppText>
                     </Button>
-                </Box>
-            </Row>
+                </ButtonGrid>
+            </Column>
         </Container>
     );
 };
 
 export default Client;
+
+const ButtonGrid = styled.div`
+    max-height: 200px;
+    gap: 10px;
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-rows: 1fr 2fr;
+`;

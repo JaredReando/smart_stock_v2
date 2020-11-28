@@ -5,6 +5,7 @@ import { Container } from './vertical_nav_bar.styles';
 import { theme } from '../../component_library/styles/theme';
 import { NavTab } from '../../constants/types';
 import { useFirebase } from '../../hooks/use_firebase_context';
+import { AppText } from '../../component_library/styles/typography';
 
 const VerticalNavBar: FC = () => {
     const history = useHistory();
@@ -16,24 +17,44 @@ const VerticalNavBar: FC = () => {
             iconName: 'home',
             title: 'Admin Home',
             path: '/admin',
+            render: () => (
+                <AppText bold color="light">
+                    Admin
+                </AppText>
+            ),
             onClick: () => history.push('/admin'),
         },
         {
             iconName: 'settings',
             title: 'Restock Report',
             path: '/admin/restock_report',
+            render: () => (
+                <AppText bold color="light">
+                    Restock
+                </AppText>
+            ),
             onClick: () => history.push('/admin/restock_report'),
         },
         {
             iconName: 'developer',
             title: 'Fixed Bins',
             path: '/admin/fixed_bins',
+            render: () => (
+                <AppText bold color="light">
+                    Fixed Bins
+                </AppText>
+            ),
             onClick: () => history.push('/admin/fixed_bins'),
         },
         {
             iconName: 'help',
             title: 'Help',
             position: 'bottom',
+            render: () => (
+                <AppText bold color="light">
+                    Sign Out
+                </AppText>
+            ),
             onClick: () => firebase.signOut(),
         },
     ];

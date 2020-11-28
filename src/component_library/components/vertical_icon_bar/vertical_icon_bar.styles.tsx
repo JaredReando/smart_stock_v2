@@ -1,31 +1,31 @@
 import styled from 'styled-components';
-
-export const Container = styled.div({});
+import { Box } from '../../styles/layout';
 
 export const ButtonPanelWrapper = styled.div(props => ({
     height: '100%',
-    width: '100px',
-    background: props.theme.colors.green,
-    display: 'flex',
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'space-between',
+    width: '150px',
+    background: props.theme.colors.primary,
+    display: 'grid',
+    // flex: 1,
+    // flexDirection: 'column',
+    // justifyContent: 'space-between',
+    gridTemplateColumns: '1fr',
+    gridTemplateRows: '40px 1fr 40px',
 }));
 
-export const IconButton = styled.div<{ active: boolean; backgroundColor?: string }>(
+export const IconButton = styled(Box)<{ active: boolean; backgroundColor?: string }>(
     {
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'center',
         height: '40px',
-        transition: '.1s linear all',
+        transition: '.2s linear all',
         cursor: 'pointer',
     },
     ({ active, backgroundColor, theme }) => {
         if (!active) {
             return {
                 ':hover': {
-                    background: theme.colors.darkGrey,
+                    background: theme.colors.warning,
                 },
             };
         }

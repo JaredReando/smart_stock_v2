@@ -1,6 +1,9 @@
-import React from 'react';
-import { ButtonPanelWrapper, IconButton, Container } from './vertical_icon_bar.styles';
-import {AppIcon} from "../icons";
+import React, { useState } from 'react';
+import { ButtonPanelWrapper, IconButton } from './vertical_icon_bar.styles';
+import { AppIcon } from '../icons';
+import { Row, Box } from '../../styles/layout';
+import { AppText } from '../../styles/typography';
+import { NavTab } from '../../../constants/types';
 
 export interface Tab {
     title: string;
@@ -11,7 +14,7 @@ export interface Tab {
 }
 
 interface Props {
-    tabs: Tab[];
+    tabs: NavTab[];
     handleClick: (tabIndex: number) => void;
     activeTabIndex: number | null;
     activeTabColor?: string;
@@ -20,15 +23,17 @@ interface Props {
 }
 
 export const VerticalIconBar: React.FC<Props> = ({
-     tabs,
-     handleClick,
-     activeTabIndex,
-     activeTabColor,
-     activeIconColor,
- }) => {
-    const renderTabs = (tabs: Tab[], indexOffset = 0) => (
-        <Container>
-            {tabs.map((tab: Tab, i: number) => {
+    tabs,
+    handleClick,
+    activeTabIndex,
+    activeTabColor,
+    activeIconColor,
+}) => {
+    // const [activeTabIndex, setActiveTabIndex] = useState(0);
+
+    const renderTabs = (tabs: NavTab[], indexOffset = 0) => (
+        <div>
+            {tabs.map((tab: NavTab, i: number) => {
                 const index = i + indexOffset;
                 const active = activeTabIndex === index;
                 return (
@@ -37,17 +42,15 @@ export const VerticalIconBar: React.FC<Props> = ({
                         onClick={() => handleClick(index)}
                         key={tab.title}
                         active={active}
-                        backgroundColor={activeTabColor}
+                        px={3}
+                        // backgroundColor={activeTabColor}
                     >
-                        <AppIcon
-                            name={tab.iconName}
-                            size="medium"
-                            color={'white'}
-                        />
+                        <AppIcon name={tab.iconName} size="medium" color={'white'} />
+                        <Box ml={3}>{tab.render()}</Box>
                     </IconButton>
                 );
             })}
-        </Container>
+        </div>
     );
 
     const topTabs = tabs.filter(tab => tab.position === 'top' || tab.position === undefined);
@@ -55,6 +58,11 @@ export const VerticalIconBar: React.FC<Props> = ({
 
     return (
         <ButtonPanelWrapper>
+            <Row justifyContent="center" alignItems="center">
+                <AppText size="large" color="light" bold>
+                    SmartStock
+                </AppText>
+            </Row>
             {renderTabs(topTabs)}
             {renderTabs(bottomTabs, topTabs.length)}
         </ButtonPanelWrapper>

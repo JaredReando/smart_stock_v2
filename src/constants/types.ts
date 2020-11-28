@@ -152,4 +152,5 @@ export interface DetailProps {
 export interface NavTab extends Tab {
     path?: string;
     onClick?: () => void;
+    render: () => any;
 }
