@@ -8,12 +8,21 @@ import { AdminAuthRoute, ClientAuthRoute } from './route_helpers';
 import NotFound404 from '../pages/not_found_404';
 import AdminRouter from './admin_router';
 
-const Routes = () => {
+interface Props {
+    authUser: any;
+}
+const Routes: React.FC<Props> = ({ authUser }) => {
+    console.log('ewsuerrrrr: ', authUser);
+    const adminRoutes = () => {
+        return <AdminAuthRoute authUser={authUser} path={'/admin'} component={AdminRouter} />;
+    };
+
+    const BaseRoutes = () => {};
     return (
         <BrowserRouter>
             <Switch>
-                <ClientAuthRoute path={'/client'} component={ClientPage} />
-                <AdminAuthRoute path={'/admin'} component={AdminRouter} />
+                {authUser && adminRoutes()}
+                <ClientAuthRoute authUser={authUser} path={'/client'} component={ClientPage} />
 
                 <Route exact path="/" component={SignInPage} />
                 <Route path={'/login'} component={SignInPage} />

@@ -1,22 +1,27 @@
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
 import { GlobalStyle } from './component_library/styles/global_styles';
-import FirebaseProvider from './context/firebase.context';
-import { Provider as AuthProvider } from './context/auth.context';
 import AppRouter from './routing/app_router';
 import { theme } from './component_library/styles/theme';
+import { useAuthUser } from './hooks/use_auth_user';
 
 document.title = 'Smart Stock';
 
 const App = () => {
+    const { authUser, loading } = useAuthUser();
+
+    if (loading) {
+        console.log('i am loading');
+    }
+
+    if (!!authUser) {
+        console.log('user should now be logged out');
+    }
     return (
         <ThemeProvider theme={theme}>
             <GlobalStyle />
-            <FirebaseProvider>
-                <AuthProvider>
-                    <AppRouter />
-                </AuthProvider>
-            </FirebaseProvider>
+            {loading && <h1>loading</h1>}
+            {!loading && <AppRouter authUser={authUser} />}
         </ThemeProvider>
     );
 };

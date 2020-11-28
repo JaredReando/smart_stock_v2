@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Container, BigBold, Form, Input } from './sign_in.styles';
-import { setAuthUser } from '../../context/mutators/auth.mutators';
 import { useFirebase } from '../../hooks/use_firebase_context';
 import { Box, Row, Column } from '../../component_library/styles/layout';
 import { AppText } from '../../component_library/styles/typography';
@@ -22,7 +21,6 @@ const SignInPage = (props: any) => {
                 setEmail('');
                 setPassword('');
                 setError(null);
-                setAuthUser(true);
                 history.push('/admin');
             })
             .catch((err: any) => {

@@ -1,7 +1,6 @@
 import firebase from 'firebase';
 import 'firebase/auth';
 import 'firebase/database';
-import { setAuthUser } from '../../context/mutators/auth.mutators';
 
 const firebaseConfig = {
     apiKey: process.env.REACT_APP_API_KEY,
@@ -17,7 +16,6 @@ class Firebase {
         firebase.initializeApp(firebaseConfig);
         this.auth = firebase.auth();
         this.db = firebase.database();
-        this.user = localStorage.getItem('authUser') ?? null;
     }
 
     //User account/authorization logic
@@ -25,16 +23,10 @@ class Firebase {
         this.auth.createUserWithEmailAndPassword(email, password);
 
     signInWithEmailAndPassword = (email, password) =>
-        this.auth.signInWithEmailAndPassword(email, password).then(r => {
-            console.log('sign in with email and pass: ', r);
-            this.user = r;
-            localStorage.setItem('authUser', r);
-        });
+        this.auth.signInWithEmailAndPassword(email, password);
 
     signOut = () => {
         this.auth.signOut().then(r => console.log('firebase logout: ', r));
-        setAuthUser(false);
-        localStorage.removeItem('authUser');
     };
 
     doPasswordReset = email => this.auth.sendPasswordResetEmail(email);
