@@ -17,6 +17,7 @@ If 'loggedIn' value is false, user is redirected back to home page
  */
 const AdminAuthRoute = ({ authUser, component: Component, ...rest }) => {
     const adminDataStore = useInitializeAdminDataStore();
+    console.log('auth route: ', authUser);
     return (
         <Route
             {...rest}
@@ -55,10 +56,15 @@ const ClientAuthRoute = ({ authUser, component: Component, ...rest }) => {
             //be provided by Dashboard's render of same Component
             component={props =>
                 authUser ? (
-                    <div style={{ display: 'flex', height: '100%', width: '100vw' }}>
-                        <Column flexGrow={1}>
-                            <Component {...props} />
-                        </Column>
+                    <div
+                        style={{
+                            display: 'flex',
+                            height: '100%',
+                            width: '100vw',
+                            border: '1px solid red',
+                        }}
+                    >
+                        <Component {...props} />
                     </div>
                 ) : (
                     <Redirect

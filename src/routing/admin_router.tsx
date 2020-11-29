@@ -6,7 +6,7 @@ import FixedBins from '../pages/Admin/fixed_bins_page';
 import Client from '../pages/Client/restocking_page';
 
 const AdminRouter: FC = () => {
-    return buildRouter('/admin', {
+    return buildRouter('/', {
         '/': AdminPage,
         '/restock_report': RestockReport,
         '/fixed_bins': FixedBins,

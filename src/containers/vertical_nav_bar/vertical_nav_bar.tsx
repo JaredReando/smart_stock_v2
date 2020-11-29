@@ -16,35 +16,35 @@ const VerticalNavBar: FC = () => {
         {
             iconName: 'home',
             title: 'Admin Home',
-            path: '/admin',
+            path: '/',
             render: () => (
                 <AppText bold color="light">
                     Admin
                 </AppText>
             ),
-            onClick: () => history.push('/admin'),
+            onClick: () => history.push('/'),
         },
         {
             iconName: 'settings',
             title: 'Restock Report',
-            path: '/admin/restock_report',
+            path: '/restock_report',
             render: () => (
                 <AppText bold color="light">
                     Restock
                 </AppText>
             ),
-            onClick: () => history.push('/admin/restock_report'),
+            onClick: () => history.push('/restock_report'),
         },
         {
             iconName: 'developer',
             title: 'Fixed Bins',
-            path: '/admin/fixed_bins',
+            path: '/fixed_bins',
             render: () => (
                 <AppText bold color="light">
                     Fixed Bins
                 </AppText>
             ),
-            onClick: () => history.push('/admin/fixed_bins'),
+            onClick: () => history.push('/fixed_bins'),
         },
         {
             iconName: 'help',

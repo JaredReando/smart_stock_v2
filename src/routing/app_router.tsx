@@ -13,21 +13,21 @@ interface Props {
 }
 const Routes: React.FC<Props> = ({ authUser }) => {
     console.log('ewsuerrrrr: ', authUser);
-    const adminRoutes = () => {
-        return <AdminAuthRoute authUser={authUser} path={'/admin'} component={AdminRouter} />;
-    };
-
-    const BaseRoutes = () => {};
     return (
         <BrowserRouter>
             <Switch>
-                {authUser && adminRoutes()}
+                {authUser && (
+                    <AdminAuthRoute authUser={authUser} path={'/'} component={AdminRouter} />
+                )}
                 <ClientAuthRoute authUser={authUser} path={'/client'} component={ClientPage} />
-
-                <Route exact path="/" component={SignInPage} />
-                <Route path={'/login'} component={SignInPage} />
-                <Route path={'/sign_up'} component={SignUpPage} />
-                <Route path={'/forgot_password'} component={PasswordForgetPage} />
+                {!authUser && (
+                    <>
+                        <Route exact path="/" component={SignInPage} />
+                        <Route path={'/login'} component={SignInPage} />
+                        <Route path={'/sign_up'} component={SignUpPage} />
+                        <Route path={'/forgot_password'} component={PasswordForgetPage} />
+                    </>
+                )}
                 <Route component={NotFound404} />
             </Switch>
         </BrowserRouter>

@@ -4,10 +4,14 @@ export const GlobalStyle = createGlobalStyle`
     html,
     body,
     #root {
-        height: 100%;
+        //height: 100vh;
+        margin: 0;
+        padding: 0;
+        height: fit-content;
     }
     html {
         box-sizing: border-box;
+        height: -webkit-fill-available;
     }
     *,
     *:before,

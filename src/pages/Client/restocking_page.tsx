@@ -90,17 +90,16 @@ const Client: React.FC = () => {
     );
     const totalRecords = records.length;
     const currentRecord = recordIndex + 1;
-    //@ts-ignore
     const testRecord =
         records[recordIndex].status === 'complete'
             ? { ...records[recordIndex], status: 'pending' }
             : { ...records[recordIndex], status: 'complete' };
-
+    let viewHeight = `${window.innerHeight - 25}px`;
     return (
         <Container>
             <Row
                 backgroundColor="green"
-                height="50px"
+                height="100%"
                 width="100%"
                 alignItems="center"
                 justifyContent="center"
