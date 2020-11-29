@@ -16,11 +16,11 @@ const Routes: React.FC<Props> = ({ authUser }) => {
     return (
         <BrowserRouter>
             <Switch>
+                <ClientAuthRoute authUser={authUser} path={'/client'} component={ClientPage} />
                 {authUser && (
                     <AdminAuthRoute authUser={authUser} path={'/'} component={AdminRouter} />
                 )}
-                <ClientAuthRoute authUser={authUser} path={'/client'} component={ClientPage} />
-                {!authUser && (
+                {authUser === null && (
                     <>
                         <Route exact path="/" component={SignInPage} />
                         <Route path={'/login'} component={SignInPage} />

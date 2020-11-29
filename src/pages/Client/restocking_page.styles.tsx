@@ -3,7 +3,8 @@ import { Box, Column } from '../../component_library/styles/layout';
 
 export const Container = styled(Box)`
     display: grid;
-    grid-template-rows: 1fr 1fr 1fr 3fr 1fr 1fr;
+    grid-template-rows: 50px repeat(2, auto) auto auto auto;
+    gap: 10px;
     grid-template-columns: 1fr;
     align-items: center;
     height: 100%;
@@ -15,11 +16,12 @@ export const Container = styled(Box)`
     touch-action: manipulation;
 `;
 
-export const Section = styled(Column)({
-    flexGrow: 0,
-    height: '100%',
-    border: '1px solid red',
-    width: '100%',
-    justifyContent: 'space-evenly',
-    alignItems: 'flex-start',
-});
+export const Section = styled(Column)`
+    height: 100%;
+    box-shadow: ${props => props.theme.shadows.large};
+    border: 1px solid black;
+    border-radius: 5px;
+    width: 100%;
+    justify-content: space-evenly;
+    align-items: flex-start;
+`;

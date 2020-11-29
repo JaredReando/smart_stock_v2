@@ -55,7 +55,10 @@ const VerticalNavBar: FC = () => {
                     Sign Out
                 </AppText>
             ),
-            onClick: () => firebase.signOut(),
+            onClick: () => {
+                firebase.signOut();
+                history.push('/login');
+            },
         },
     ];
     const getTabs = (): NavTab[] => {

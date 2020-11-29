@@ -37,7 +37,7 @@ const AdminAuthRoute = ({ authUser, component: Component, ...rest }) => {
                 ) : (
                     <Redirect
                         to={{
-                            pathname: '/',
+                            pathname: '/login',
                             state: { from: props.location },
                         }}
                     />
@@ -47,34 +47,25 @@ const AdminAuthRoute = ({ authUser, component: Component, ...rest }) => {
     );
 };
 
-const ClientAuthRoute = ({ authUser, component: Component, ...rest }) => {
+const ClientAuthRoute = ({ component: Component, ...rest }) => {
     return (
         <Route
             {...rest}
             //'props' here refers to those provided by <Route />: history, location, match, etc.
             //The Component's unique props don't need to be passed here, since they will
             //be provided by Dashboard's render of same Component
-            component={props =>
-                authUser ? (
-                    <div
-                        style={{
-                            display: 'flex',
-                            height: '100%',
-                            width: '100vw',
-                            border: '1px solid red',
-                        }}
-                    >
-                        <Component {...props} />
-                    </div>
-                ) : (
-                    <Redirect
-                        to={{
-                            pathname: '/',
-                            state: { from: props.location },
-                        }}
-                    />
-                )
-            }
+            component={props => (
+                <div
+                    style={{
+                        display: 'flex',
+                        height: `${window.innerHeight}px`,
+                        width: '100vw',
+                        border: '1px solid red',
+                    }}
+                >
+                    <Component {...props} />
+                </div>
+            )}
         />
     );
 };

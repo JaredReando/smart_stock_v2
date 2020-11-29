@@ -6,12 +6,10 @@ import { useRestockStore } from '../../hooks';
 import { useFirebase } from '../../hooks/use_firebase_context';
 import { Button } from '../../component_library/styles/buttons';
 import { RestockRecord } from '../../constants/types';
-import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
 const Client: React.FC = () => {
     const firebase = useFirebase();
-    const history = useHistory();
     const { records: restockRecords } = useRestockStore();
     const [records, setRecords] = useState<RestockRecord[]>([]);
     const [recordIndex, setRecordIndex] = useState(0);
@@ -208,7 +206,7 @@ const Client: React.FC = () => {
                         <AppText bold uppercase size="large" mr={3}>
                             High Priority Only
                         </AppText>
-                        <input
+                        <CheckBox
                             checked={checkboxValue}
                             onChange={() => setCheckboxValue(v => !v)}
                             type="checkbox"
@@ -305,9 +303,17 @@ const Client: React.FC = () => {
 
 export default Client;
 
+const CheckBox = styled.input`
+    width: 30px;
+    height: 30px;
+    &:checked {
+        // styles go here
+    }
+`;
 const ButtonGrid = styled.div`
-    max-height: 200px;
-    gap: 10px;
+    max-height: 150px;
+    border: 1px solid green;
+    gap: 5px;
     display: grid;
     grid-template-columns: 1fr 2fr 1fr;
     grid-template-rows: 1fr 2fr;
