@@ -14,18 +14,18 @@ const VerticalNavBar: FC = () => {
 
     const tempTabs: NavTab[] = [
         {
-            iconName: 'home',
-            title: 'Admin Home',
+            iconName: 'inventory',
+            title: 'Inventory',
             path: '/',
             render: () => (
                 <AppText bold color="light">
-                    Admin
+                    Inventory
                 </AppText>
             ),
             onClick: () => history.push('/'),
         },
         {
-            iconName: 'settings',
+            iconName: 'forklift',
             title: 'Restock Report',
             path: '/restock_report',
             render: () => (
@@ -36,7 +36,7 @@ const VerticalNavBar: FC = () => {
             onClick: () => history.push('/restock_report'),
         },
         {
-            iconName: 'developer',
+            iconName: 'settings',
             title: 'Fixed Bins',
             path: '/fixed_bins',
             render: () => (
@@ -47,8 +47,8 @@ const VerticalNavBar: FC = () => {
             onClick: () => history.push('/fixed_bins'),
         },
         {
-            iconName: 'help',
-            title: 'Help',
+            iconName: 'user',
+            title: 'Logout',
             position: 'bottom',
             render: () => (
                 <AppText bold color="light">

@@ -296,47 +296,51 @@ const RestockReport: React.FC<Props> = () => {
                         <Button mt={3} onClick={() => setShowModal(s => !s)}>
                             Configure New Report
                         </Button>
-                    </Column>
-                    <InfoBlub margin={3}>
-                        <BlubHeader>
-                            <AppText bold uppercase color="light">
-                                Status
-                            </AppText>
-                        </BlubHeader>
-                        <Row margin={2}>
-                            <Column>
-                                <Row alignItems="center" border="1px solid black" height="50px">
-                                    <CircleIndicator color={theme.colors.green} />
-                                    <AppText uppercase bold size="small">
+                        <InfoBlub mt={3}>
+                            <BlubHeader>
+                                <AppText bold uppercase color="light">
+                                    Status
+                                </AppText>
+                            </BlubHeader>
+                            <Row
+                                margin={2}
+                                alignItems="center"
+                                justifyContent="center"
+                                height="100%"
+                            >
+                                <Row alignItems="center" m={1}>
+                                    <CircleIndicator color={theme.colors.green} size={30}>
+                                        <AppText bold color="light">
+                                            {dashboardInfo.completed}
+                                        </AppText>
+                                    </CircleIndicator>
+                                    <AppText ml={2} uppercase bold size="small">
                                         Completed
                                     </AppText>
                                 </Row>
-                                <AppText>{dashboardInfo.completed}</AppText>
-                            </Column>
-                            <Column alignItems="center">
-                                <Row mb={3} alignItems="flex-start">
-                                    <CircleIndicator color={theme.colors.warning} />
-                                    <Row justifyContent="center" mr={3}>
-                                        <AppText uppercase bold size="small">
-                                            Pending
+                                <Row alignItems="center" m={1}>
+                                    <CircleIndicator color={theme.colors.warning} size={30}>
+                                        <AppText bold color="light">
+                                            {dashboardInfo.pending}
                                         </AppText>
-                                    </Row>
+                                    </CircleIndicator>
+                                    <AppText ml={2} uppercase bold size="small">
+                                        Pending
+                                    </AppText>
                                 </Row>
-                                <AppText>{dashboardInfo.pending}</AppText>
-                            </Column>
-                            <Column alignItems="center">
-                                <Row mb={3} alignItems="center">
-                                    <CircleIndicator color={theme.colors.error} />
-                                    <Row justifyContent="center" mr={3}>
-                                        <AppText uppercase bold size="small">
-                                            Missing
+                                <Row alignItems="center" m={1}>
+                                    <CircleIndicator color={theme.colors.error} size={30}>
+                                        <AppText bold color="light">
+                                            {dashboardInfo.missing}
                                         </AppText>
-                                    </Row>
+                                    </CircleIndicator>
+                                    <AppText ml={2} uppercase bold size="small">
+                                        Missing
+                                    </AppText>
                                 </Row>
-                                <AppText>{dashboardInfo.missing}</AppText>
-                            </Column>
-                        </Row>
-                    </InfoBlub>
+                            </Row>
+                        </InfoBlub>
+                    </Column>
                     <InfoBlub maxHeight="200px" overflow="auto" margin={3}>
                         <BlubHeader>
                             <AppText bold uppercase color="light">
@@ -345,9 +349,6 @@ const RestockReport: React.FC<Props> = () => {
                         </BlubHeader>
                         {outOfStock && (
                             <Column margin={2} overflow="scroll">
-                                {/*{outOfStock.sort().map(out => {*/}
-                                {/*    console.log('out of stock record: ', out)*/}
-                                {/*    return (*/}
                                 <DataTable
                                     textSize="small"
                                     columnHeaders={[
@@ -387,7 +388,6 @@ const InfoBlub = styled(Column)`
     border-radius: 4px;
     box-shadow: ${props => props.theme.shadows.large};
     flex-grow: 1;
-    flex-basis: 200px;
     position: relative;
     overflow: hidden;
 `;
@@ -400,10 +400,11 @@ const BlubHeader = styled(Row)`
     padding: 5px;
 `;
 
-export const CircleIndicator = styled.div<{ color?: string }>`
-    height: 15px;
-    width: 15px;
+export const CircleIndicator = styled(Row)<{ color?: string; size?: number }>`
+    justify-content: center;
+    align-items: center;
+    height: ${props => (props.size ? `${props.size}px` : '15px')};
+    width: ${props => (props.size ? `${props.size}px` : '15px')};
     border-radius: 50%;
-    border: 1px solid black;
     background: ${props => props.color || props.theme.colors.primary};
 `;

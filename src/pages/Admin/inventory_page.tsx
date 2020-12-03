@@ -9,7 +9,7 @@ import AppModal from '../../component_library/modals/app_modal';
 import { ModalCard } from '../../component_library/modals/modal_card';
 import { AppText, Header, Subheader } from '../../component_library/styles/typography';
 
-const AdminPage = () => {
+const InventoryPage = () => {
     const [showModal, setShowModal] = React.useState(false);
     const [loading, setLoading] = React.useState(false);
     const inputRef = useRef<null | HTMLInputElement>(null);
@@ -98,17 +98,17 @@ const AdminPage = () => {
                     </Column>
                 </AdminHeader>
                 <Column mx={3}>
-                    <Row alignItems="center" margin={3}>
-                        <AppText bold uppercase size="large">
-                            Inventory Search
-                        </AppText>
-                        <input type="text" />
-                        <Button>Submit</Button>
-                    </Row>
+                    {/*<Row alignItems="center" margin={3}>*/}
+                    {/*    <AppText bold uppercase size="large">*/}
+                    {/*        Inventory Search*/}
+                    {/*    </AppText>*/}
+                    {/*    <input type="text" />*/}
+                    {/*    <Button>Submit</Button>*/}
+                    {/*</Row>*/}
                 </Column>
             </Column>
         </>
     );
 };
 
-export default AdminPage;
+export default InventoryPage;

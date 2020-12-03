@@ -32,7 +32,7 @@ export const VerticalIconBar: React.FC<Props> = ({
     // const [activeTabIndex, setActiveTabIndex] = useState(0);
 
     const renderTabs = (tabs: NavTab[], indexOffset = 0) => (
-        <div>
+        <Box>
             {tabs.map((tab: NavTab, i: number) => {
                 const index = i + indexOffset;
                 const active = activeTabIndex === index;
@@ -45,12 +45,14 @@ export const VerticalIconBar: React.FC<Props> = ({
                         px={3}
                         // backgroundColor={activeTabColor}
                     >
-                        <AppIcon name={tab.iconName} size="medium" color={'white'} />
-                        <Box ml={3}>{tab.render()}</Box>
+                        <Row width="40px" justifyContent="center">
+                            <AppIcon name={tab.iconName} size="medium" color={'white'} />
+                        </Row>
+                        <Box ml={2}>{tab.render()}</Box>
                     </IconButton>
                 );
             })}
-        </div>
+        </Box>
     );
 
     const topTabs = tabs.filter(tab => tab.position === 'top' || tab.position === undefined);

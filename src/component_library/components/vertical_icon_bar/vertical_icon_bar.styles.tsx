@@ -3,13 +3,11 @@ import { Box } from '../../styles/layout';
 
 export const ButtonPanelWrapper = styled.div(props => ({
     height: '100%',
-    width: '150px',
+    width: '180px',
     background: props.theme.colors.primary,
     display: 'grid',
-    // flex: 1,
-    // flexDirection: 'column',
-    // justifyContent: 'space-between',
     gridTemplateColumns: '1fr',
+    gap: '20px',
     gridTemplateRows: '40px 1fr 40px',
 }));
 
@@ -25,7 +23,7 @@ export const IconButton = styled(Box)<{ active: boolean; backgroundColor?: strin
         if (!active) {
             return {
                 ':hover': {
-                    background: theme.colors.warning,
+                    background: theme.colors.darkGrey,
                 },
             };
         }

@@ -26,6 +26,7 @@ const Routes: React.FC<Props> = ({ authUser }) => {
                         <Route path={'/login'} component={SignInPage} />
                         <Route path={'/sign_up'} component={SignUpPage} />
                         <Route path={'/forgot_password'} component={PasswordForgetPage} />
+                        <Route component={NotFound404} />
                     </>
                 )}
                 <Route component={NotFound404} />

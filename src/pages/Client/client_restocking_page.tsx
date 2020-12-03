@@ -15,6 +15,8 @@ const ClientRestockingPage: React.FC = () => {
     const [recordIndex, setRecordIndex] = useState(0);
     const [threshold, setThreshold] = useState(2);
     const [checkboxValue, setCheckboxValue] = useState(false);
+    const currentRecord = records[recordIndex];
+
     const getRecord = useCallback(
         (direction: 'prev' | 'next') => {
             const limit = records.length - 1;
@@ -58,14 +60,12 @@ const ClientRestockingPage: React.FC = () => {
         if (checkboxValue) {
             const highPriorityRecords = records.reduce((acc: any, record) => {
                 if (!record.stockLevels.filled || record.stockLevels.filled.length < threshold) {
-                    console.log('low stock: ', record);
                     acc.push(record);
                 }
                 return acc;
             }, []);
             if (highPriorityRecords.length === 0) {
-                console.log('no records!!!!');
-                alert('No records found. Try a number greater than ' + threshold);
+                alert('No records found. Try a value greater than ' + threshold);
                 setCheckboxValue(false);
                 return;
             }
@@ -87,22 +87,22 @@ const ClientRestockingPage: React.FC = () => {
         stockLevels,
         available,
         status,
-    } = records[recordIndex];
-    const matchedMaterials = records.filter(rec => rec.material === records[recordIndex].material);
-    const matchedMaterialIndex = matchedMaterials.findIndex(
-        mat => mat.id === records[recordIndex].id,
-    );
+    } = currentRecord;
+    const matchedMaterials = records.filter(rec => rec.material === currentRecord.material);
+    const matchedMaterialIndex = matchedMaterials.findIndex(mat => mat.id === currentRecord.id);
     const totalRecords = records.length;
-    const currentRecord = recordIndex + 1;
-    const testRecord =
-        records[recordIndex].status === 'complete'
-            ? { ...records[recordIndex], status: 'pending' }
-            : { ...records[recordIndex], status: 'complete' };
+    const adjustedCurrentIndex = recordIndex + 1;
+    const statusColor =
+        currentRecord.status === 'complete'
+            ? theme.colors.primary
+            : currentRecord.status === 'pending'
+            ? theme.colors.white
+            : theme.colors.error;
     return (
         <>
             <Container>
                 <Row
-                    backgroundColor="green"
+                    backgroundColor={theme.colors.primary}
                     height="100%"
                     width="100%"
                     alignItems="center"
@@ -130,6 +130,7 @@ const ClientRestockingPage: React.FC = () => {
                         justifyContent="center"
                         alignItems="center"
                         width="100%"
+                        backgroundColor={statusColor}
                     >
                         <AppText bold uppercase size="jumbo">
                             {sourceBin}
@@ -154,10 +155,8 @@ const ClientRestockingPage: React.FC = () => {
                         justifyContent="center"
                         alignItems="center"
                         width="100%"
+                        backgroundColor={statusColor}
                     >
-                        <AppText uppercase size="small">
-                            {status}
-                        </AppText>
                         <AppText bold uppercase size="jumbo">
                             {destinationBin}
                         </AppText>
@@ -214,16 +213,18 @@ const ClientRestockingPage: React.FC = () => {
                     </Row>
                 </Section>
                 <Section>
-                    <Row px={3} flexGrow={0} justifyContent="space-between" width="100%">
+                    <Row flexGrow={1} justifyContent="space-between" width="100%">
                         <Column flex="1 0 auto">
-                            <Box backgroundColor={theme.colors.lightGrey} width="100%">
+                            <Box px={3} backgroundColor={theme.colors.lightGrey} width="100%">
                                 <AppText bold uppercase>
                                     Material
                                 </AppText>
                             </Box>
-                            <AppText size="xlarge" bold>
-                                {material}
-                            </AppText>
+                            <Row alignItems="center" height="100%">
+                                <AppText px={3} size="xlarge" bold>
+                                    {material}
+                                </AppText>
+                            </Row>
                         </Column>
                         <Column flex="0 0 50px">
                             <Box backgroundColor={theme.colors.lightGrey} width="100%">
@@ -231,9 +232,11 @@ const ClientRestockingPage: React.FC = () => {
                                     Qty.
                                 </AppText>
                             </Box>
-                            <AppText size="large" bold>
-                                {available}
-                            </AppText>
+                            <Row alignItems="center" height="100%">
+                                <AppText size="large" bold>
+                                    {available}
+                                </AppText>
+                            </Row>
                         </Column>
                         <Column flex="0 0 80px">
                             <Box backgroundColor={theme.colors.lightGrey} width="100%">
@@ -241,42 +244,49 @@ const ClientRestockingPage: React.FC = () => {
                                     Count
                                 </AppText>
                             </Box>
-                            <AppText size="large" bold>{`${matchedMaterialIndex + 1} of ${
-                                matchedMaterials.length
-                            }`}</AppText>
+                            <Row alignItems="center" height="100%">
+                                <AppText size="large" bold>{`${matchedMaterialIndex + 1} of ${
+                                    matchedMaterials.length
+                                }`}</AppText>
+                            </Row>
                         </Column>
                     </Row>
-                    <Row px={3} flexGrow={0} justifyContent="space-between" width="100%">
+                    <Row flexGrow={1} justifyContent="space-between" width="100%">
                         <Column width="100%">
-                            <Box backgroundColor={theme.colors.lightGrey} width="100%">
+                            <Box px={3} backgroundColor={theme.colors.lightGrey} width="100%">
                                 <AppText bold uppercase>
                                     Description
                                 </AppText>
                             </Box>
-                            <AppText
-                                bold
-                                uppercase
-                                size="large"
-                                style={{
-                                    whiteSpace: 'nowrap',
-                                    overflow: 'hidden',
-                                    textOverflow: 'ellipsis',
-                                }}
-                            >
-                                {description}
-                            </AppText>
+                            <Row alignItems="center" height="100%">
+                                <AppText
+                                    px={3}
+                                    bold
+                                    uppercase
+                                    size="large"
+                                    style={{
+                                        whiteSpace: 'nowrap',
+                                        overflow: 'hidden',
+                                        textOverflow: 'ellipsis',
+                                    }}
+                                >
+                                    {description}
+                                </AppText>
+                            </Row>
                         </Column>
                     </Row>
-                    <Row px={3} flexGrow={0} justifyContent="space-between" width="100%">
+                    <Row flexGrow={1} justifyContent="space-between" width="100%">
                         <Column width="100%">
-                            <Box backgroundColor={theme.colors.lightGrey} width="100%">
+                            <Box px={3} backgroundColor={theme.colors.lightGrey} width="100%">
                                 <AppText bold uppercase>
                                     Storage Unit
                                 </AppText>
                             </Box>
-                            <AppText bold uppercase size="xlarge">
-                                {storageUnit}
-                            </AppText>
+                            <Row alignItems="center" height="100%">
+                                <AppText px={3} bold uppercase size="xlarge">
+                                    {storageUnit}
+                                </AppText>
+                            </Row>
                         </Column>
                         <Column flex="0 0 130px" justifyContent="space-between" pb={3}>
                             <Box backgroundColor={theme.colors.lightGrey} width="100%">
@@ -284,11 +294,13 @@ const ClientRestockingPage: React.FC = () => {
                                     Record
                                 </AppText>
                             </Box>
-                            <AppText
-                                bold
-                                uppercase
-                                size="large"
-                            >{`${currentRecord} of ${totalRecords}`}</AppText>
+                            <Row alignItems="center" height="100%">
+                                <AppText
+                                    bold
+                                    uppercase
+                                    size="large"
+                                >{`${adjustedCurrentIndex} of ${totalRecords}`}</AppText>
+                            </Row>
                         </Column>
                     </Row>
                 </Section>
@@ -299,7 +311,6 @@ const ClientRestockingPage: React.FC = () => {
                             gridRow: '1/2',
                         }}
                         height="100%"
-                        // width="100%"
                         variant="secondary"
                         onClick={() => setRecordIndex(getRecord('prev'))}
                     >
@@ -309,19 +320,18 @@ const ClientRestockingPage: React.FC = () => {
                     </Button>
                     <Button
                         style={{
-                            background: 'tomato',
+                            background: theme.colors.error,
                             gridColumn: '2/3',
                             gridRow: '1/2',
                         }}
                         height="100%"
-                        // width="100%"
                         onClick={() => {
                             const index = restockRecords.findIndex(
-                                rec => rec.id === records[recordIndex].id,
+                                rec => rec.id === currentRecord.id,
                             );
                             firebase.doUpdateRestockRecord(index, {
-                                ...testRecord,
-                                status: 'missing',
+                                ...currentRecord,
+                                status: status === 'missing' ? 'pending' : 'missing',
                             });
                         }}
                     >
@@ -335,13 +345,15 @@ const ClientRestockingPage: React.FC = () => {
                             gridRow: '2/3',
                         }}
                         height="100%"
-                        // width="100%"
                         variant="primary"
                         onClick={() => {
                             const index = restockRecords.findIndex(
-                                rec => rec.id === records[recordIndex].id,
+                                rec => rec.id === currentRecord.id,
                             );
-                            firebase.doUpdateRestockRecord(index, testRecord);
+                            firebase.doUpdateRestockRecord(index, {
+                                ...currentRecord,
+                                status: status === 'complete' ? 'pending' : 'complete',
+                            });
                         }}
                     >
                         <AppText noSelect color="light" uppercase bold size="large">
@@ -354,7 +366,6 @@ const ClientRestockingPage: React.FC = () => {
                             gridRow: '1/2',
                         }}
                         height="100%"
-                        // width="100%"
                         variant="secondary"
                         onClick={() => setRecordIndex(getRecord('next'))}
                     >
@@ -383,7 +394,6 @@ const CheckBox = styled.input`
 const ButtonGrid = styled(Box)`
     height: 100%;
     width: 100%;
-    gap: 5px;
     display: grid;
     grid-template-columns: 35% 30% 35%;
     grid-template-rows: repeat(2, 1fr);
@@ -398,15 +408,16 @@ const ThresholdInput = styled.input`
 
 const Container = styled(Box)`
     display: grid;
-    grid-template-rows: 50px repeat(2, auto) auto auto 160px;
+    grid-template-rows: 50px repeat(2, auto) 70px auto 160px;
     grid-template-columns: 1fr;
-    align-items: center;
     height: 100%;
     width: 100%;
     max-width: 600px;
+    max-height: 800px;
     margin: 0 auto;
-    overflow: hidden;
+    overflow: scroll;
     touch-action: manipulation;
+    box-shadow: ${props => props.theme.shadows.large};
 `;
 
 const Section = styled(Column)`
