@@ -1,0 +1,3593 @@
+[
+  {
+    "Product": "CF03501BIR",
+    "Description": "PIPA BIRCH",
+    "Bin": "B01-01-A"
+  },
+  {
+    "Product": "CF03501BIR",
+    "Description": "PIPA BIRCH",
+    "Bin": "B01-01-B"
+  },
+  {
+    "Product": "CF03501BIR",
+    "Description": "PIPA BIRCH",
+    "Bin": "B02-01-B"
+  },
+  {
+    "Product": "CF03501BIR",
+    "Description": "PIPA BIRCH",
+    "Bin": "B03-01-A"
+  },
+  {
+    "Product": "CF03501BIR",
+    "Description": "PIPA BIRCH",
+    "Bin": "B03-01-B"
+  },
+  {
+    "Product": "CF03501BIR",
+    "Description": "PIPA BIRCH",
+    "Bin": "B04-01-A"
+  },
+  {
+    "Product": "CF03501BIR",
+    "Description": "PIPA BIRCH",
+    "Bin": "B04-01-B"
+  },
+  {
+    "Product": "CF03501CVR",
+    "Description": "PIPA CAVIAR",
+    "Bin": "B05-01-A"
+  },
+  {
+    "Product": "CF03501CVR",
+    "Description": "PIPA CAVIAR",
+    "Bin": "B05-01-B"
+  },
+  {
+    "Product": "CF03501CVR",
+    "Description": "PIPA CAVIAR",
+    "Bin": "B06-01-A"
+  },
+  {
+    "Product": "CF03501CVR",
+    "Description": "PIPA CAVIAR",
+    "Bin": "B06-01-B"
+  },
+  {
+    "Product": "CF03501CVR",
+    "Description": "PIPA CAVIAR",
+    "Bin": "B07-01-A"
+  },
+  {
+    "Product": "CF03501CVR",
+    "Description": "PIPA CAVIAR",
+    "Bin": "B07-01-B"
+  },
+  {
+    "Product": "CF03501CVR",
+    "Description": "PIPA CAVIAR",
+    "Bin": "B08-01-A"
+  },
+  {
+    "Product": "CF03501CVR",
+    "Description": "PIPA CAVIAR",
+    "Bin": "B08-01-B"
+  },
+  {
+    "Product": "CF03501FRT",
+    "Description": "PIPA FROST",
+    "Bin": "B09-01-A"
+  },
+  {
+    "Product": "CF03501FRT",
+    "Description": "PIPA FROST",
+    "Bin": "B09-01-B"
+  },
+  {
+    "Product": "CF03501FRT",
+    "Description": "PIPA FROST",
+    "Bin": "B10-01-A"
+  },
+  {
+    "Product": "CF03501FRT",
+    "Description": "PIPA FROST",
+    "Bin": "B10-01-B"
+  },
+  {
+    "Product": "CF03501FRT",
+    "Description": "PIPA FROST",
+    "Bin": "B11-01-A"
+  },
+  {
+    "Product": "CF03501FRT",
+    "Description": "PIPA FROST",
+    "Bin": "B11-01-B"
+  },
+  {
+    "Product": "CF03501FRT",
+    "Description": "PIPA FROST",
+    "Bin": "B12-01-A"
+  },
+  {
+    "Product": "CF03501FRT",
+    "Description": "PIPA FROST",
+    "Bin": "B12-01-B"
+  },
+  {
+    "Product": "CF03501GRN",
+    "Description": "PIPA GRANITE",
+    "Bin": "B13-01-A"
+  },
+  {
+    "Product": "CF03501GRN",
+    "Description": "PIPA GRANITE",
+    "Bin": "B13-01-B"
+  },
+  {
+    "Product": "CF03501GRN",
+    "Description": "PIPA GRANITE",
+    "Bin": "B14-01-B"
+  },
+  {
+    "Product": "CF03501GRN",
+    "Description": "PIPA GRANITE",
+    "Bin": "B15-01-A"
+  },
+  {
+    "Product": "CF03501GRN",
+    "Description": "PIPA GRANITE",
+    "Bin": "B15-01-B"
+  },
+  {
+    "Product": "CF03501GRN",
+    "Description": "PIPA GRANITE",
+    "Bin": "B16-01-A"
+  },
+  {
+    "Product": "CF03501GRN",
+    "Description": "PIPA GRANITE",
+    "Bin": "B16-01-B"
+  },
+  {
+    "Product": "CF08500ASP",
+    "Description": "PIPA LITE ASPEN",
+    "Bin": "B19-01-A"
+  },
+  {
+    "Product": "CF08500ASP",
+    "Description": "PIPA LITE ASPEN",
+    "Bin": "B19-01-B"
+  },
+  {
+    "Product": "CF08500ASP",
+    "Description": "PIPA LITE ASPEN",
+    "Bin": "B20-01-A"
+  },
+  {
+    "Product": "CF08500ASP",
+    "Description": "PIPA LITE ASPEN",
+    "Bin": "B20-01-B"
+  },
+  {
+    "Product": "CF08500ASP",
+    "Description": "PIPA LITE ASPEN",
+    "Bin": "B21-01-A"
+  },
+  {
+    "Product": "CF08500ASP",
+    "Description": "PIPA LITE ASPEN",
+    "Bin": "B21-01-B"
+  },
+  {
+    "Product": "CF08500ASP",
+    "Description": "PIPA LITE ASPEN",
+    "Bin": "B22-01-A"
+  },
+  {
+    "Product": "CF08500ASP",
+    "Description": "PIPA LITE ASPEN",
+    "Bin": "B22-01-B"
+  },
+  {
+    "Product": "CF08500CVR",
+    "Description": "PIPA LITE CAVIAR",
+    "Bin": "B23-01-A"
+  },
+  {
+    "Product": "CF08500CVR",
+    "Description": "PIPA LITE CAVIAR",
+    "Bin": "B23-01-B"
+  },
+  {
+    "Product": "CF08500CVR",
+    "Description": "PIPA LITE CAVIAR",
+    "Bin": "B24-01-A"
+  },
+  {
+    "Product": "CF08500CVR",
+    "Description": "PIPA LITE CAVIAR",
+    "Bin": "B24-01-B"
+  },
+  {
+    "Product": "CF08500CVR",
+    "Description": "PIPA LITE CAVIAR",
+    "Bin": "B25-01-A"
+  },
+  {
+    "Product": "CF08500CVR",
+    "Description": "PIPA LITE CAVIAR",
+    "Bin": "B25-01-B"
+  },
+  {
+    "Product": "CF08500CVR",
+    "Description": "PIPA LITE CAVIAR",
+    "Bin": "B26-01-A"
+  },
+  {
+    "Product": "CF08500CVR",
+    "Description": "PIPA LITE CAVIAR",
+    "Bin": "B26-01-Bx"
+  },
+  {
+    "Product": "CF08500CVR",
+    "Description": "PIPA LITE CAVIAR",
+    "Bin": "B27-01-A"
+  },
+  {
+    "Product": "CF08500CVR",
+    "Description": "PIPA LITE CAVIAR",
+    "Bin": "B27-01-B"
+  },
+  {
+    "Product": "CF08500CVR",
+    "Description": "PIPA LITE CAVIAR",
+    "Bin": "B28-01-A"
+  },
+  {
+    "Product": "CF08500CVR",
+    "Description": "PIPA LITE CAVIAR",
+    "Bin": "B28-01-B"
+  },
+  {
+    "Product": "CF08500GRN",
+    "Description": "PIPA LITE GRANITE",
+    "Bin": "B29-01-A"
+  },
+  {
+    "Product": "CF08500GRN",
+    "Description": "PIPA LITE GRANITE",
+    "Bin": "B29-01-B"
+  },
+  {
+    "Product": "CF08500GRN",
+    "Description": "PIPA LITE GRANITE",
+    "Bin": "B30-01-A"
+  },
+  {
+    "Product": "CF08500GRN",
+    "Description": "PIPA LITE GRANITE",
+    "Bin": "B30-01-B"
+  },
+  {
+    "Product": "CF08500GRN",
+    "Description": "PIPA LITE GRANITE",
+    "Bin": "B31-01-A"
+  },
+  {
+    "Product": "CF08500GRN",
+    "Description": "PIPA LITE GRANITE",
+    "Bin": "B31-01-B"
+  },
+  {
+    "Product": "CF08500GRN",
+    "Description": "PIPA LITE GRANITE",
+    "Bin": "B32-01-A"
+  },
+  {
+    "Product": "CF08500GRN",
+    "Description": "PIPA LITE GRANITE",
+    "Bin": "B32-01-B"
+  },
+  {
+    "Product": "CF08500SAG",
+    "Description": "PIPA LITE SAGE",
+    "Bin": "C01-01-A"
+  },
+  {
+    "Product": "CF08500SAG",
+    "Description": "PIPA LITE SAGE",
+    "Bin": "C01-01-B"
+  },
+  {
+    "Product": "CF08500SAG",
+    "Description": "PIPA LITE SAGE",
+    "Bin": "C02-01-A"
+  },
+  {
+    "Product": "CF08500SAG",
+    "Description": "PIPA LITE SAGE",
+    "Bin": "C02-01-B"
+  },
+  {
+    "Product": "CF08500SAG",
+    "Description": "PIPA LITE SAGE",
+    "Bin": "C03-01-A"
+  },
+  {
+    "Product": "CF08500SAG",
+    "Description": "PIPA LITE SAGE",
+    "Bin": "C03-01-B"
+  },
+  {
+    "Product": "CF08500SAG",
+    "Description": "PIPA LITE SAGE",
+    "Bin": "C04-01-A"
+  },
+  {
+    "Product": "CF08500SAG",
+    "Description": "PIPA LITE SAGE",
+    "Bin": "C04-01-B"
+  },
+  {
+    "Product": "CF08501ASP",
+    "Description": "PIPA LITE LUX W/ BASE ASPEN",
+    "Bin": "C05-01-A"
+  },
+  {
+    "Product": "CF08501ASP",
+    "Description": "PIPA LITE LUX W/ BASE ASPEN",
+    "Bin": "C05-01-B"
+  },
+  {
+    "Product": "CF08501ASP",
+    "Description": "PIPA LITE LUX W/ BASE ASPEN",
+    "Bin": "C06-01-A"
+  },
+  {
+    "Product": "CF08501ASP",
+    "Description": "PIPA LITE LUX W/ BASE ASPEN",
+    "Bin": "C06-01-B"
+  },
+  {
+    "Product": "CF08501ASP",
+    "Description": "PIPA LITE LUX W/ BASE ASPEN",
+    "Bin": "C07-01-A"
+  },
+  {
+    "Product": "CF08501ASP",
+    "Description": "PIPA LITE LUX W/ BASE ASPEN",
+    "Bin": "C07-01-B"
+  },
+  {
+    "Product": "CF08501ASP",
+    "Description": "PIPA LITE LUX W/ BASE ASPEN",
+    "Bin": "C08-01-A"
+  },
+  {
+    "Product": "CF08501ASP",
+    "Description": "PIPA LITE LUX W/ BASE ASPEN",
+    "Bin": "C08-01-B"
+  },
+  {
+    "Product": "CF08501ASP",
+    "Description": "PIPA LITE LUX W/ BASE ASPEN",
+    "Bin": "C09-01-A"
+  },
+  {
+    "Product": "CF08501ASP",
+    "Description": "PIPA LITE LUX W/ BASE ASPEN",
+    "Bin": "C09-01-B"
+  },
+  {
+    "Product": "CF08501ASP",
+    "Description": "PIPA LITE LUX W/ BASE ASPEN",
+    "Bin": "C10-01-A"
+  },
+  {
+    "Product": "CF08501ASP",
+    "Description": "PIPA LITE LUX W/ BASE ASPEN",
+    "Bin": "C10-01-B"
+  },
+  {
+    "Product": "CF08501BIR",
+    "Description": "PIPA LITE LX BIRCH",
+    "Bin": "C11-01-A"
+  },
+  {
+    "Product": "CF08501BIR",
+    "Description": "PIPA LITE LX BIRCH",
+    "Bin": "C11-01-B"
+  },
+  {
+    "Product": "CF08501BIR",
+    "Description": "PIPA LITE LX BIRCH",
+    "Bin": "C12-01-A"
+  },
+  {
+    "Product": "CF08501BIR",
+    "Description": "PIPA LITE LX BIRCH",
+    "Bin": "C12-01-B"
+  },
+  {
+    "Product": "CF08501BIR",
+    "Description": "PIPA LITE LX BIRCH",
+    "Bin": "C13-01-A"
+  },
+  {
+    "Product": "CF08501BIR",
+    "Description": "PIPA LITE LX BIRCH",
+    "Bin": "C13-01-B"
+  },
+  {
+    "Product": "CF08501BIR",
+    "Description": "PIPA LITE LX BIRCH",
+    "Bin": "C14-01-A"
+  },
+  {
+    "Product": "CF08501BIR",
+    "Description": "PIPA LITE LX BIRCH",
+    "Bin": "C14-01-B"
+  },
+  {
+    "Product": "CF08501CVR",
+    "Description": "PIPA LITE LUX W/ BASE CAVIAR",
+    "Bin": "C17-01-A"
+  },
+  {
+    "Product": "CF08501CVR",
+    "Description": "PIPA LITE LUX W/ BASE CAVIAR",
+    "Bin": "C17-01-B"
+  },
+  {
+    "Product": "CF08501CVR",
+    "Description": "PIPA LITE LUX W/ BASE CAVIAR",
+    "Bin": "C18-01-A"
+  },
+  {
+    "Product": "CF08501CVR",
+    "Description": "PIPA LITE LUX W/ BASE CAVIAR",
+    "Bin": "C18-01-B"
+  },
+  {
+    "Product": "CF08501CVR",
+    "Description": "PIPA LITE LUX W/ BASE CAVIAR",
+    "Bin": "C19-01-A"
+  },
+  {
+    "Product": "CF08501CVR",
+    "Description": "PIPA LITE LUX W/ BASE CAVIAR",
+    "Bin": "C19-01-B"
+  },
+  {
+    "Product": "CF08501CVR",
+    "Description": "PIPA LITE LUX W/ BASE CAVIAR",
+    "Bin": "C20-01-A"
+  },
+  {
+    "Product": "CF08501CVR",
+    "Description": "PIPA LITE LUX W/ BASE CAVIAR",
+    "Bin": "C20-01-B"
+  },
+  {
+    "Product": "CF08501CVR",
+    "Description": "PIPA LITE LUX W/ BASE CAVIAR",
+    "Bin": "C21-01-A"
+  },
+  {
+    "Product": "CF08501CVR",
+    "Description": "PIPA LITE LUX W/ BASE CAVIAR",
+    "Bin": "C21-01-B"
+  },
+  {
+    "Product": "CF08501CVR",
+    "Description": "PIPA LITE LUX W/ BASE CAVIAR",
+    "Bin": "C22-01-A"
+  },
+  {
+    "Product": "CF08501CVR",
+    "Description": "PIPA LITE LUX W/ BASE CAVIAR",
+    "Bin": "C22-01-B"
+  },
+  {
+    "Product": "CF08501FRT",
+    "Description": "PIPA LITE LUX W/ BASE FROST",
+    "Bin": "C23-01-A"
+  },
+  {
+    "Product": "CF08501FRT",
+    "Description": "PIPA LITE LUX W/ BASE FROST",
+    "Bin": "C23-01-B"
+  },
+  {
+    "Product": "CF08501FRT",
+    "Description": "PIPA LITE LUX W/ BASE FROST",
+    "Bin": "C24-01-A"
+  },
+  {
+    "Product": "CF08501FRT",
+    "Description": "PIPA LITE LUX W/ BASE FROST",
+    "Bin": "C24-01-B"
+  },
+  {
+    "Product": "CF08501FRT",
+    "Description": "PIPA LITE LUX W/ BASE FROST",
+    "Bin": "C25-01-A"
+  },
+  {
+    "Product": "CF08501FRT",
+    "Description": "PIPA LITE LUX W/ BASE FROST",
+    "Bin": "C25-01-B"
+  },
+  {
+    "Product": "CF08501FRT",
+    "Description": "PIPA LITE LUX W/ BASE FROST",
+    "Bin": "C26-01-A"
+  },
+  {
+    "Product": "CF08501FRT",
+    "Description": "PIPA LITE LUX W/ BASE FROST",
+    "Bin": "C26-01-B"
+  },
+  {
+    "Product": "CF08501FRT",
+    "Description": "PIPA LITE LUX W/ BASE FROST",
+    "Bin": "C27-01-A"
+  },
+  {
+    "Product": "CF08501FRT",
+    "Description": "PIPA LITE LUX W/ BASE FROST",
+    "Bin": "C27-01-B"
+  },
+  {
+    "Product": "CF08501FRT",
+    "Description": "PIPA LITE LUX W/ BASE FROST",
+    "Bin": "C28-01-A"
+  },
+  {
+    "Product": "CF08501FRT",
+    "Description": "PIPA LITE LUX W/ BASE FROST",
+    "Bin": "C28-01-B"
+  },
+  {
+    "Product": "CF08501GRN",
+    "Description": "PIPA LITE LUX W/ BASE GRANITE",
+    "Bin": "C29-01-A"
+  },
+  {
+    "Product": "CF08501GRN",
+    "Description": "PIPA LITE LUX W/ BASE GRANITE",
+    "Bin": "C29-01-B"
+  },
+  {
+    "Product": "CF08501GRN",
+    "Description": "PIPA LITE LUX W/ BASE GRANITE",
+    "Bin": "C30-01-A"
+  },
+  {
+    "Product": "CF08501GRN",
+    "Description": "PIPA LITE LUX W/ BASE GRANITE",
+    "Bin": "C30-01-B"
+  },
+  {
+    "Product": "CF08501GRN",
+    "Description": "PIPA LITE LUX W/ BASE GRANITE",
+    "Bin": "C31-01-A"
+  },
+  {
+    "Product": "CF08501GRN",
+    "Description": "PIPA LITE LUX W/ BASE GRANITE",
+    "Bin": "C31-01-B"
+  },
+  {
+    "Product": "CF08501GRN",
+    "Description": "PIPA LITE LUX W/ BASE GRANITE",
+    "Bin": "C32-01-A"
+  },
+  {
+    "Product": "CF08501GRN",
+    "Description": "PIPA LITE LUX W/ BASE GRANITE",
+    "Bin": "C32-01-B"
+  },
+  {
+    "Product": "CS05103CVR",
+    "Description": "RAVA CAVIAR",
+    "Bin": "D01-01-A"
+  },
+  {
+    "Product": "CS05103CVR",
+    "Description": "RAVA CAVIAR",
+    "Bin": "D01-01-B"
+  },
+  {
+    "Product": "CS05103CVR",
+    "Description": "RAVA CAVIAR",
+    "Bin": "D02-01-A"
+  },
+  {
+    "Product": "CS05103CVR",
+    "Description": "RAVA CAVIAR",
+    "Bin": "D02-01-B"
+  },
+  {
+    "Product": "CS05103CVR",
+    "Description": "RAVA CAVIAR",
+    "Bin": "D03-01-A"
+  },
+  {
+    "Product": "CS05103CVR",
+    "Description": "RAVA CAVIAR",
+    "Bin": "D03-01-B"
+  },
+  {
+    "Product": "CS05103CVR",
+    "Description": "RAVA CAVIAR",
+    "Bin": "D04-01-A"
+  },
+  {
+    "Product": "CS05103CVR",
+    "Description": "RAVA CAVIAR",
+    "Bin": "D04-01-B"
+  },
+  {
+    "Product": "CS05103FRT",
+    "Description": "RAVA FROST",
+    "Bin": "D05-01-A"
+  },
+  {
+    "Product": "CS05103FRT",
+    "Description": "RAVA FROST",
+    "Bin": "D05-01-B"
+  },
+  {
+    "Product": "CS05103FRT",
+    "Description": "RAVA FROST",
+    "Bin": "D06-01-A"
+  },
+  {
+    "Product": "CS05103FRT",
+    "Description": "RAVA FROST",
+    "Bin": "D06-01-B"
+  },
+  {
+    "Product": "CS05103FRT",
+    "Description": "RAVA FROST",
+    "Bin": "D07-01-A"
+  },
+  {
+    "Product": "CS05103FRT",
+    "Description": "RAVA FROST",
+    "Bin": "D07-01-B"
+  },
+  {
+    "Product": "CS05103FRT",
+    "Description": "RAVA FROST",
+    "Bin": "D08-01-A"
+  },
+  {
+    "Product": "CS05103FRT",
+    "Description": "RAVA FROST",
+    "Bin": "D08-01-B"
+  },
+  {
+    "Product": "CS05103GRN",
+    "Description": "RAVA GRANITE",
+    "Bin": "D09-01-A"
+  },
+  {
+    "Product": "CS05103GRN",
+    "Description": "RAVA GRANITE",
+    "Bin": "D09-01-B"
+  },
+  {
+    "Product": "CS05103GRN",
+    "Description": "RAVA GRANITE",
+    "Bin": "D10-01-A"
+  },
+  {
+    "Product": "CS05103GRN",
+    "Description": "RAVA GRANITE",
+    "Bin": "D10-01-B"
+  },
+  {
+    "Product": "CS05103GRN",
+    "Description": "RAVA GRANITE",
+    "Bin": "D11-01-A"
+  },
+  {
+    "Product": "CS05103GRN",
+    "Description": "RAVA GRANITE",
+    "Bin": "D11-01-B"
+  },
+  {
+    "Product": "CS05103ROS",
+    "Description": "RAVA ROSE",
+    "Bin": "D12-01-A"
+  },
+  {
+    "Product": "CS05103ROS",
+    "Description": "RAVA ROSE",
+    "Bin": "D12-01-B"
+  },
+  {
+    "Product": "CS05103ROS",
+    "Description": "RAVA ROSE",
+    "Bin": "D13-01-A"
+  },
+  {
+    "Product": "CS05103ROS",
+    "Description": "RAVA ROSE",
+    "Bin": "D13-01-B"
+  },
+  {
+    "Product": "CS05103LAK",
+    "Description": "RAVA LAKE",
+    "Bin": "D14-01-A"
+  },
+  {
+    "Product": "CS05103LAK",
+    "Description": "RAVA LAKE",
+    "Bin": "D14-01-B"
+  },
+  {
+    "Product": "CS05103LAK",
+    "Description": "RAVA LAKE",
+    "Bin": "D15-01-A"
+  },
+  {
+    "Product": "CS05103LAK",
+    "Description": "RAVA LAKE",
+    "Bin": "D15-01-B"
+  },
+  {
+    "Product": "CS05103LAK",
+    "Description": "RAVA LAKE",
+    "Bin": "D16-01-A"
+  },
+  {
+    "Product": "CS05103LAK",
+    "Description": "RAVA LAKE",
+    "Bin": "D16-01-B"
+  },
+  {
+    "Product": "HC-10-004",
+    "Description": "ZAAZ PEWTER",
+    "Bin": "D19-01-A"
+  },
+  {
+    "Product": "HC-10-004",
+    "Description": "ZAAZ PEWTER",
+    "Bin": "D19-01-B"
+  },
+  {
+    "Product": "HC-10-005",
+    "Description": "ZAAZ CARBON",
+    "Bin": "D20-01-A"
+  },
+  {
+    "Product": "HC-10-005",
+    "Description": "ZAAZ CARBON",
+    "Bin": "D20-01-B"
+  },
+  {
+    "Product": "HC-10-009",
+    "Description": "ZAAZ ALMOND",
+    "Bin": "D21-01-A"
+  },
+  {
+    "Product": "HC-10-009",
+    "Description": "ZAAZ ALMOND",
+    "Bin": "D21-01-B"
+  },
+  {
+    "Product": "HC-10-015",
+    "Description": "ZAAZ JADE",
+    "Bin": "D22-01-A"
+  },
+  {
+    "Product": "HC-10-015",
+    "Description": "ZAAZ JADE",
+    "Bin": "D22-01-B"
+  },
+  {
+    "Product": "STC08000CVR",
+    "Description": "MIXX 2 W/ BASSINET CAVIAR",
+    "Bin": "D23-01-A"
+  },
+  {
+    "Product": "STC08000CVR",
+    "Description": "MIXX 2 W/ BASSINET CAVIAR",
+    "Bin": "D23-01-B"
+  },
+  {
+    "Product": "STC08000CVR",
+    "Description": "MIXX 2 W/ BASSINET CAVIAR",
+    "Bin": "D24-01-A"
+  },
+  {
+    "Product": "STC08000CVR",
+    "Description": "MIXX 2 W/ BASSINET CAVIAR",
+    "Bin": "D24-01-B"
+  },
+  {
+    "Product": "ST08101ASP",
+    "Description": "DEMI GROW ASPEN",
+    "Bin": "D25-01-A"
+  },
+  {
+    "Product": "ST08101ASP",
+    "Description": "DEMI GROW ASPEN",
+    "Bin": "D25-01-B"
+  },
+  {
+    "Product": "ST08101ASP",
+    "Description": "DEMI GROW ASPEN",
+    "Bin": "D26-01-A"
+  },
+  {
+    "Product": "ST08101ASP",
+    "Description": "DEMI GROW ASPEN",
+    "Bin": "D26-01-B"
+  },
+  {
+    "Product": "ST08101CVR",
+    "Description": "DEMI GROW CAVIAR",
+    "Bin": "D27-01-A"
+  },
+  {
+    "Product": "ST08101CVR",
+    "Description": "DEMI GROW CAVIAR",
+    "Bin": "D27-01-B"
+  },
+  {
+    "Product": "ST08101CVR",
+    "Description": "DEMI GROW CAVIAR",
+    "Bin": "D28-01-A"
+  },
+  {
+    "Product": "ST08101CVR",
+    "Description": "DEMI GROW CAVIAR",
+    "Bin": "D28-01-B"
+  },
+  {
+    "Product": "ST08101CVR",
+    "Description": "DEMI GROW CAVIAR",
+    "Bin": "D29-01-A"
+  },
+  {
+    "Product": "ST08101CVR",
+    "Description": "DEMI GROW CAVIAR",
+    "Bin": "D29-01-B"
+  },
+  {
+    "Product": "ST08101CVR",
+    "Description": "DEMI GROW CAVIAR",
+    "Bin": "D30-01-A"
+  },
+  {
+    "Product": "ST08101CVR",
+    "Description": "DEMI GROW CAVIAR",
+    "Bin": "D30-01-B"
+  },
+  {
+    "Product": "ST08101FRT",
+    "Description": "DEMI GROW FROST",
+    "Bin": "D31-01-A"
+  },
+  {
+    "Product": "ST08101FRT",
+    "Description": "DEMI GROW FROST",
+    "Bin": "D31-01-B"
+  },
+  {
+    "Product": "ST08101FRT",
+    "Description": "DEMI GROW FROST",
+    "Bin": "D32-01-A"
+  },
+  {
+    "Product": "ST08101FRT",
+    "Description": "DEMI GROW FROST",
+    "Bin": "D32-01-B"
+  },
+  {
+    "Product": "ST10502BIR",
+    "Description": "MIXX BIRCH",
+    "Bin": "E01-01-A"
+  },
+  {
+    "Product": "ST10502BIR",
+    "Description": "MIXX BIRCH",
+    "Bin": "E01-01-B"
+  },
+  {
+    "Product": "ST10502BIR",
+    "Description": "MIXX BIRCH",
+    "Bin": "E02-01-A"
+  },
+  {
+    "Product": "ST10502BIR",
+    "Description": "MIXX BIRCH",
+    "Bin": "E02-01-B"
+  },
+  {
+    "Product": "ST10502CVR",
+    "Description": "MIXX CAVIAR",
+    "Bin": "E03-01-A"
+  },
+  {
+    "Product": "ST10502CVR",
+    "Description": "MIXX CAVIAR",
+    "Bin": "E03-01-B"
+  },
+  {
+    "Product": "ST10502CVR",
+    "Description": "MIXX CAVIAR",
+    "Bin": "E04-01-A"
+  },
+  {
+    "Product": "ST10502CVR",
+    "Description": "MIXX CAVIAR",
+    "Bin": "E04-01-B"
+  },
+  {
+    "Product": "ST10502GRN",
+    "Description": "MIXX GRANITE",
+    "Bin": "E05-01-A"
+  },
+  {
+    "Product": "ST10502GRN",
+    "Description": "MIXX GRANITE",
+    "Bin": "E05-01-B"
+  },
+  {
+    "Product": "ST10502GRN",
+    "Description": "MIXX GRANITE",
+    "Bin": "E06-01-A"
+  },
+  {
+    "Product": "ST10502GRN",
+    "Description": "MIXX GRANITE",
+    "Bin": "E06-01-B"
+  },
+  {
+    "Product": "TC11201CVR",
+    "Description": "COVE AIRE  W/NAPPER&SHEET CAVIAR",
+    "Bin": "E07-01-A"
+  },
+  {
+    "Product": "n/a",
+    "Description": "none",
+    "Bin": "E07-01-Bx"
+  },
+  {
+    "Product": "TC11201CVR",
+    "Description": "COVE AIRE  W/NAPPER&SHEET CAVIAR",
+    "Bin": "E08-01-A"
+  },
+  {
+    "Product": "TC11201CVR",
+    "Description": "COVE AIRE  W/NAPPER&SHEET CAVIAR",
+    "Bin": "E08-01-B"
+  },
+  {
+    "Product": "TC11201CHP",
+    "Description": "COVE AIRE  W/NAPPER&SHEET CHAMPAGNE",
+    "Bin": "E09-01-A"
+  },
+  {
+    "Product": "TC11201CHP",
+    "Description": "COVE AIRE  W/NAPPER&SHEET CHAMPAGNE",
+    "Bin": "E09-01-B"
+  },
+  {
+    "Product": "TC11201CHP",
+    "Description": "COVE AIRE  W/NAPPER&SHEET CHAMPAGNE",
+    "Bin": "E10-01-A"
+  },
+  {
+    "Product": "TC11201CHP",
+    "Description": "COVE AIRE  W/NAPPER&SHEET CHAMPAGNE",
+    "Bin": "E10-01-B"
+  },
+  {
+    "Product": "TC11201FRT",
+    "Description": "COVE AIRE  W/NAPPER&SHEET FROST",
+    "Bin": "E11-01-A"
+  },
+  {
+    "Product": "TC11201FRT",
+    "Description": "COVE AIRE  W/NAPPER&SHEET FROST",
+    "Bin": "E11-01-B"
+  },
+  {
+    "Product": "TC11201FRT",
+    "Description": "COVE AIRE  W/NAPPER&SHEET FROST",
+    "Bin": "E12-01-A"
+  },
+  {
+    "Product": "TC11201FRT",
+    "Description": "COVE AIRE  W/NAPPER&SHEET FROST",
+    "Bin": "E12-01-B"
+  },
+  {
+    "Product": "TC04512ASP",
+    "Description": "SENA AIRE ASPEN W/ SHEET",
+    "Bin": "E13-01-A"
+  },
+  {
+    "Product": "TC04512ASP",
+    "Description": "SENA AIRE ASPEN W/ SHEET",
+    "Bin": "E13-01-B"
+  },
+  {
+    "Product": "TC04512ASP",
+    "Description": "SENA AIRE ASPEN W/ SHEET",
+    "Bin": "E14-01-A"
+  },
+  {
+    "Product": "TC04512ASP",
+    "Description": "SENA AIRE ASPEN W/ SHEET",
+    "Bin": "E14-01-B"
+  },
+  {
+    "Product": "TC04512ASP",
+    "Description": "SENA AIRE ASPEN W/ SHEET",
+    "Bin": "E17-01-A"
+  },
+  {
+    "Product": "TC04512ASP",
+    "Description": "SENA AIRE ASPEN W/ SHEET",
+    "Bin": "E17-01-B"
+  },
+  {
+    "Product": "TC04512ASP",
+    "Description": "SENA AIRE ASPEN W/ SHEET",
+    "Bin": "E18-01-A"
+  },
+  {
+    "Product": "TC04512ASP",
+    "Description": "SENA AIRE ASPEN W/ SHEET",
+    "Bin": "E18-01-B"
+  },
+  {
+    "Product": "n/a",
+    "Description": "none",
+    "Bin": "E19-01-Ax"
+  },
+  {
+    "Product": "TC04512CVR",
+    "Description": "SENA AIRE CAVIAR W/SHEET",
+    "Bin": "E19-01-B"
+  },
+  {
+    "Product": "TC04512CVR",
+    "Description": "SENA AIRE CAVIAR W/SHEET",
+    "Bin": "E20-01-A"
+  },
+  {
+    "Product": "TC04512CVR",
+    "Description": "SENA AIRE CAVIAR W/SHEET",
+    "Bin": "E20-01-B"
+  },
+  {
+    "Product": "TC04512CVR",
+    "Description": "SENA AIRE CAVIAR W/SHEET",
+    "Bin": "E21-01-A"
+  },
+  {
+    "Product": "TC04512CVR",
+    "Description": "SENA AIRE CAVIAR W/SHEET",
+    "Bin": "E21-01-B"
+  },
+  {
+    "Product": "TC04512CVR",
+    "Description": "SENA AIRE CAVIAR W/SHEET",
+    "Bin": "E22-01-A"
+  },
+  {
+    "Product": "TC04512CVR",
+    "Description": "SENA AIRE CAVIAR W/SHEET",
+    "Bin": "E22-01-B"
+  },
+  {
+    "Product": "TC04512GRN",
+    "Description": "SENA AIRE GRANITE W/SHEET",
+    "Bin": "E23-01-A"
+  },
+  {
+    "Product": "TC04512GRN",
+    "Description": "SENA AIRE GRANITE W/SHEET",
+    "Bin": "E23-01-B"
+  },
+  {
+    "Product": "TC04512GRN",
+    "Description": "SENA AIRE GRANITE W/SHEET",
+    "Bin": "E24-01-A"
+  },
+  {
+    "Product": "TC04512GRN",
+    "Description": "SENA AIRE GRANITE W/SHEET",
+    "Bin": "E24-01-B"
+  },
+  {
+    "Product": "TC04512GRN",
+    "Description": "SENA AIRE GRANITE W/SHEET",
+    "Bin": "E25-01-A"
+  },
+  {
+    "Product": "TC04512GRN",
+    "Description": "SENA AIRE GRANITE W/SHEET",
+    "Bin": "E25-01-B"
+  },
+  {
+    "Product": "TC04512GRN",
+    "Description": "SENA AIRE GRANITE W/SHEET",
+    "Bin": "E26-01-A"
+  },
+  {
+    "Product": "TC04512GRN",
+    "Description": "SENA AIRE GRANITE W/SHEET",
+    "Bin": "E26-01-B"
+  },
+  {
+    "Product": "TC04573CHP",
+    "Description": "SENA AIRE MINI CHAMPAGNE W/SHEET",
+    "Bin": "E27-01-A"
+  },
+  {
+    "Product": "TC04573CHP",
+    "Description": "SENA AIRE MINI CHAMPAGNE W/SHEET",
+    "Bin": "E27-01-B"
+  },
+  {
+    "Product": "TC04573CHP",
+    "Description": "SENA AIRE MINI CHAMPAGNE W/SHEET",
+    "Bin": "E28-01-A"
+  },
+  {
+    "Product": "TC04573CHP",
+    "Description": "SENA AIRE MINI CHAMPAGNE W/SHEET",
+    "Bin": "E28-01-B"
+  },
+  {
+    "Product": "TC04573CHP",
+    "Description": "SENA AIRE MINI CHAMPAGNE W/SHEET",
+    "Bin": "E29-01-A"
+  },
+  {
+    "Product": "TC04573CHP",
+    "Description": "SENA AIRE MINI CHAMPAGNE W/SHEET",
+    "Bin": "E29-01-B"
+  },
+  {
+    "Product": "TC04573IRN",
+    "Description": "SENA AIRE MINI IRON W/SHEET",
+    "Bin": "E30-01-A"
+  },
+  {
+    "Product": "TC04573IRN",
+    "Description": "SENA AIRE MINI IRON W/SHEET",
+    "Bin": "E30-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "E31-01-Ax"
+  },
+  {
+    "Product": "TC04573IRN",
+    "Description": "SENA AIRE MINI IRON W/SHEET",
+    "Bin": "E31-01-B"
+  },
+  {
+    "Product": "TC04573IRN",
+    "Description": "SENA AIRE MINI IRON W/SHEET",
+    "Bin": "E32-01-A"
+  },
+  {
+    "Product": "TC04573IRN",
+    "Description": "SENA AIRE MINI IRON W/SHEET",
+    "Bin": "E32-01-B"
+  },
+  {
+    "Product": "ST10700ASP",
+    "Description": "TAVO REFRESH ASPEN",
+    "Bin": "F01-01-A"
+  },
+  {
+    "Product": "ST10700ASP",
+    "Description": "TAVO REFRESH ASPEN",
+    "Bin": "F01-01-B"
+  },
+  {
+    "Product": "ST10700ASP",
+    "Description": "TAVO REFRESH ASPEN",
+    "Bin": "F02-01-A"
+  },
+  {
+    "Product": "ST10700ASP",
+    "Description": "TAVO REFRESH ASPEN",
+    "Bin": "F02-01-B"
+  },
+  {
+    "Product": "ST10700ASP",
+    "Description": "TAVO REFRESH ASPEN",
+    "Bin": "F03-01-A"
+  },
+  {
+    "Product": "ST10700ASP",
+    "Description": "TAVO REFRESH ASPEN",
+    "Bin": "F03-01-B"
+  },
+  {
+    "Product": "ST10700ASP",
+    "Description": "TAVO REFRESH ASPEN",
+    "Bin": "F04-01-A"
+  },
+  {
+    "Product": "ST10700ASP",
+    "Description": "TAVO REFRESH ASPEN",
+    "Bin": "F04-01-B"
+  },
+  {
+    "Product": "ST10700CVR",
+    "Description": "TAVO REFRESH CAVIAR",
+    "Bin": "F05-01-A"
+  },
+  {
+    "Product": "ST10700CVR",
+    "Description": "TAVO REFRESH CAVIAR",
+    "Bin": "F05-01-B"
+  },
+  {
+    "Product": "ST10700CVR",
+    "Description": "TAVO REFRESH CAVIAR",
+    "Bin": "F06-01-A"
+  },
+  {
+    "Product": "ST10700CVR",
+    "Description": "TAVO REFRESH CAVIAR",
+    "Bin": "F06-01-B"
+  },
+  {
+    "Product": "ST10700CVR",
+    "Description": "TAVO REFRESH CAVIAR",
+    "Bin": "F07-01-A"
+  },
+  {
+    "Product": "ST10700CVR",
+    "Description": "TAVO REFRESH CAVIAR",
+    "Bin": "F07-01-B"
+  },
+  {
+    "Product": "ST10700CVR",
+    "Description": "TAVO REFRESH CAVIAR",
+    "Bin": "F08-01-A"
+  },
+  {
+    "Product": "ST10700CVR",
+    "Description": "TAVO REFRESH CAVIAR",
+    "Bin": "F08-01-B"
+  },
+  {
+    "Product": "ST10700FRT",
+    "Description": "TAVO REFRESH FROST",
+    "Bin": "F09-01-A"
+  },
+  {
+    "Product": "ST10700FRT",
+    "Description": "TAVO REFRESH FROST",
+    "Bin": "F09-01-B"
+  },
+  {
+    "Product": "ST10700FRT",
+    "Description": "TAVO REFRESH FROST",
+    "Bin": "F10-01-A"
+  },
+  {
+    "Product": "ST10700FRT",
+    "Description": "TAVO REFRESH FROST",
+    "Bin": "F10-01-B"
+  },
+  {
+    "Product": "ST10700FRT",
+    "Description": "TAVO REFRESH FROST",
+    "Bin": "F11-01-A"
+  },
+  {
+    "Product": "ST10700FRT",
+    "Description": "TAVO REFRESH FROST",
+    "Bin": "F11-01-B"
+  },
+  {
+    "Product": "ST10700FRT",
+    "Description": "TAVO REFRESH FROST",
+    "Bin": "F12-01-A"
+  },
+  {
+    "Product": "ST10700FRT",
+    "Description": "TAVO REFRESH FROST",
+    "Bin": "F12-01-B"
+  },
+  {
+    "Product": "ST10700GRN",
+    "Description": "TAVO GRANITE",
+    "Bin": "F13-01-A"
+  },
+  {
+    "Product": "ST10700GRN",
+    "Description": "TAVO GRANITE",
+    "Bin": "F13-01-B"
+  },
+  {
+    "Product": "ST10700GRN",
+    "Description": "TAVO GRANITE",
+    "Bin": "F14-01-A"
+  },
+  {
+    "Product": "ST10700GRN",
+    "Description": "TAVO GRANITE",
+    "Bin": "F14-01-B"
+  },
+  {
+    "Product": "ST10700GRN",
+    "Description": "TAVO GRANITE",
+    "Bin": "F15-01-A"
+  },
+  {
+    "Product": "ST10700GRN",
+    "Description": "TAVO GRANITE",
+    "Bin": "F15-01-B"
+  },
+  {
+    "Product": "ST10700GRN",
+    "Description": "TAVO GRANITE",
+    "Bin": "F16-01-A"
+  },
+  {
+    "Product": "ST10700GRN",
+    "Description": "TAVO GRANITE",
+    "Bin": "F16-01-B"
+  },
+  {
+    "Product": "ST10700SAG",
+    "Description": "TAVO SAGE",
+    "Bin": "F19-01-A"
+  },
+  {
+    "Product": "ST10700SAG",
+    "Description": "TAVO SAGE",
+    "Bin": "F19-01-B"
+  },
+  {
+    "Product": "ST10700SAG",
+    "Description": "TAVO SAGE",
+    "Bin": "F20-01-A"
+  },
+  {
+    "Product": "ST10700SAG",
+    "Description": "TAVO SAGE",
+    "Bin": "F20-01-B"
+  },
+  {
+    "Product": "ST10700SAG",
+    "Description": "TAVO SAGE",
+    "Bin": "F21-01-A"
+  },
+  {
+    "Product": "ST10700SAG",
+    "Description": "TAVO SAGE",
+    "Bin": "F21-01-B"
+  },
+  {
+    "Product": "ST10700SAG",
+    "Description": "TAVO SAGE",
+    "Bin": "F22-01-A"
+  },
+  {
+    "Product": "ST10700SAG",
+    "Description": "TAVO SAGE",
+    "Bin": "F22-01-B"
+  },
+  {
+    "Product": "IF-02-001",
+    "Description": "PIPA BASE",
+    "Bin": "F23-01-A"
+  },
+  {
+    "Product": "IF-02-001",
+    "Description": "PIPA BASE",
+    "Bin": "F23-01-B"
+  },
+  {
+    "Product": "IF-02-001",
+    "Description": "PIPA BASE",
+    "Bin": "F24-01-A"
+  },
+  {
+    "Product": "IF-02-001",
+    "Description": "PIPA BASE",
+    "Bin": "F24-01-B"
+  },
+  {
+    "Product": "IF-02-001",
+    "Description": "PIPA BASE",
+    "Bin": "F25-01-A"
+  },
+  {
+    "Product": "IF-02-001",
+    "Description": "PIPA BASE",
+    "Bin": "F25-01-B"
+  },
+  {
+    "Product": "IF-02-001",
+    "Description": "PIPA BASE",
+    "Bin": "F26-01-A"
+  },
+  {
+    "Product": "IF-02-001",
+    "Description": "PIPA BASE",
+    "Bin": "F26-01-B"
+  },
+  {
+    "Product": "IF-02-001",
+    "Description": "PIPA BASE",
+    "Bin": "F27-01-A"
+  },
+  {
+    "Product": "IF-02-001",
+    "Description": "PIPA BASE",
+    "Bin": "F27-01-B"
+  },
+  {
+    "Product": "IF-02-001",
+    "Description": "PIPA BASE",
+    "Bin": "F28-01-A"
+  },
+  {
+    "Product": "IF-02-001",
+    "Description": "PIPA BASE",
+    "Bin": "F28-01-B"
+  },
+  {
+    "Product": "IF-02-001",
+    "Description": "PIPA BASE",
+    "Bin": "F29-01-A"
+  },
+  {
+    "Product": "IF-02-001",
+    "Description": "PIPA BASE",
+    "Bin": "F29-01-B"
+  },
+  {
+    "Product": "IF-02-001",
+    "Description": "PIPA BASE",
+    "Bin": "F30-01-A"
+  },
+  {
+    "Product": "IF-02-001",
+    "Description": "PIPA BASE",
+    "Bin": "F30-01-B"
+  },
+  {
+    "Product": "IF-02-001",
+    "Description": "PIPA BASE",
+    "Bin": "F31-01-A"
+  },
+  {
+    "Product": "IF-02-001",
+    "Description": "PIPA BASE",
+    "Bin": "F31-01-B"
+  },
+  {
+    "Product": "IF-02-001",
+    "Description": "PIPA BASE",
+    "Bin": "F32-01-A"
+  },
+  {
+    "Product": "IF-02-001",
+    "Description": "PIPA BASE",
+    "Bin": "F32-01-B"
+  },
+  {
+    "Product": "SE10302BLU",
+    "Description": "LEAF GROW BLUSH",
+    "Bin": "G01-01-A"
+  },
+  {
+    "Product": "SE10302BLU",
+    "Description": "LEAF GROW BLUSH",
+    "Bin": "G01-01-B"
+  },
+  {
+    "Product": "SE10302BLU",
+    "Description": "LEAF GROW BLUSH",
+    "Bin": "G02-01-A"
+  },
+  {
+    "Product": "SE10302BLU",
+    "Description": "LEAF GROW BLUSH",
+    "Bin": "G02-01-B"
+  },
+  {
+    "Product": "SE10302CHP",
+    "Description": "LEAF GROW CHAMPAGNE",
+    "Bin": "G03-01-A"
+  },
+  {
+    "Product": "SE10302CHP",
+    "Description": "LEAF GROW CHAMPAGNE",
+    "Bin": "G03-01-B"
+  },
+  {
+    "Product": "SE10302CHP",
+    "Description": "LEAF GROW CHAMPAGNE",
+    "Bin": "G04-01-A"
+  },
+  {
+    "Product": "SE10302CHP",
+    "Description": "LEAF GROW CHAMPAGNE",
+    "Bin": "G04-01-B"
+  },
+  {
+    "Product": "SE10302IRN",
+    "Description": "LEAF GROW IRON",
+    "Bin": "G05-01-A"
+  },
+  {
+    "Product": "SE10302IRN",
+    "Description": "LEAF GROW IRON",
+    "Bin": "G05-01-B"
+  },
+  {
+    "Product": "SE10302IRN",
+    "Description": "LEAF GROW IRON",
+    "Bin": "G06-01-A"
+  },
+  {
+    "Product": "SE10302IRN",
+    "Description": "LEAF GROW IRON",
+    "Bin": "G06-01-B"
+  },
+  {
+    "Product": "TB-20-001",
+    "Description": "TRANSPORT BAG",
+    "Bin": "G07-01-A"
+  },
+  {
+    "Product": "TB-20-001",
+    "Description": "TRANSPORT BAG",
+    "Bin": "G07-01-B"
+  },
+  {
+    "Product": "TB-20-001",
+    "Description": "TRANSPORT BAG",
+    "Bin": "G08-01-A"
+  },
+  {
+    "Product": "TB-20-001",
+    "Description": "TRANSPORT BAG",
+    "Bin": "G08-01-B"
+  },
+  {
+    "Product": "ST09401CVR",
+    "Description": "PEPP NEXT CAVIAR",
+    "Bin": "G09-01-A"
+  },
+  {
+    "Product": "ST09401CVR",
+    "Description": "PEPP NEXT CAVIAR",
+    "Bin": "G09-01-B"
+  },
+  {
+    "Product": "ST09401CVR",
+    "Description": "PEPP NEXT CAVIAR",
+    "Bin": "G10-01-A"
+  },
+  {
+    "Product": "ST09401CVR",
+    "Description": "PEPP NEXT CAVIAR",
+    "Bin": "G10-01-B"
+  },
+  {
+    "Product": "ST09401FRT",
+    "Description": "PEPP NEXT FROST",
+    "Bin": "G11-01-A"
+  },
+  {
+    "Product": "ST09401FRT",
+    "Description": "PEPP NEXT FROST",
+    "Bin": "G11-01-B"
+  },
+  {
+    "Product": "ST09401FRT",
+    "Description": "PEPP NEXT FROST",
+    "Bin": "G12-01-A"
+  },
+  {
+    "Product": "ST09401FRT",
+    "Description": "PEPP NEXT FROST",
+    "Bin": "G12-01-B"
+  },
+  {
+    "Product": "CS07001ASP",
+    "Description": "AACE ASPEN",
+    "Bin": "G13-01-A"
+  },
+  {
+    "Product": "CS07001ASP",
+    "Description": "AACE ASPEN",
+    "Bin": "G13-01-B"
+  },
+  {
+    "Product": "CS07001ASP",
+    "Description": "AACE ASPEN",
+    "Bin": "G14-01-A"
+  },
+  {
+    "Product": "CS07001ASP",
+    "Description": "AACE ASPEN",
+    "Bin": "G14-01-B"
+  },
+  {
+    "Product": "CS07001CHC",
+    "Description": "AACE CHARCOAL",
+    "Bin": "G17-01-A"
+  },
+  {
+    "Product": "CS07001CHC",
+    "Description": "AACE CHARCOAL",
+    "Bin": "G17-01-B"
+  },
+  {
+    "Product": "CS07001CHC",
+    "Description": "AACE CHARCOAL",
+    "Bin": "G18-01-A"
+  },
+  {
+    "Product": "CS07001CHC",
+    "Description": "AACE CHARCOAL",
+    "Bin": "G18-01-B"
+  },
+  {
+    "Product": "CS07001CVR",
+    "Description": "AACE CAVIAR",
+    "Bin": "G19-01-A"
+  },
+  {
+    "Product": "CS07001CVR",
+    "Description": "AACE CAVIAR",
+    "Bin": "G19-01-B"
+  },
+  {
+    "Product": "CS07001CVR",
+    "Description": "AACE CAVIAR",
+    "Bin": "G20-01-A"
+  },
+  {
+    "Product": "CS07001CVR",
+    "Description": "AACE CAVIAR",
+    "Bin": "G20-01-B"
+  },
+  {
+    "Product": "AC08101ASP",
+    "Description": "DEMI GROW SIBLING SEAT ASPEN",
+    "Bin": "G21-01-A"
+  },
+  {
+    "Product": "AC08101ASP",
+    "Description": "DEMI GROW SIBLING SEAT ASPEN",
+    "Bin": "G21-01-B"
+  },
+  {
+    "Product": "AC08101ASP",
+    "Description": "DEMI GROW SIBLING SEAT ASPEN",
+    "Bin": "G22-01-A"
+  },
+  {
+    "Product": "AC08101ASP",
+    "Description": "DEMI GROW SIBLING SEAT ASPEN",
+    "Bin": "G22-01-B"
+  },
+  {
+    "Product": "AC08101CVR",
+    "Description": "DEMI GROW SIBLING SEAT CAVIAR",
+    "Bin": "G23-01-A"
+  },
+  {
+    "Product": "AC08101CVR",
+    "Description": "DEMI GROW SIBLING SEAT CAVIAR",
+    "Bin": "G23-01-B"
+  },
+  {
+    "Product": "AC08101CVR",
+    "Description": "DEMI GROW SIBLING SEAT CAVIAR",
+    "Bin": "G24-01-A"
+  },
+  {
+    "Product": "AC08101CVR",
+    "Description": "DEMI GROW SIBLING SEAT CAVIAR",
+    "Bin": "G24-01-B"
+  },
+  {
+    "Product": "AC08101FRT",
+    "Description": "DEMI GROW SIBLING SEAT FROST",
+    "Bin": "G25-01-A"
+  },
+  {
+    "Product": "AC08101FRT",
+    "Description": "DEMI GROW SIBLING SEAT FROST",
+    "Bin": "G25-01-B"
+  },
+  {
+    "Product": "AC08101FRT",
+    "Description": "DEMI GROW SIBLING SEAT FROST",
+    "Bin": "G26-01-A"
+  },
+  {
+    "Product": "AC08101FRT",
+    "Description": "DEMI GROW SIBLING SEAT FROST",
+    "Bin": "G26-01-B"
+  },
+  {
+    "Product": "CC09200ASP",
+    "Description": "DEMI GROW BASSINET ASPEN",
+    "Bin": "G27-01-A"
+  },
+  {
+    "Product": "CC09200ASP",
+    "Description": "DEMI GROW BASSINET ASPEN",
+    "Bin": "G27-01-B"
+  },
+  {
+    "Product": "CC09200ASP",
+    "Description": "DEMI GROW BASSINET ASPEN",
+    "Bin": "G28-01-A"
+  },
+  {
+    "Product": "CC09200ASP",
+    "Description": "DEMI GROW BASSINET ASPEN",
+    "Bin": "G28-01-B"
+  },
+  {
+    "Product": "CC09200CVR",
+    "Description": "DEMI GROW BASSINET CAVIAR",
+    "Bin": "G29-01-A"
+  },
+  {
+    "Product": "CC09200CVR",
+    "Description": "DEMI GROW BASSINET CAVIAR",
+    "Bin": "G29-01-B"
+  },
+  {
+    "Product": "CC09200CVR",
+    "Description": "DEMI GROW BASSINET CAVIAR",
+    "Bin": "G30-01-A"
+  },
+  {
+    "Product": "CC09200CVR",
+    "Description": "DEMI GROW BASSINET CAVIAR",
+    "Bin": "G30-01-B"
+  },
+  {
+    "Product": "CC09200FRT",
+    "Description": "DEMI GROW BASSINET FROST",
+    "Bin": "G31-01-A"
+  },
+  {
+    "Product": "CC09200FRT",
+    "Description": "DEMI GROW BASSINET FROST",
+    "Bin": "G31-01-B"
+  },
+  {
+    "Product": "CC09200FRT",
+    "Description": "DEMI GROW BASSINET FROST",
+    "Bin": "G32-01-A"
+  },
+  {
+    "Product": "CC09200FRT",
+    "Description": "DEMI GROW BASSINET FROST",
+    "Bin": "G32-01-B"
+  },
+  {
+    "Product": "SC04500ASP",
+    "Description": "SENA SERIES CHANGER ASPEN",
+    "Bin": "H01-01-A"
+  },
+  {
+    "Product": "SC04500ASP",
+    "Description": "SENA SERIES CHANGER ASPEN",
+    "Bin": "H01-01-B"
+  },
+  {
+    "Product": "SC04500ASP",
+    "Description": "SENA SERIES CHANGER ASPEN",
+    "Bin": "H02-01-A"
+  },
+  {
+    "Product": "SC04500ASP",
+    "Description": "SENA SERIES CHANGER ASPEN",
+    "Bin": "H02-01-B"
+  },
+  {
+    "Product": "SC04500CVR",
+    "Description": "SENA SERIES CHANGER CAVIAR",
+    "Bin": "H03-01-A"
+  },
+  {
+    "Product": "SC04500CVR",
+    "Description": "SENA SERIES CHANGER CAVIAR",
+    "Bin": "H03-01-B"
+  },
+  {
+    "Product": "SC04500CVR",
+    "Description": "SENA SERIES CHANGER CAVIAR",
+    "Bin": "H04-01-A"
+  },
+  {
+    "Product": "SC04500CVR",
+    "Description": "SENA SERIES CHANGER CAVIAR",
+    "Bin": "H04-01-B"
+  },
+  {
+    "Product": "SC04500GRN",
+    "Description": "SENA SERIES CHANGER GRANITE",
+    "Bin": "H05-01-A"
+  },
+  {
+    "Product": "SC04500GRN",
+    "Description": "SENA SERIES CHANGER GRANITE",
+    "Bin": "H05-01-B"
+  },
+  {
+    "Product": "SC04500GRN",
+    "Description": "SENA SERIES CHANGER GRANITE",
+    "Bin": "H06-01-A"
+  },
+  {
+    "Product": "SC04500GRN",
+    "Description": "SENA SERIES CHANGER GRANITE",
+    "Bin": "H06-01-B"
+  },
+  {
+    "Product": "SC04500BKA",
+    "Description": "SENA SERIES CHANGER PBK",
+    "Bin": "H07-01-A"
+  },
+  {
+    "Product": "SC04500BKA",
+    "Description": "SENA SERIES CHANGER PBK",
+    "Bin": "H07-01-B"
+  },
+  {
+    "Product": "SC04500BKA",
+    "Description": "SENA SERIES CHANGER PBK",
+    "Bin": "H08-01-A"
+  },
+  {
+    "Product": "SC04500BKA",
+    "Description": "SENA SERIES CHANGER PBK",
+    "Bin": "H08-01-B"
+  },
+  {
+    "Product": "SD09900ACS",
+    "Description": "MIXX STAND",
+    "Bin": "H09-01-A"
+  },
+  {
+    "Product": "SD09900ACS",
+    "Description": "MIXX STAND",
+    "Bin": "H09-01-B"
+  },
+  {
+    "Product": "SD09900ACS",
+    "Description": "MIXX STAND",
+    "Bin": "H10-01-A"
+  },
+  {
+    "Product": "SD09900ACS",
+    "Description": "MIXX STAND",
+    "Bin": "H10-01-B"
+  },
+  {
+    "Product": "CC09801CVR",
+    "Description": "MIXX 2 BASSINET CAVIAR",
+    "Bin": "H11-01-A"
+  },
+  {
+    "Product": "CC09801CVR",
+    "Description": "MIXX 2 BASSINET CAVIAR",
+    "Bin": "H11-01-B"
+  },
+  {
+    "Product": "CC09801CVR",
+    "Description": "MIXX 2 BASSINET CAVIAR",
+    "Bin": "H12-01-A"
+  },
+  {
+    "Product": "CC09801CVR",
+    "Description": "MIXX 2 BASSINET CAVIAR",
+    "Bin": "H12-01-B"
+  },
+  {
+    "Product": "TS10500HAP",
+    "Description": "MIXX TS NAVY (BLEU)",
+    "Bin": "H13-01-A"
+  },
+  {
+    "Product": "TS10500HAP",
+    "Description": "MIXX TS NAVY (BLEU)",
+    "Bin": "H13-01-B"
+  },
+  {
+    "Product": "TS10500HAP",
+    "Description": "MIXX TS NAVY (BLEU)",
+    "Bin": "H14-01-A"
+  },
+  {
+    "Product": "TS10500HAP",
+    "Description": "MIXX TS NAVY (BLEU)",
+    "Bin": "H14-01-B"
+  },
+  {
+    "Product": "TS10500HAP",
+    "Description": "MIXX TS NAVY (BLEU)",
+    "Bin": "H15-01-A"
+  },
+  {
+    "Product": "TS10500HAP",
+    "Description": "MIXX TS NAVY (BLEU)",
+    "Bin": "H15-01-B"
+  },
+  {
+    "Product": "TS10500HAP",
+    "Description": "MIXX TS NAVY (BLEU)",
+    "Bin": "H16-01-A"
+  },
+  {
+    "Product": "TS10500HAP",
+    "Description": "MIXX TS NAVY (BLEU)",
+    "Bin": "H16-01-B"
+  },
+  {
+    "Product": "TS10500HCV",
+    "Description": "MIXX TS VERONA (CAVIAR)",
+    "Bin": "H19-01-A"
+  },
+  {
+    "Product": "TS10500HCV",
+    "Description": "MIXX TS VERONA (CAVIAR)",
+    "Bin": "H19-01-B"
+  },
+  {
+    "Product": "TS10500HCV",
+    "Description": "MIXX TS VERONA (CAVIAR)",
+    "Bin": "H20-01-A"
+  },
+  {
+    "Product": "TS10500HCV",
+    "Description": "MIXX TS VERONA (CAVIAR)",
+    "Bin": "H20-01-B"
+  },
+  {
+    "Product": "TS10500HCV",
+    "Description": "MIXX TS VERONA (CAVIAR)",
+    "Bin": "H21-01-A"
+  },
+  {
+    "Product": "TS10500HCV",
+    "Description": "MIXX TS VERONA (CAVIAR)",
+    "Bin": "H21-01-B"
+  },
+  {
+    "Product": "TS10500HCV",
+    "Description": "MIXX TS VERONA (CAVIAR)",
+    "Bin": "H22-01-A"
+  },
+  {
+    "Product": "TS10500HCV",
+    "Description": "MIXX TS VERONA (CAVIAR)",
+    "Bin": "H22-01-B"
+  },
+  {
+    "Product": "TS10701CVR",
+    "Description": "TAVO TRAVEL SYSTEM CAVIAR",
+    "Bin": "H23-01-A"
+  },
+  {
+    "Product": "TS10701CVR",
+    "Description": "TAVO TRAVEL SYSTEM CAVIAR",
+    "Bin": "H23-01-B"
+  },
+  {
+    "Product": "TS10701CVR",
+    "Description": "TAVO TRAVEL SYSTEM CAVIAR",
+    "Bin": "H24-01-A"
+  },
+  {
+    "Product": "TS10701CVR",
+    "Description": "TAVO TRAVEL SYSTEM CAVIAR",
+    "Bin": "H24-01-B"
+  },
+  {
+    "Product": "TS10701CVR",
+    "Description": "TAVO TRAVEL SYSTEM CAVIAR",
+    "Bin": "H25-01-A"
+  },
+  {
+    "Product": "TS10701CVR",
+    "Description": "TAVO TRAVEL SYSTEM CAVIAR",
+    "Bin": "H25-01-B"
+  },
+  {
+    "Product": "TS10701CVR",
+    "Description": "TAVO TRAVEL SYSTEM CAVIAR",
+    "Bin": "H26-01-A"
+  },
+  {
+    "Product": "TS10701CVR",
+    "Description": "TAVO TRAVEL SYSTEM CAVIAR",
+    "Bin": "H26-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "H27-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "H27-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "H28-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "H28-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "H29-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "H29-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "H30-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "H30-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "H31-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "H31-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "H32-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "H32-01-B"
+  },
+  {
+    "Product": "CF-02-001",
+    "Description": "PIPA NIGHT",
+    "Bin": "I01-01-A"
+  },
+  {
+    "Product": "CF-02-001",
+    "Description": "PIPA NIGHT",
+    "Bin": "I01-01-B"
+  },
+  {
+    "Product": "CF-02-001",
+    "Description": "PIPA NIGHT",
+    "Bin": "I02-01-A"
+  },
+  {
+    "Product": "CF-02-001",
+    "Description": "PIPA NIGHT",
+    "Bin": "I02-01-B"
+  },
+  {
+    "Product": "CF-02-001",
+    "Description": "PIPA NIGHT",
+    "Bin": "I03-01-A"
+  },
+  {
+    "Product": "CF-02-001",
+    "Description": "PIPA NIGHT",
+    "Bin": "I03-01-B"
+  },
+  {
+    "Product": "CF-02-001",
+    "Description": "PIPA NIGHT",
+    "Bin": "I04-01-A"
+  },
+  {
+    "Product": "CF-02-001",
+    "Description": "PIPA NIGHT",
+    "Bin": "I04-01-B"
+  },
+  {
+    "Product": "CF-02-005",
+    "Description": "PIPA BERRY",
+    "Bin": "I05-01-A"
+  },
+  {
+    "Product": "CF-02-005",
+    "Description": "PIPA BERRY",
+    "Bin": "I05-01-B"
+  },
+  {
+    "Product": "CF-02-006",
+    "Description": "PIPA GRAPHITE",
+    "Bin": "I06-01-A"
+  },
+  {
+    "Product": "CF-02-006",
+    "Description": "PIPA GRAPHITE",
+    "Bin": "I06-01-B"
+  },
+  {
+    "Product": "CF-02-007",
+    "Description": "PIPA INDIGO",
+    "Bin": "I07-01-A"
+  },
+  {
+    "Product": "CF-02-007",
+    "Description": "PIPA INDIGO",
+    "Bin": "I07-01-B"
+  },
+  {
+    "Product": "CF08500EBN",
+    "Description": "PIPA LITE W/ BASE EBONY",
+    "Bin": "I08-01-A"
+  },
+  {
+    "Product": "CF08500EBN",
+    "Description": "PIPA LITE W/ BASE EBONY",
+    "Bin": "I08-01-B"
+  },
+  {
+    "Product": "CF08500FOG",
+    "Description": "PIPA LITE W/ BASE FOG",
+    "Bin": "I09-01-A"
+  },
+  {
+    "Product": "CF08500FOG",
+    "Description": "PIPA LITE W/ BASE FOG",
+    "Bin": "I09-01-B"
+  },
+  {
+    "Product": "CS05101HCV",
+    "Description": "RAVA VERONA CAVIAR",
+    "Bin": "I10-01-A"
+  },
+  {
+    "Product": "CS05101HCV",
+    "Description": "RAVA VERONA CAVIAR",
+    "Bin": "I10-01-B"
+  },
+  {
+    "Product": "CS-50-001",
+    "Description": "RAVA CAVIAR",
+    "Bin": "I11-01-A"
+  },
+  {
+    "Product": "CS-50-001",
+    "Description": "RAVA CAVIAR",
+    "Bin": "I11-01-B"
+  },
+  {
+    "Product": "CS-50-001",
+    "Description": "RAVA CAVIAR",
+    "Bin": "I12-01-A"
+  },
+  {
+    "Product": "CS-50-001",
+    "Description": "RAVA CAVIAR",
+    "Bin": "I12-01-B"
+  },
+  {
+    "Product": "CS-50-001",
+    "Description": "RAVA CAVIAR",
+    "Bin": "I13-01-A"
+  },
+  {
+    "Product": "CS-50-001",
+    "Description": "RAVA CAVIAR",
+    "Bin": "I13-01-B"
+  },
+  {
+    "Product": "CS-50-001",
+    "Description": "RAVA CAVIAR",
+    "Bin": "I14-01-A"
+  },
+  {
+    "Product": "CS-50-001",
+    "Description": "RAVA CAVIAR",
+    "Bin": "I14-01-B"
+  },
+  {
+    "Product": "CS-50-002",
+    "Description": "RAVA INDIGO",
+    "Bin": "I17-01-A"
+  },
+  {
+    "Product": "CS-50-002",
+    "Description": "RAVA INDIGO",
+    "Bin": "I17-01-B"
+  },
+  {
+    "Product": "CS-50-003",
+    "Description": "RAVA BERRY",
+    "Bin": "I18-01-A"
+  },
+  {
+    "Product": "CS-50-003",
+    "Description": "RAVA BERRY",
+    "Bin": "I18-01-B"
+  },
+  {
+    "Product": "CS-50-005",
+    "Description": "RAVA SLATE",
+    "Bin": "I19-01-A"
+  },
+  {
+    "Product": "CS-50-005",
+    "Description": "RAVA SLATE",
+    "Bin": "I19-01-B"
+  },
+  {
+    "Product": "ST-41-001",
+    "Description": "MIXX 2 CAVIAR",
+    "Bin": "I20-01-A"
+  },
+  {
+    "Product": "ST-41-001",
+    "Description": "MIXX 2 CAVIAR",
+    "Bin": "I20-01-B"
+  },
+  {
+    "Product": "ST-41-002",
+    "Description": "MIXX 2 INDIGO",
+    "Bin": "I21-01-A"
+  },
+  {
+    "Product": "ST-41-002",
+    "Description": "MIXX 2 INDIGO",
+    "Bin": "I21-01-B"
+  },
+  {
+    "Product": "ST-41-003",
+    "Description": "MIXX 2 BERRY",
+    "Bin": "I22-01-A"
+  },
+  {
+    "Product": "ST-41-003",
+    "Description": "MIXX 2 BERRY",
+    "Bin": "I22-01-B"
+  },
+  {
+    "Product": "TC-14-001",
+    "Description": "SENA MINI AIRE NIGHT",
+    "Bin": "I23-01-A"
+  },
+  {
+    "Product": "TC-14-006",
+    "Description": "SENA MINI AIRE GRAPHITE",
+    "Bin": "I23-01-B"
+  },
+  {
+    "Product": "ST-31-022",
+    "Description": "TAVO ALUMINUM",
+    "Bin": "I24-01-A"
+  },
+  {
+    "Product": "ST-31-022",
+    "Description": "TAVO ALUMINUM",
+    "Bin": "I24-01-B"
+  },
+  {
+    "Product": "ST-18-024",
+    "Description": "PEPP GRAPHITE WITH DREAM DRAPE",
+    "Bin": "I25-01-A"
+  },
+  {
+    "Product": "ST-18-024",
+    "Description": "PEPP GRAPHITE WITH DREAM DRAPE",
+    "Bin": "I25-01-B"
+  },
+  {
+    "Product": "CS-40-001",
+    "Description": "AACE CAVIAR",
+    "Bin": "I26-01-A"
+  },
+  {
+    "Product": "CS-40-001",
+    "Description": "AACE CAVIAR",
+    "Bin": "I26-01-B"
+  },
+  {
+    "Product": "CS-40-002",
+    "Description": "AACE SLATE",
+    "Bin": "I27-01-A"
+  },
+  {
+    "Product": "CS-40-002",
+    "Description": "AACE SLATE",
+    "Bin": "I27-01-B"
+  },
+  {
+    "Product": "CS07001CHC",
+    "Description": "AACE CHARCOAL",
+    "Bin": "I28-01-A"
+  },
+  {
+    "Product": "CS07001CHC",
+    "Description": "AACE CHARCOAL",
+    "Bin": "I28-01-B"
+  },
+  {
+    "Product": "SC-01-001",
+    "Description": "SENA CHANGER NIGHT",
+    "Bin": "I29-01-A"
+  },
+  {
+    "Product": "SC-01-001",
+    "Description": "SENA CHANGER NIGHT",
+    "Bin": "I29-01-B"
+  },
+  {
+    "Product": "SC-01-004",
+    "Description": "SENA CHANGER SAFARI",
+    "Bin": "I30-01-A"
+  },
+  {
+    "Product": "SC-01-004",
+    "Description": "SENA CHANGER SAFARI",
+    "Bin": "I30-01-B"
+  },
+  {
+    "Product": "STC03900CVR",
+    "Description": "IVVI TOTL SYSTEM CAVIAR W FT/CC/AD/RC/SH",
+    "Bin": "I31-01-A"
+  },
+  {
+    "Product": "STC03900CVR",
+    "Description": "IVVI TOTL SYSTEM CAVIAR W FT/CC/AD/RC/SH",
+    "Bin": "I31-01-B"
+  },
+  {
+    "Product": "STC03900CHC",
+    "Description": "IVVI TOTL SYSTEM CHARCOAL FT/CC/AD/RC/SH",
+    "Bin": "I32-01-A"
+  },
+  {
+    "Product": "STC03900CHC",
+    "Description": "IVVI TOTL SYSTEM CHARCOAL FT/CC/AD/RC/SH",
+    "Bin": "I32-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "J01-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "J01-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "J02-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "J02-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "J03-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "J03-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "J04-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "J04-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "J05-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "J05-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "J06-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "J06-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "J07-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "J07-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "J08-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "J08-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "J09-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "J09-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "J10-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "J10-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "J11-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "J11-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "J12-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "J12-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "J13-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "J13-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "J14-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "J14-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "J15-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "J15-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "J16-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "J16-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "J19-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "J19-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "J20-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "J20-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "J21-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "J21-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "J22-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "J22-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "J23-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "J23-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "J24-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "J24-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "J25-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "J25-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "J26-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "J26-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "J27-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "J27-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "J28-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "J28-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "J29-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "J29-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "J30-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "J30-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "J31-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "J31-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "J32-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "J32-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "K01-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "K01-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "K02-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "K02-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "K03-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "K03-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "K04-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "K04-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "K05-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "K05-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "K06-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "K06-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "K07-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "K07-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "K08-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "K08-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "K09-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "K09-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "K10-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "K10-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "K11-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "K11-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "K12-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "K12-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "K13-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "K13-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "K14-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "K14-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "K17-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "K17-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "K18-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "K18-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "K19-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "K19-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "K20-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "K20-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "K21-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "K21-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "K22-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "K22-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "K23-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "K23-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "K24-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "K24-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "K25-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "K25-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "K26-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "K26-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "K27-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "K27-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "K28-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "K28-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "K29-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "K29-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "K30-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "K30-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "K31-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "K31-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "K32-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "K32-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "L01-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "L01-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "L02-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "L02-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "L03-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "L03-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "L04-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "L04-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "L05-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "L05-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "L06-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "L06-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "L07-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "L07-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "L08-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "L08-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "L09-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "L09-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "L10-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "L10-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "L11-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "L11-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "L12-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "L12-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "L13-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "L13-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "L14-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "L14-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "L15-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "L15-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "L16-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "L16-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "L19-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "L19-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "L20-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "L20-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "L21-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "L21-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "L22-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "L22-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "L23-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "L23-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "L24-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "L24-01-B"
+  },
+  {
+    "Product No": "none",
+    "Description": "none",
+    "Pallets": "none",
+    "Bin": "L25-01-A",
+    "none": "COLUMN"},
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "L25-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "L26-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "L26-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "L27-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "L27-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "L28-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "L28-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "L29-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "L29-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "L30-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "L30-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "L31-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "L31-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "L32-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "L32-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "M01-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "M01-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "M02-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "M02-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "M03-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "M03-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "M04-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "M04-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "M05-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "M05-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "M06-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "M06-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "M07-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "M07-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "M09-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "M09-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "M10-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "M10-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "M11-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "M11-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "M12-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "M12-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "M13-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "M13-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "M14-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "M14-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "M15-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "M15-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "M16-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "M16-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "O01-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "O01-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "O02-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "O02-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "O03-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "O03-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "O04-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "O04-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "O05-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "O05-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "O06-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "O06-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "O07-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "O07-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "O09-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "O09-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "O10-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "O10-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "O11-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "O11-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "O12-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "O12-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "O13-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "O13-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "O14-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "O14-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "O15-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "O15-01-B"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "O16-01-A"
+  },
+  {
+    "Product": "none",
+    "Description": "none",
+    "Bin": "O16-01-B"
+  }
+]

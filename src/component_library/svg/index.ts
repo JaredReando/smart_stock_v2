@@ -1,0 +1,17 @@
+export { default as addFile } from './add_file_icon';
+export { default as back } from './back_icon';
+export { default as callMute } from './call_mute_icon';
+export { default as developer } from './developer_icon';
+export { default as user } from './user_icon';
+export { default as forklift } from './forklift_icon';
+export { default as home } from './home_icon';
+export { default as items } from './items_icon';
+export { default as laserPointer } from './laser_pointer_icon';
+export { default as log } from './log_icon';
+export { default as measure } from './measure_icon';
+export { default as menu } from './menu_icon';
+export { default as settings } from './settings_icon';
+export { default as text } from './text_icon';
+export { default as add } from './add_icon';
+export { default as close } from './close_icon';
+export { default as inventory } from './inventory_icon';

@@ -4,7 +4,7 @@ export default class NunaStock {
     constructor(rawInventoryJSON, fixedBinsJSON) {
         this.rawInventoryJSON = rawInventoryJSON;
         this.fixedBinsJSON = fixedBinsJSON;
-
+        console.log('did stock levels work? ', this.getMaterialStockLevels());
         //TODO: phase out need for report arrays throughout application
         this.restockReportArray = this.getFixedBinRestockReport();
         this.inventoryReportArray = this.getFifoSortedInventory();
@@ -12,7 +12,29 @@ export default class NunaStock {
         //Firebase-friendly data object data structures
         this.inventoryReportObject = this.createInventoryReportNestedObject();
         this.restockReportObject = this.createRestockReportNestedObject();
+
+        //Experimental --> for Dashboard summary view.
+        this.outOfStock = this.getMaterialStockLevels();
     }
+
+    getMaterialStockLevels = () => {
+        const emptyRestock = this.getEmptyFixedBins();
+        const fixedBinDetails = this.fixedBinsJSON.reduce((binDetails, fixedBin) => {
+            const bin = fixedBin['Bin'];
+            const product = fixedBin['Product'];
+            if (!binDetails[product]) {
+                binDetails[product] = { binCount: 0, fixedBins: [], binsStocked: 0 };
+            }
+            if (!emptyRestock.includes(bin)) {
+                binDetails[product].binsStocked += 1;
+            }
+            binDetails[product].binCount += 1;
+            binDetails[product].fixedBins.push(bin);
+            return binDetails;
+        }, {});
+
+        return fixedBinDetails;
+    };
 
     createRestockReportNestedObject = () => {
         const restockReportObjectArray = this.getFixedBinRestockReport();
@@ -20,7 +42,7 @@ export default class NunaStock {
             nestedObj[index] = obj;
             return nestedObj;
         };
-        return restockReportObjectArray.reduce(reducer, {})
+        return restockReportObjectArray.reduce(reducer, {});
     };
 
     createInventoryReportNestedObject = () => {
@@ -51,7 +73,7 @@ export default class NunaStock {
                 }
                 const levelThree = nestedObj[objStorageLocation][objStorageType][objStorageBin];
                 if (!levelThree[objStorageUnit]) {
-                    const isSysBin = (objStorageType[0] === '9');
+                    const isSysBin = objStorageType[0] === '9';
 
                     if (objStorageUnit !== 'N/A' && !isSysBin) {
                         levelThree[objStorageUnit] = {};
@@ -60,20 +82,24 @@ export default class NunaStock {
             };
             checkObjectModel();
             //Assign inventoryObject to lowest level storageUnit node:
-            const isSysBin = (objStorageType[0] === '9');
+            const isSysBin = objStorageType[0] === '9';
 
             if (objStorageUnit === 'N/A' && !isSysBin) {
-                nestedObj[objStorageLocation][objStorageType][objStorageBin] = "empty";
+                nestedObj[objStorageLocation][objStorageType][objStorageBin] = 'empty';
             }
-            //Sets inventory object to unique index key on storageUnit object node
-            if (!!nestedObj[objStorageLocation][objStorageType][objStorageBin][objStorageUnit] && !isSysBin) {
-                const storageUnitPath = nestedObj[objStorageLocation][objStorageType][objStorageBin][objStorageUnit];
+            //Sets inventory object to unique index.ts key on storageUnit object node
+            if (
+                !!nestedObj[objStorageLocation][objStorageType][objStorageBin][objStorageUnit] &&
+                !isSysBin
+            ) {
+                const storageUnitPath =
+                    nestedObj[objStorageLocation][objStorageType][objStorageBin][objStorageUnit];
                 const objIndex = Object.keys(storageUnitPath).length;
                 storageUnitPath[objIndex] = obj;
             }
             //Special exception for non-HU handled system locations
             if (objStorageUnit === 'N/A' && isSysBin) {
-                const storageBinPath = nestedObj[objStorageLocation][objStorageType][objStorageBin]
+                const storageBinPath = nestedObj[objStorageLocation][objStorageType][objStorageBin];
                 const objIndex = Object.keys(storageBinPath).length;
                 storageBinPath[objIndex] = obj;
             }
@@ -81,46 +107,62 @@ export default class NunaStock {
             return nestedObj;
         };
 
-        return inventoryReportObjectArray.reduce(reducer, {})
+        return inventoryReportObjectArray.reduce(reducer, {});
     };
 
     //PARSES A SINGLE RAW INVENTORY OBJECT RECORD INTO DESIRED KEY/VALUE PAIRS
     parseInventoryRecordObject(jsonIventoryReportObject) {
         const parsedRecord = {
-            storageBin: (jsonIventoryReportObject['Storage Bin'] ? jsonIventoryReportObject['Storage Bin'] : 'N/A'),
-            material: (jsonIventoryReportObject['Material'] === undefined ? 'undefined' : jsonIventoryReportObject['Material']),
-            available: (jsonIventoryReportObject['Available stock'] >= 0 ? jsonIventoryReportObject['Available stock'] : 'N/A'),
-            storageUnit: (jsonIventoryReportObject['Storage Unit'] ? jsonIventoryReportObject['Storage Unit'] : 'N/A'),
-            storageType: (jsonIventoryReportObject['Storage Type'] === undefined ? 'undefined' : jsonIventoryReportObject['Storage Type']),
-            storageLocation: (jsonIventoryReportObject['Storage Location'] ? jsonIventoryReportObject['Storage Location'] : 1),
-            uuid: uuid()
+            storageBin: jsonIventoryReportObject['Storage Bin']
+                ? jsonIventoryReportObject['Storage Bin']
+                : 'N/A',
+            material:
+                jsonIventoryReportObject['Material'] === undefined
+                    ? 'undefined'
+                    : jsonIventoryReportObject['Material'],
+            available:
+                jsonIventoryReportObject['Available stock'] >= 0
+                    ? jsonIventoryReportObject['Available stock']
+                    : 'N/A',
+            storageUnit: jsonIventoryReportObject['Storage Unit']
+                ? jsonIventoryReportObject['Storage Unit']
+                : 'N/A',
+            storageType:
+                jsonIventoryReportObject['Storage Type'] === undefined
+                    ? 'undefined'
+                    : jsonIventoryReportObject['Storage Type'],
+            storageLocation: jsonIventoryReportObject['Storage Location']
+                ? jsonIventoryReportObject['Storage Location']
+                : 1,
+            noneStocked: false,
+            uuid: uuid(),
         };
-        if(parsedRecord.storageBin.includes('.')) {
+        if (parsedRecord.storageBin.includes('.')) {
             const binName = parsedRecord.storageBin;
             parsedRecord.storageBin = binName.replace(/\./g, '_');
         }
-
-        return parsedRecord
+        return parsedRecord;
     }
 
     //2-TIER SORTS INVENTORY ARRAY BY MATERIAL THEN STORAGE UNIT (BIGGEST -> SMALLEST VALUE)
     sortInventoryByFifo(parsedInventoryRecords) {
-        const fifoSortedInventory = [...parsedInventoryRecords]
-            .sort((bin1, bin2) => {
-                //SORT OVERSTOCK ARRAY IN ORDER BY MATERIAL ID
-                if (bin1['material'] > bin2['material']) return 1;
-                if (bin1['material'] < bin2['material']) return -1;
-                //IF MATERIALS ARE THE SAME, SORT THEM IN ORDER OF STORAGE UNIT VALUE, IGNORING LAST 2 SU DIGITS (DISABLED)
-                // if (bin1['storageUnit'].slice(0,8) > bin2['storageUnit'].slice(0,8)) return 1;
-                // if (bin1['storageUnit'].slice(0,8) < bin2['storageUnit'].slice(0,8)) return -1;
+        const fifoSortedInventory = [...parsedInventoryRecords].sort((bin1, bin2) => {
+            //SORT OVERSTOCK ARRAY IN ORDER BY MATERIAL ID
+            if (bin1['material'] > bin2['material']) return 1;
+            if (bin1['material'] < bin2['material']) return -1;
+            //IF MATERIALS ARE THE SAME, SORT THEM IN ORDER OF STORAGE UNIT VALUE, IGNORING LAST 2 SU DIGITS (DISABLED)
+            // if (bin1['storageUnit'].slice(0,8) > bin2['storageUnit'].slice(0,8)) return 1;
+            // if (bin1['storageUnit'].slice(0,8) < bin2['storageUnit'].slice(0,8)) return -1;
 
-                //SORT MATERIALS BY STORAGE UNIT # LOWEST TO HIGHEST
-                if (bin1['storageUnit'] > bin2['storageUnit']) return 1;
-                if (bin1['storageUnit'] < bin2['storageUnit']) return -1;
-                //IF MATERIALS ARE THE SAME, SORT THEM IN ORDER OF STORAGE UNIT BY CLOSEST TO FARTHEST
-                if ((bin1['material'] === bin2['material']) && (bin1['storageBin'] > bin2['storageBin'])) return 1;
-                if ((bin1['material'] === bin2['material']) && (bin1['storageBin'] < bin2['storageBin'])) return -1;
-            });
+            //SORT MATERIALS BY STORAGE UNIT # LOWEST TO HIGHEST
+            if (bin1['storageUnit'] > bin2['storageUnit']) return 1;
+            if (bin1['storageUnit'] < bin2['storageUnit']) return -1;
+            //IF MATERIALS ARE THE SAME, SORT THEM IN ORDER OF STORAGE UNIT BY CLOSEST TO FARTHEST
+            if (bin1['material'] === bin2['material'] && bin1['storageBin'] > bin2['storageBin'])
+                return 1;
+            if (bin1['material'] === bin2['material'] && bin1['storageBin'] < bin2['storageBin'])
+                return -1;
+        });
         return fifoSortedInventory;
     }
 
@@ -128,54 +170,66 @@ export default class NunaStock {
     //RAW JSON INVENTORY FILE CONVERTED TO ONLY CONTAIN DESIRED OBJECT PROPS. NO FILTERING YET TO REMOVE NULL RECORDS.
     getFifoSortedInventory() {
         //FORMAT DATA TO CONTAIN ONLY DESIRED KEY/VALUE OBJECT PAIRS EXPECTED BY REDUCERSS
-        const parsedInventoryRecords = this.rawInventoryJSON.map((record) => {
-            return this.parseInventoryRecordObject(record)
-        })
-        return this.sortInventoryByFifo(parsedInventoryRecords)
+        const parsedInventoryRecords = this.rawInventoryJSON.map(record => {
+            return this.parseInventoryRecordObject(record);
+        });
+        return this.sortInventoryByFifo(parsedInventoryRecords);
     }
 
     //FILTER PARSED INVENTORY REPORT TO CONTAIN ONLY VALID RESTOCKING RECORDS (NON-EMPTY ST1 STORAGE TYPE)
     getValidRestockInventory(parsedInventoryRecords) {
-        const validRestockInventory = parsedInventoryRecords
-            .filter((record) => record['storageType'] === 'ST1' && !record['material'].includes('empty') && record['storageLocation'] == 1)
+        const validRestockInventory = parsedInventoryRecords.filter(
+            record =>
+                record['storageType'] === 'ST1' &&
+                !record['material'].includes('empty') &&
+                record['storageLocation'] == 1,
+        );
         return validRestockInventory;
     }
 
-    //MATCHES DESIGNATED FIXED BINS WITH EMPTY BINS IN RESTOCK REPORT. RETURNS BACK A SORTED ARRAY OF EMPTY RESTOCK BIN NAMES
+    //MATCHES DESIGNATED FIXED Bin WITH EMPTY Bin IN RESTOCK REPORT. RETURNS BACK A SORTED ARRAY OF EMPTY RESTOCK BIN NAMES
     getEmptyFixedBins() {
-        //INVENTORY.FILTER => BINS FOUND IN FIXEDBINS THAT HAVE 0 STOCK IN INVENTORY REPORT
+        //INVENTORY.FILTER => Bin FOUND IN FIXEDBin THAT HAVE 0 STOCK IN INVENTORY REPORT
         //CREATES AN ARRAY OF BIN NAME STRINGS SO 'includes' METHOD CAN BE USED FOR EMPTY BIN MATCHING
-        let fixedBinNames = this.fixedBinsJSON.map((record) => record['BINS'])
+        let fixedBinNames = this.fixedBinsJSON.map(record => record['Bin']);
         //CREATES AN ARRAY OF INVENTORY REPORT OBJECTS CORRESPONDING TO EMPTY BIN / FIXED BIN MATCHES
-        let binsToRestockObjects = this.getFifoSortedInventory().filter((record) => (record.available == 0 & fixedBinNames.includes(record.storageBin)));
+        let binsToRestockObjects = this.getFifoSortedInventory().filter(
+            record => (record.available == 0) & fixedBinNames.includes(record.storageBin),
+        );
         //MAPS BACK AN ARRAY CONTAINING ONLY EMPTY FIXED BIN NAMES
-        let binsToRestockStrings = binsToRestockObjects.map((record) => record['storageBin'])
-        return binsToRestockStrings
+        let binsToRestockStrings = binsToRestockObjects.map(record => record['storageBin']);
+        return binsToRestockStrings;
     }
 
     getFixedBinRestockReport() {
         const fifoSortedInventory = this.getFifoSortedInventory();
-        const validRestockInventory =  this.getValidRestockInventory(fifoSortedInventory);
+        const validRestockInventory = this.getValidRestockInventory(fifoSortedInventory);
         const emptyFixedBins = this.getEmptyFixedBins();
+        const materialStockLevels = this.getMaterialStockLevels();
         const fixedBinRestockReport = [];
-        emptyFixedBins.forEach((fixedBin) => {
+        emptyFixedBins.forEach(fixedBin => {
             //MATCHES MATERIAL TO RESTOCK BETWEEN EMPTY FIXED BIN ARRAY AND FIXED BIN 'fixedBinsJSON' MASTER
-            const materialToRestock = this.fixedBinsJSON.find((jsonBin) => jsonBin['BINS'] === fixedBin)
+            const materialToRestock = this.fixedBinsJSON.find(
+                jsonBin => jsonBin['Bin'] === fixedBin,
+            );
             //RETURNS INDEX REFERENCE FOR FIRST MATCH FOUND IN 'validRestockInventory' OF FIXED BIN MATERIAL
-            const sliceIndex = validRestockInventory.findIndex((fifoRecord) => fifoRecord['material'] === materialToRestock['Product No'])
+            const sliceIndex = validRestockInventory.findIndex(
+                fifoRecord => fifoRecord['material'] === materialToRestock['Product'],
+            );
             //LOOKS IN 'validRestockInventory' FOR MATCH OF MATERIAL RECORD. IF FOUND, PULLS FULL OBJECT FROM ARRAY AND RETURNS IN PLACE OF fixedBin
             if (sliceIndex !== -1) {
                 const fifoResult = validRestockInventory.splice(sliceIndex, 1)[0];
                 const restockRecord = {
                     sourceBin: fifoResult['storageBin'],
-                    destinationBin: materialToRestock['BINS'],
+                    destinationBin: materialToRestock['Bin'],
                     material: fifoResult['material'],
                     storageUnit: fifoResult['storageUnit'],
                     description: materialToRestock['Description'],
-                    available: (fifoResult['available'] >= 0 ? fifoResult['available'] : 'N/A'),
+                    available: fifoResult['available'] >= 0 ? fifoResult['available'] : 'N/A',
                     isCompleted: false,
                     isMissing: false,
-                    uuid: uuid()
+                    noneStocked: materialStockLevels[fifoResult['material']].binsStocked === 0,
+                    uuid: uuid(),
                 };
                 fixedBinRestockReport.push(restockRecord);
             }
