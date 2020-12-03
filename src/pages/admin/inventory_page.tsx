@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import AdminHeader from './admin_header';
+import PageHeader from './page_header';
 import { Column, Row } from '../../component_library/styles/layout';
 import { Button } from '../../component_library/styles/buttons';
 import moment from 'moment';
@@ -83,7 +83,7 @@ const InventoryPage = () => {
                 </ModalCard>
             </AppModal>
             <Column height="100%">
-                <AdminHeader>
+                <PageHeader>
                     <Column margin={3}>
                         <Header uppercase>Inventory</Header>
                         <AppText
@@ -96,7 +96,7 @@ const InventoryPage = () => {
                             Upload New Inventory File
                         </Button>
                     </Column>
-                </AdminHeader>
+                </PageHeader>
                 <Column mx={3}>
                     {/*<Row alignItems="center" margin={3}>*/}
                     {/*    <AppText bold uppercase size="large">*/}

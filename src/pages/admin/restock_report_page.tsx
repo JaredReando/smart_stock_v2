@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import DataTable from '../../component_library/components/data_table/data_table';
-import AdminHeader from './admin_header';
+import PageHeader from './page_header';
 import { AppText, Header, Subheader } from '../../component_library/styles/typography';
 import { Box, Column, Row } from '../../component_library/styles/layout';
 import AppModal from '../../component_library/modals/app_modal';
@@ -284,7 +284,7 @@ const RestockReport: React.FC<Props> = () => {
             </AppModal>
 
             <Column height="100%">
-                <AdminHeader>
+                <PageHeader>
                     <Column margin={3}>
                         <Header uppercase>Restock Report</Header>
                         <AppText
@@ -370,7 +370,7 @@ const RestockReport: React.FC<Props> = () => {
                             </Column>
                         )}
                     </InfoBlub>
-                </AdminHeader>
+                </PageHeader>
                 <Box flexGrow={1} overflow="hidden">
                     <DataTable
                         columnHeaders={headerItems}

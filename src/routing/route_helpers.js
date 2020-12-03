@@ -17,7 +17,6 @@ If 'loggedIn' value is false, user is redirected back to home page
  */
 const AdminAuthRoute = ({ authUser, component: Component, ...rest }) => {
     const adminDataStore = useInitializeAdminDataStore();
-    console.log('auth route: ', authUser);
     return (
         <Route
             {...rest}

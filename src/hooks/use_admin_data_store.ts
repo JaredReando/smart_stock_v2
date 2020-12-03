@@ -45,11 +45,10 @@ export function useInitializeAdminDataStore() {
                     await restoreLocalFromRemote(localDB.current, remoteInventory, remoteSummary!);
                 }
                 if (mostUpToDate === 'match') {
-                    console.log('mostUpToDate passed. No update required');
+                    // console.log('mostUpToDate passed. No update required');
                 }
             } catch (err) {
                 if (err.message === 'missing') {
-                    console.log('missing summary. Rebooting from admin');
                     const remoteInventory = await getInventory();
                     await restoreLocalFromRemote(localDB.current, remoteInventory, remoteSummary!);
                 } else {

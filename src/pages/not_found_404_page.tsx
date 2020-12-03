@@ -1,8 +1,8 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 
-const NotFound404: React.FC = () => {
+const NotFound404Page: React.FC = () => {
     return <Redirect to={'/'} />;
 };
 
-export default NotFound404;
+export default NotFound404Page;

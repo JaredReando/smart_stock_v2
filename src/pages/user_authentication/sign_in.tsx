@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { Container, BigBold, Form, Input } from './sign_in.styles';
 import { useFirebase } from '../../hooks/use_firebase_context';
 import { Box, Row, Column } from '../../component_library/styles/layout';
 import { AppText } from '../../component_library/styles/typography';
 import { Button } from '../../component_library/styles/buttons';
+import styled from 'styled-components';
 
 const SignInPage = (props: any) => {
     const [email, setEmail] = useState('');
@@ -87,3 +87,38 @@ const SignInPage = (props: any) => {
 };
 
 export default SignInPage;
+
+const Container = styled.div(({ theme }) => ({
+    height: '100vh',
+    width: '100vw',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    background: theme.colors.primary,
+}));
+
+const BigBold = styled(AppText)<{ fontSize: any }>`
+    font-weight: bold;
+    font-size: ${props => props.fontSize};
+`;
+
+const Form = styled.form(({ theme }) => ({
+    padding: `${theme.space[6]}px ${theme.space[6]}px ${theme.space[3]}px ${theme.space[6]}px`,
+    background: theme.colors.white,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: '4px',
+    boxShadow: theme.shadows.large,
+    width: '100%',
+    maxWidth: '500px',
+}));
+
+const Input = styled.input({
+    border: '1px solid #dadce0',
+    width: '100%',
+    padding: '10px',
+    borderRadius: '4px',
+    fontSize: '1em',
+});

@@ -9,14 +9,6 @@ document.title = 'Smart Stock';
 
 const App = () => {
     const { authUser, loading } = useAuthUser();
-
-    if (loading) {
-        console.log('i am loading');
-    }
-
-    if (!!authUser) {
-        console.log('user should now be logged out');
-    }
     return (
         <ThemeProvider theme={theme}>
             <GlobalStyle />

@@ -15,7 +15,6 @@ export const useAuthUser = () => {
                 setAuthUser(null);
             }
             setLoading(false);
-            console.log('firebase authUser change: ', user);
         });
         return () => unsubscribe();
     }, [firebase.auth, setLoading]);

@@ -41,7 +41,6 @@ export class LocalDatabase {
                 },
             })
             .then(async () => {
-                console.log('hit');
                 const found = await this.localDB.find({
                     selector: {
                         // storageBin: {$ne: ''},
@@ -49,7 +48,7 @@ export class LocalDatabase {
                         $or: selector,
                     },
                 });
-                console.log('found from find: ', found);
+                console.log('found in localDB: ', found);
             });
     }
 
@@ -94,7 +93,6 @@ export class LocalDatabase {
     async findInOverstock(materialNeeded: {
         [key: string]: { bins: string[]; description: string };
     }): Promise<FoundOverstock> {
-        console.log('db materails needed: ', materialNeeded);
         await this.localDB.createIndex({
             index: {
                 fields: ['material'],
@@ -157,8 +155,6 @@ export class LocalDatabase {
     }
 
     async bulkAddRecords<T, U>(records: T[], summary: U) {
-        let info = await this.localDB.info();
-        console.log('info: ', info);
         try {
             await this.localDB.bulkDocs(records);
             await this.localDB.put({
@@ -168,7 +164,5 @@ export class LocalDatabase {
         } catch (e) {
             console.error('Error adding bulk records: ', e);
         }
-        info = await this.localDB.info();
-        console.log('info after: ', info);
     }
 }

@@ -1,13 +1,13 @@
 import React, { FC } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import NotFound404 from "../pages/not_found_404";
+import NotFound404Page from '../pages/not_found_404_page';
 
 const Router: FC<any> = ({ children, basename }) => {
     return (
         <BrowserRouter basename={basename}>
             <Switch>
                 {children}
-                <Route component={NotFound404} />
+                <Route component={NotFound404Page} />
             </Switch>
         </BrowserRouter>
     );

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { ButtonPanelWrapper, IconButton } from './vertical_icon_bar.styles';
 import { AppIcon } from '../icons';
 import { Row, Box } from '../../styles/layout';

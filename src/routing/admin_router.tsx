@@ -1,9 +1,9 @@
 import { FC } from 'react';
 import buildRouter from './build_router';
-import InventoryPage from '../pages/Admin/inventory_page';
-import RestockReport from '../pages/Admin/restock_report_page';
-import FixedBins from '../pages/Admin/fixed_bins_page';
-import ClientRestockingPage from '../pages/Client/client_restocking_page';
+import InventoryPage from '../pages/admin/inventory_page';
+import RestockReport from '../pages/admin/restock_report_page';
+import FixedBins from '../pages/admin/fixed_bins_page';
+import ClientRestockingPage from '../pages/client/client_restocking_page';
 
 const AdminRouter: FC = () => {
     return buildRouter('/', {

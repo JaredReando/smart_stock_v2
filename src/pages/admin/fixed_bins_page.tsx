@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import DataTable from '../../component_library/components/data_table/data_table';
 import { Column } from '../../component_library/styles/layout';
-import AdminHeader from './admin_header';
+import PageHeader from './page_header';
 import { useAdminDataStore } from '../../hooks/use_admin_data_store';
 import Button from '../../component_library/styles/buttons/button';
 import { AppText, Header } from '../../component_library/styles/typography';
@@ -45,7 +45,7 @@ const FixedBins: React.FC<Props> = () => {
 
     return (
         <Column height="100%">
-            <AdminHeader>
+            <PageHeader>
                 <Column margin={3}>
                     <Header uppercase>Fixed Bins</Header>
                     <AppText mt={3} uppercase bold>
@@ -61,7 +61,7 @@ const FixedBins: React.FC<Props> = () => {
                         </Button>
                     </a>
                 </Column>
-            </AdminHeader>
+            </PageHeader>
             <DataTable
                 columnHeaders={headerItems}
                 rowData={fixedBinStore.fixedBins.map(bin => ({

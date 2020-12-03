@@ -26,7 +26,7 @@ class Firebase {
         this.auth.signInWithEmailAndPassword(email, password);
 
     signOut = () => {
-        this.auth.signOut().then(r => console.log('firebase logout: ', r));
+        this.auth.signOut();
     };
 
     doPasswordReset = email => this.auth.sendPasswordResetEmail(email);
@@ -57,7 +57,6 @@ class Firebase {
             .child('restock')
             .child('summary')
             .set(summary);
-        console.log('restock summary updated: ', summary);
     };
 
     overwriteFixedBins = fixedBins => {
@@ -70,7 +69,6 @@ class Firebase {
     };
 
     overwriteInventoryReport = (inventoryReport, inventorySummary) => {
-        console.log('overwriting firebase inventory....', inventoryReport);
         this.db
             .ref('Companies')
             .child('Nuna')

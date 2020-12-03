@@ -49,7 +49,7 @@ const ClientRestockingPage: React.FC = () => {
             });
             setRecords(updatedRecords);
         }
-    }, [restockRecords]);
+    }, [restockRecords, checkboxValue, records]);
 
     useEffect(() => {
         if (!checkboxValue) {
@@ -72,7 +72,7 @@ const ClientRestockingPage: React.FC = () => {
             setRecords(highPriorityRecords);
             setRecordIndex(0);
         }
-    }, [checkboxValue]);
+    }, [checkboxValue, records, restockRecords, threshold]);
 
     if (records.length === 0) {
         return null;
@@ -84,7 +84,7 @@ const ClientRestockingPage: React.FC = () => {
         material,
         storageUnit,
         description,
-        stockLevels,
+        // stockLevels,
         available,
         status,
     } = currentRecord;
