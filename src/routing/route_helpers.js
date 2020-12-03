@@ -48,6 +48,14 @@ const AdminAuthRoute = ({ authUser, component: Component, ...rest }) => {
 };
 
 const ClientAuthRoute = ({ component: Component, ...rest }) => {
+    const [height, setHeight] = React.useState(window.innerHeight);
+    const updateHeight = () => {
+        setHeight(window.innerHeight);
+    };
+    React.useEffect(() => {
+        window.addEventListener('resize', updateHeight);
+        return () => window.removeEventListener('resize', updateHeight);
+    });
     return (
         <Route
             {...rest}
@@ -58,7 +66,7 @@ const ClientAuthRoute = ({ component: Component, ...rest }) => {
                 <div
                     style={{
                         display: 'flex',
-                        height: `${window.innerHeight}px`,
+                        height: `${height}px`,
                         width: '100vw',
                         border: '1px solid red',
                     }}

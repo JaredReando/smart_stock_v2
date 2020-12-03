@@ -8,6 +8,7 @@ export interface Props extends SpaceProps {
     light?: boolean;
     uppercase?: boolean;
     capitalize?: boolean;
+    noSelect?: boolean;
 }
 
 const AppText = styled.p<Props>(props => {
@@ -19,6 +20,7 @@ const AppText = styled.p<Props>(props => {
         textTransform: getTextTransform(props),
         marginBlockStart: '0px',
         marginBlockEnd: '0px',
+        userSelect: props.noSelect ? 'none' : 'inherit',
     };
 }, space);
 
