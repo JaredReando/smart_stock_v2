@@ -67,7 +67,6 @@ const ClientAuthRoute = ({ component: Component, ...rest }) => {
                         display: 'flex',
                         height: `${height}px`,
                         width: '100vw',
-                        border: '1px solid red',
                     }}
                 >
                     <Component {...props} />

@@ -85,7 +85,6 @@ class Firebase {
             .child('inventory')
             .child('summary')
             .set(inventorySummary);
-        console.log('firebase inventory summary updated: ', inventorySummary);
     };
 
     doUpdateRestockRecord = (index, updatedRecord) => {

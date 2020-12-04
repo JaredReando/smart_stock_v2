@@ -15,7 +15,7 @@ const Routes: React.FC<Props> = ({ authUser }) => {
     return (
         <BrowserRouter>
             <Switch>
-                <ClientAuthRoute authUser={authUser} path={'/client'} component={ClientPage} />
+                <ClientAuthRoute authUser={authUser} path={'/restock'} component={ClientPage} />
                 {authUser && (
                     <AdminAuthRoute authUser={authUser} path={'/'} component={AdminRouter} />
                 )}
