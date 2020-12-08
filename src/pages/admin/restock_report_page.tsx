@@ -406,5 +406,6 @@ export const CircleIndicator = styled(Row)<{ color?: string; size?: number }>`
     height: ${props => (props.size ? `${props.size}px` : '15px')};
     width: ${props => (props.size ? `${props.size}px` : '15px')};
     border-radius: 50%;
-    background: ${props => props.color || props.theme.colors.primary};
+    transition: 200ms linear all;
+    background-color: ${props => props.color || props.theme.colors.primary};
 `;

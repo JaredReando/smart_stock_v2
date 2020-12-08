@@ -49,32 +49,33 @@ const ClientRestockingPage: React.FC = () => {
             });
             setRecords(updatedRecords);
         }
-    }, [restockRecords, checkboxValue, records]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [restockRecords]);
 
-    useEffect(() => {
-        if (!checkboxValue) {
-            setRecords(restockRecords);
-            setRecordIndex(0);
-        }
+    const resetRecords = () => {
+        setCheckboxValue(false);
+        setRecords(restockRecords);
+        setRecordIndex(0);
+    };
 
-        if (checkboxValue) {
-            const highPriorityRecords = records.reduce((acc: any, record) => {
-                if (!record.stockLevels.filled || record.stockLevels.filled.length < threshold) {
-                    acc.push(record);
-                }
-                return acc;
-            }, []);
-            if (highPriorityRecords.length === 0) {
-                alert('No records found. Try a value greater than ' + threshold);
-                setCheckboxValue(false);
-                return;
+    const determinePrioritizedRecords = () => {
+        const highPriorityRecords = records.reduce((acc: any, record) => {
+            if (!record.stockLevels.filled || record.stockLevels.filled.length < threshold) {
+                acc.push(record);
             }
-            setRecords(highPriorityRecords);
-            setRecordIndex(0);
-        }
-    }, [checkboxValue, records, restockRecords, threshold]);
+            return acc;
+        }, []);
 
-    if (records.length === 0) {
+        if (highPriorityRecords.length === 0) {
+            alert('No records found. Try a value greater than ' + threshold);
+            setCheckboxValue(false);
+            return;
+        }
+        setCheckboxValue(true);
+        setRecords(highPriorityRecords);
+        setRecordIndex(0);
+    };
+    if (!currentRecord ?? records.length === 0) {
         return null;
     }
 
@@ -131,8 +132,16 @@ const ClientRestockingPage: React.FC = () => {
                         alignItems="center"
                         width="100%"
                         backgroundColor={statusColor}
+                        style={{
+                            transition: '200ms linear background-color',
+                        }}
                     >
-                        <AppText bold uppercase size="jumbo">
+                        <AppText
+                            bold
+                            uppercase
+                            size="jumbo"
+                            color={status !== 'pending' ? 'light' : 'dark'}
+                        >
                             {sourceBin}
                         </AppText>
                     </Row>
@@ -156,8 +165,16 @@ const ClientRestockingPage: React.FC = () => {
                         alignItems="center"
                         width="100%"
                         backgroundColor={statusColor}
+                        style={{
+                            transition: '200ms linear background-color',
+                        }}
                     >
-                        <AppText bold uppercase size="jumbo">
+                        <AppText
+                            bold
+                            uppercase
+                            size="jumbo"
+                            color={status !== 'pending' ? 'light' : 'dark'}
+                        >
                             {destinationBin}
                         </AppText>
                     </Row>
@@ -181,7 +198,13 @@ const ClientRestockingPage: React.FC = () => {
                                 <CheckBox
                                     id="checkbox"
                                     checked={checkboxValue}
-                                    onChange={() => setCheckboxValue(v => !v)}
+                                    onChange={() => {
+                                        if (checkboxValue) {
+                                            resetRecords();
+                                        } else {
+                                            determinePrioritizedRecords();
+                                        }
+                                    }}
                                     type="checkbox"
                                 />
                                 <AppText ml={4} bold uppercase size="medium" mr={3}>
@@ -320,10 +343,10 @@ const ClientRestockingPage: React.FC = () => {
                     </Button>
                     <Button
                         style={{
-                            background: theme.colors.error,
                             gridColumn: '2/3',
                             gridRow: '1/2',
                         }}
+                        variant="danger"
                         height="100%"
                         onClick={() => {
                             const index = restockRecords.findIndex(

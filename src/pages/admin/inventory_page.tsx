@@ -36,6 +36,8 @@ const InventoryPage = () => {
             recordCount: results.length,
         };
         await overwriteDBs(results, newSummary);
+        setLoading(false);
+        setShowModal(false);
     };
     useEffect(() => {
         document.title = 'Admin';

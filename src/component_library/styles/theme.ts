@@ -53,6 +53,25 @@ const buttons = {
             },
         },
     },
+    danger: {
+        color: colors.white,
+        backgroundColor: colors.error,
+        border: 'none',
+        boxShadow: shadows.small,
+        ':hover': {
+            boxShadow: shadows.large,
+        },
+        ':active': {
+            backgroundColor: colors.darkGrey,
+        },
+        ':disabled': {
+            cursor: 'not-allowed',
+            backgroundColor: colors.darkGrey,
+            ':hover': {
+                boxShadow: shadows.small,
+            },
+        },
+    },
     secondary: {
         color: colors.primary,
         backgroundColor: colors.secondary,

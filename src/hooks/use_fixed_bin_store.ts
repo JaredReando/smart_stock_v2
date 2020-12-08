@@ -13,7 +13,7 @@ const useFixedBinStore = (): FixedBinStore => {
     useEffect(() => {
         setLoading(true);
         firebase.db.ref(FIXED_BIN_RECORDS_PATH).on('value', async (snap: any) => {
-            const firebaseBins = snap.val().sort((a: any, b: any) => (a.bin > b.bin ? 1 : -1));
+            const firebaseBins = snap.val()?.sort((a: any, b: any) => (a.bin > b.bin ? 1 : -1));
             setFixedBins(firebaseBins);
             setLoading(false);
             const airtableBins = await fetchAirtableFixedBins();

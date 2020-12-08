@@ -1,14 +1,13 @@
 import { Box } from './box';
-import styled from "styled-components";
+import styled from 'styled-components';
 
-const Flex = styled(Box)({
+//@ts-ignore
+export const Row = styled(Box)({
     display: 'flex',
-});
-
-export const Row = styled(Flex)({
     flexDirection: 'row',
 });
 
-export const Column = styled(Flex)({
+export const Column = styled(Box)({
+    display: 'flex',
     flexDirection: 'column',
 });

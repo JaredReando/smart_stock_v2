@@ -58,7 +58,7 @@ export const convertInventoryCSVFile = (
     return new Promise((res, rej) => {
         reader.onload = (e: ProgressEvent<FileReader>) => {
             const csvFile = e.target!.result; //selected local .csv file
-            const parsedFile: RawInventoryRecord[] = csvToObject(csvFile);
+            const parsedFile: RawInventoryRecord[] = csvToObject(csvFile) as RawInventoryRecord[];
             const csvKeys: string[] = Object.keys(parsedFile[0]);
             let { isValid, missingHeaders } = hasRequiredKeys(requiredHeaders as string[], csvKeys);
             if (isValid) {
