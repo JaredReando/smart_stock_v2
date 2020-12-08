@@ -21,6 +21,7 @@ const AppText = styled.p<Props>(props => {
         marginBlockStart: '0px',
         marginBlockEnd: '0px',
         userSelect: props.noSelect ? 'none' : 'inherit',
+        transition: '100ms linear all',
     };
 }, space);
 
