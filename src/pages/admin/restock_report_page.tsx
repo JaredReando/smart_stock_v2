@@ -384,7 +384,7 @@ const RestockReport: React.FC<Props> = () => {
 
 export default RestockReport;
 
-const InfoBlub = styled(Column)`
+export const InfoBlub = styled(Column)`
     border-radius: 4px;
     box-shadow: ${props => props.theme.shadows.large};
     flex-grow: 1;
@@ -392,7 +392,7 @@ const InfoBlub = styled(Column)`
     overflow: hidden;
 `;
 
-const BlubHeader = styled(Row)`
+export const BlubHeader = styled(Row)`
     height: 30px;
     flex-shrink: 0;
     background: ${props => props.theme.colors.primary};
