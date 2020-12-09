@@ -90,7 +90,7 @@ const FixedBins: React.FC<Props> = () => {
                         </Button>
                     </a>
                 </Column>
-                <InfoBlub maxHeight="200px" overflow="auto" margin={3}>
+                <InfoBlub maxHeight="300px" overflow="auto" margin={3}>
                     <BlubHeader>
                         <AppText bold uppercase color="light">
                             Material Allocation
